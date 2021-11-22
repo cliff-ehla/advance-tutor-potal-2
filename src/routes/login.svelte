@@ -1,4 +1,5 @@
 <script context="module">
+	export const prerender = true;
 	export const load = ({session}) => {
 		// TODO I cannot delete the access token
 		// if (session.access_token) {

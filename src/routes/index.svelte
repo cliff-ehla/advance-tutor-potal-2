@@ -1,21 +1,16 @@
 <script context="module">
-	import {http} from "$lib/http";
+	import {http, onFail} from "$lib/http";
 	import {groupByTime} from "$lib/zoom/group-by-time";
 
-	export const load = async ({fetch}) => {
-		const {success, data, debug} = await http.post(fetch, '/zoom/zoom_list_all', {})
-		if (!success) {
-			if (debug.err_code === 401) {
-				return {
-					status: 302,
-					redirect: '/login'
-				}
-			} else {
-				return {
-					error: debug
-				}
+	export const load = async ({fetch, session}) => {
+		if (!session.access_token) {
+			return {
+				status: 302,
+				redirect: '/login'
 			}
 		}
+		const {success, data, debug} = await http.post(fetch, '/zoom/zoom_list_all', {})
+		if (!success) return onFail(debug)
 		return {
 			props: {
 				category_list: groupByTime(data)
