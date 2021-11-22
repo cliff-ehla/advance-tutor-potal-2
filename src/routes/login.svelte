@@ -16,10 +16,11 @@
 	import {goto} from '$app/navigation'
 	import Icon from '$lib/ui/icon.svelte'
 	import {getStores} from "$app/stores";
+	let env = import.meta.env.VITE_ENV
 	const {session} = getStores()
 
-	let username = 'queeniedevc4'
-	let password = 'a12345678'
+	let username = env !== 'production' ? 'queeniedevc4' : ''
+	let password = env !== 'production' ? 'a12345678' : ''
 	let error = false
 	let loading = false
 
