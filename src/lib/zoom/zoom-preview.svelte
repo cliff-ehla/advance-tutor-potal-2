@@ -1,7 +1,7 @@
 <script>
-	import utc from "dayjs/plugin/utc"
-	import timezone from "dayjs/plugin/timezone"
-	import isBetween from 'dayjs/plugin/isBetween'
+	import utc from "dayjs/plugin/utc.js"
+	import timezone from "dayjs/plugin/timezone.js"
+	import isBetween from 'dayjs/plugin/isBetween.js'
 	import dayjs from 'dayjs'
 	dayjs.extend(isBetween)
 	dayjs.extend(utc)
