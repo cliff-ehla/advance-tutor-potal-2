@@ -4,7 +4,7 @@
 
 <header class="flex justify-between h-16 items-center px-4">
 	<a href="/">
-		<img src="/favicon-96x96.png" alt="ehla" class="w-12 rounded"/>
+		<img src="/logo.png" alt="ehla" class="w-12 rounded"/>
 	</a>
 	<div>
 		{#if user_info}

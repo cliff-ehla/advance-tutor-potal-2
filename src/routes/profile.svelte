@@ -25,8 +25,11 @@
 	export let user_info
 </script>
 
-{#if user_info}
-	<p>{user_info.username}</p>
-{/if}
-
-<a href="/logout">Logout</a>
+<div class="container">
+	<div class="mb-4">
+		{#if user_info}
+			<p>{user_info.username}</p>
+		{/if}
+	</div>
+	<a class="button" href="/logout">Logout</a>
+</div>

@@ -23,7 +23,3 @@
 <main>
 	<slot />
 </main>
-
-<footer>
-	<p>EHLA</p>
-</footer>
