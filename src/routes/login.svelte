@@ -49,7 +49,7 @@
 
 
 <div class="p-2 bg-white">
-	<img src="/logo.png" alt="logo" class="w-16 mx-auto">
+	<img src="/logo.png" alt="logo" class="w-12 mx-auto">
 </div>
 
 <div class="md:py-12 md:px-8">
