@@ -25,11 +25,18 @@
 	export let user_info
 </script>
 
-<div class="container">
-	<div class="mb-4">
-		{#if user_info}
+<div class="container py-8">
+	<div class="bg-white p-8 rounded border border-gray-300">
+		<div class="p-4 border-b border-gray-200">
+			<p class="text-sm text-gray-400">Username</p>
 			<p>{user_info.username}</p>
-		{/if}
+		</div>
+		<div class="p-4 border-b border-gray-200">
+			<p class="text-sm text-gray-400">Nickname</p>
+			<p>{user_info.nickname}</p>
+		</div>
+		<div class="p-4">
+			<a class="button" href="/logout">Logout</a>
+		</div>
 	</div>
-	<a class="button" href="/logout">Logout</a>
 </div>

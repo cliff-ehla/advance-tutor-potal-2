@@ -59,6 +59,6 @@
 </div>
 
 <svelte:head>
-	<title>Home</title>
+	<title>EHLA Zoom class</title>
 </svelte:head>
 
