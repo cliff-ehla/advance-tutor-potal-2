@@ -28,4 +28,5 @@
 	}
 </script>
 
-<button on:click={onLogin}>Login</button>
+<div class="font-bold">hi</div>
+<button class="rounded bg-red-500" on:click={onLogin}>Login</button>
