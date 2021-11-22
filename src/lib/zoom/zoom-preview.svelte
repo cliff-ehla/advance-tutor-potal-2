@@ -11,8 +11,6 @@
 	import Icon from '$lib/ui/icon.svelte'
 	import {onMount} from 'svelte'
 
-	// z.start_date = '2021-06-11 22:30:01'
-	// console.log(z.start_date)
 	const start = dayjs(z.start_date)
 	let now = dayjs(new Date())
 	const not_set = !z.start_date

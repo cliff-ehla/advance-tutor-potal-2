@@ -29,7 +29,8 @@ export const post = async (req) => {
 				'set-cookie': [_cookie, user_info_cookie]
 			},
 			body: {
-				data: user
+				...res.body,
+				...{data: user}
 			}
 		}
 	}

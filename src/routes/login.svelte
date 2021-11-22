@@ -27,12 +27,12 @@
 
 	const onLogin = async () => {
 		if (loading) return
-		try {
-			loading = true
-			let {data} = await http.post(fetch, '/user/login', {
-				username,
-				password
-			})
+		loading = true
+		let {data, success} = await http.post(fetch, '/user/login', {
+			username,
+			password
+		})
+		if (success) {
 			session.set({
 				user_info: {
 					username: data.username,
@@ -40,8 +40,7 @@
 				}
 			})
 			goto('/')
-		} catch (e) {
-			console.log(e)
+		} else {
 			loading = false
 			error = true
 		}
