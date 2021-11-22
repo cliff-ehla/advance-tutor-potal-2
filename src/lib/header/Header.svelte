@@ -1,5 +1,6 @@
 <script>
 	import { page } from '$app/stores';
+	export let user_info
 </script>
 
 <header>
@@ -25,6 +26,11 @@
 	</nav>
 
 	<div class="corner">
+		{#if user_info}
+			<p class="text-sm">{user_info.nickname}</p>
+		{:else}
+			<a href="/login">Login</a>
+		{/if}
 		<!-- TODO put something else here? github link? -->
 	</div>
 </header>

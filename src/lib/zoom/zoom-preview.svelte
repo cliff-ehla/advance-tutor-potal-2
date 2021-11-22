@@ -8,7 +8,6 @@
 	dayjs.extend(timezone)
 
 	export let z
-	export let tutor_group_id
 	import Icon from '$lib/ui/icon.svelte'
 	import {onMount} from 'svelte'
 
