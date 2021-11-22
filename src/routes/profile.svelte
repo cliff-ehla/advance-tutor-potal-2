@@ -26,5 +26,7 @@
 </script>
 
 {#if user_info}
-	{user_info.username}
+	<p>{user_info.username}</p>
 {/if}
+
+<a href="/logout">Logout</a>

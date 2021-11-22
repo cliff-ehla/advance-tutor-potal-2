@@ -11,11 +11,14 @@
 <script>
 	import Header from '$lib/header/Header.svelte';
 	import '../styles/tailwind-output.css';
+	import {page} from '$app/stores'
 
 	export let user_info
 </script>
 
-<Header {user_info}/>
+{#if $page.path !== '/login'}
+	<Header {user_info}/>
+{/if}
 
 <main>
 	<slot />

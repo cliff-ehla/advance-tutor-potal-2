@@ -28,9 +28,13 @@
 	export let zoom_list
 </script>
 
-{#each zoom_list as z}
-	<ZoomPreview {z} />
-{/each}
+<div class="container">
+	<div class="grid gap-4">
+		{#each zoom_list as z}
+			<ZoomPreview {z} />
+		{/each}
+	</div>
+</div>
 
 <svelte:head>
 	<title>Home</title>
