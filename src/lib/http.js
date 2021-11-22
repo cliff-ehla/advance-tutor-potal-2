@@ -1,3 +1,5 @@
+import {sentry} from "$lib/sentry";
+
 const http = (() => {
 	async function get (fetch, resource, query) {
 		if (query) {
@@ -7,7 +9,8 @@ const http = (() => {
 			}
 		}
 		const res = await fetch('/api' + resource)
-		return await res.json()
+		const {success, data, metadata, debug} = await res.json()
+		return {success, data, metadata, debug}
 	}
 
 	async function post (fetch, resource, body = {}) {
@@ -20,7 +23,8 @@ const http = (() => {
 				},
 				body: body && JSON.stringify(body)
 			})
-			return await res.json()
+			const {success, data, metadata, debug} = await res.json()
+			return {success, data, metadata, debug}
 		} catch (e) {
 			console.log('fatal error: this mostly happened when usermodel do not return a json body', e)
 			return {
@@ -38,4 +42,18 @@ const http = (() => {
 	}
 })()
 
-export {http}
+const onFail = (debug) => {
+	if (debug.err_code === 401) {
+		return {
+			status: 302,
+			redirect: '/login'
+		}
+	}
+	sentry.log(debug)
+	return {
+		error: new Error(debug.debug_msg),
+		status: 400
+	}
+}
+
+export {http, onFail}

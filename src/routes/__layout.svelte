@@ -9,13 +9,19 @@
 </script>
 
 <script>
+	import {sentry} from "$lib/sentry";
 	import Header from '$lib/top-bar.svelte';
 	import LoadingBar from '$lib/ui/indeterminate-loading-bar.svelte'
 	import {navigating} from "$app/stores";
 	import '../styles/tailwind-output.css';
 	import {page} from '$app/stores'
+	import {onMount} from 'svelte'
 
 	export let user_info
+
+	onMount(() => {
+		sentry.init()
+	})
 </script>
 
 {#if $page.path !== '/login'}
