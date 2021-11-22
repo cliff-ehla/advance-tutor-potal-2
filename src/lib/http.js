@@ -10,7 +10,8 @@ const http = (() => {
 		return await res.json()
 	}
 
-	async function post (fetch, resource, body) {
+	async function post (fetch, resource, body = {}) {
+		// an empty object is necessary, otherwise result fatal error when not passing body params
 		try {
 			const res = await fetch('/api' + resource, {
 				method: 'POST',
@@ -19,11 +20,9 @@ const http = (() => {
 				},
 				body: body && JSON.stringify(body)
 			})
-			if (res.ok) {
-				return await res.json()
-			}
+			return await res.json()
 		} catch (e) {
-			console.log('fatal error: ', e)
+			console.log('fatal error: this mostly happened when usermodel do not return a json body', e)
 			return {
 				success: false,
 				data: false,
