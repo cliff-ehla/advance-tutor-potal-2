@@ -24,11 +24,12 @@
 </script>
 
 <script>
+	import ZoomPreview from '$lib/zoom/zoom-preview.svelte'
 	export let zoom_list
 </script>
 
 {#each zoom_list as z}
-	<p>{z.title} - {z.start_date}</p>
+	<ZoomPreview {z} />
 {/each}
 
 <svelte:head>
