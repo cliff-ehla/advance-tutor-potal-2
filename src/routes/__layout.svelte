@@ -9,7 +9,7 @@
 </script>
 
 <script>
-	import Header from '$lib/header/Header.svelte';
+	import Header from '$lib/top-bar.svelte';
 	import LoadingBar from '$lib/ui/indeterminate-loading-bar.svelte'
 	import {navigating} from "$app/stores";
 	import '../styles/tailwind-output.css';
