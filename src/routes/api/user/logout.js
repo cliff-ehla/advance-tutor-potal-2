@@ -8,10 +8,15 @@ export const post = async (req) => {
 		httpOnly: true,
 		maxAge: 0
 	});
+	let user_info = cookie.serialize('access_token', '', {
+		path: '/',
+		httpOnly: true,
+		maxAge: 0
+	});
 	return {
 		status: 200,
 		headers: {
-			'set-cookie': _cookie
+			'set-cookie': [_cookie, user_info]
 		}
 	}
 }

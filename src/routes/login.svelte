@@ -15,6 +15,8 @@
 	import {http} from "$lib/http";
 	import {goto} from '$app/navigation'
 	import Icon from '$lib/ui/icon.svelte'
+	import {getStores} from "$app/stores";
+	const {session} = getStores()
 
 	let username = 'queeniedevc4'
 	let password = 'a12345678'
@@ -25,12 +27,19 @@
 		if (loading) return
 		try {
 			loading = true
-			await http.post(fetch, '/user/login', {
+			let {data} = await http.post(fetch, '/user/login', {
 				username,
 				password
 			})
+			session.set({
+				user_info: {
+					username: data.username,
+					nickname: data.nickname
+				}
+			})
 			goto('/')
 		} catch (e) {
+			console.log(e)
 			loading = false
 			error = true
 		}
