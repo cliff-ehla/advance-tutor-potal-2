@@ -10,6 +10,8 @@
 
 <script>
 	import Header from '$lib/header/Header.svelte';
+	import LoadingBar from '$lib/ui/indeterminate-loading-bar.svelte'
+	import {navigating} from "$app/stores";
 	import '../styles/tailwind-output.css';
 	import {page} from '$app/stores'
 
@@ -21,5 +23,10 @@
 {/if}
 
 <main class="bg-gray-100">
+	{#if $navigating}
+		<div class="fixed inset-x-0 top-0 z-50">
+			<LoadingBar/>
+		</div>
+	{/if}
 	<slot />
 </main>
