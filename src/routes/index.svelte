@@ -3,7 +3,7 @@
 	import {groupByTime} from "$lib/zoom/group-by-time";
 
 	export const load = async ({fetch, session}) => {
-		if (!session.access_token) {
+		if (!session.user_info) {
 			return {
 				status: 302,
 				redirect: '/login'
