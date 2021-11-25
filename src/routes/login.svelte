@@ -55,7 +55,7 @@
 <div class="md:py-12 md:px-8">
 	<div class="max-w-screen-sm mx-auto bg-white md:rounded-lg py-8 md:py-16 px-4 md:px-36 md:border md:border-gray-300">
 		<div>
-			<h1 class="font-bold mb-8 text-t1 text-center text-gray-500">EHLA Student Portal</h1>
+			<h1 class="font-bold mb-8 text-t1 text-center text-gray-500">EHLA Tutor Portal</h1>
 			<div class="w-32 h-32 mb-8 border border-gray-300 rounded-full mx-auto flex items-center justify-center">
 				<Icon name="avatar" className="w-20 text-gray-300"/>
 			</div>
