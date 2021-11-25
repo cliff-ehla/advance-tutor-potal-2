@@ -62,10 +62,10 @@ export async function getStudentLessonList (tutor_group_id, child_id, _fetch, op
 		const tg = get(tutor_group_store).tutor_group[tutor_group_id]
 		const tg_lesson = tg && tg.lessons
 		if (tg_lesson && use_cache) return console.log('get_tutor_group_lesson_list use cache')
-		const {data} = await http.post('tutorApi/get_tutor_course_by_id', {
+		const {data} = await http.post(_fetch,'/tutorApi/get_tutor_course_by_id', {
 			tutor_group_id,
 			child_id
-		}, _fetch)
+		})
 		tutor_group_store.saveTutorGroupLesson(tutor_group_id, data)
 		return data
 	} catch (e) {
