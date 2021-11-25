@@ -24,6 +24,10 @@
 	import {onMount} from 'svelte'
 	import LeftBar from '../components/left-bar.svelte';
 	import {left_bar_visible} from "../store";
+	import Notification from '../components/app-shelf/notification.svelte'
+	import Modal from '../components/app-shelf/modal.svelte'
+	import Popup from '../components/app-shelf/popup.svelte'
+	import Popper from '../components/app-shelf/popper.svelte'
 
 	export let user_info
 
@@ -34,13 +38,20 @@
 
 <LeftBar/>
 
-<main class="bg-gray-100">
-	{#if $navigating}
-		<div class="fixed inset-x-0 top-0 z-50">
-			<LoadingBar/>
-		</div>
-	{/if}
-	<main class:ml-20={$left_bar_visible} class="transition transition-all">
-		<slot />
-	</main>
-</main>
+{#if $navigating}
+	<div class="fixed inset-x-0 top-0 z-50">
+		<LoadingBar/>
+	</div>
+{/if}
+
+<Notification>
+	<Modal>
+		<Popup>
+			<Popper>
+				<main class:ml-20={$left_bar_visible} class="transition transition-all">
+					<slot></slot>
+				</main>
+			</Popper>
+		</Popup>
+	</Modal>
+</Notification>
