@@ -4,7 +4,7 @@
 	export let user_id
 	export let active_tab = 'tasks'
 
-	const lesson_tabs = [
+	let lesson_tabs = [
 		{
 			slug: 'message',
 			label: 'Messages',
