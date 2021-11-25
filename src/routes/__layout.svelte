@@ -1,5 +1,11 @@
 <script context="module">
+	import {org_store} from "../store";
+	import {get} from 'svelte/store'
 	export const load = ({session}) => {
+		if (!get(org_store).id) {
+			console.log('hi')
+			// getUserOrgData(this.fetch)
+		}
 		return {
 			props: {
 				user_info: session.user_info
