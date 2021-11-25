@@ -30,10 +30,6 @@
 	})
 </script>
 
-{#if $page.path !== '/login'}
-	<Header {user_info}/>
-{/if}
-
 <main class="bg-gray-100">
 	{#if $navigating}
 		<div class="fixed inset-x-0 top-0 z-50">
