@@ -6,7 +6,7 @@
 	import { debounce } from "debounce";
 	import {domain} from "./puzzle-reader-constant";
 	import Panzoom from '@panzoom/panzoom'
-	import tippy from "tippy.js";
+	// import tippy from "tippy.js";
 	import {pdf_keyboard_listener_active} from "../../../store";
 
 	export let pages_info_2 = []
@@ -129,10 +129,10 @@
 
 	const tooltip = (node, is_fullscreen) => {
 		const showTooltip = (is_fullscreen) => {
-			tippy(node, {
-				content: !is_fullscreen ? 'Fullscreen' : `Collapse`,
-				placement: 'right'
-			})
+			// tippy(node, {
+			// 	content: !is_fullscreen ? 'Fullscreen' : `Collapse`,
+			// 	placement: 'right'
+			// })
 		}
 		showTooltip(is_fullscreen)
 		return {

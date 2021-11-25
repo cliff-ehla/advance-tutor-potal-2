@@ -23,12 +23,15 @@
   "dependencies": {
     "@fontsource/fira-mono": "^4.5.0",
     "@lukeed/uuid": "^2.0.0",
+    "@panzoom/panzoom": "^4.4.3",
     "@popperjs/core": "^2.10.2",
     "@sentry/browser": "^6.15.0",
     "@sentry/tracing": "^6.15.0",
     "@sveltejs/adapter-vercel": "^1.0.0-next.31",
+    "blueimp-md5": "^2.19.0",
     "cookie": "^0.4.1",
     "dayjs": "^1.10.7",
+    "debounce": "^1.2.1",
     "normalizr": "^3.6.1",
     "tippy": "^0.0.0"
   }

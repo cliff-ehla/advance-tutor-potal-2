@@ -4,7 +4,7 @@
 	const {showPopper} = getContext('popper')
 	import {onMount} from 'svelte'
 	import {getZoomMaterialRating} from "../../../api/zoom-api";
-	import tippy from "tippy.js";
+	// import tippy from "tippy.js";
 
 	export let student_id
 	export let item_id
@@ -20,10 +20,10 @@
 
 	const tooltip = (node) => {
 		const showTooltip = (rate) => {
-			tippy(node, {
-				content: !rate ? 'Rate the material for the student' : `Rated: ${rate}`,
-				placement: 'right'
-			})
+			// tippy(node, {
+			// 	content: !rate ? 'Rate the material for the student' : `Rated: ${rate}`,
+			// 	placement: 'right'
+			// })
 		}
 		return {
 			update: showTooltip

@@ -20,13 +20,13 @@ export async function getTutorGroupLessonList (tutor_group_id, _fetch, options) 
 	try {
 		const tg = get(tutor_group_store).tutor_group[tutor_group_id]
 		const tg_lesson = tg && tg.lessons
-		if (tg_lesson && use_cache) return console.log('get_tutor_group_lesson_list use cache')
-		const {data} = await http.post('courseApi/get_tutor_group_lesson_list', {
+		if (tg_lesson && use_cache) return console.log('/get_tutor_group_lesson_list use cache')
+		const {data} = await http.post(_fetch,'/courseApi/get_tutor_group_lesson_list', {
 			tutor_group_id
-		}, _fetch)
-		const res2 = await http.post('tutorApi/list_lesson_report_by_tutor_group_id', {
+		})
+		const res2 = await http.post(_fetch,'/tutorApi/list_lesson_report_by_tutor_group_id', {
 			tutor_group_id
-		}, _fetch)
+		})
 		let lessons = data
 		lessons.forEach(lesson => {
 			let object = res2.data.find(l => l.day_id === lesson.day_id)

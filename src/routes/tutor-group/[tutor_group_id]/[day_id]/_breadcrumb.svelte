@@ -1,7 +1,7 @@
 <script>
 	import Icon from '../../../../components/ui-elements/icon.svelte'
 	import {lesson_type as lesson_type_map, tutor_group_store} from "../../../../store";
-	import {stores} from '@sapper/app'
+	import {stores} from '$app/stores'
 	import {org_store} from "../../../../store";
 
 	const {page} = stores()
