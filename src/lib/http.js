@@ -8,9 +8,14 @@ const http = (() => {
 				resource += `?${property}=${query[property]}`
 			}
 		}
-		const res = await fetch('/api' + resource)
-		const {success, data, metadata, debug} = await res.json()
-		return {success, data, metadata, debug}
+		try {
+			const res = await fetch('/api' + resource)
+			const {success, data, metadata, debug} = await res.json()
+			return {success, data, metadata, debug}
+		} catch (e) {
+
+		}
+
 	}
 
 	async function post (fetch, resource, body = {}) {

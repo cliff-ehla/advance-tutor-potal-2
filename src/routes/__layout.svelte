@@ -1,10 +1,10 @@
 <script context="module">
 	import {org_store} from "../store";
 	import {get} from 'svelte/store'
-	import {getUserOrgData} from "../api/tutor-api";
-	export const load = ({fetch, session}) => {
+	export const load = async ({fetch, session}) => {
+		let d = await fetch('/api/organizationApi/user_organization_data_v2')
+		console.log('cliff: ', d)
 		if (!get(org_store).id) {
-			console.log('hi')
 			// getUserOrgData(fetch)
 		}
 		return {
