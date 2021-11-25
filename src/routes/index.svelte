@@ -9,7 +9,7 @@
 				redirect: '/login'
 			}
 		}
-		const {success, data, debug} = await http.post(fetch, '/zoom/zoom_list_all', {})
+		const {success, data, debug} = await http.post(fetch, '/zoomApi/zoom_list_all', {})
 		if (!success) return onFail(debug)
 		return {
 			props: {
