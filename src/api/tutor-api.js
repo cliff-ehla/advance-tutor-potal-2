@@ -75,9 +75,9 @@ export async function getStudentLessonList (tutor_group_id, child_id, _fetch, op
 
 export async function getTutorGroupStudentList (tutor_group_id, _fetch) {
 	try {
-		const {data} = await http.post('tutorApi/list_user_by_tutor_group_id', {
+		const {data} = await http.post(_fetch,'/tutorApi/list_user_by_tutor_group_id', {
 			tutor_group_id
-		}, _fetch)
+		})
 		tutor_group_store.saveTutorGroupStudents(tutor_group_id, data.students)
 		return {tutor_group_student_list: data.students}
 	} catch (e) {
