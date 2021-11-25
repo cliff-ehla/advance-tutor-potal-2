@@ -1,11 +1,7 @@
 <script>
-
+	import Calendar from '../../components/calendar/overview-calendar.svelte'
 	import {org_store} from "../../store";
 	import TopBar from '../../components/top-bar.svelte'
-	$:{
-		console.log($org_store)
-	}
-
 </script>
 
 <TopBar>
@@ -19,3 +15,5 @@
 		</div>
 	{/if}
 </TopBar>
+
+<Calendar/>
