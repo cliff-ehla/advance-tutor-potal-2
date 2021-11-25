@@ -9,8 +9,8 @@
 	import {getContext} from 'svelte'
 	const {close} = getContext('simple-modal')
 	const {showNotification} = getContext('notification')
-	import utc from "dayjs/plugin/utc"
-	import timezone from "dayjs/plugin/timezone"
+	import utc from "dayjs/plugin/utc.js"
+	import timezone from "dayjs/plugin/timezone.js"
 	import customParseFormat from "dayjs/plugin/customParseFormat"
 	import {tutor_group_store} from "../../store";
 
