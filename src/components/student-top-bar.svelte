@@ -3,7 +3,7 @@
 	export let back_path = undefined
 	export let o_o_o
 	export let segment
-	import {stores} from '@sapper/app'
+	import {stores} from '$app/stores'
 	import ProfileMenu from './profile-menu.svelte'
 	const {page} = stores()
 	$: user_id = $page.params.user_id || $page.query.user_id

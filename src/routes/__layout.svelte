@@ -22,6 +22,8 @@
 	import '../styles/tailwind-output.css';
 	import {page} from '$app/stores'
 	import {onMount} from 'svelte'
+	import LeftBar from '../components/left-bar.svelte';
+	import {left_bar_visible} from "../store";
 
 	export let user_info
 
@@ -30,11 +32,15 @@
 	})
 </script>
 
+<LeftBar/>
+
 <main class="bg-gray-100">
 	{#if $navigating}
 		<div class="fixed inset-x-0 top-0 z-50">
 			<LoadingBar/>
 		</div>
 	{/if}
-	<slot />
+	<main class:ml-20={$left_bar_visible} class="transition transition-all">
+		<slot />
+	</main>
 </main>

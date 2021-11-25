@@ -1,5 +1,5 @@
 <script>
-	import {stores} from '@sapper/app'
+	import {stores} from '$app/stores'
 	import Icon from './ui-elements/icon.svelte'
 	const {page, session} = stores()
 	import {left_bar_visible} from "../store";

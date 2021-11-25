@@ -1,6 +1,6 @@
 <script>
 	import Icon from '../ui-elements/icon.svelte'
-	import {stores} from '@sapper/app'
+	import {stores} from '$app/stores'
 	import ProfileMenu from '../profile-menu.svelte'
 	import {org_store} from "../../store";
 	import {tutor_group_store} from "../../store";

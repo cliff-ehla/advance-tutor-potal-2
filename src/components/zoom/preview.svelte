@@ -9,7 +9,7 @@
 	import {org_store} from "../../store";
 	import Rate from './rate-zoom.svelte'
 	import {listStudentNote} from "../../api/student-note-api";
-	// import {stores} from '@sapper/app'
+	// import {stores} from '$app/stores'
 	import {syllabus_store} from "../../store";
 	import {listAllCategory, updateSyllabus} from "../../api/syllabus-api";
 	import {fetchZoomOverview} from "../../api/zoom-api";
