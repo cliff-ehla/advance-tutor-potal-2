@@ -4,7 +4,7 @@ import {get} from 'svelte/store'
 
 export async function getUserOrgData (_fetch) {
 	try {
-		const {data} = await http.get('organizationApi/user_organization_data_v2', _fetch)
+		const {data} = await http.get(_fetch,'/organizationApi/user_organization_data_v2')
 		tutor_group_store.saveList(data[0].tutor_group_without_classes)
 		tutor_group_store.saveOOOList(data[0].one_on_one)
 		tutor_group_store.saveClassList(data[0].classes)

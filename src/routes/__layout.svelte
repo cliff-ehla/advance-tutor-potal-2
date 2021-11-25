@@ -1,11 +1,10 @@
 <script context="module">
 	import {org_store} from "../store";
 	import {get} from 'svelte/store'
-	export const load = async ({fetch, session}) => {
-		let d = await fetch('/api/organizationApi/user_organization_data_v2')
-		console.log('cliff: ', d)
+	import {getUserOrgData} from "../api/tutor-api";
+	export const load = ({fetch, session}) => {
 		if (!get(org_store).id) {
-			// getUserOrgData(fetch)
+			getUserOrgData(fetch)
 		}
 		return {
 			props: {
