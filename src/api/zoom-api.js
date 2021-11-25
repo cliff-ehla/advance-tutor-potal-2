@@ -1,4 +1,4 @@
-import http from "../http";
+import {http} from "$lib/http";
 import {tutor_group_store, updated_wrapper_id_store} from "../store";
 
 export async function fetchZoomOverview ({start_date, end_date}, _fetch) {

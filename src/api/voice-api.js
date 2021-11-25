@@ -1,4 +1,4 @@
-import http from "../http";
+import {http} from "$lib/http";
 
 export async function getVoicesReport ({lesson_id, tutor_group_id, day_id, child_id, sentences, vocabs}, _fetch) {
 	try {

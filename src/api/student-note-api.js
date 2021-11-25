@@ -1,4 +1,4 @@
-import http from "../http";
+import {http} from "$lib/http";
 
 export async function listStudentNote ({student_id, teacher_id}, _fetch) {
 	const {data, metadata} = await http.post('studentNoteApi/list_student_note', {

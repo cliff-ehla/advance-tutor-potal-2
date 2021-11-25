@@ -1,4 +1,4 @@
-import http from "../http";
+import {http} from "$lib/http";
 
 export async function getVocabs (word_ids, _fetch) {
 	try {

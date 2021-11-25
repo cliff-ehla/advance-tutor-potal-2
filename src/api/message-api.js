@@ -1,4 +1,4 @@
-import http from "../http";
+import {http} from "$lib/http";
 
 export async function fetchMessage ({tutor_group_id, student_id}, _fetch) {
 	try {

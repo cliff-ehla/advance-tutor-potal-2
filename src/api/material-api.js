@@ -1,4 +1,4 @@
-import http from "../http";
+import {http} from "$lib/http";
 import {material_store} from "../store";
 
 export async function getUserMaterial (child_id, _fetch) {

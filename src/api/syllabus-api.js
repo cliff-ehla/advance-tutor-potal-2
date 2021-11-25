@@ -1,4 +1,4 @@
-import http from "../http";
+import {http} from "$lib/http";
 import {syllabus_store} from "../store";
 
 export async function listAllCategory () {

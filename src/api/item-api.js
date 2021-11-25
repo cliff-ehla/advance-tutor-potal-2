@@ -1,4 +1,4 @@
-import http from "../http";
+import {http} from "$lib/http";
 import {item_store} from "../store";
 import {get} from 'svelte/store'
 
