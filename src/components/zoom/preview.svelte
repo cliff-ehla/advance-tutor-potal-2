@@ -257,7 +257,7 @@
 			{:else if !!big_classroom_type}
 				<p class="text-t2 font-bold mb-2">
 					{is_big_class ? 'Big class:' : 'Small class:'}
-					{#if student_cnt}<span className="ml-1">{student_cnt} student(s)</span>{/if}
+					{#if student_cnt}<span class="ml-1">{student_cnt} student(s)</span>{/if}
 				</p>
 			{:else}
 				<div class="relative">

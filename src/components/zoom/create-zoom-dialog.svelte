@@ -11,7 +11,7 @@
 	const {showNotification} = getContext('notification')
 	import utc from "dayjs/plugin/utc.js"
 	import timezone from "dayjs/plugin/timezone.js"
-	import customParseFormat from "dayjs/plugin/customParseFormat"
+	import customParseFormat from "dayjs/plugin/customParseFormat.js"
 	import {tutor_group_store} from "../../store";
 
 	dayjs.extend(utc)
