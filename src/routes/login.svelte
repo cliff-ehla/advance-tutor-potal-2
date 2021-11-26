@@ -1,13 +1,12 @@
 <script context="module">
 	export const prerender = true;
 	export const load = ({session}) => {
-		// TODO I cannot delete the access token
-		// if (session.access_token) {
-		// 	return {
-		// 		redirect: '/',
-		// 		status: 302
-		// 	}
-		// }
+		if (session.access_token) {
+			return {
+				redirect: '/',
+				status: 302
+			}
+		}
 		return true
 	}
 </script>
@@ -19,9 +18,11 @@
 	import {getStores} from "$app/stores";
 	let env = import.meta.env.VITE_ENV
 	const {session} = getStores()
+	let base_url = import.meta.env.VITE_API_BASE
+	let local_production = base_url === 'https://usermodel.ehlacademy.org'
 
-	let username = env !== 'production' ? 'queeniedevc4' : ''
-	let password = env !== 'production' ? 'a12345678' : ''
+	let username = env === 'production' ? '' : local_production ? 'teacher.john' : 'queeniedevt14'
+	let password = env === 'production' ? '' : local_production ? '123john' : 'q12345678'
 	let error = false
 	let loading = false
 
