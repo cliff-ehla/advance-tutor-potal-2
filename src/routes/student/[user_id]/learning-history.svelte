@@ -16,7 +16,7 @@
 	let preview_image
 
 	const onPreview = async (id) => {
-		let data = await getItem(id)
+		let data = await getItem(id, fetch)
 		preview_image = data.pdf_array
 	}
 

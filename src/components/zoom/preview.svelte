@@ -1,7 +1,6 @@
 <script>
 	import {removeMaterialFromZoom} from "../../api/zoom-api";
 	import AddPdfToZoomDialog from '../../components/task/add-pdf-to-zoom-dialog.svelte'
-	import CreateZoomDialog from '../../components/zoom/create-zoom-dialog.svelte'
 	import StudentDisplay from '../../components/tutor-group/students-display.svelte'
 	import dayjs from 'dayjs'
 	import {getContext, onMount} from 'svelte'
@@ -136,27 +135,6 @@
 		})
 	}
 
-	const onEditZoom = () => {
-		open(CreateZoomDialog, {
-			tutor_group_id,
-			teacher_id: z.teacher_id,
-			teacher_nickname: z.teacher_nickname,
-			zoom_config: z,
-			is_overview,
-			selected_type: z.f_one_on_one === 1 ? 'One-on-one' : 'Group'
-		}, {
-			closeOnOuterClick: false,
-			styleWindow: {
-				maxWidth: '26em',
-				borderRadius: '1em'
-			},
-			styleContent: {
-				overflow: 'visible',
-				padding: '1em 1em 0.5em'
-			}
-		})
-	}
-
 	const getLevelOptions = (category) => {
 		let obj = $syllabus_store.find(s => {
 			return s.category_type === category
@@ -189,10 +167,6 @@
 		{#if not_set}
 			<p class="text-xs font-bold uppercase">No date</p>
 			<div class="flex-1"></div>
-			<button on:click={onEditZoom} class="bg-opacity-5 hover:bg-opacity-10 bg-black px-2 rounded text-sm flex items-center">
-				<Icon name="edit" className="w-4"/>
-				<span class="ml-2">Edit</span>
-			</button>
 		{:else if expired}
 			<p class="text-xs font-bold uppercase">Class expired</p>
 		{:else if not_yet_started}
@@ -213,10 +187,6 @@
 				</div>
 			{/if}
 			<div class="flex-1"></div>
-			<button on:click={onEditZoom} class="{within_hour || is_today ? 'bg-opacity-20 hover:bg-opacity-30' : 'bg-black bg-opacity-5 hover:bg-opacity-10'} bg-black px-2 rounded text-sm flex items-center">
-				<Icon name="edit" className="w-4"/>
-				<span class="ml-2">Edit</span>
-			</button>
 		{:else if in_progress}
 			<p class="text-xs font-bold uppercase">In progress</p>
 		{/if}
