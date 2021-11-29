@@ -1084,6 +1084,11 @@ parse-json@^5.0.0:
     json-parse-even-better-errors "^2.3.0"
     lines-and-columns "^1.1.6"
 
+parse-srt@^1.0.0-alpha:
+  version "1.0.0-alpha"
+  resolved "https://registry.yarnpkg.com/parse-srt/-/parse-srt-1.0.0-alpha.tgz#85e3c60d31e4dd0924faf541ea85a188fc344f61"
+  integrity sha1-hePGDTHk3Qkk+vVB6oWhiPw0T2E=
+
 path-is-absolute@^1.0.0:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/path-is-absolute/-/path-is-absolute-1.0.1.tgz#174b9268735534ffbc7ace6bf53a5a9e1b5c5f5f"
@@ -1405,6 +1410,11 @@ svelte-hmr@^0.14.7:
   version "0.14.7"
   resolved "https://registry.yarnpkg.com/svelte-hmr/-/svelte-hmr-0.14.7.tgz#7fa8261c7b225d9409f0a86f3b9ea5c3ca6f6607"
   integrity sha512-pDrzgcWSoMaK6AJkBWkmgIsecW0GChxYZSZieIYfCP0v2oPyx2CYU/zm7TBIcjLVUPP714WxmViE9Thht4etog==
+
+svelte-slider@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/svelte-slider/-/svelte-slider-1.0.1.tgz#5be09adc5b9bd88cf09cc5b13a4cf76082d05f01"
+  integrity sha512-oK4L5Hzf7A4buGES4v0q2n2pbJFEE5jR/BC4fdBlPa1Y2Ni3T/9g5XTME7yqv3wLws0jRwkG515NDqqI0F/pAQ==
 
 svelte@^3.34.0:
   version "3.44.1"

@@ -98,8 +98,8 @@
 		if (!$syllabus_store.length) {
 			await listAllCategory()
 		}
-		let res = await getZoomDetails(z.wrapper_id)
-		student_cnt = res.student_cnt
+		let res = await getZoomDetails(z.wrapper_id, fetch)
+		student_cnt = res.students.length
 		return () => {
 			if (timer_id) clearInterval(timer_id)
 		}

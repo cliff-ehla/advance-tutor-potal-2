@@ -21,8 +21,7 @@
 	const onRate = async value => {
 		if (loading) return
 		loading = true
-		console.log(item_id)
-		await markZoomRating({
+		await markZoomRating(fetch, {
 			student_id,
 			item_id,
 			t_difficulty_rate: value
