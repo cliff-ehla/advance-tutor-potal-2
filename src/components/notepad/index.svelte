@@ -3,11 +3,9 @@
 	import Icon from '../ui-elements/icon.svelte'
 	const dispatch = createEventDispatcher()
 	import {setCourseNote} from "../../api/course-api";
-	import {setUserNote} from "../../api/user-api";
 
 	export let note
 	export let tutor_group_id = undefined
-	export let student_id = undefined
 
 	let loading
 	let is_editing
@@ -16,17 +14,10 @@
 	const onSave = async () => {
 		if (loading) return
 		loading = true
-		if (student_id) {
-			await setUserNote({
-				student_id,
-				message: note
-			})
-		} else if (tutor_group_id) {
-			await setCourseNote({
-				tutor_group_id,
-				message: note
-			})
-		}
+		await setCourseNote({
+			tutor_group_id,
+			message: note
+		}, fetch)
 		loading = false
 		is_editing = false
 	}

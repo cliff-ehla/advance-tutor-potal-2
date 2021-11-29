@@ -26,7 +26,7 @@
 	}
 </script>
 
-<GroupClassTopBar segment="students" {tutor_group}/>
+<GroupClassTopBar segment="tutor-group-messages" {tutor_group}/>
 
 <div class="p-6">
 	<p class="pb-4 font-bold text-t2">Messages</p>
