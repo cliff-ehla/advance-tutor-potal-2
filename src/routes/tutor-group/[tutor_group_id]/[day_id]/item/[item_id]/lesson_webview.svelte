@@ -10,7 +10,7 @@
 </script>
 
 <script>
-	import {stores} from "@sapper/app";
+	import {stores} from "$app/stores";
 	const {page} = stores()
 
 	import {onMount} from 'svelte'
