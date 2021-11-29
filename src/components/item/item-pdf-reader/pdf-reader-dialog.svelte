@@ -9,7 +9,7 @@
 
 	onMount(async () => {
 		if (item_id) {
-			let data = await getItem(item_id)
+			let data = await getItem(item_id, fetch)
 			pdf_json = data.pdf_json
 		}
 	})

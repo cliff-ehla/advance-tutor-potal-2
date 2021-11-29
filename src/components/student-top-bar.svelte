@@ -6,7 +6,7 @@
 	import {stores} from '$app/stores'
 	import ProfileMenu from './profile-menu.svelte'
 	const {page} = stores()
-	$: user_id = $page.params.user_id || $page.query.user_id
+	$: user_id = $page.params.user_id || $page.query.get("user_id")
 
 	const tabs = [
 		{
@@ -20,10 +20,6 @@
 		{
 			label: 'Learning history',
 			slug: 'learning-history'
-		},
-		{
-			label: 'Material from student',
-			slug: 'material'
 		}
 	]
 </script>

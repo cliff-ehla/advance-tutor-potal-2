@@ -22,7 +22,7 @@
 	const {page, session} = stores()
 
 	$: tutor_group = $tutor_group_store.tutor_group[$page.params.tutor_group_id] || {}
-	$: user_id = $page.query.user_id
+	$: user_id = $page.query.get("user_id")
 	$: o_o_o = $tutor_group_store ? tutor_group_store.getOOO(user_id) : null
 	$: zoom_list = $tutor_group_store ? tutor_group_store.getZoomList($page.params.tutor_group_id) : null
 	$: category_list = zoom_list ? getZoomListTimeCategory(zoom_list) : null
@@ -34,7 +34,7 @@
 	<GroupClassTopBar segment="zoom" {tutor_group}/>
 {/if}
 
-<SideTab user_id={$page.query.user_id} tutor_group_id={$page.params.tutor_group_id} active_tab="zoom">
+<SideTab {user_id} tutor_group_id={$page.params.tutor_group_id} active_tab="zoom">
 	<div class="p-8 max-w-screen-lg">
 		{#if category_list}
 			{#each category_list as cat}

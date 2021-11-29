@@ -36,7 +36,7 @@
 	}
 
 	const getAlertMessage = async () => {
-		alert_message_options = await listAlertMessage()
+		alert_message_options = await listAlertMessage(fetch)
 	}
 
 	const updateMessage = async () => {
@@ -44,7 +44,7 @@
 		messages = await fetchMessage({
 			tutor_group_id,
 			student_id,
-		})
+		}, fetch)
 		let _last_message_id = messages.length && messages[messages.length - 1].message_id
 		if (scroll_container_el) {
 			if (_last_message_id && (_last_message_id !== last_message_id)) {
@@ -66,7 +66,7 @@
 					tutor_group_id,
 					teacher_id,
 					message_id: message.id
-				})
+				}, fetch)
 				await updateMessage()
 				scroll_container_el.scrollTop = scroll_container_el.scrollHeight
 			}

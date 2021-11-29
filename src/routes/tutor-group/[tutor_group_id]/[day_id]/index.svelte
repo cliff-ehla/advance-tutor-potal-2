@@ -43,9 +43,9 @@
 	$: not_completed_users = lesson && lesson.not_completed_users
 	$: students = lesson && lesson.students
 	$: lesson_type = $lesson_type_map[lesson && lesson.type]
-	$: user_id = $page.query.user_id
-	$: c_id = $page.query.c_id
-	$: zoom_id = $page.query.zoom_id
+	$: user_id = $page.query.get("user_id")
+	$: c_id = $page.query.get("c_id")
+	$: zoom_id = $page.query.get("zoom_id")
 	$: is_one_on_one = !!user_id
 	$: is_group = !is_one_on_one
 	$: is_school = $org_store.o_type === 'SCHOOL'

@@ -16,4 +16,4 @@
 	Loading...
 </div>
 
-<iframe class="absolute inset-0 w-full h-full" src="https://ehla-baby.com/fun/game-json/{item_id}?accessToken={$session.user_session.access_token}" frameborder="0"></iframe>
+<iframe class="absolute inset-0 w-full h-full" src="https://ehla-baby.com/fun/game-json/{item_id}?accessToken={$session.access_token}" frameborder="0"></iframe>

@@ -30,7 +30,7 @@
 	let preview_thumbs
 
 	onMount(async () => {
-		const data = await getTutorGroupItemList({tutor_group_id, category})
+		const data = await getTutorGroupItemList({tutor_group_id, category}, fetch)
 		items = data.unselected_items
 		history_items = data.selected_items
 		filters = data.tag_ordering
@@ -40,7 +40,7 @@
 	const onSave = async () => {
 		if (loading_save || !selected_item_id) return
 		loading_save = true
-		await addMaterialToZoom({
+		await addMaterialToZoom(fetch, {
 			item_id: selected_item_id,
 			tutor_group_id,
 			wrapper_id,
@@ -53,7 +53,7 @@
 	const onSelectItem = async (item) => {
 		loading_preview = true
 		selected_item_id = item.id
-		let data = await getItem(selected_item_id)
+		let data = await getItem(selected_item_id, fetch)
 		preview_thumbs = data.pdf_array
 		loading_preview = false
 	}

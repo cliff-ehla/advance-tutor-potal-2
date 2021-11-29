@@ -129,7 +129,7 @@
 	const onRemoveMaterial = (day_id) => {
 		let day_ids = z.days.map(d => d.day_id)
 		day_ids.splice(day_ids.indexOf(day_id), 1)
-		removeMaterialFromZoom({
+		removeMaterialFromZoom(fetch, {
 			wrapper_id: z.wrapper_id,
 			day_ids
 		})
