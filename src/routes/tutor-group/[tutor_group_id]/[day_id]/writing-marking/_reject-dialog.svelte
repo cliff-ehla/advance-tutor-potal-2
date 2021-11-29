@@ -1,5 +1,5 @@
 <script>
-	import TemplateTextBox from './template-text-box.svelte'
+	import TemplateTextBox from './_template-text-box.svelte'
 	import {onMount, getContext} from 'svelte'
 	import {listRejectCommentSample, rejectWriting} from "../../../../../api/writing-api";
 	const {close} = getContext('simple-modal')
