@@ -87,11 +87,10 @@ export async function getTutorGroupStudentList (tutor_group_id, _fetch) {
 
 export async function getTutorGroupItemList ({tutor_group_id, category}, _fetch) {
 	try {
-		const {data} = await http.post('organizationApi/get_tutor_group_item_list', {
+		const {data} = await http.post(_fetch,'/organizationApi/get_tutor_group_item_list', {
 			tutor_group_id,
-			category_tag_type: category,
-			task_type: "reading-pdf"
-		}, _fetch)
+			category_tag_type: category
+		})
 		return data
 	} catch (e) {
 		console.log(e)
@@ -100,7 +99,7 @@ export async function getTutorGroupItemList ({tutor_group_id, category}, _fetch)
 
 export async function fetchTutorAvailableTimeSlot (_fetch) {
 	try {
-		const {data} = await http.post('tutorApi/list_available_timeslot', {}, _fetch)
+		const {data} = await http.post(_fetch,'/tutorApi/list_available_timeslot', {})
 		return data
 	} catch (e) {
 		console.log(e)
@@ -109,9 +108,9 @@ export async function fetchTutorAvailableTimeSlot (_fetch) {
 
 export async function setTutorAvailableTimeSlot ({start_time, end_time, timeslot, timeslot_id}, _fetch) {
 	try {
-		const {data} = await http.post('tutorApi/set_available_time', {
+		const {data} = await http.post(_fetch,'/tutorApi/set_available_time', {
 			start_time, end_time, timeslot, timeslot_id
-		}, _fetch)
+		})
 		return data
 	} catch (e) {
 		console.log(e)
