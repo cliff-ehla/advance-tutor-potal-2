@@ -103,6 +103,6 @@
 
 <style>
 	.label {
-		@apply text-xxs font-bold text-white px-2 py-1 rounded-sm;
+		@apply text-xs font-bold text-white px-2 py-1 rounded-sm;
 	}
 </style>
