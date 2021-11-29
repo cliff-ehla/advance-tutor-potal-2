@@ -1,12 +1,12 @@
 <script context="module">
 	export const prerender = true;
 	export const load = ({session}) => {
-		if (session.access_token) {
-			return {
-				redirect: '/',
-				status: 302
-			}
-		}
+		// if (session.access_token) {
+		// 	return {
+		// 		redirect: '/',
+		// 		status: 302
+		// 	}
+		// }
 		return true
 	}
 </script>

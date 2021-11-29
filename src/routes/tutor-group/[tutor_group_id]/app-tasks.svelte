@@ -36,7 +36,7 @@
 	$: dict = $tutor_group_store.tutor_group[$page.params.tutor_group_id] || {}
 	$: lessons = dict && dict.lessons
 	$: students = dict && dict.students
-	$: user_id = $page.query.user_id
+	$: user_id = $page.query.get("user_id")
 	$: c_id = $page.query.c_id
 	$: is_one_on_one = $page.query.user_id
 	$: o_o_o = $tutor_group_store ? tutor_group_store.getOOO(user_id) : null

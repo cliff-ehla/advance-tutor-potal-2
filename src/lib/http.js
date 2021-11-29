@@ -31,7 +31,7 @@ const http = (() => {
 			const {success, data, metadata, debug} = await res.json()
 			return {success, data, metadata, debug}
 		} catch (e) {
-			console.log('fatal error: this mostly happened when usermodel do not return a json body', e)
+			console.log(`fatal error: ${resource} this mostly happened when usermodel do not return a json body`, e)
 			return {
 				success: false,
 				data: false,
