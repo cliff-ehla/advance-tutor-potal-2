@@ -20,11 +20,20 @@
 	const {session} = getStores()
 	let base_url = import.meta.env.VITE_API_BASE
 	let local_production = base_url === 'https://usermodel.ehlacademy.org'
+	import {left_bar_visible} from "../store";
+	import {onMount} from 'svelte'
 
 	let username = env === 'production' ? '' : local_production ? 'teacher.john' : 'queeniedevt14'
 	let password = env === 'production' ? '' : local_production ? '123john' : 'q12345678'
 	let error = false
 	let loading = false
+
+	onMount(() => {
+		left_bar_visible.set(false)
+		return () => {
+			left_bar_visible.set(true)
+		}
+	})
 
 	const onLogin = async () => {
 		if (loading) return

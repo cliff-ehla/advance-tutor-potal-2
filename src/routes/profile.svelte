@@ -14,8 +14,11 @@
 </script>
 
 <script>
+	import TopBar from '../components/top-bar.svelte'
 	export let user_info
 </script>
+
+<TopBar>Profile</TopBar>
 
 <div class="container py-8">
 	<div class="bg-white p-8 rounded border border-gray-300">

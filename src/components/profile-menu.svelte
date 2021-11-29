@@ -7,6 +7,7 @@
 	$: user_info = $session.user_info
 
 	$: is_school = $org_store.o_type === 'SCHOOL'
+	console.log($session)
 
 	const menu = [
 		{
@@ -51,7 +52,7 @@
 		{/if}
 		<Dropdown placement="bottom-end">
 			<div slot="activator" class="inline-flex items-center">
-				<div class="rounded-full w-10 h-10 bg-cover bg-center" style="background-image: url({user_info.profile_pic})"></div>
+				<div class="rounded-full w-10 h-10 bg-cover bg-center" style="background-image: url({$session.user_info.profile_pic})"></div>
 				<div class="ml-2 leading-none">
 					<p class="text-xs text-gray-500">Teacher</p>
 					<p class="max-w-xs text-sm text-gray-700 whitespace-nowrap overflow-hidden overflow-ellipsis">
