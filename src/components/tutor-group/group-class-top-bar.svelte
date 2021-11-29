@@ -24,8 +24,8 @@
 			slug: 'app-tasks'
 		},
 		{
-			label: 'Note',
-			slug: 'note'
+			label: 'Reminder',
+			slug: 'reminder'
 		},
 		{
 			label: 'Messages',
