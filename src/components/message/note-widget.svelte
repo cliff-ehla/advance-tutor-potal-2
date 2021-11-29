@@ -25,7 +25,7 @@
 	const fetchNote = async () => {
 		const res = await listStudentNote({
 			student_id, teacher_id
-		})
+		}, fetch)
 		notes = res.notes
 		notes = notes.sort((a,b) => {
 			return a.update_ts > b.update_ts ? 1 : -1
@@ -46,21 +46,21 @@
 					student_id,
 					note,
 					teacher_id
-				})
+				}, fetch)
 				await fetchNote()
 			}
 		})
 	}
 
 	const onDelete = async (note_id) => {
-		await deleteStudentNote({note_id})
+		await deleteStudentNote({note_id}, fetch)
 		fetchNote()
 	}
 
 	export function markAsReadAndScroll () {
 		markAsRead({
 			student_id
-		})
+		}, fetch)
 		setTimeout(() => {
 			scroll_container_el.scrollTop = scroll_container_el.scrollHeight
 		}, 10)

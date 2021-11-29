@@ -15,7 +15,7 @@
 		},
 		{
 			label: 'Reminder',
-			slug: 'note'
+			slug: 'reminder'
 		},
 		{
 			label: 'Learning history',
