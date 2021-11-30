@@ -41,12 +41,11 @@
 	$: is_one_on_one = $page.query.get("user_id")
 	$: o_o_o = $tutor_group_store ? tutor_group_store.getOOO(user_id) : null
 </script>
-
 {#if user_id && o_o_o}
 	<StudentTopBar segment="course" {o_o_o}/>
 <!--	<CourseBreadcrumb {user_id} {dict}/>-->
 {:else}
-	<GroupClassTopBar back_path="/classes/{c_id}" {c_id} segment="app-tasks" tutor_group={dict}/>
+	<GroupClassTopBar {c_id} segment="app-tasks" tutor_group={dict}/>
 {/if}
 
 <div class="flex w-full">

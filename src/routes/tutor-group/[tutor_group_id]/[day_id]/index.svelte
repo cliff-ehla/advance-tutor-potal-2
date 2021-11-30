@@ -26,6 +26,7 @@
 	import TopBar from '../../../../components/top-bar.svelte'
 	import CourseBreadcrumb from '../../../../components/course-breadcrumb.svelte'
 	import StudentTopBar from '../../../../components/student-top-bar.svelte'
+	import GroupClassTopBar from '../../../../components/tutor-group/group-class-top-bar.svelte'
 	import {lesson_type as lesson_type_map, task_type as task_type_map} from "../../../../store";
 	import WritingStatusBanner from './_writing_status_banner.svelte'
 	import {getRejectHistory} from "../../../../api/writing-api";
@@ -172,7 +173,8 @@
 		</div>
 	</TopBar>
 {:else}
-	<TopBar back_path></TopBar>
+	<GroupClassTopBar tutor_group={dict}/>
+<!--	<TopBar back_path></TopBar>-->
 {/if}
 
 <div class="bg-white border-b border-gray-300">
