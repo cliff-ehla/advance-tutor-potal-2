@@ -36,7 +36,7 @@
 	})
 </script>
 
-<LeftBar/>
+<!--<LeftBar/>-->
 
 {#if $navigating}
 	<div class="fixed inset-x-0 top-0 z-50">
@@ -48,7 +48,7 @@
 	<Modal>
 		<Popup>
 			<Popper>
-				<main class:ml-20={$left_bar_visible} class="transition transition-all">
+				<main class="transition transition-all">
 					<slot></slot>
 				</main>
 			</Popper>
