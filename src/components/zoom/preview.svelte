@@ -32,7 +32,7 @@
 	import Icon from '../ui-elements/icon.svelte'
 	import Dropdown from '../ui-elements/dropdown3.svelte'
 	const {open} = getContext('simple-modal')
-	let is_one_on_one = z.students.length === 1
+	let is_one_on_one = z.f_one_on_one === 1
 	let student_id = is_one_on_one ? z.students[0].user_id : null
 	let big_classroom_type = z.big_classroom_type
 	let is_big_class = big_classroom_type === 'UNLIMITED' || big_classroom_type === 'BIG'
@@ -207,7 +207,7 @@
 							<Icon name="right" className="w-4 ml-2"/>
 						</a>
 					{:else}
-						<span class="text-gray-400">No student</span>
+						<span class="text-gray-400">No student s</span>
 					{/if}
 					<a on:click={close} href="/tutor-group/{tutor_group.tutor_group_id}/message?user_id={user_id}" class="hover:opacity-70 inline-block font-bold text-xs px-4 py-1 rounded-full text-white leading-none" style="background: {tutor_group.color || '#ccc'}">
 						{z.title || 'No class title'}
