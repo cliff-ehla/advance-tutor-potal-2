@@ -1,126 +1,21 @@
 <script>
-	import utc from "dayjs/plugin/utc.js"
-	import timezone from "dayjs/plugin/timezone.js"
-	import isBetween from 'dayjs/plugin/isBetween.js'
-	import dayjs from 'dayjs'
-	dayjs.extend(isBetween)
-	dayjs.extend(utc)
-	dayjs.extend(timezone)
-
-	export let z
-	import Icon from '$lib/ui/icon.svelte'
-	import {onMount} from 'svelte'
-
-	const start = dayjs(z.start_date)
-	let now = dayjs(new Date())
-	const not_set = !z.start_date
-	const day_diff = start.diff(now, 'day')
-	const is_today = day_diff === 0
-
-	let in_progress
-	let expired
-	let not_yet_started
-	let hour_diff
-	let min_diff
-	let within_hour
-
-	$: status = not_set ? 'not_set' : expired ? 'expired' : in_progress ? 'in_progress' : within_hour ? 'in_hour' : is_today ? 'today' : 'coming_soon'
-	$: zoom_button_active = (within_hour || in_progress)
-
-	$: start_time_hk = dayjs.utc(z.start_date).tz('Asia/Hong_Kong')
-	$: end_time_hk = start_time_hk ? start_time_hk.add(z.duration, 'minutes') : null
-
-	$: classroom_type = z.big_classroom_type
-	$: classroom_type_display = ['BIG','UNLIMITED'].includes(classroom_type) ? 'Big class' : classroom_type === 'SMALL' ? 'Small class' : ''
-
-	const status_to_style = {
-		'not_set': 'bg-blue-100 text-red-500',
-		'expired': 'bg-gray-200 text-gray-400',
-		'in_progress': 'bg-yellow-500 text-black',
-		'in_hour': 'bg-green-500 text-white',
-		'today': 'bg-green-500 text-white',
-		'coming_soon': 'bg-blue-100 text-blue-500'
-	}
-
-	const update = () => {
-		now = dayjs()
-		hour_diff = start_time_hk.diff(now, 'hour')
-		min_diff = start_time_hk.diff(now, 'minute') % 60
-		expired = now.isAfter(end_time_hk)
-		in_progress = now.isBetween(start_time_hk, end_time_hk)
-		within_hour = start_time_hk.diff(now, 'minute') < 60
-		not_yet_started = now.isBefore(start_time_hk)
-	}
-
-	onMount(() => {
-		let timer_id
-		update()
-		if (is_today) {
-			hour_diff = start.diff(now, 'hour')
-			timer_id = setInterval(update, 1000)
-		}
-		return () => {
-			if (timer_id) clearInterval(timer_id)
-		}
-	})
+	import dayjs from "dayjs";
+	export let zoom
 </script>
 
-<div class="rounded bg-white border border-gray-300 overflow-hidden">
-	<div class="{status_to_style[status]} flex px-4 h-8 items-center">
-		{#if not_set}
-			<p class="text-xs font-bold uppercase">No date</p>
-			<p class="text-xxs ml-2">Your tutor have not set the class time</p>
-		{:else if expired}
-			<p class="text-xs font-bold uppercase">Class completed</p>
-		{:else if not_yet_started}
-			{#if within_hour}
-				<div class="inline-flex items-center">
-					<Icon name="stopwatch" className="w-5"/>
-					<p class="text-sm ml-1 leading-none">{min_diff} Minutes to start</p>
-				</div>
-			{:else if is_today}
-				<div class="inline-flex items-center">
-					<Icon name="stopwatch" className="w-5"/>
-					<p class="text-sm ml-1 leading-none">{hour_diff} Hours to start</p>
-				</div>
-			{:else}
-				<div class="inline-flex items-center">
-					<Icon name="stopwatch" className="w-5"/>
-					<p class="text-sm ml-1 leading-none">{day_diff} Days to start</p>
-				</div>
-			{/if}
-		{:else if in_progress}
-			<p class="text-xs font-bold uppercase">In progress</p>
-		{/if}
+<div class="p-2 flex">
+	<div class="w-24">
+		<p class="text-gray-500">{dayjs(zoom.start_date).format('H:mma')}</p>
 	</div>
-	<div class="p-4">
-		<div class="mb-0.5">
-			<p class="text-lg leading-tight text-black">{z.title || 'No title'}</p>
-			<p class="text text-blue-500">Teacher: {z.teacher_nickname}</p>
-		</div>
-		{#if classroom_type_display}
-			<div class="mb-2">
-				<p class="text-gray-500 text-sm">{classroom_type_display}</p>
-			</div>
+	<div>
+		{#each zoom.days as d}
+			<p>{d.title}</p>
+		{/each}
+		{#if zoom.f_one_on_one}
+			<span class="text-red-500">{zoom.title}</span>
 		{/if}
-		<div class="flex">
-			<div class="flex items-center">
-				<Icon name="calendar" className="text-gray-500 w-6"/>
-				<div class="ml-1 text-sm">{start_time_hk.format('MMM D, h:mm A')}</div>
-			</div>
-			<div class="flex items-center ml-4">
-				<Icon name="stopwatch" className="text-gray-500 w-5"/>
-				<div class="ml-1 text-sm">{z.duration} minutes</div>
-			</div>
-		</div>
-		{#if zoom_button_active}
-			<a target="_blank" href={z.zoom_link} class="block bg-blue-500 hover:bg-blue-700 text-white mt-4 text-center px-12 py-2 rounded font-bold w-full">
-				<p>Join the class now</p>
-			</a>
-		{:else if !expired}
-			<button disabled class="bg-gray-200 text-gray-300 mt-4 text-center px-12 py-2 rounded font-bold w-full">
-				Join the class now
-			</button>
-		{/if}
+		{#each zoom.students as s}
+			<span class="text-blue-500 mr-2">{s.nickname} ({s.level})</span>
+		{/each}
 	</div>
 </div>
