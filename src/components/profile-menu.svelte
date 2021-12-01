@@ -7,7 +7,6 @@
 	$: user_info = $session.user_info
 
 	$: is_school = $org_store.o_type === 'SCHOOL'
-	console.log($session)
 
 	const menu = [
 		{
