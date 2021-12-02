@@ -16,19 +16,16 @@
 
 <script>
 	import {sentry} from "$lib/sentry";
-	import Header from '$lib/top-bar.svelte';
 	import LoadingBar from '$lib/ui/indeterminate-loading-bar.svelte'
 	import {navigating} from "$app/stores";
 	import '../styles/tailwind-output.css';
-	import {page} from '$app/stores'
 	import {onMount} from 'svelte'
-	import LeftBar from '../components/left-bar.svelte';
-	import {left_bar_visible} from "../store";
 	import Notification from '../components/app-shelf/notification.svelte'
 	import Modal from '../components/app-shelf/modal.svelte'
 	import Popup from '../components/app-shelf/popup.svelte'
 	import Popper from '../components/app-shelf/popper.svelte'
 	import TopBar from '$lib/app-shelf/top-bar.svelte'
+	import {session} from '$app/stores'
 
 	export let user_info
 
@@ -37,7 +34,9 @@
 	})
 </script>
 
-<TopBar/>
+{#if $session.user_info}
+	<TopBar/>
+{/if}
 
 {#if $navigating}
 	<div class="fixed inset-x-0 top-0 z-50">
