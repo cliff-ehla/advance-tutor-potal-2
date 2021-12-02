@@ -15,6 +15,11 @@
 </script>
 
 <script>
+	import StudentWidget from '../../components/item/item-pdf-reader/student-widget.svelte'
+	import StudentListWidget from '$lib/zoom/student-list-widget.svelte'
+	import {session} from '$app/stores'
+	import Icon from '$lib/ui/icon.svelte'
+
 	export let zoom
 	const items = zoom.days.map(d => ({
 		item_id: d.item_ids[0],
@@ -22,6 +27,8 @@
 	}))
 	const students = zoom.students
 	const tutor_group_id = zoom.tutor_group_id
+	const is_one_on_one = !zoom.big_classroom_type
+	const student_id = is_one_on_one ? students[0].student_id : null
 	let selected_item_id = items[0].item_id
 	let pdf_json
 	let loading_item = true
@@ -45,10 +52,27 @@
 	}
 </script>
 
-{#each items as item}
-	<p>{item.title}</p>
-{/each}
+<div class="h-10 border-b border-gray-300 items-center flex">
+	<button on:click={() => {history.back()}} class="w-10 h-10 cc hover:bg-blue-200">
+		<Icon name="right" className="transform rotate-180 w-4"/>
+	</button>
+	{#each items as item}
+		<p>{item.title}</p>
+	{/each}
+</div>
 
 {#if !loading_item}
 	<PdfReader pages_info_2={pdf_json}/>
 {/if}
+
+<div class="fixed right-8 bottom-0 z-50">
+	{#if is_one_on_one}
+		<StudentWidget {student_id} {tutor_group_id} teacher_id={$session.user_id}/>
+	{:else}
+		<StudentListWidget student_list={students}/>
+	{/if}
+</div>
+
+<div class="fixed bottom-2 left-1/2 w-20 -ml-10 bg-yellow-500 text-center rounded-sm text-sm">
+	6:30
+</div>

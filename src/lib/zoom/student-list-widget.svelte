@@ -1,0 +1,27 @@
+<script>
+	import Icon from '$lib/ui/icon.svelte'
+
+	export let student_list
+	let is_collapsed = false
+</script>
+
+<div class="w-72 bg-white shadow-lg border border-gray-300 rounded flex flex-col transition-all {!is_collapsed ? 'h-96' : 'h-12'}">
+	<div on:click={() => {is_collapsed = !is_collapsed}} class="cursor-pointer group h-12 flex items-center border-b border-gray-300">
+		<div class="flex-1 px-4 flex items-center">
+			Students list
+		</div>
+		<div class="w-12 h-12 flex items-center justify-center flex-shrink-0">
+			<button class="focus:outline-none h-8 w-8 rounded-full flex items-center justify-center group-hover:bg-gray-100">
+				<Icon name="{is_collapsed ? 'right' : 'close'}" className="w-4 text-gray-500 transform transition-transform {is_collapsed ? 'rotate-90' : '-rotate-90'}"/>
+			</button>
+		</div>
+	</div>
+
+	<div class="flex-1 px-4 py-2 pb-0">
+		{#each student_list as s}
+			<p class="border-b border-gray-200 my-1 py-1">{s.nickname}</p>
+		{/each}
+	</div>
+
+	<button class="button">Send alert to all students</button>
+</div>
