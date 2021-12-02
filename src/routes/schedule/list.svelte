@@ -22,8 +22,7 @@
 	export let zoom_list
 	import dayjs from "dayjs";
 	import ZoomPreview from '$lib/zoom/zoom-preview.svelte'
-	import isToday from "dayjs/plugin/isToday";
-	import Icon from '$lib/ui/icon.svelte'
+	import isToday from "dayjs/plugin/isToday.js";
 	dayjs.extend(isToday)
 
 	const groupByDate = (zoom_list) => {
