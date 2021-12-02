@@ -23,9 +23,12 @@
 	</div>
 	<div class="w-full">
 		{#each zoom.days as d}
-			<p on:click={() => {previewMaterial(d)}} class="cursor-pointer hover:text-blue-700 mb-1">
-				<Icon name="pdf" className="inline-block w-5 mr-2 text-gray-400"/>{d.title} <Icon name="right" className="inline-block w-3"/>
-			</p>
+			<div on:click={() => {previewMaterial(d)}} class="cursor-pointer hover:text-blue-700 hover:bg-gray-200 flex items-center mb-1 group px-1 py-0.5 rounded">
+				<Icon name="pdf" className="inline-block w-5 mr-2 text-gray-400"/>
+				<p>{d.title}</p>
+				<div class="bg-white px-2 rounded-full text-xs ml-auto hidden group-hover:block">Preview</div>
+				<!--{d.t_difficulty_rate}-->
+			</div>
 		{/each}
 		{#if zoom.is_big_classroom}
 			{#each zoom.students as s}
