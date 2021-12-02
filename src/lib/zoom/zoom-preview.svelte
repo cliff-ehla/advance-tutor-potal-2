@@ -5,7 +5,7 @@
 	export let zoom
 	const {open} = getContext('simple-modal')
 	import PdfReaderDialog from '../../components/item/item-pdf-reader/pdf-reader-dialog.svelte'
-	import isToday from "dayjs/plugin/isToday";
+	import isToday from "dayjs/plugin/isToday.js";
 	dayjs.extend(isToday)
 
 	$: is_today = dayjs(zoom.start_date).isToday()

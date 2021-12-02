@@ -1,6 +1,6 @@
 import dayjs from "dayjs";
-import isToday from 'dayjs/plugin/isToday'
-import isTomorrow from 'dayjs/plugin/isTomorrow'
+import isToday from 'dayjs/plugin/isToday.js'
+import isTomorrow from 'dayjs/plugin/isTomorrow.js'
 
 dayjs.extend(isToday)
 dayjs.extend(isTomorrow)
