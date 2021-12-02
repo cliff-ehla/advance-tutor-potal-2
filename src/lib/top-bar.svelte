@@ -8,6 +8,7 @@
 		<p class="ml-4 font-bold">EHLA Zoom class</p>
 	</a>
 	<div class="ml-auto hover:text-blue-500 flex items-center">
+		h
 		{#if user_info}
 			<a href="/profile" class="inline-flex items-center">
 				<img class="rounded-full w-8 h-8" src={user_info.profile_pic} alt="profile">

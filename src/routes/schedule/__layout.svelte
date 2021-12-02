@@ -12,7 +12,16 @@
 		<Icon name="calendar"/>
 	</a>
 </div>
-<slot></slot>
+
+<div class="relative">
+	<div class="absolute p-4">
+		<div class="w-48 h-48 bg-gray-200"></div>
+	</div>
+
+	<div class="ml-56">
+		<slot></slot>
+	</div>
+</div>
 
 <style>
 	.active {

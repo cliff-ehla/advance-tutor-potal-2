@@ -2,9 +2,9 @@
 	import {org_store} from "../store";
 	import {get} from 'svelte/store'
 	import {getUserOrgData} from "../api/tutor-api";
-	export const load = ({fetch, session}) => {
+	export const load = async ({fetch, session}) => {
 		if (!get(org_store).id) {
-			getUserOrgData(fetch)
+			await getUserOrgData(fetch)
 		}
 		return {
 			props: {

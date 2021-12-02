@@ -37,15 +37,19 @@
 		{:else}
 			<div>
 				<a href="/tutor-group/{zoom.tutor_group_id}" class="text-xs text-gray-500 hover:text-red-500 inline-block">Course: {zoom.title}</a>
+				<Icon name="chat" className="w-3.5 text-gray-400 inline-block ml-0.5"/>
 			</div>
 			{#if zoom.f_one_on_one}
 			{:else}
 			{/if}
 			{#each zoom.students as s}
-				<div class="inline-flex items-center mr-2 bg-blue-200 rounded-full mt-1">
+				<a href="/students/{s.user_id}" class="inline-flex items-center mr-2 bg-blue-200 rounded-full mt-1 overflow-hidden">
 					<div class="w-6 h-6 rounded-full mr-1 cc text-xs bg-blue-500 text-white">{s.level.charAt(0).toUpperCase() + s.level.slice(1)}</div>
-					<span class="text-sm pr-2 py-1">{s.nickname}</span>
-				</div>
+					<span class="text-sm py-1">{s.nickname}</span>
+					<div class="w-8 cc bg-white h-8 bg-opacity-50 ml-2">
+						<Icon name="report" className="w-3.5 text-gray-400 inline-block"/>
+					</div>
+				</a>
 			{/each}
 		{/if}
 	</div>
