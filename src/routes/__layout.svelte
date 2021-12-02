@@ -28,6 +28,7 @@
 	import Modal from '../components/app-shelf/modal.svelte'
 	import Popup from '../components/app-shelf/popup.svelte'
 	import Popper from '../components/app-shelf/popper.svelte'
+	import TopBar from '$lib/app-shelf/top-bar.svelte'
 
 	export let user_info
 
@@ -36,7 +37,7 @@
 	})
 </script>
 
-<!--<LeftBar/>-->
+<TopBar/>
 
 {#if $navigating}
 	<div class="fixed inset-x-0 top-0 z-50">
