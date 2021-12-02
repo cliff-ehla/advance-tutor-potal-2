@@ -150,6 +150,10 @@ const tutor_group = () => {
 		return ids ? denormalize(ids, zoom_list_schema, get(store).entity) : null
 	}
 
+	const getTutorGroup = (tutor_group_id) => {
+		return get(store).entity.tutor_group[tutor_group_id]
+	}
+
 	const deleteZoom = (wrapper_id) => {
 		store.update(v => {
 			let clone = v.overall_zoom_ids
@@ -177,7 +181,8 @@ const tutor_group = () => {
 		saveZoomDetails,
 		saveOverallZoomList,
 		saveClassList,
-		deleteZoom
+		deleteZoom,
+		getTutorGroup
 	}
 }
 

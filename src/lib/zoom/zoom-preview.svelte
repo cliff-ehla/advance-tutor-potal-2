@@ -36,7 +36,7 @@
 			{/each}
 		{:else}
 			<div>
-				<p class="text-xs text-gray-500 inline-block">Course: {zoom.title}</p>
+				<a href="/tutor-group/{zoom.tutor_group_id}" class="text-xs text-gray-500 hover:text-red-500 inline-block">Course: {zoom.title}</a>
 			</div>
 			{#if zoom.f_one_on_one}
 			{:else}
@@ -52,6 +52,6 @@
 </div>
 {#if is_today}
 	<div class="ml-24 px-2 pb-2">
-		<button class="bg-green-500 text-white w-full py-2 rounded-full text-center">Join the class now</button>
+		<a href="/zoom/{zoom.wrapper_id}" class="block bg-green-500 text-white w-full py-2 rounded-full text-center">Join the class now</a>
 	</div>
 {/if}
