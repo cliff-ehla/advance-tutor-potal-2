@@ -1,6 +1,8 @@
 import {writable, derived, get} from 'svelte/store'
 import { normalize, denormalize , schema } from 'normalizr'
 import updateEntities from './update-entities'
+import {tutor_group_store} from "./index";
+import dayjs from "dayjs";
 
 const tutor_group_schema = new schema.Entity('tutor_group', {}, {idAttribute: 'tutor_group_id'})
 const tutor_group_list_schema = [tutor_group_schema]
@@ -154,6 +156,31 @@ const tutor_group = () => {
 		return get(store).entity.tutor_group[tutor_group_id]
 	}
 
+	/**
+	 * flatten all the course from one on one
+	 */
+	const getAllCourse = () => {
+		let students = get(d_store).o_o_o_list
+		console.log('students', students)
+		if (!students) return
+		const results = []
+		students.forEach(item => {
+			item.tutor_groups.forEach(tg => {
+				const expired = dayjs(tg.end_date).isBefore(dayjs())
+				if (!expired) {
+					results.push({
+						...tg,
+						...{
+							student_name: item.nickname,
+							student_id: item.user_id
+						}
+					})
+				}
+			})
+		})
+		return results
+	}
+
 	const deleteZoom = (wrapper_id) => {
 		store.update(v => {
 			let clone = v.overall_zoom_ids
@@ -182,7 +209,8 @@ const tutor_group = () => {
 		saveOverallZoomList,
 		saveClassList,
 		deleteZoom,
-		getTutorGroup
+		getTutorGroup,
+		getAllCourse
 	}
 }
 

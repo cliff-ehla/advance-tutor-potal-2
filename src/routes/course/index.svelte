@@ -20,7 +20,6 @@
 				}
 			})
 		})
-		console.log(results)
 		return results
 	}
 </script>

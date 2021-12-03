@@ -1,6 +1,8 @@
 <script>
 	import Icon from '$lib/ui/icon.svelte'
 	import {page} from '$app/stores'
+	import {tutor_group_store} from "../../store";
+	const course_list = $tutor_group_store ? tutor_group_store.getAllCourse() : null
 </script>
 
 <div class="px-4 flex h-12 items-center border-b border-gray-300 sticky top-0 bg-white">
@@ -14,8 +16,23 @@
 </div>
 
 <div class="relative">
-	<div class="absolute p-4">
-		<div class="w-48 h-48 bg-gray-200"></div>
+	<div class="absolute w-56">
+<!--		<div class="w-48 h-48 bg-gray-200"></div>-->
+		{#if course_list}
+			<p class="uppercase text-sm mb-2 text-gray-500 font-bold px-4 pt-4">Courses</p>
+			{#each course_list as course}
+				<a href="/tutor-group/{course.tutor_group_id}" class="block cursor-pointer py-0.5 px-2.5 hover:bg-gray-200 rounded my-1 mx-1.5">
+					<div class="flex items-center">
+						<p>{course.student_name}</p>
+						<div class="ml-auto flex items-center">
+							<Icon name="bell" className="w-3 text-gray-300"/>
+							<Icon name="chat" className="w-3 text-gray-300"/>
+						</div>
+					</div>
+					<p class="text-xs text-gray-400">{course.title.split('(')[0]}</p>
+				</a>
+			{/each}
+		{/if}
 	</div>
 
 	<div class="ml-56">
