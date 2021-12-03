@@ -23,26 +23,33 @@
 	import dayjs from "dayjs";
 	import ZoomPreview from '$lib/zoom/zoom-preview.svelte'
 	import isToday from "dayjs/plugin/isToday.js";
+	import isBetween from "dayjs/plugin/isBetween.js";
+	import {page} from '$app/stores'
 	dayjs.extend(isToday)
+	dayjs.extend(isBetween)
+	$: date_key = `${$page.params.yyyy}-${$page.params.mm}-01`
 
 	const groupByDate = (zoom_list) => {
 		let results = []
 		zoom_list.forEach(z => {
-			let date = dayjs(z.start_date).format('YYYY-MM-DD')
-			let obj = results.find(r => r.date === date)
-			if (!obj) {
-				results.push({
-					date,
-					zoom_list: [z]
-				})
-			} else {
-				obj.zoom_list.push(z)
+			console.log(date_key)
+			if (dayjs(z.start_date).isSame(date_key, 'month')) {
+				let date = dayjs(z.start_date).format('YYYY-MM-DD')
+				let obj = results.find(r => r.date === date)
+				if (!obj) {
+					results.push({
+						date,
+						zoom_list: [z]
+					})
+				} else {
+					obj.zoom_list.push(z)
+				}
 			}
 		})
 		return results
 	}
 
-	let zoom_list_by_date = groupByDate(zoom_list)
+	$: zoom_list_by_date = date_key ? groupByDate(zoom_list) : []
 </script>
 
 {#each zoom_list_by_date as date}

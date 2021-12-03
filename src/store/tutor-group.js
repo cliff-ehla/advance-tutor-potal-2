@@ -161,7 +161,6 @@ const tutor_group = () => {
 	 */
 	const getAllCourse = () => {
 		let students = get(d_store).o_o_o_list
-		console.log('students', students)
 		if (!students) return
 		const results = []
 		students.forEach(item => {
