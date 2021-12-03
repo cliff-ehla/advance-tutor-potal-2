@@ -39,18 +39,23 @@
 	</div>
 </div>
 
-<div class="relative">
-	<div class="absolute w-56 border-gray-300 border-r">
+<div class="flex">
+	<div class="top-10 sticky w-64 border-gray-300 border-r overflow-y-scroll" style="max-height: calc(100vh - 3em)">
 <!--		<div class="w-48 h-48 bg-gray-200"></div>-->
 		{#if course_list}
 			<p class="uppercase text-xs mb-2 text-black font-bold px-4 pt-4">Courses</p>
 			{#each course_list as course}
 				<a href="/tutor-group/{course.tutor_group_id}" class="block cursor-pointer py-0.5 px-2.5 hover:bg-gray-200 rounded my-1 mx-2">
 					<div class="flex items-center">
-						<p class="text-sm">{course.student_name}</p>
+						<p class="text-sm relative leading-tight">
+							{course.student_name}
+							{#if course.unread_message_cnt}
+								<span class="w-2 h-2 bg-red-500 rounded-full absolute -left-2 top-0"></span>
+							{/if}
+						</p>
 						<div class="ml-auto flex items-center">
 							<Icon name="bell" className="w-3 text-gray-300"/>
-							<Icon name="chat" className="w-3 text-gray-300"/>
+							<Icon name="chat" className="w-4 text-gray-300"/>
 						</div>
 					</div>
 					<p class="text-xs text-gray-400">{course.title.split('(')[0]}</p>
@@ -59,7 +64,7 @@
 		{/if}
 	</div>
 
-	<div class="ml-56 max-w-screen-md">
+	<div class="max-w-screen-lg">
 		<slot/>
 	</div>
 </div>
