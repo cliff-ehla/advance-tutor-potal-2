@@ -279,6 +279,11 @@
   resolved "https://registry.yarnpkg.com/@popperjs/core/-/core-2.10.2.tgz#0798c03351f0dea1a5a4cabddf26a55a7cbee590"
   integrity sha512-IXf3XA7+XyN7CP9gGh/XB0UxVMlvARGEgGXLubFICsUMGz6Q+DU+i4gGlpOxTjKvXjkJDJC8YdqdKkDj9qZHEQ==
 
+"@popperjs/core@^2.9.0":
+  version "2.11.0"
+  resolved "https://registry.yarnpkg.com/@popperjs/core/-/core-2.11.0.tgz#6734f8ebc106a0860dff7f92bf90df193f0935d7"
+  integrity sha512-zrsUxjLOKAzdewIDRWy9nsV1GQsKBCWaGwsZQlCgr6/q+vjyZhFgqedLfFBuI9anTPEUT4APq9Mu0SZBTzIcGQ==
+
 "@rollup/pluginutils@^4.1.1":
   version "4.1.1"
   resolved "https://registry.yarnpkg.com/@rollup/pluginutils/-/pluginutils-4.1.1.tgz#1d4da86dd4eded15656a57d933fda2b9a08d47ec"
@@ -2618,6 +2623,13 @@ tailwindcss@^2.2.19:
     reduce-css-calc "^2.1.8"
     resolve "^1.20.0"
     tmp "^0.2.1"
+
+tippy.js@^6.3.7:
+  version "6.3.7"
+  resolved "https://registry.yarnpkg.com/tippy.js/-/tippy.js-6.3.7.tgz#8ccfb651d642010ed9a32ff29b0e9e19c5b8c61c"
+  integrity sha512-E1d3oP2emgJ9dRQZdf3Kkn0qJgI6ZLpyS5z6ZkY1DF3kaQaBsGZsndEpHwx+eC+tYM41HaSNvNtLx8tU57FzTQ==
+  dependencies:
+    "@popperjs/core" "^2.9.0"
 
 tippy@^0.0.0:
   version "0.0.0"

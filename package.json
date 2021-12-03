@@ -36,6 +36,7 @@
     "normalizr": "^3.6.1",
     "parse-srt": "^1.0.0-alpha",
     "svelte-slider": "^1.0.1",
-    "tippy": "^0.0.0"
+    "tippy": "^0.0.0",
+    "tippy.js": "^6.3.7"
   }
 }
