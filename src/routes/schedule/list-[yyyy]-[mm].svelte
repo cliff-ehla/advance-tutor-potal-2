@@ -32,7 +32,6 @@
 	const groupByDate = (zoom_list) => {
 		let results = []
 		zoom_list.forEach(z => {
-			console.log(date_key)
 			if (dayjs(z.start_date).isSame(date_key, 'month')) {
 				let date = dayjs(z.start_date).format('YYYY-MM-DD')
 				let obj = results.find(r => r.date === date)

@@ -1,11 +1,18 @@
 <script>
 	import Icon from '$lib/ui/icon.svelte'
+	import DatePicker from '$lib/ui/date-picker/index.svelte'
 	import {page} from '$app/stores'
 	import {tutor_group_store} from "../../store";
 	const course_list = $tutor_group_store ? tutor_group_store.getAllCourse() : null
 	import dayjs from "dayjs";
-
 	$: date_key = `${$page.params.yyyy}-${$page.params.mm}-01`
+	const isAllowed = (date) => {
+		console.log(date)
+		return true
+	}
+	const onDateChange = (e) => {
+		console.log(dayjs(e.detail).format('YYYY-MM-DD'))
+	}
 </script>
 
 <div class="px-4 flex h-12 items-center border-b border-gray-300 sticky top-0 bg-white z-10">
@@ -40,8 +47,10 @@
 </div>
 
 <div class="flex">
-	<div class="top-10 sticky w-64 border-gray-300 border-r overflow-y-scroll" style="max-height: calc(100vh - 3em)">
-<!--		<div class="w-48 h-48 bg-gray-200"></div>-->
+	<div class="top-10 sticky w-64 border-gray-300 border-r overflow-y-scroll flex-shrink-0" style="max-height: calc(100vh - 3em)">
+		<div class="h-64 px-3 py-3 border-b border-gray-300">
+			<DatePicker {isAllowed} on:input={onDateChange}/>
+		</div>
 		{#if course_list}
 			<p class="uppercase text-xs mb-2 text-black font-bold px-4 pt-4">Courses</p>
 			{#each course_list as course}
