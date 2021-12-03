@@ -53,7 +53,7 @@
 </script>
 
 {#each zoom_list_by_date as date}
-	<div class="flex border border-gray-200 items-start" class:bg-blue-200={dayjs(date.date).isToday()}>
+	<div class="flex border-b border-gray-300 items-start" class:bg-blue-200={dayjs(date.date).isToday()}>
 		<div class="w-32 p-2 flex items-end">
 			<p class="font-bold w-8 flex justify-center">{dayjs(date.date).format('D')}</p>
 			<p class="text-xs uppercase">{dayjs(date.date).format('MMM, ddd')}</p>

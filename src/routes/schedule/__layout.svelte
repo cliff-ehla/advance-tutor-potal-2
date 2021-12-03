@@ -40,14 +40,14 @@
 </div>
 
 <div class="relative">
-	<div class="absolute w-56">
+	<div class="absolute w-56 border-gray-300 border-r">
 <!--		<div class="w-48 h-48 bg-gray-200"></div>-->
 		{#if course_list}
-			<p class="uppercase text-sm mb-2 text-gray-500 font-bold px-4 pt-4">Courses</p>
+			<p class="uppercase text-xs mb-2 text-black font-bold px-4 pt-4">Courses</p>
 			{#each course_list as course}
-				<a href="/tutor-group/{course.tutor_group_id}" class="block cursor-pointer py-0.5 px-2.5 hover:bg-gray-200 rounded my-1 mx-1.5">
+				<a href="/tutor-group/{course.tutor_group_id}" class="block cursor-pointer py-0.5 px-2.5 hover:bg-gray-200 rounded my-1 mx-2">
 					<div class="flex items-center">
-						<p>{course.student_name}</p>
+						<p class="text-sm">{course.student_name}</p>
 						<div class="ml-auto flex items-center">
 							<Icon name="bell" className="w-3 text-gray-300"/>
 							<Icon name="chat" className="w-3 text-gray-300"/>
@@ -59,7 +59,7 @@
 		{/if}
 	</div>
 
-	<div class="ml-56">
+	<div class="ml-56 max-w-screen-md">
 		<slot/>
 	</div>
 </div>
