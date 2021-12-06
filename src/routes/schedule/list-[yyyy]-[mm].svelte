@@ -1,18 +1,8 @@
 <script context="module">
-	import {http, onFail} from "$lib/http";
-
-	export const load = async ({session, fetch}) => {
-		if (!session.user_info) {
-			return {
-				status: 302,
-				redirect: '/login'
-			}
-		}
-		const {success, data, debug} = await http.post(fetch, '/zoomApi/zoom_list_all')
-		if (!success) return onFail(debug)
+	export const load = ({stuff}) => {
 		return {
 			props: {
-				zoom_list: data
+				zoom_list: stuff.zoom_list
 			}
 		}
 	}

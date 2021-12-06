@@ -32,9 +32,6 @@
 		value: c,
 		allowed: allow(year, month, c)
 	}));
-	$: {
-		console.log(cells)
-	}
 </script>
 
 <div class="w-64">
@@ -47,7 +44,7 @@
 	<div class="flex flex-wrap px-1">
 		{#each cells as { allowed, value } (uuid())}
 			<div
-							class="w-6 h-6 rounded-full inline-flex items-center justify-center text-xxs m-1 {isSelected(value) ? 'bg-blue-500 text-white' : ''} {!allowed ? 'cursor-not-allowed text-gray-300' : (allowed && value) ? 'hover:bg-gray-100 cursor-pointer' : ''}"
+							class="w-6 h-6 rounded-full inline-flex items-center justify-center text-xxs m-1 {isSelected(value) ? 'bg-blue-500 text-white' : ''} {!allowed ? 'cursor-not-allowed text-gray-300' : (allowed && value) ? 'text-black hover:bg-gray-200 cursor-pointer' : ''}"
 							on:click={allowed && value ? onChange.bind(this, value) : noop}
 							class:cell={true}>
 				{value || ''}

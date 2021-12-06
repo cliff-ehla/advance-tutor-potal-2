@@ -8,7 +8,7 @@
 		}
 		return {
 			status: 302,
-			redirect: '/schedule/list'
+			redirect: '/schedule'
 		}
 	}
 </script>

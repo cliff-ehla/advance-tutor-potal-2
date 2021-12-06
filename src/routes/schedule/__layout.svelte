@@ -1,3 +1,27 @@
+<script context="module">
+	import {http, onFail} from "$lib/http";
+
+	export const load = async ({session, fetch, stuff}) => {
+		if (!session.user_info) {
+			return {
+				status: 302,
+				redirect: '/login'
+			}
+		}
+		const {success, data, debug} = await http.post(fetch, '/zoomApi/zoom_list_all')
+		if (!success) return onFail(debug)
+		return {
+			stuff: {
+				zoom_list: data
+			},
+			props: {
+				zoom_list: data
+			}
+		}
+	}
+</script>
+
+
 <script>
 	import Icon from '$lib/ui/icon.svelte'
 	import DatePicker from '$lib/ui/date-picker/index.svelte'
@@ -5,10 +29,12 @@
 	import {tutor_group_store} from "../../store";
 	const course_list = $tutor_group_store ? tutor_group_store.getAllCourse() : null
 	import dayjs from "dayjs";
+	export let zoom_list
 	$: date_key = `${$page.params.yyyy}-${$page.params.mm}-01`
 	const isAllowed = (date) => {
-		console.log(date)
-		return true
+		return zoom_list.some(zoom => {
+			return dayjs(zoom.start_date).isSame(dayjs(date), 'day')
+		})
 	}
 	const onDateChange = (e) => {
 		console.log(dayjs(e.detail).format('YYYY-MM-DD'))
