@@ -27,6 +27,8 @@
 	import DatePicker from '$lib/ui/date-picker/index.svelte'
 	import {page} from '$app/stores'
 	import {tutor_group_store} from "../../store";
+	import {goto} from "$app/navigation";
+
 	const course_list = $tutor_group_store ? tutor_group_store.getAllCourse() : null
 	import dayjs from "dayjs";
 	export let zoom_list
@@ -37,26 +39,25 @@
 		})
 	}
 	const onDateChange = (e) => {
-		console.log(dayjs(e.detail).format('YYYY-MM-DD'))
+		const date_key = dayjs(e.detail).format('YYYY-MM-DD')
+		goto(`list-${date_key}`)
 	}
 </script>
 
 <div class="px-4 flex h-12 items-center border-b border-gray-300 sticky top-0 bg-white z-10">
 
 	<div class="flex items-center">
-		<a href="list-{dayjs().format('YYYY-MM')}" class="inline-block border border-gray-300 px-2 py-1 rounded">Today</a>
+		<a href="list-{dayjs().format('YYYY-MM-DD')}" class="inline-block border border-gray-300 px-2 py-1 rounded hover:text-blue-500 hover:border-current">Today</a>
 		<div class="flex mx-2">
-			<a href="list-{dayjs(date_key).subtract(1,'month').format('YYYY-MM')}" class="block cc w-8 h-8 rounded-full hover:bg-gray-200 transition-colors">
+			<a href="list-{dayjs(date_key).subtract(1,'month').format('YYYY-MM-DD')}" class="block cc w-8 h-8 rounded-full hover:bg-gray-200 transition-colors">
 				<Icon name="right" className="w-3 transform rotate-180"/>
 			</a>
-			<a href="list-{dayjs(date_key).add(1,'month').format('YYYY-MM')}" class="block cc w-8 h-8 rounded-full hover:bg-gray-200 transition-colors">
+			<a href="list-{dayjs(date_key).add(1,'month').format('YYYY-MM-DD')}" class="block cc w-8 h-8 rounded-full hover:bg-gray-200 transition-colors">
 				<Icon name="right" className="w-3"/>
 			</a>
 		</div>
 		<div class="text-t2 flex items-center">
 			<p>{dayjs(date_key).format('MMM YYYY')}</p>
-<!--			<p class="mx-2">-</p>-->
-<!--			<p>{dayjs(date_key).add(2, 'month').format('MMM YYYY')}</p>-->
 		</div>
 
 	</div>
