@@ -1,15 +1,7 @@
-<script context="module">
-	export const load = ({stuff}) => {
-		return {
-			props: {
-				zoom_list: stuff.zoom_list
-			}
-		}
-	}
-</script>
-
 <script>
-	export let zoom_list
+	import {zoom_store} from "$lib/store/zoom.js";
+
+	let zoom_list = $zoom_store.list
 	import dayjs from "dayjs";
 	import ZoomPreview from '$lib/zoom/zoom-preview.svelte'
 	import isToday from "dayjs/plugin/isToday.js";

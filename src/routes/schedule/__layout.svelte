@@ -1,5 +1,5 @@
 <script context="module">
-	import {http, onFail} from "$lib/http";
+	import {zoom_store} from "$lib/store/zoom.js";
 
 	export const load = async ({session, fetch, stuff}) => {
 		if (!session.user_info) {
@@ -8,16 +8,8 @@
 				redirect: '/login'
 			}
 		}
-		const {success, data, debug} = await http.post(fetch, '/zoomApi/zoom_list_all')
-		if (!success) return onFail(debug)
-		return {
-			stuff: {
-				zoom_list: data
-			},
-			props: {
-				zoom_list: data
-			}
-		}
+		await zoom_store.callIfNoCache(fetch)
+		return true
 	}
 </script>
 
@@ -31,7 +23,7 @@
 
 	const course_list = $tutor_group_store ? tutor_group_store.getAllCourse() : null
 	import dayjs from "dayjs";
-	export let zoom_list
+	let zoom_list = $zoom_store.list
 	$: date_key = `${$page.params.yyyy}-${$page.params.mm}-01`
 	const isAllowed = (date) => {
 		return zoom_list.some(zoom => {

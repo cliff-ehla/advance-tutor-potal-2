@@ -26,7 +26,7 @@
 
 <div class="p-2 flex w-full">
 	<div class="w-24 flex-shrink-0">
-		<p class="text-gray-500">{dayjs(zoom.start_date).format('H:mma')}</p>
+		<p class="text-gray-500">{dayjs(zoom.start_date).format('h:mma')}</p>
 	</div>
 	<div class="w-full">
 		{#each zoom.days as d}
