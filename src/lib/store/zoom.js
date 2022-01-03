@@ -38,8 +38,8 @@ const create_store = () => {
 			let end = start.add(zoom.duration, 'minutes')
 			return {
 				title: zoom.students.map(s => s.nickname).join(','),
-				start: start.toDate(),
-				end: end.toDate(),
+				start: start.format('YYYY-MM-DD HH:mm:ss'),
+				end: end.format('YYYY-MM-DD HH:mm:ss'),
 				extendedProps: zoom
 			}
 		})
@@ -54,8 +54,8 @@ const create_store = () => {
 		if (get(store).length) {
 			return console.log('cached')
 		}
-		let start_time = dayjs().subtract(3, 'month').format('YYYY-MM-DD HH:mm:ss')
-		let end_time = dayjs().add(3, 'month').format('YYYY-MM-DD HH:mm:ss')
+		let start_time = dayjs().subtract(1, 'day').format('YYYY-MM-DD HH:mm:ss')
+		let end_time = dayjs().add(1, 'day').format('YYYY-MM-DD HH:mm:ss')
 		const {data} = await http.post(fetch, '/zoomApi/zoom_list_all', {
 			start_time,
 			end_time

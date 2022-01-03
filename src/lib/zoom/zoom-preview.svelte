@@ -29,6 +29,7 @@
 		<p class="text-gray-500">{dayjs(zoom.start_date).format('h:mma')}</p>
 	</div>
 	<div class="w-full">
+		<div class="text-blue-500 italic text-sm mb-2">{zoom.wrapper_id}</div>
 		{#each zoom.days as d}
 			<div on:click={() => {previewMaterial(d)}} class="cursor-pointer hover:text-blue-700 hover:bg-gray-200 flex items-center mb-1 group px-1 py-0.5 rounded">
 				<Icon name="pdf" className="inline-block w-5 mr-2 text-gray-400 flex-shrink-0"/>

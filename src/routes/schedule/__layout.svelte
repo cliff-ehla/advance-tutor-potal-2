@@ -57,7 +57,7 @@
 		{#each $zoom_store.time_zone_options as option}
 			<button on:click={zoom_store.setTimeZoom(option.tz)} class="calendar-button ml-2" class:active={option.active}>{option.label}</button>
 		{/each}
-		<a href="/schedule/list" class:active={$page.path.split('/').pop() === 'list'} class="w-10 h-10 cc rounded">
+		<a href="/schedule" class:active={$page.path.split('/').pop() === 'list'} class="w-10 h-10 cc rounded">
 			<svg viewBox="0 0 36 36" class="fill-current w-5"><path d="M11 14h25v8H11zM0 25h8v7H0zM11 25h25v7H11zM11 4h25v7H11zM0 4h8v7H0zM0 14h8v8H0z"></path></svg>
 		</a>
 		<a href="/schedule/grid-{dayjs().format('YYYY-MM-DD')}" class:active={$page.path.split('/').pop() === 'month'} class="w-10 h-10 cc">
