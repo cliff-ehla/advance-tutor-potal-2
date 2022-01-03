@@ -2,12 +2,31 @@ import {writable, get, derived} from "svelte/store";
 import {http} from "$lib/http.js";
 import dayjs from "dayjs";
 import utc from "dayjs/plugin/utc.js";
+import timezone from "dayjs/plugin/timezone.js";
 dayjs.extend(utc)
+dayjs.extend(timezone)
+let env = import.meta.env.VITE_ENV
 
 const create_store = () => {
 	const store = writable([])
 	const time_zone = writable('Asia/Hong_Kong')
 	const _store = derived([store, time_zone], ([$store, $time_zone]) => {
+		let time_zone_options = [
+			{
+				label: env === 'dev' ? 'New York' : dayjs.tz.guess().split('/')[1],
+				tz: env === 'dev' ? 'America/New_York' : dayjs.tz.guess(),
+			},
+			{
+				label: 'Hong Kong',
+				tz: 'Asia/Hong_Kong'
+			}
+		]
+		time_zone_options = time_zone_options.map(opt => {
+			return {
+				...opt,
+				active: opt.tz === $time_zone
+			}
+		})
 		const zoom_list = $store.map(zoom => {
 			return {
 				...zoom,
@@ -27,6 +46,7 @@ const create_store = () => {
 		return {
 			list: zoom_list,
 			events,
+			time_zone_options,
 			time_zone: $time_zone
 		}
 	})

@@ -39,7 +39,7 @@
 <div class="px-4 flex h-12 items-center border-b border-gray-300 sticky top-0 bg-white z-10">
 
 	<div class="flex items-center">
-		<a href="list-{dayjs().format('YYYY-MM-DD')}" class="inline-block border border-gray-300 px-2 py-1 rounded hover:text-blue-500 hover:border-current">Today</a>
+		<a href="list-{dayjs().format('YYYY-MM-DD')}" class="calendar-button">Today</a>
 		<div class="flex mx-2">
 			<a href="list-{dayjs(date_key).subtract(1,'month').format('YYYY-MM-DD')}" class="block cc w-8 h-8 rounded-full hover:bg-gray-200 transition-colors">
 				<Icon name="right" className="w-3 transform rotate-180"/>
@@ -54,8 +54,9 @@
 
 	</div>
 	<div class="ml-auto flex items-center">
-		<button>HK</button>
-		<button>UK</button>
+		{#each $zoom_store.time_zone_options as option}
+			<button on:click={zoom_store.setTimeZoom(option.tz)} class="calendar-button ml-2" class:active={option.active}>{option.label}</button>
+		{/each}
 		<a href="/schedule/list" class:active={$page.path.split('/').pop() === 'list'} class="w-10 h-10 cc rounded">
 			<svg viewBox="0 0 36 36" class="fill-current w-5"><path d="M11 14h25v8H11zM0 25h8v7H0zM11 25h25v7H11zM11 4h25v7H11zM0 4h8v7H0zM0 14h8v8H0z"></path></svg>
 		</a>
