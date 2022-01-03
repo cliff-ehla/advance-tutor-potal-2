@@ -16,9 +16,9 @@
 
 	const previewMaterial = async (d) => {
 		// TODO: leave to tooltip will close the tooltip
-		// open(PdfReaderDialog, {
-		// 	item_id: d.item_id
-		// })
+		open(PdfReaderDialog, {
+			item_id: d.item_id
+		})
 	}
 
 	const onTippy = node => {

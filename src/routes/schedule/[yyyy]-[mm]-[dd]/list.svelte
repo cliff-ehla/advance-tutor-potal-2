@@ -20,17 +20,17 @@
 	}
 
 	const scrollToDate = () => {
-		animateScroll.scrollTo({
-			element: `[data-date="${date_key}"]`,
-			offset: -48,
-			onDone: (el) => {
-				if (!el) return console.log('no element')
-				el.classList.add('bg-yellow-500')
-				setTimeout(() => {
-					el.classList.remove('bg-yellow-500')
-				}, 2000)
-			}
-		})
+		// animateScroll.scrollTo({
+		// 	element: `[data-date="${date_key}"]`,
+		// 	offset: -48,
+		// 	onDone: (el) => {
+		// 		if (!el) return console.log('no element')
+		// 		el.classList.add('bg-yellow-500')
+		// 		setTimeout(() => {
+		// 			el.classList.remove('bg-yellow-500')
+		// 		}, 2000)
+		// 	}
+		// })
 	}
 
 	const groupByDate = (zoom_list) => {

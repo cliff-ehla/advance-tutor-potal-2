@@ -20,9 +20,9 @@
 	import {page} from '$app/stores'
 	import {tutor_group_store} from "../../store";
 	import {goto} from "$app/navigation";
-
-	const course_list = $tutor_group_store ? tutor_group_store.getAllCourse() : null
 	import dayjs from "dayjs";
+	const course_list = $tutor_group_store ? tutor_group_store.getAllCourse() : null
+	$: slug = $page.path.split('/').pop()
 	let zoom_list = $zoom_store.list
 	$: date_key = `${$page.params.yyyy}-${$page.params.mm}-01`
 	const isAllowed = (date) => {
@@ -39,13 +39,13 @@
 <div class="px-4 flex h-12 items-center border-b border-gray-300 sticky top-0 bg-white z-10">
 
 	<div class="flex items-center">
-		<a href="list-{dayjs().format('YYYY-MM-DD')}" class="calendar-button">Today</a>
+		<a href="/schedule/{dayjs().format('YYYY-MM-DD')}/{slug}" class="calendar-button">Today</a>
 		<div class="flex mx-2">
-			<a href="list-{dayjs(date_key).subtract(1,'month').format('YYYY-MM-DD')}" class="block cc w-8 h-8 rounded-full hover:bg-gray-200 transition-colors">
-				<Icon name="right" className="w-3 transform rotate-180"/>
+			<a href="/schedule/{dayjs(date_key).subtract(1,'month').format('YYYY-MM-DD')}/{slug}" class="block cc w-8 h-8 rounded-full hover:bg-gray-200 transition-colors">
+				<Icon name="right" className="w-4 transform rotate-180"/>
 			</a>
-			<a href="list-{dayjs(date_key).add(1,'month').format('YYYY-MM-DD')}" class="block cc w-8 h-8 rounded-full hover:bg-gray-200 transition-colors">
-				<Icon name="right" className="w-3"/>
+			<a href="/schedule/{dayjs(date_key).add(1,'month').format('YYYY-MM-DD')}/{slug}" class="block cc w-8 h-8 rounded-full hover:bg-gray-200 transition-colors">
+				<Icon name="right" className="w-4"/>
 			</a>
 		</div>
 		<div class="text-t2 flex items-center">
@@ -58,10 +58,10 @@
 			<button on:click={zoom_store.setTimeZoom(option.tz)} class="calendar-button ml-1" class:active={option.active}>{option.label}</button>
 		{/each}
 		<div class="ml-4"></div>
-		<a href="/schedule/list-{dayjs().format('YYYY-MM-DD')}" class:active={$page.path.split('/').pop().startsWith('list')} class="calendar-button">
+		<a href="/schedule/{dayjs().format('YYYY-MM-DD')}/list" class:active={slug  === 'list'} class="calendar-button">
 			<svg viewBox="0 0 36 36" class="fill-current w-5"><path d="M11 14h25v8H11zM0 25h8v7H0zM11 25h25v7H11zM11 4h25v7H11zM0 4h8v7H0zM0 14h8v8H0z"></path></svg>
 		</a>
-		<a href="/schedule/grid-{dayjs().format('YYYY-MM-DD')}" class:active={$page.path.split('/').pop().startsWith('grid')} class="calendar-button ml-1">
+		<a href="/schedule/{dayjs().format('YYYY-MM-DD')}/month" class:active={slug === 'month'} class="calendar-button ml-1">
 			<Icon name="calendar"/>
 		</a>
 	</div>
