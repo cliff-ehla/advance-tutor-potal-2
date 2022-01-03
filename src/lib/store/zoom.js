@@ -38,7 +38,7 @@ const create_store = () => {
 		})
 		const events = zoom_list.map(zoom => {
 			return {
-				title: zoom.students.map(s => s.nickname).join(','),
+				title: zoom.sub_cat || zoom.students.map(s => s.nickname).join(','),
 				start: zoom.start_date.format('YYYY-MM-DD HH:mm:ss'),
 				end: zoom.end_date.format('YYYY-MM-DD HH:mm:ss'),
 				extendedProps: zoom
@@ -55,12 +55,24 @@ const create_store = () => {
 		if (get(store).length) {
 			return console.log('cached')
 		}
-		let start_time = dayjs().subtract(1, 'day').format('YYYY-MM-DD HH:mm:ss')
-		let end_time = dayjs().add(1, 'day').format('YYYY-MM-DD HH:mm:ss')
+		let start_time = dayjs().subtract(3, 'month').format('YYYY-MM-DD HH:mm:ss')
+		let end_time = dayjs().add(3, 'month').format('YYYY-MM-DD HH:mm:ss')
 		const {data} = await http.post(fetch, '/zoomApi/zoom_list_all', {
 			start_time,
 			end_time
 		})
+		const res = await http.post(fetch,'/courseApi/list_registrable_classroom', {
+			start_date: start_time,
+			end_date: end_time,
+		})
+		data.forEach(zoom => {
+			res.data.forEach(zoom2 => {
+				if (zoom.wrapper_id === zoom2.zoom_id) {
+					zoom.sub_cat = zoom2.sub_cat
+				}
+			})
+		})
+		console.log(res.data)
 		store.set(data)
 	}
 	const setTimeZoom = (tz) => {
