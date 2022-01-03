@@ -8,6 +8,8 @@
 	import PdfReaderDialog from '../../components/item/item-pdf-reader/pdf-reader-dialog.svelte'
 	import isToday from "dayjs/plugin/isToday.js";
 	dayjs.extend(isToday)
+	import {zoom_store} from "$lib/store/zoom.js";
+
 	console.log(zoom)
 
 	$: is_today = dayjs(zoom.start_date).isToday()
@@ -29,14 +31,13 @@
 <div class="p-8 border border-gray-200 w-full bg-white shadow-lg rounded max-w-xl">
 	<div class="w-full">
 		<div class="text-blue-500 italic text-sm mb-2">{zoom.title} {zoom.wrapper_id}</div>
-		<p class="text-gray-500">{dayjs(zoom.start_date).format('DD MMM (ddd), h:mma')}</p>
+		<p class="text-gray-500">
+			{dayjs(zoom.start_date).format('DD MMM (ddd), h:mma')} - {dayjs(zoom.end_date).format('h:mma')}
+			<span class="text-xs font-bold ml-2 bg-gray-100 border border-gray-300 px-1">{$zoom_store.time_zone.label}</span>
+		</p>
 		{#each zoom.days as d}
-			<div on:click={() => {previewMaterial(d)}} class="cursor-pointer hover:text-blue-700 hover:bg-gray-200 flex items-center mb-1 group px-1 py-0.5 rounded">
-				<Icon name="pdf" className="inline-block w-5 mr-2 text-gray-400 flex-shrink-0"/>
+			<div on:click={() => {previewMaterial(d)}} class="cursor-pointer hover:text-blue-700 hover:bg-gray-200 my-2 group px-4 py-3 bg-gray-100 shadow rounded border-gray-300 border">
 				<p class="leading-tight">{d.title}</p>
-				<div class="w-14 flex-shrink-0 ml-auto">
-					<div class="bg-white px-2 rounded-full text-xs ml-auto hidden group-hover:block">Preview</div>
-				</div>
 			</div>
 		{/each}
 		{#if zoom.is_big_classroom}

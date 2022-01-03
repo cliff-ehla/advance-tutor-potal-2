@@ -35,7 +35,7 @@
 			},
 			eventMouseLeave: ({el}) => {
 				// TODO: leave to tooltip will close the tooltip
-				closePopper()
+				// closePopper()
 			}
 		})
 		calendar.render()

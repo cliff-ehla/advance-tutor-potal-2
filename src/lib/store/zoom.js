@@ -28,18 +28,19 @@ const create_store = () => {
 			}
 		})
 		const zoom_list = $store.map(zoom => {
+			let start_date = dayjs.utc(zoom.start_date).tz($time_zone)
+			let end_date = start_date.add(zoom.duration, 'minutes')
 			return {
 				...zoom,
-				start_date: dayjs.utc(zoom.start_date).tz($time_zone)
+				start_date,
+				end_date
 			}
 		})
 		const events = zoom_list.map(zoom => {
-			let start = dayjs(zoom.start_date)
-			let end = start.add(zoom.duration, 'minutes')
 			return {
 				title: zoom.students.map(s => s.nickname).join(','),
-				start: start.format('YYYY-MM-DD HH:mm:ss'),
-				end: end.format('YYYY-MM-DD HH:mm:ss'),
+				start: zoom.start_date.format('YYYY-MM-DD HH:mm:ss'),
+				end: zoom.end_date.format('YYYY-MM-DD HH:mm:ss'),
 				extendedProps: zoom
 			}
 		})
@@ -47,7 +48,7 @@ const create_store = () => {
 			list: zoom_list,
 			events,
 			time_zone_options,
-			time_zone: $time_zone
+			time_zone: time_zone_options.find(opt => opt.tz === $time_zone)
 		}
 	})
 	const callIfNoCache = async (fetch) => {
