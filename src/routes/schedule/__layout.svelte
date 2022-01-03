@@ -32,7 +32,7 @@
 	}
 	const onDateChange = (e) => {
 		const date_key = dayjs(e.detail).format('YYYY-MM-DD')
-		goto(`list-${date_key}`)
+		goto(`/schedule/${date_key}/${slug}`)
 	}
 </script>
 

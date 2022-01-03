@@ -3,6 +3,8 @@
 	import {browser} from "$app/env";
 	import ZoomPreviewPopup from '$lib/zoom/zoom-preview-popup.svelte'
 	import {getContext} from 'svelte'
+	import {page} from "$app/stores.js";
+
 	const {showPopper, closePopper} = getContext('popper')
 
 	let calendar
@@ -12,6 +14,14 @@
 	$: {
 		if ($zoom_store && browser && calendar) {
 			reRenderEvents()
+		}
+	}
+
+	$: {
+		if ($page.params.mm && calendar) {
+			const {dd, mm, yyyy} = $page.params
+			const data = `${yyyy}-${mm}-${dd}`
+			calendar.gotoDate(data)
 		}
 	}
 
@@ -42,6 +52,7 @@
 	}
 
 	const reRenderEvents = () => {
+		console.log('cliff: ', 'reRenderEvents')
 		const source = calendar.getEventSourceById(SOURCE_ID)
 		if (source) {
 			source.remove()
