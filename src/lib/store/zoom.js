@@ -68,7 +68,11 @@ const create_store = () => {
 		data.forEach(zoom => {
 			res.data.forEach(zoom2 => {
 				if (zoom.wrapper_id === zoom2.zoom_id) {
-					zoom.sub_cat = zoom2.sub_cat
+					const {sub_cat, rc_level, reg_user_cnt, student_size} = zoom2
+					zoom.sub_cat = sub_cat
+					zoom.rc_level = rc_level
+					zoom.reg_user_cnt = reg_user_cnt
+					zoom.student_size = student_size
 				}
 			})
 		})
