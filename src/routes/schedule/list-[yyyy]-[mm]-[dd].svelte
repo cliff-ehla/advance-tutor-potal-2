@@ -1,7 +1,6 @@
 <script>
 	import {zoom_store} from "$lib/store/zoom.js";
 
-	let zoom_list = $zoom_store.list
 	import dayjs from "dayjs";
 	import ZoomPreview from '$lib/zoom/zoom-preview.svelte'
 	import isToday from "dayjs/plugin/isToday.js";
@@ -55,7 +54,7 @@
 		return results
 	}
 
-	$: zoom_list_by_date = date_key ? groupByDate(zoom_list) : []
+	$: zoom_list_by_date = date_key ? groupByDate($zoom_store.list) : []
 </script>
 
 {#each zoom_list_by_date as date}

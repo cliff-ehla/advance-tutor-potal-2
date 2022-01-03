@@ -30,7 +30,7 @@ const create_store = () => {
 		const zoom_list = $store.map(zoom => {
 			return {
 				...zoom,
-				start_date: dayjs.utc(zoom.start_date).local()
+				start_date: dayjs.utc(zoom.start_date).tz($time_zone)
 			}
 		})
 		const events = zoom_list.map(zoom => {
