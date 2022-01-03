@@ -55,12 +55,13 @@
 	</div>
 	<div class="ml-auto flex items-center">
 		{#each $zoom_store.time_zone_options as option}
-			<button on:click={zoom_store.setTimeZoom(option.tz)} class="calendar-button ml-2" class:active={option.active}>{option.label}</button>
+			<button on:click={zoom_store.setTimeZoom(option.tz)} class="calendar-button ml-1" class:active={option.active}>{option.label}</button>
 		{/each}
-		<a href="/schedule" class:active={$page.path.split('/').pop() === 'list'} class="w-10 h-10 cc rounded">
+		<div class="ml-4"></div>
+		<a href="/schedule/list-{dayjs().format('YYYY-MM-DD')}" class:active={$page.path.split('/').pop().startsWith('list')} class="calendar-button">
 			<svg viewBox="0 0 36 36" class="fill-current w-5"><path d="M11 14h25v8H11zM0 25h8v7H0zM11 25h25v7H11zM11 4h25v7H11zM0 4h8v7H0zM0 14h8v8H0z"></path></svg>
 		</a>
-		<a href="/schedule/grid-{dayjs().format('YYYY-MM-DD')}" class:active={$page.path.split('/').pop() === 'month'} class="w-10 h-10 cc">
+		<a href="/schedule/grid-{dayjs().format('YYYY-MM-DD')}" class:active={$page.path.split('/').pop().startsWith('grid')} class="calendar-button ml-1">
 			<Icon name="calendar"/>
 		</a>
 	</div>
@@ -93,7 +94,7 @@
 		{/if}
 	</div>
 
-	<div class="max-w-screen-lg w-full">
+	<div class="w-full">
 		<slot/>
 	</div>
 </div>

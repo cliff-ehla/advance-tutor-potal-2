@@ -1,6 +1,9 @@
 <script>
 	import {zoom_store} from "$lib/store/zoom.js";
 	import {browser} from "$app/env";
+	import ZoomPreviewPopup from '$lib/zoom/zoom-preview-popup.svelte'
+	import {getContext} from 'svelte'
+	const {showPopper, closePopper} = getContext('popper')
 
 	let calendar
 
@@ -20,7 +23,20 @@
 					id: SOURCE_ID
 				}
 			],
-			initialView: 'dayGridMonth', // dayGridMonth, timeGridWeek
+			height: 'calc(100vh - 120px)',
+			headerToolbar: false,
+			initialView: 'dayGridMonth',
+			eventMouseEnter: ({event, el}) => {
+				let zoom = event.extendedProps
+				console.log(zoom)
+				showPopper(el, ZoomPreviewPopup, {
+					zoom
+				})
+			},
+			eventMouseLeave: ({el}) => {
+				// TODO: leave to tooltip will close the tooltip
+				closePopper()
+			}
 		})
 		calendar.render()
 	}

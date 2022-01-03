@@ -71,7 +71,7 @@
 </script>
 
 {#if component}
-	<div transition:fade={{duration: 200}} class="fixed inset-0 z-50 bg-black bg-opacity-20"></div>
+<!--	<div transition:fade={{duration: 200}} class="fixed inset-0 z-50 bg-black bg-opacity-20"></div>-->
 	<div transition:fade={{duration: 200}} style="z-index: 99999" id="tooltip" bind:this={tooltip_el}>
 		<svelte:component this={component} {...props}/>
 	</div>

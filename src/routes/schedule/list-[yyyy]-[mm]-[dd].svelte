@@ -20,7 +20,6 @@
 	}
 
 	const scrollToDate = () => {
-		console.log('scrollToDate')
 		animateScroll.scrollTo({
 			element: `[data-date="${date_key}"]`,
 			offset: -48,
