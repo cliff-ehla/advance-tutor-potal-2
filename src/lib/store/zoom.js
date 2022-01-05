@@ -55,9 +55,9 @@ const create_store = () => {
 		if (get(store).length) {
 			return console.log('cached')
 		}
-		let start_time = dayjs().subtract(3, 'month').format('YYYY-MM-DD HH:mm:ss')
+		let start_time = dayjs().subtract(8, 'month').format('YYYY-MM-DD HH:mm:ss')
 		let end_time = dayjs().add(3, 'month').format('YYYY-MM-DD HH:mm:ss')
-		const {data} = await http.post(fetch, '/zoomApi/zoom_list_all', {
+		const {data, success} = await http.post(fetch, '/zoomApi/zoom_list_all', {
 			start_time,
 			end_time
 		})
@@ -65,19 +65,21 @@ const create_store = () => {
 			start_date: start_time,
 			end_date: end_time,
 		})
-		data.forEach(zoom => {
-			res.data.forEach(zoom2 => {
-				if (zoom.wrapper_id === zoom2.zoom_id) {
-					const {sub_cat, rc_level, reg_user_cnt, student_size} = zoom2
-					zoom.sub_cat = sub_cat
-					zoom.rc_level = rc_level
-					zoom.reg_user_cnt = reg_user_cnt
-					zoom.student_size = student_size
-				}
+		if (success) {
+			data.forEach(zoom => {
+				res.data.forEach(zoom2 => {
+					if (zoom.wrapper_id === zoom2.zoom_id) {
+						const {sub_cat, rc_level, reg_user_cnt, student_size} = zoom2
+						zoom.sub_cat = sub_cat
+						zoom.rc_level = rc_level
+						zoom.reg_user_cnt = reg_user_cnt
+						zoom.student_size = student_size
+					}
+				})
 			})
-		})
-		console.log(res.data)
-		store.set(data)
+			console.log(res.data)
+			store.set(data)
+		}
 	}
 	const setTimeZoom = (tz) => {
 		time_zone.set(tz)

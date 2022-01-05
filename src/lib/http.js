@@ -1,4 +1,5 @@
 import {sentry} from "$lib/sentry";
+import {goto} from "$app/navigation";
 
 const http = (() => {
 	async function get (fetch, resource, query) {
@@ -29,6 +30,11 @@ const http = (() => {
 				body: body && JSON.stringify(body)
 			})
 			const {success, data, metadata, debug} = await res.json()
+			if (!success) {
+				if (debug.err_code === 401) {
+					goto('/login')
+				}
+			}
 			return {success, data, metadata, debug}
 		} catch (e) {
 			console.log(`fatal error: ${resource} this mostly happened when usermodel do not return a json body`, e)

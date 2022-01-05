@@ -166,7 +166,8 @@ const tutor_group = () => {
 		students.forEach(item => {
 			item.tutor_groups.forEach(tg => {
 				const expired = dayjs(tg.end_date).isBefore(dayjs())
-				if (!expired) {
+				const lessons_count = tg.total_lesson_cnt
+				if (!expired && lessons_count > 0) {
 					results.push({
 						...tg,
 						...{

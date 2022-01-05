@@ -29,7 +29,16 @@
 		<p class="text-gray-500">{dayjs(zoom.start_date).format('h:mma')}</p>
 	</div>
 	<div class="w-full">
-		<div class="text-blue-500 italic text-sm mb-2">{zoom.sub_cat}</div>
+		<div class="text-blue-500 italic text-sm mb-2">
+			{#if zoom.is_big_classroom}
+				<div class="">{zoom.sub_cat}</div>
+			{:else}
+				<div>
+					<a href="/tutor-group/{zoom.tutor_group_id}">{zoom.title}</a>
+					<Icon name="chat" className="w-3.5 text-gray-400 inline-block ml-0.5"/>
+				</div>
+			{/if}
+		</div>
 		{#each zoom.days as d}
 			<div on:click={() => {previewMaterial(d)}} class="cursor-pointer hover:text-blue-700 hover:bg-gray-200 flex items-center mb-1 group px-1 py-0.5 rounded">
 				<Icon name="pdf" className="inline-block w-5 mr-2 text-gray-400 flex-shrink-0"/>
@@ -48,10 +57,6 @@
 				</div>
 			{/each}
 		{:else}
-			<div>
-				<a href="/tutor-group/{zoom.tutor_group_id}" class="text-xs text-gray-500 hover:text-red-500 inline-block">Course: {zoom.title}</a>
-				<Icon name="chat" className="w-3.5 text-gray-400 inline-block ml-0.5"/>
-			</div>
 			{#if zoom.f_one_on_one}
 			{:else}
 			{/if}

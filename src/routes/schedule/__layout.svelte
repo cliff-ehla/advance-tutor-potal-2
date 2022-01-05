@@ -75,7 +75,7 @@
 		{#if course_list}
 			<p class="uppercase text-xs mb-2 text-black font-bold px-4 pt-4">Courses</p>
 			{#each course_list as course}
-				<a href="/tutor-group/{course.tutor_group_id}" class="block cursor-pointer py-0.5 px-2.5 hover:bg-gray-200 rounded my-1 mx-2">
+				<a href="/tutor-group/{course.tutor_group_id}/zoom" class="block cursor-pointer py-0.5 px-2.5 hover:bg-gray-200 rounded my-1 mx-2">
 					<div class="flex items-center">
 						<p class="text-sm relative leading-tight">
 							{course.student_name}
@@ -83,12 +83,16 @@
 								<span class="w-2 h-2 bg-red-500 rounded-full absolute -left-2 top-0"></span>
 							{/if}
 						</p>
-						<div class="ml-auto flex items-center">
-							<Icon name="bell" className="w-3 text-gray-300"/>
-							<Icon name="chat" className="w-4 text-gray-300"/>
+						<div class="ml-auto flex items-center text-xs">
+
+<!--							<Icon name="bell" className="w-3 text-gray-300"/>-->
+<!--							<Icon name="chat" className="w-4 text-gray-300"/>-->
 						</div>
 					</div>
-					<p class="text-xs text-gray-400">{course.title.split('(')[0]}</p>
+					<div class="text-xs text-gray-400 flex">
+						<p class="text-xs text-gray-400">{course.title.split('(')[0]}</p>
+						<p class="ml-auto">{course.completion_cnt}/{course.total_lesson_cnt}</p>
+					</div>
 				</a>
 			{/each}
 		{/if}
