@@ -3,7 +3,7 @@
 	export let student_id
 	export let teacher_id
 
-	import MessageWidget from '../../../components/message/message-widget.svelte'
+	import MessageWidget from '$lib/message/message-widget.svelte'
 	import NoteWidget from '../../../components/message/note-widget.svelte'
 	import Icon from '../../../components/ui-elements/icon.svelte'
 	import {getContext} from 'svelte'

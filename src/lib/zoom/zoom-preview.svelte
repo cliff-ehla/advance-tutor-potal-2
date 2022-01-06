@@ -53,7 +53,7 @@
 				<div class="">{zoom.sub_cat}</div>
 			{:else}
 				<div>
-					<a on:mouseleave={closePopper} on:mouseenter={e => {onTutorGroupPreview(e, zoom)}} href="/tutor-group/{zoom.tutor_group_id}">{zoom.title}</a>
+					<a on:mouseleave={closePopper} on:mouseenter={e => {onTutorGroupPreview(e, zoom)}} href="/students/{zoom.students[0].user_id}/tutor-group/{zoom.tutor_group_id}">{zoom.title}</a>
 					<Icon name="chat" className="w-3.5 text-gray-400 inline-block ml-0.5"/>
 				</div>
 			{/if}

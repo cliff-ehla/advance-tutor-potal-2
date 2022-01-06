@@ -2,7 +2,7 @@
 	import TopBar from '../../../components/student-top-bar.svelte'
 	import SideTab from './_side-tab.svelte'
 	import {tutor_group_store} from "../../../store";
-	import MessageWidget from '../../../components/message/message-widget.svelte'
+	import MessageWidget from '$lib/message/message-widget.svelte'
 	import {stores} from '$app/stores'
 	const {page, session} = stores()
 
