@@ -75,7 +75,7 @@
 		{#if course_list}
 			<p class="uppercase text-xs mb-2 text-black font-bold px-4 pt-4">Courses</p>
 			{#each course_list as course}
-				<a href="/tutor-group/{course.tutor_group_id}/zoom" class="block cursor-pointer py-0.5 px-2.5 hover:bg-gray-200 rounded my-1 mx-2">
+				<a href="/tutor-group/{course.tutor_group_id}" class="block cursor-pointer py-0.5 px-2.5 hover:bg-gray-200 rounded my-1 mx-2">
 					<div class="flex items-center">
 						<p class="text-sm relative leading-tight">
 							{course.student_name}

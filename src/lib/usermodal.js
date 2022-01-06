@@ -7,7 +7,7 @@ export async function usermodel (request, resource, data) {
 	}
 	const query = {
 		'encode': 1,
-		'access-token': '22131035.c10f49c13c902f4e3290c3c37bb02ea7b645b9ea' // request.locals.access_token
+		'access-token': 'Jodiehappytest' // request.locals.access_token
 	}
 	let url = `${base}${resource}`
 	for (const property in query) {
