@@ -13,14 +13,10 @@
 	export let zoom_list
 	import {page} from "$app/stores";
 	import dayjs from "dayjs";
-	import {tutor_group_store} from "../../../store/index.js";
+	import {tutor_group_store} from "../../../../store/index.js";
 	import RateLabel from '$lib/zoom/rate-label.svelte'
 	$: tutor_group_id = $page.params.tutor_group_id
 	$: tutor_group = $tutor_group_store.tutor_group[tutor_group_id]
-
-	$:{
-		console.log(tutor_group)
-	}
 </script>
 
 <h1 class="font-bold">{tutor_group && tutor_group.title}</h1>
