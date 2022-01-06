@@ -4,7 +4,7 @@
 	import ZoomPreviewPopup from '$lib/zoom/zoom-preview-popup.svelte'
 	import {getContext} from 'svelte'
 	import {page} from "$app/stores"
-	import {eventContent} from "../../../components/calendar/event-content.js";
+	import {eventContent} from "$lib/calendar/event-content.js";
 
 	const {showPopper, closePopper} = getContext('popper')
 
