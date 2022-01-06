@@ -10,6 +10,7 @@
 	import CoursePreviewPopup from '$lib/zoom/course-preview-popup.svelte'
 	import StudentPreviewPopup from '$lib/student/student-preview-popup.svelte'
 	import isToday from "dayjs/plugin/isToday.js";
+	import {capitalize} from "$lib/helper/capitalize.js";
 	dayjs.extend(isToday)
 
 	$: is_today = dayjs(zoom.start_date).isToday()
@@ -71,7 +72,9 @@
 		{#if zoom.is_big_classroom}
 			{#each zoom.students as s}
 				<div class="inline-flex items-center mr-2 bg-blue-200 rounded-full mt-1">
-					<div class="w-6 h-6 rounded-full mr-1 cc text-xs bg-blue-500 text-white">{s.level.charAt(0).toUpperCase() + s.level.slice(1)}</div>
+					<div class="w-6 h-6 rounded-full mr-1 cc text-xs bg-blue-500 text-white">
+						{capitalize(s.level)}
+					</div>
 					<span class="text-sm pr-2 py-1">{s.nickname}</span>
 				</div>
 			{/each}

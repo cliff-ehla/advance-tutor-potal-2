@@ -23,8 +23,12 @@
 
 <h1 class="font-bold mb-4">{tutor_group && tutor_group.title}</h1>
 <div class="flex">
-	{#if zoom_list}
-		<CourseTimeLine {zoom_list}/>
-	{/if}
-	<MessageWidget {tutor_group_id} {student_id} height="calc(100vh - 170px)"/>
+	<div class="flex-1 bg-white p-4 border border-gray-300">
+		{#if zoom_list}
+			<CourseTimeLine {zoom_list}/>
+		{/if}
+	</div>
+	<div class="ml-4 bg-white border border-gray-300">
+		<MessageWidget {tutor_group_id} {student_id} height="calc(100vh - 200px)"/>
+	</div>
 </div>
