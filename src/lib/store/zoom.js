@@ -65,15 +65,17 @@ const create_store = () => {
 			start_date: start_time,
 			end_date: end_time,
 		})
+		console.log(res)
 		if (success) {
 			data.forEach(zoom => {
 				res.data.forEach(zoom2 => {
 					if (zoom.wrapper_id === zoom2.zoom_id) {
-						const {sub_cat, rc_level, reg_user_cnt, student_size} = zoom2
+						const {description_code_short_id, sub_cat, rc_level, reg_user_cnt, student_size} = zoom2
 						zoom.sub_cat = sub_cat
 						zoom.rc_level = rc_level
 						zoom.reg_user_cnt = reg_user_cnt
 						zoom.student_size = student_size
+						zoom.description_code_short_id = description_code_short_id
 					}
 				})
 			})
