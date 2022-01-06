@@ -5,7 +5,9 @@
 	import tippy from "tippy.js";
 	export let zoom
 	const {open} = getContext('simple-modal')
+	const {showPopper} = getContext('popper')
 	import PdfReaderDialog from '../../components/item/item-pdf-reader/pdf-reader-dialog.svelte'
+	import CoursePreviewPopup from '$lib/zoom/course-preview-popup.svelte'
 	import isToday from "dayjs/plugin/isToday.js";
 	dayjs.extend(isToday)
 
@@ -22,6 +24,12 @@
 			content: 'Open zoom application'
 		})
 	}
+
+	const onTutorGroupPreview = (e, zoom) => {
+		showPopper(e.target, CoursePreviewPopup, {
+			tutor_group_id: zoom.tutor_group_id
+		})
+	}
 </script>
 
 <div class="p-2 flex w-full">
@@ -34,7 +42,7 @@
 				<div class="">{zoom.sub_cat}</div>
 			{:else}
 				<div>
-					<a href="/tutor-group/{zoom.tutor_group_id}">{zoom.title}</a>
+					<a on:mouseenter={e => {onTutorGroupPreview(e, zoom)}} href="/tutor-group/{zoom.tutor_group_id}">{zoom.title}</a>
 					<Icon name="chat" className="w-3.5 text-gray-400 inline-block ml-0.5"/>
 				</div>
 			{/if}
