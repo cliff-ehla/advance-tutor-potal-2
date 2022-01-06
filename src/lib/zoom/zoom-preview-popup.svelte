@@ -31,18 +31,24 @@
 <div class="p-8 border border-gray-300 w-full bg-white shadow-lg rounded max-w-xl">
 	<div class="w-full">
 		<div class="text-blue-500 mb-1 text-lg">
-			{zoom.sub_cat || zoom.title}
+			{zoom.sub_cat || zoom.title.split('(')[0]}
 		</div>
 		<p class="text-gray-500 text-sm">
 			{dayjs(zoom.start_date).format('DD MMM (ddd), h:mma')} - {dayjs(zoom.end_date).format('h:mma')}
 <!--			<span class="text-xs font-bold ml-2 bg-gray-100 border border-gray-300 px-1">{$zoom_store.time_zone.label}</span>-->
 		</p>
 		<div class="my-4">
-		{#each zoom.days as d}
-			<div on:click={() => {previewMaterial(d)}} class="cursor-pointer hover:text-blue-700 hover:bg-gray-200 my-2 group px-4 py-3 bg-gray-100 shadow rounded border-gray-300 border">
-				<p class="leading-tight">{d.title}</p>
-			</div>
-		{/each}
+			{#if zoom.days.length}
+				{#each zoom.days as d}
+					<div on:click={() => {previewMaterial(d)}} class="cursor-pointer hover:text-blue-700 hover:bg-gray-200 my-2 group px-4 py-3 bg-gray-100 shadow rounded border-gray-300 border">
+						<p class="leading-tight">{d.title}</p>
+					</div>
+				{/each}
+			{:else}
+				<div class="text-gray-300 my-2 group px-4 py-3 bg-gray-100 rounded border-gray-300 border">
+					No material yet
+				</div>
+			{/if}
 		</div>
 		{#if zoom.is_big_classroom}
 			{#each zoom.students as s}
@@ -52,13 +58,6 @@
 				</div>
 			{/each}
 		{:else}
-			<div>
-				<a href="/tutor-group/{zoom.tutor_group_id}" class="text-xs text-gray-500 hover:text-red-500 inline-block">Course: {zoom.title}</a>
-				<Icon name="chat" className="w-3.5 text-gray-400 inline-block ml-0.5"/>
-			</div>
-			{#if zoom.f_one_on_one}
-			{:else}
-			{/if}
 			{#each zoom.students as s}
 				<a href="/students/{s.user_id}" class="inline-flex items-center mr-2 bg-blue-200 rounded-full mt-1 overflow-hidden border border-white hover:border-blue-300">
 					<div class="w-6 h-6 rounded-full mr-1 cc text-xs bg-blue-500 text-white">{s.level.charAt(0).toUpperCase() + s.level.slice(1)}</div>

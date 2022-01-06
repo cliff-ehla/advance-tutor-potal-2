@@ -1,12 +1,13 @@
 import dayjs from "dayjs";
+import tippy from "tippy.js";
 
 export const eventContent = (arg) => {
 	let zoom = arg.event.extendedProps
 	let title_el = document.createElement('i')
 	let time_el = document.createElement('div')
 	time_el.innerHTML = dayjs(arg.event.start).format('h:mma')
-	time_el.style.paddingRight = '2px'
 	time_el.setAttribute("id", 'wrapper_' + zoom.wrapper_id)
+	time_el.classList.add('mr-1', 'font-bold' , 'text-xs')
 
 	let student_count = zoom.students.length
 	let big_classroom_type = zoom.big_classroom_type
@@ -29,9 +30,9 @@ export const eventContent = (arg) => {
 	if (is_classroom) {
 		let code_el = document.createElement('div')
 		code_el.innerHTML = zoom.description_code_short_id
-		code_el.classList.add('overflow-hidden', 'px-1', 'text-xs', 'bg-gray-300', 'ml-auto')
+		code_el.classList.add('overflow-hidden', 'px-1', 'text-xs', 'bg-gray-300', 'ml-auto', 'text-xs')
 		let size_el = document.createElement('div')
-		size_el.classList.add('bg-purple-500', 'text-white', 'px-1' , 'leading-tight', 'text-xs', 'ml-auto')
+		size_el.classList.add('bg-purple-500', 'text-white', 'px-1' , 'leading-tight', 'text-xs', 'ml-1')
 		size_el.innerHTML = `${zoom.reg_user_cnt}/${zoom.student_size}`
 		wrapper_el.append(code_el)
 		wrapper_el.append(size_el)

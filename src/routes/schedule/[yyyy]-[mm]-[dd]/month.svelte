@@ -43,6 +43,8 @@
 				console.log(zoom)
 				showPopper(el, ZoomPreviewPopup, {
 					zoom
+				}, {
+					placement: 'right'
 				})
 			},
 			eventMouseLeave: ({el}) => {
