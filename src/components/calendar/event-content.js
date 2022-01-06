@@ -11,10 +11,11 @@ export const eventContent = (arg) => {
 	title_el.innerHTML = arg.event.title
 	let student_count = zoom.students.length
 	let big_classroom_type = zoom.big_classroom_type
+	const is_classroom = !!big_classroom_type
 	let is_big_class = ['UNLIMITED', 'BIG'].includes(big_classroom_type)
 	let is_small_class = big_classroom_type === 'SMALL'
-	if (!!big_classroom_type) {
-		title_el.innerHTML = is_big_class ? 'Big class' : 'Small class'
+	if (is_classroom) {
+		title_el.innerHTML = zoom.sub_cat
 	} else if (student_count > 1) {
 		title_el.innerHTML = `${student_count} students`
 	} else {
@@ -22,7 +23,8 @@ export const eventContent = (arg) => {
 	}
 
 	let wrapper_el = document.createElement('div')
-	wrapper_el.classList.add('inline-flex', 'items-center', 'cursor-pointer', 'overflow-hidden')
+	wrapper_el.classList.add('inline-flex', 'items-center', 'cursor-pointer', 'overflow-hidden', 'text-white', 'rounded-sm')
+	wrapper_el.classList.add(is_classroom ? 'bg-purple-500' : 'bg-blue-500')
 	wrapper_el.appendChild(time_el)
 	wrapper_el.appendChild(title_el)
 

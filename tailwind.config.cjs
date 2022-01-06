@@ -38,7 +38,7 @@ module.exports = {
         '100': '#ebeff3',
         '200': '#dbeeff',
         '300': '#84b4d4',
-        '500': '#21A6FF',
+        '500': '#2f80ed',
         '700': '#0f8cde'
       },
       green: {
@@ -47,6 +47,9 @@ module.exports = {
       },
       yellow: {
         '500': '#e6b700'
+      },
+      purple: {
+        '500': '#9c27b0'
       },
       grammar: '#9F545D',
       speaking: '#1E3E78',

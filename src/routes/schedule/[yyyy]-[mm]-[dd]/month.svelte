@@ -3,7 +3,8 @@
 	import {browser} from "$app/env";
 	import ZoomPreviewPopup from '$lib/zoom/zoom-preview-popup.svelte'
 	import {getContext} from 'svelte'
-	import {page} from "$app/stores.js";
+	import {page} from "$app/stores"
+	import {eventContent} from "../../../components/calendar/event-content.js";
 
 	const {showPopper, closePopper} = getContext('popper')
 
@@ -33,6 +34,7 @@
 					id: SOURCE_ID
 				}
 			],
+			eventContent,
 			height: 'calc(100vh - 120px)',
 			headerToolbar: false,
 			initialView: 'dayGridMonth',
@@ -45,14 +47,14 @@
 			},
 			eventMouseLeave: ({el}) => {
 				// TODO: leave to tooltip will close the tooltip
-				// closePopper()
+				closePopper()
 			}
 		})
 		calendar.render()
 	}
 
 	const reRenderEvents = () => {
-		console.log('cliff: ', 'reRenderEvents')
+		console.log('cliff: ', 'reRenderEvents', $zoom_store.events)
 		const source = calendar.getEventSourceById(SOURCE_ID)
 		if (source) {
 			source.remove()
