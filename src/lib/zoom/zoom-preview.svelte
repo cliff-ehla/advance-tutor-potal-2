@@ -5,9 +5,10 @@
 	import tippy from "tippy.js";
 	export let zoom
 	const {open} = getContext('simple-modal')
-	const {showPopper} = getContext('popper')
+	const {showPopper, closePopper} = getContext('popper')
 	import PdfReaderDialog from '../../components/item/item-pdf-reader/pdf-reader-dialog.svelte'
 	import CoursePreviewPopup from '$lib/zoom/course-preview-popup.svelte'
+	import StudentPreviewPopup from '$lib/student/student-preview-popup.svelte'
 	import isToday from "dayjs/plugin/isToday.js";
 	dayjs.extend(isToday)
 
@@ -28,6 +29,16 @@
 	const onTutorGroupPreview = (e, zoom) => {
 		showPopper(e.target, CoursePreviewPopup, {
 			tutor_group_id: zoom.tutor_group_id
+		}, {
+			placement: 'right'
+		})
+	}
+
+	const onStudentPreview = (e, student) => {
+		showPopper(e.target, StudentPreviewPopup, {
+			student_id: student.user_id
+		}, {
+			placement: 'right'
 		})
 	}
 </script>
@@ -42,7 +53,7 @@
 				<div class="">{zoom.sub_cat}</div>
 			{:else}
 				<div>
-					<a on:mouseenter={e => {onTutorGroupPreview(e, zoom)}} href="/tutor-group/{zoom.tutor_group_id}">{zoom.title}</a>
+					<a on:mouseleave={closePopper} on:mouseenter={e => {onTutorGroupPreview(e, zoom)}} href="/tutor-group/{zoom.tutor_group_id}">{zoom.title}</a>
 					<Icon name="chat" className="w-3.5 text-gray-400 inline-block ml-0.5"/>
 				</div>
 			{/if}
@@ -69,7 +80,7 @@
 			{:else}
 			{/if}
 			{#each zoom.students as s}
-				<a href="/students/{s.user_id}" class="inline-flex items-center mr-2 bg-blue-200 rounded-full mt-1 overflow-hidden border border-white hover:border-blue-300">
+				<a on:mouseleave={closePopper} on:mouseenter={e => {onStudentPreview(e, s)}} href="/students/{s.user_id}" class="inline-flex items-center mr-2 bg-blue-200 rounded-full mt-1 overflow-hidden border border-white hover:border-blue-300">
 					<div class="w-6 h-6 rounded-full mr-1 cc text-xs bg-blue-500 text-white">{s.level.charAt(0).toUpperCase() + s.level.slice(1)}</div>
 					<span class="text-sm py-1">{s.nickname}</span>
 					<div class="w-8 cc bg-white h-8 bg-opacity-50 ml-2">

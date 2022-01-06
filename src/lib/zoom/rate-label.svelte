@@ -21,12 +21,14 @@
 </script>
 
 {#if rate}
-	<div class="inline-flex items-center border border-gray-300 px-2 h-6 rounded-sm {color_map[rate]}">
-		{#if rate == 1 || rate == 5}
+	<div class="inline-flex items-center border border-gray-300 px-1 rounded-sm {color_map[rate]}">
+		{#if rate == 3}
+			<Icon name="tick" className="w-3 fill-current"/>
+		{:else if rate == 1 || rate == 5}
 			<Icon name="alert" className="w-4 fill-current"/>
 		{:else}
-			<div class="w-2.5 h-2.5 rounded-full bg-current "></div>
+			<div class="w-2 h-2 rounded-full bg-current"></div>
 		{/if}
-		<p class="ml-2 text-sm font-bold uppercase">{label_map[rate]}</p>
+		<p class="ml-1">{label_map[rate]}</p>
 	</div>
 {/if}
