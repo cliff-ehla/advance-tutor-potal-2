@@ -82,7 +82,8 @@
 							<Icon name="report" className="w-3.5 text-gray-400 inline-block"/>
 						</div>
 					</a>
-					<StudentPreviewPopup student_id={s.user_id}/>
+					// TODO
+<!--					<StudentPreviewPopup student_id={s.user_id}/>-->
 				</Dropdown>
 			{/each}
 		{/if}

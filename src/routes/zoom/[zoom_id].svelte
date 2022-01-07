@@ -20,9 +20,15 @@
 	import {session} from '$app/stores'
 	import Icon from '$lib/ui/icon.svelte'
 	import Countdown from '$lib/live/countdown.svelte'
+	import dayjs from "dayjs";
+	import utc from "dayjs/plugin/utc.js";
+	dayjs.extend(utc)
 
 	export let zoom
-	console.log(zoom)
+	let start_date = dayjs.utc(zoom.start_date).local()
+	let end_date = dayjs(start_date).add(zoom.duration, 'minutes')
+	start_date = start_date.format('YYYY-MM-DD HH:mm:ss')
+	end_date = end_date.format('YYYY-MM-DD HH:mm:ss')
 	const items = zoom.days.map(d => ({
 		item_id: d.item_ids[0],
 		title: d.title
@@ -75,8 +81,6 @@
 	{/if}
 </div>
 
-<div class="fixed bottom-2 left-1/2 w-20 -ml-10 bg-yellow-500 text-center rounded-sm text-sm">
-	<Countdown start_date={zoom.start_date} duration={zoom.duration} let:test>
-		{test}
-	</Countdown>
+<div class="fixed bottom-2 left-1/2 transform -translate-x-1/2">
+	<Countdown start_date={start_date} end_date={end_date} duration={zoom.duration}/>
 </div>
