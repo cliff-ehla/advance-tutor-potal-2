@@ -6,6 +6,7 @@
 
 	const student_id = $page.params.student_id
 	$: student = $tutor_group_store ? tutor_group_store.getOOO(student_id) : null
+	$: tutor_group_id = $page.params.tutor_group_id
 </script>
 
 <div class="absolute">
@@ -22,19 +23,23 @@
 					</div>
 				</div>
 				<div class="py-4 border-gray-300 border-b border-t">
-					<a href="/students/{student_id}/learning-history" class="text-sm uppercase block font-bold">Learning history</a>
+					<a href="/students/{student_id}/learning-history"
+					   class:underline={$page.path.split('/').pop() === 'learning-history'}
+					   class="text-sm uppercase block font-bold hover:text-blue-500">Learning history</a>
 				</div>
 				<div class="py-4 border-gray-300 border-b">
 					<p class="text-sm uppercase mb-2 font-bold">Courses</p>
 					{#each student.tutor_groups as course}
-						<a href="/students/{student_id}/tutor-group/{course.tutor_group_id}" class="mb-4 block hover:text-blue-500 text-sm">
-							<p>{course.title}</p><!--						<p>{course.unread_message_cnt}</p>-->
+						<a href="/students/{student_id}/tutor-group/{course.tutor_group_id}"
+						   class:underline={course.tutor_group_id === tutor_group_id}
+						   class="mb-4 block hover:text-blue-500 text-sm">
+							<p>{course.title.split('(')[0]}</p><!--						<p>{course.unread_message_cnt}</p>-->
 						</a>
 					{/each}
 				</div>
 			{/if}
 
-			<div class="py-4 border-gray-300 border-b">
+			<div class="py-4">
 				<p class="text-sm uppercase mb-2 font-bold">Notes</p>
 				<div class="border border-gray-300">
 					<NoteWidget height="226px" {student_id} teacher_id={$session.user_info.user_id}/>

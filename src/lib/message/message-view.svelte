@@ -67,5 +67,5 @@
 		</div>
 	{/each}
 {:else}
-	No message
+	<p class="text-gray-500 text-sm p-4">No message</p>
 {/if}
