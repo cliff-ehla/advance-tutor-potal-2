@@ -4,7 +4,7 @@
 	export let onRateSuccess = () => {}
 	export let is_standalone_style = false
 
-	export let t_difficulty_rate
+	export let t_difficulty_rate = undefined
 	export let student_id
 	export let item_id
 

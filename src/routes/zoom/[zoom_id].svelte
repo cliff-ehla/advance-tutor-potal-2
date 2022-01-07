@@ -70,7 +70,7 @@
 </div>
 
 {#if !loading_item}
-<!--	<PdfReader pages_info_2={pdf_json}/>-->
+	<PdfReader pages_info_2={pdf_json}/>
 {/if}
 
 <div class="fixed right-8 bottom-0 z-50">
@@ -82,5 +82,9 @@
 </div>
 
 <div class="fixed bottom-2 left-1/2 transform -translate-x-1/2">
-	<Countdown start_date={start_date} end_date={end_date} duration={zoom.duration}/>
+	<Countdown
+					{student_id}
+					item_id={selected_item_id}
+					start_date={start_date}
+          end_date={end_date}/>
 </div>

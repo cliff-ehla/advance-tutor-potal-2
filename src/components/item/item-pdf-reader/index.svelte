@@ -1,7 +1,7 @@
 <script>
 	import Icon from '../../ui-elements/icon.svelte'
 	import Reader from './puzzle-reader.svelte'
-	import RatingButton from './rating-button.svelte'
+	// import RatingButton from './rating-button.svelte'
 	import StudentWidget from './student-widget.svelte'
 	import { debounce } from "debounce";
 	import {domain} from "./puzzle-reader-constant";
@@ -152,7 +152,7 @@
 	<div class="w-16 fixed left-4 bottom-4 z-50">
 		{#if student_id && tutor_group_id}
 			<div class="mb-2">
-				<RatingButton {student_id} {item_id}/>
+<!--				<RatingButton {student_id} {item_id}/>-->
 			</div>
 		{/if}
 		<div class="bg-white shadow border rounded">
