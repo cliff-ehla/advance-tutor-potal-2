@@ -70,7 +70,7 @@
 <div class="flex">
 	<div class="top-10 sticky w-64 border-gray-300 border-r overflow-y-scroll flex-shrink-0" style="max-height: calc(100vh - 3em)">
 		<div class="h-64 px-3 py-3 border-b border-gray-300">
-			<DatePicker {isAllowed} on:input={onDateChange}/>
+<!--			<DatePicker {isAllowed} on:input={onDateChange}/>-->
 		</div>
 		{#if course_list}
 			<p class="uppercase text-xs mb-2 text-black font-bold px-4 pt-4">Courses</p>

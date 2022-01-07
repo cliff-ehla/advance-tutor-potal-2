@@ -3,7 +3,7 @@
 	export function load () {
 		return {
 			status: 302,
-			redirect: `/schedule/${dayjs().format('YYYY-MM-DD')}/list`
+			redirect: `/schedule/${dayjs().format('YYYY-MM-DD')}/month`
 		}
 	}
 </script>

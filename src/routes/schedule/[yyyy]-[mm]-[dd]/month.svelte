@@ -51,7 +51,6 @@
 	}
 
 	const reRenderEvents = () => {
-		console.log('cliff: ', 'reRenderEvents', $zoom_store.events)
 		const source = calendar.getEventSourceById(SOURCE_ID)
 		if (source) {
 			source.remove()

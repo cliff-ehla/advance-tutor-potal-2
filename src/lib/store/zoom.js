@@ -65,7 +65,6 @@ const create_store = () => {
 			start_date: start_time,
 			end_date: end_time,
 		})
-		console.log(res)
 		if (success) {
 			data.forEach(zoom => {
 				res.data.forEach(zoom2 => {
@@ -79,7 +78,6 @@ const create_store = () => {
 					}
 				})
 			})
-			console.log(res.data)
 			store.set(data)
 		}
 	}
