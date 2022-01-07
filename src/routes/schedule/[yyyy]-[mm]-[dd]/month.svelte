@@ -38,18 +38,13 @@
 			height: 'calc(100vh - 120px)',
 			headerToolbar: false,
 			initialView: 'dayGridMonth',
-			eventMouseEnter: ({event, el}) => {
+			eventClick: ({event, el}) => {
 				let zoom = event.extendedProps
-				console.log(zoom)
 				showPopper(el, ZoomPreviewPopup, {
 					zoom
 				}, {
 					placement: 'right'
 				})
-			},
-			eventMouseLeave: ({el}) => {
-				// TODO: leave to tooltip will close the tooltip
-				closePopper()
 			}
 		})
 		calendar.render()
