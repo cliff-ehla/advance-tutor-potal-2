@@ -26,6 +26,7 @@
 	import Popper from '../components/app-shelf/popper.svelte'
 	import TopBar from '$lib/app-shelf/top-bar.svelte'
 	import {session} from '$app/stores'
+	import {page} from "$app/stores";
 
 	export let user_info
 
@@ -34,7 +35,7 @@
 	})
 </script>
 
-{#if $session.user_info}
+{#if $session.user_info && !$page.path.startsWith('/zoom')}
 	<TopBar/>
 {/if}
 

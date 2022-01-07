@@ -19,8 +19,10 @@
 	import StudentListWidget from '$lib/zoom/student-list-widget.svelte'
 	import {session} from '$app/stores'
 	import Icon from '$lib/ui/icon.svelte'
+	import Countdown from '$lib/live/countdown.svelte'
 
 	export let zoom
+	console.log(zoom)
 	const items = zoom.days.map(d => ({
 		item_id: d.item_ids[0],
 		title: d.title
@@ -28,7 +30,7 @@
 	const students = zoom.students
 	const tutor_group_id = zoom.tutor_group_id
 	const is_one_on_one = !zoom.big_classroom_type
-	const student_id = is_one_on_one ? students[0].student_id : null
+	const student_id = is_one_on_one ? students[0].user_id : null
 	let selected_item_id = items[0].item_id
 	let pdf_json
 	let loading_item = true
@@ -62,7 +64,7 @@
 </div>
 
 {#if !loading_item}
-	<PdfReader pages_info_2={pdf_json}/>
+<!--	<PdfReader pages_info_2={pdf_json}/>-->
 {/if}
 
 <div class="fixed right-8 bottom-0 z-50">
@@ -74,5 +76,7 @@
 </div>
 
 <div class="fixed bottom-2 left-1/2 w-20 -ml-10 bg-yellow-500 text-center rounded-sm text-sm">
-	6:30
+	<Countdown start_date={zoom.start_date} duration={zoom.duration} let:test>
+		{test}
+	</Countdown>
 </div>

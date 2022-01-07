@@ -45,6 +45,8 @@
 						<div class="absolute top-0 -right-2 w-2 h-2 rounded-full bg-red-500"></div>
 					{/if}
 				</div>
+			{:else}
+				{student_id}
 			{/if}
 		</div>
 		<div class="w-12 h-12 flex items-center justify-center flex-shrink-0">
