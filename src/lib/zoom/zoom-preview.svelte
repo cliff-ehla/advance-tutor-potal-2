@@ -1,11 +1,11 @@
 <script>
 	import dayjs from "dayjs";
 	import Icon from '$lib/ui/icon.svelte'
+	import Dropdown from '$lib/ui/dropdown3.svelte'
 	import {getContext} from "svelte";
 	import tippy from "tippy.js";
 	export let zoom
 	const {open} = getContext('simple-modal')
-	const {showPopper, closePopper} = getContext('popper')
 	import PdfReaderDialog from '../../components/item/item-pdf-reader/pdf-reader-dialog.svelte'
 	import CoursePreviewPopup from '$lib/zoom/course-preview-popup.svelte'
 	import StudentPreviewPopup from '$lib/student/student-preview-popup.svelte'
@@ -26,22 +26,6 @@
 			content: 'Open zoom application'
 		})
 	}
-
-	const onTutorGroupPreview = (e, zoom) => {
-		showPopper(e.target, CoursePreviewPopup, {
-			tutor_group_id: zoom.tutor_group_id
-		}, {
-			placement: 'right'
-		})
-	}
-
-	const onStudentPreview = (e, student) => {
-		showPopper(e.target, StudentPreviewPopup, {
-			student_id: student.user_id
-		}, {
-			placement: 'right'
-		})
-	}
 </script>
 
 <div class="p-2 flex w-full">
@@ -49,13 +33,19 @@
 		<p class="text-gray-500">{dayjs(zoom.start_date).format('h:mma')}</p>
 	</div>
 	<div class="w-full">
-		<div class="text-blue-500 italic text-sm mb-2">
+		<div class="italic text-sm mb-2">
 			{#if zoom.is_big_classroom}
-				<div class="">{zoom.sub_cat}</div>
+				<div class="text-purple-500">{zoom.sub_cat}</div>
 			{:else}
-				<div>
-					<a on:mouseleave={closePopper} on:mouseenter={e => {onTutorGroupPreview(e, zoom)}} href="/students/{zoom.students[0].user_id}/tutor-group/{zoom.tutor_group_id}">{zoom.title}</a>
-					<Icon name="chat" className="w-3.5 text-gray-400 inline-block ml-0.5"/>
+				<div class="text-blue-500">
+					<Dropdown activator_style="inline-block" placement="right">
+						<a slot="activator" href="/students/{zoom.students[0].user_id}/tutor-group/{zoom.tutor_group_id}">
+							{zoom.title.split('(')[0]}
+						</a>
+						<div class="">
+							<CoursePreviewPopup tutor_group_id={zoom.tutor_group_id}/>
+						</div>
+					</Dropdown>
 				</div>
 			{/if}
 		</div>
@@ -83,13 +73,16 @@
 			{:else}
 			{/if}
 			{#each zoom.students as s}
-				<a on:mouseleave={closePopper} on:mouseenter={e => {onStudentPreview(e, s)}} href="/students/{s.user_id}" class="inline-flex items-center mr-2 bg-blue-200 rounded-full mt-1 overflow-hidden border border-white hover:border-blue-300">
-					<div class="w-6 h-6 rounded-full mr-1 cc text-xs bg-blue-500 text-white">{s.level.charAt(0).toUpperCase() + s.level.slice(1)}</div>
-					<span class="text-sm py-1">{s.nickname}</span>
-					<div class="w-8 cc bg-white h-8 bg-opacity-50 ml-2">
-						<Icon name="report" className="w-3.5 text-gray-400 inline-block"/>
-					</div>
-				</a>
+				<Dropdown placement="right">
+					<a slot="activator" href="/students/{s.user_id}" class="inline-flex items-center mr-2 bg-blue-200 rounded-full mt-1 overflow-hidden border border-white hover:border-blue-300">
+						<div class="w-6 h-6 rounded-full mr-1 cc text-xs bg-blue-500 text-white">{s.level.charAt(0).toUpperCase() + s.level.slice(1)}</div>
+						<span class="text-sm py-1">{s.nickname}</span>
+						<div class="w-8 cc bg-white h-8 bg-opacity-50 ml-2">
+							<Icon name="report" className="w-3.5 text-gray-400 inline-block"/>
+						</div>
+					</a>
+					<StudentPreviewPopup student_id={s.user_id}/>
+				</Dropdown>
 			{/each}
 		{/if}
 	</div>

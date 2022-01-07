@@ -19,7 +19,7 @@
 </script>
 
 
-<div class="bg-white p-4 shadow-lg rounded text-xs border border-gray-300">
+<div class="bg-white p-4 shadow-lg rounded text-xs border border-gray-300 overflow-scroll" style="max-height: 500px">
 	<div class="mb-2">
 		{completed_count} / {total_count} completed
 	</div>

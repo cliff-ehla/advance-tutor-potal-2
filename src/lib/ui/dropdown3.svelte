@@ -70,7 +70,7 @@
 
 <div class:w-full={full_width} on:mouseenter={onMouseEnter} on:mouseleave={onMouseLeave}>
 	<div bind:this={activator_el} on:mouseenter={onMouseEnter} on:click={onToggle}
-	     class="inline-block activator cursor-pointer flex items-center {activator_style} {active ? activator_active_style : ''}">
+	     class="activator cursor-pointer inline-flex items-center {activator_style} {active ? activator_active_style : ''}">
 		<slot name="activator"/>
 		{#if caveat_visible}
 			<svg viewBox="0 0 36.001 36" class:rotate-180={active}
