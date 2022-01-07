@@ -25,7 +25,7 @@ export const eventContent = (arg) => {
 	wrapper_el.appendChild(time_el)
 
 
-	let is_before = dayjs(arg.event.start).isBefore(dayjs())
+	let is_before = dayjs(arg.event.end).isBefore(dayjs())
 
 	if (is_classroom) {
 		let code_el = document.createElement('div')

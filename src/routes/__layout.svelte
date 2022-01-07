@@ -35,7 +35,7 @@
 	})
 </script>
 
-{#if $session.user_info && !$page.path.startsWith('/zoom')}
+{#if $session.user_info && !($page.path.startsWith('/zoom') || $page.path.startsWith('/item'))}
 	<TopBar/>
 {/if}
 

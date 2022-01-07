@@ -3,12 +3,19 @@
 	export let zoom_list
 	import dayjs from "dayjs";
 	import utc from "dayjs/plugin/utc.js";
+	import {getContext} from 'svelte'
+	const {open, closeModal} = getContext('simple-modal')
+	import PdfReaderDialog from '../../components/item/item-pdf-reader/pdf-reader-dialog.svelte'
+	import {tooltip} from "$lib/aciton/tooltip.js";
+
 	dayjs.extend(utc)
 	const isPast = (zoom) => {
 		return dayjs.utc(zoom.start_date).local().isBefore(dayjs())
 	}
 	const onPreview = (d) => {
-		console.log('cliff: ', d)
+		open(PdfReaderDialog, {
+			item_id: d.item_id
+		})
 	}
 </script>
 
@@ -26,8 +33,12 @@
 			<div>
 				{#if zoom.days.length}
 					{#each zoom.days as d}
-						<div on:click={() => {onPreview(d)}} class="cursor-pointer hover:text-blue-700 hover:bg-gray-200 flex items-center mb-1 group rounded">
-							<p class="leading-tight">{d.title}</p>
+						<div class="flex">
+							<a use:tooltip={'Click to preview'}
+							   href="/item/{d.item_id}"
+							   class="cursor-pointer hover:text-blue-700 leading-tight">
+								{d.title}
+							</a>
 							<div class="ml-2">
 								{#if isPast(zoom)}
 									<RateLabel rate={d.t_difficulty_rate}/>

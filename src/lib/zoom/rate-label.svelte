@@ -1,5 +1,9 @@
 <script>
 	import Icon from '$lib/ui/icon.svelte'
+	import Dropdown from '$lib/ui/dropdown3.svelte'
+	import RateZoom from '$lib/live/rate-zoom.svelte'
+	export let student_id = undefined
+	export let item_id = undefined
 
 	export let rate
 
@@ -21,12 +25,18 @@
 </script>
 
 {#if rate}
-	<div class="whitespace-nowrap inline-flex items-center border border-gray-300 px-1 rounded-sm text-xs {color_map[rate]}">
+	<div class="bg-white whitespace-nowrap inline-flex items-center border border-gray-300 px-1 rounded-sm text-xs {color_map[rate]}">
 		{#if rate == 3}<Icon name="tick" className="w-3 fill-current mr-1"/>{/if}
 		<p>{label_map[rate]}</p>
 	</div>
 {:else}
-	<div class="whitespace-nowrap border border-gray-300 px-1 rounded-sm text-gray-400 text-xs bg-gray-200">
-		No rating
-	</div>
+	<Dropdown activator_style="whitespace-nowrap border border-gray-300 px-1 rounded-sm text-gray-400 text-xs bg-gray-200">
+		<div slot="activator">
+			<div class="flex items-center">
+				<div class="w-1.5 h-1.5 bg-red-500 rounded"></div>
+				<p class="ml-1">No rating</p>
+			</div>
+		</div>
+		<RateZoom {student_id} {item_id}/>
+	</Dropdown>
 {/if}

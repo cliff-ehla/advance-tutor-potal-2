@@ -6,12 +6,15 @@
 	export let zoom
 	const {open} = getContext('simple-modal')
 	import PdfReaderDialog from '../../components/item/item-pdf-reader/pdf-reader-dialog.svelte'
+	import RateLabel from '$lib/zoom/rate-label.svelte'
 	import isToday from "dayjs/plugin/isToday.js";
 	dayjs.extend(isToday)
 	import CoursePreviewPopup from '$lib/zoom/course-preview-popup.svelte'
 	import Dropdown from '$lib/ui/dropdown3.svelte'
-
 	$: is_today = dayjs(zoom.start_date).isToday()
+	$: is_ended = dayjs().isAfter(dayjs(zoom.end_date))
+	$: student_id = zoom.students[0].user_id
+	$: is_classroom = zoom.is_big_classroom
 
 	const previewMaterial = async (d) => {
 		open(PdfReaderDialog, {
@@ -23,12 +26,12 @@
 <div class="p-8 border border-gray-300 w-full bg-white shadow-lg rounded max-w-xl">
 	<div class="w-full">
 		<div class="text-blue-500 mb-1 text-lg">
-			{#if zoom.is_big_classroom}
+			{#if is_classroom}
 				<div class="text-purple-500">{zoom.sub_cat}</div>
 			{:else}
 				<div class="text-blue-500">
 					<Dropdown activator_style="inline-block" placement="right" caveat_visible>
-						<a slot="activator" href="/students/{zoom.students[0].user_id}/tutor-group/{zoom.tutor_group_id}">
+						<a slot="activator" href="/students/{student_id}/tutor-group/{zoom.tutor_group_id}">
 							{zoom.title.split('(')[0]}
 						</a>
 						<div class="">
@@ -45,8 +48,13 @@
 		<div class="my-4">
 			{#if zoom.days.length}
 				{#each zoom.days as d}
-					<div use:tooltip={'Preview material'} on:click={() => {previewMaterial(d)}} class="cursor-pointer hover:text-blue-700 hover:bg-gray-200 my-2 group px-4 py-3 bg-gray-100 shadow rounded border-gray-300 border">
-						<p class="leading-tight">{d.title}</p>
+					<div on:click={() => {previewMaterial(d)}} class="cursor-pointer hover:text-blue-700 hover:bg-gray-200 my-2 group px-4 py-3 bg-gray-100 shadow rounded border-gray-300 border relative">
+						<p use:tooltip={'Preview material'} class="leading-tight">{d.title}</p>
+						{#if is_ended && !is_classroom}
+							<div class="ml-4 absolute -top-3 -right-4">
+								<RateLabel {student_id} item_id={d.item_id} rate={d.t_difficulty_rate}/>
+							</div>
+						{/if}
 					</div>
 				{/each}
 			{:else}
@@ -55,7 +63,7 @@
 				</div>
 			{/if}
 		</div>
-		{#if zoom.is_big_classroom}
+		{#if is_classroom}
 			{#each zoom.students as s}
 				<div class="inline-flex items-center mr-2 bg-blue-200 rounded-full mt-1">
 					<div class="w-6 h-6 rounded-full mr-1 cc text-xs bg-blue-500 text-white">{s.level.charAt(0).toUpperCase() + s.level.slice(1)}</div>
