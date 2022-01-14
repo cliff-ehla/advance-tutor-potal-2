@@ -39,9 +39,8 @@
 					</p>
 				</div>
 			</div>
-			<div class="bg-white shadow-lg py-4 rounded border border-gray-300">
+			<div class="dropdown">
 				<a href="/logout" class="item">Logout</a>
-
 			</div>
 		</Dropdown>
 	</div>

@@ -44,8 +44,7 @@
 	import RejectDialog from './_reject-dialog.svelte'
 	import {onMount, getContext} from 'svelte'
 	import {left_bar_visible} from "../../../../../store";
-
-	const {showNotification} = getContext('notification')
+	import {notifications} from "$lib/store/notification.js";
 	const {open} = getContext('simple-modal')
 	const {page} = stores()
 	$: tutor_group = $tutor_group_store.tutor_group[$page.params.tutor_group_id] || {}
@@ -95,7 +94,7 @@
 		}, overall_msg, window.fetch)
 		await submitComments(writing_id, comments)
 		loading = false
-		showNotification('Your marking is updated')
+		notifications.success('Your marking is updated')
 		history.back()
 	}
 

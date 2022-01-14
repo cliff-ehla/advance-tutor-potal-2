@@ -22,7 +22,7 @@
 	import {navigating} from "$app/stores";
 	import '../styles/tailwind-output.css';
 	import {onMount} from 'svelte'
-	import Notification from '../components/app-shelf/notification.svelte'
+	import Toast from '$lib/app-shelf/toast.svelte'
 	import Modal from '../components/app-shelf/modal.svelte'
 	import Popup from '../components/app-shelf/popup.svelte'
 	import Popper from '../components/app-shelf/popper.svelte'
@@ -49,15 +49,13 @@
 		<LoadingBar/>
 	</div>
 {/if}
-
-<Notification>
-	<Modal>
-		<Popup>
-			<Popper>
-				<main class="transition transition-all">
-					<slot></slot>
-				</main>
-			</Popper>
-		</Popup>
-	</Modal>
-</Notification>
+<Toast/>
+<Modal>
+	<Popup>
+		<Popper>
+			<main class="transition transition-all">
+				<slot></slot>
+			</main>
+		</Popper>
+	</Popup>
+</Modal>

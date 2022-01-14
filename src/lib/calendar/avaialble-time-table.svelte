@@ -9,7 +9,7 @@
 	import utc from "dayjs/plugin/utc.js";
 	import EventMenu from './event-menu.svelte'
 	const {showPopper} = getContext('popper')
-	const {showNotification} = getContext('notification')
+	import {notifications} from "$lib/store/notification.js";
 
 	export let timeslot_id
 	export let start_day
@@ -51,14 +51,14 @@
 					end: e.end
 				}
 				calendar.addEventSource([new_event])
-				showNotification('Time session added')
+				notifications.success('Time session added')
 				save()
 			},
 			eventClick: ({event, el}) => {
 				showPopper(el, EventMenu, {
 					onDelete: () => {
 						event.remove()
-						showNotification('Time session removed')
+						notifications.success(('Time session removed')
 						save()
 					}
 				}, {
@@ -67,11 +67,11 @@
 			},
 			eventDragStop: e => {
 				save()
-				showNotification('Time session Edited')
+				notifications.success(('Time session Edited')
 			},
 			eventResizeStop: e => {
 				save()
-				showNotification('Time session Edited')
+				notifications.success(('Time session Edited')
 			},
 			dayHeaderContent: (date) => {
 				let div = document.createElement('div')
