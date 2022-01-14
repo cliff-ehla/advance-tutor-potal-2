@@ -106,4 +106,6 @@
 	<svg viewBox="0 0 36 36" class="fill-current {className}"><path d="M0 5v27h36V5H0zm11 24H3V11h8v18zm11 0h-8V11h8v18zm11 0h-8V11h8v18z"></path></svg>
 {:else if name === 'month'}
 	<svg viewBox="0 0 36 36" class="fill-current {className}"><path d="M31.5 0H36v36H0V0H31.5zM2.7 32.822h30.6V8.47H2.7v24.352z"></path><path d="M4.503 10.588h5.4v5.294h-5.4zM4 25v6h6v-6H4zm5 5H5v-4h4v4zM11 25v6h6v-6h-6zm5 5h-4v-4h4v4zM4 18v6h6v-6H4zm5 5H5v-4h4v4zM18 25v6h6v-6h-6zm5 5h-4v-4h4v4zM25 25v6h6v-6h-6zm5 5h-4v-4h4v4zM11 18v6h6v-6h-6zm5 5h-4v-4h4v4zM18 18v6h6v-6h-6zm5 5h-4v-4h4v4zM25 18v6h6v-6h-6zm5 5h-4v-4h4v4zM11 11v6h6v-6h-6zm5 5h-4v-4h4v4zM18 11v6h6v-6h-6zm5 5h-4v-4h4v4zM25 11v6h6v-6h-6zm5 5h-4v-4h4v4z"></path></svg>
+{:else if name === 'star'}
+	<svg viewBox="0 0 36 36" class="fill-current {className}"><path d="M36 13.958l-12.924-1.14L18 .883l-5.076 11.933L0 13.96l9.784 8.518-2.91 12.642L18 28.448l11.126 6.672-2.91-12.643L36 13.957zm-8.85 18.44l-8.474-5.08L18 26.91l-.68.406-8.47 5.08 2.216-9.627.178-.77-.595-.52-7.45-6.485 9.84-.87.788-.067.308-.726L18 4.245l3.866 9.087.31.726.787.07 9.84.87-7.45 6.484-.595.52.178.77L27.15 32.4z"></path></svg>
 {/if}

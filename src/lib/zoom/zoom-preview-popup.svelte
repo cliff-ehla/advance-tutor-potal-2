@@ -13,7 +13,7 @@
 	import Dropdown from '$lib/ui/dropdown3.svelte'
 	$: is_today = dayjs(zoom.start_date).isToday()
 	$: is_ended = dayjs().isAfter(dayjs(zoom.end_date))
-	$: student_id = zoom.students[0].user_id
+	$: student_id = zoom.students.length ? zoom.students[0].user_id : undefined
 	$: is_classroom = zoom.is_big_classroom
 
 	const previewMaterial = async (d) => {

@@ -23,14 +23,15 @@
 		else hide()
 	}
 
-	const hide = () => {
+	export const hide = () => {
 		if (!popup_el) return
 		popup_el.classList.add('hidden')
 		active = false
 	}
 
-	const show = () => {
+	export const show = () => {
 		if (!popup_el) return
+		console.log('show')
 		popup_el.classList.remove('hidden')
 		popper_instance.update()
 		active = true
