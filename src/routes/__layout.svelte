@@ -27,11 +27,14 @@
 	import TopBar from '$lib/app-shelf/top-bar.svelte'
 	import {session} from '$app/stores'
 	import {page} from "$app/stores";
+	import {http} from "$lib/http.js";
 
 	export let user_info
 
-	onMount(() => {
+	onMount(async () => {
 		sentry.init()
+		let r = await http.post(fetch, '/tutorApi/list_zoom_status_in_tutor_group')
+		console.log('cliff: ', r)
 	})
 </script>
 
