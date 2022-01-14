@@ -3,7 +3,7 @@
 	import {goto} from '$app/navigation'
 	import {getStores} from "$app/stores";
 	import {sentry} from "$lib/sentry";
-	// import {user_info} from "$lib/store/user_info.js";
+	import {user_info} from "$lib/store/user_info.js";
 
 	let env = import.meta.env.VITE_ENV
 	const {session} = getStores()
@@ -27,10 +27,10 @@
 					nickname: data.nickname
 				}
 			})
-			// user_info.set({
-			// 	username: data.username,
-			// 	nickname: data.nickname
-			// })
+			user_info.set({
+				username: data.username,
+				nickname: data.nickname
+			})
 			sentry.setUser({
 				username: data.username,
 				nickname: data.nickname
