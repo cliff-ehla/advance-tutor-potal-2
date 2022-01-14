@@ -22,7 +22,7 @@
 <div>
 {#each zoom_list as zoom, i}
 	<div class="flex relative pb-2">
-		<div class="z-10 w-4 h-4 border border-green-500 rounded-full {!isPast(zoom) ? 'bg-white' : 'bg-green-500'}"></div>
+		<div class="z-10 flex-shrink-0 w-4 h-4 border border-green-500 rounded-full {!isPast(zoom) ? 'bg-white' : 'bg-green-500'}"></div>
 		{#if i < zoom_list.length - 1}
 			<div class="transform -translate-x-1/2 absolute w-0.5 bg-green-500 inset-y-0 ml-2 top-0 h-full"></div>
 		{/if}

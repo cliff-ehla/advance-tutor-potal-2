@@ -1,7 +1,8 @@
 <script context="module">
 	import {zoom_store} from "$lib/store/zoom.js";
 
-	export const load = async ({session, fetch, stuff}) => {
+	export const load = async ({session, page, fetch, stuff}) => {
+		if (page.query.get('reload')) {}
 		if (!session.user_info) {
 			return {
 				status: 302,

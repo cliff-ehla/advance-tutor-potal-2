@@ -1,6 +1,9 @@
 <script>
 	import {http} from "$lib/http.js";
 	import {is_loading} from "$lib/store/is_loading";
+	import {triggerReload} from "$lib/helper/trigger-reload.js";
+	import {tooltip} from "$lib/aciton/tooltip.js";
+
 	export let onRateSuccess = () => {}
 	export let t_difficulty_rate = undefined
 	export let student_id
@@ -16,7 +19,6 @@
 
 	const onRate = async (value, e) => {
 		if ($is_loading) return
-		e.stopPropagation()
 		await http.post(fetch, '/zoomApi/set_zoom_material_rating', {
 			student_id,
 			item_id,
@@ -24,6 +26,7 @@
 		}, {
 			notification: `You rated: ${map[value]}`
 		})
+		triggerReload()
 		onRateSuccess(value)
 	}
 </script>
@@ -33,7 +36,7 @@
 	<div class="flex font-bold justify-center">
 		{#each [1,2,3,4,5] as opt}
 			<div class="mx-2 w-8 text-center">
-				<button on:click={(e) => {onRate(opt, e)}}
+				<button use:tooltip={map[opt]} on:click={(e) => {onRate(opt, e)}}
 				        class="{t_difficulty_rate === opt ? 'opacity-100' : 'opacity-70'} relative w-8 h-8 rounded-full flex items-center justify-center bg-white mb-1 hover:opacity-100">
 					{opt}
 					{#if t_difficulty_rate === opt}
