@@ -40,7 +40,7 @@
 				</div>
 			</div>
 			<div class="bg-white shadow-lg py-4 rounded border border-gray-300">
-				<div class="h-0.5 bg-gray-200 my-1 mx-4"></div>
+				<a href="/logout" class="item">Logout</a>
 
 			</div>
 		</Dropdown>
