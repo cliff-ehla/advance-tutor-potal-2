@@ -2,6 +2,7 @@
 	import {course_store} from "$lib/store/course.js";
 
 	export const load = async ({page, fetch}) => {
+		if (page.query.get('reload')) {}
 		await course_store.fetchZoomList(fetch, {
 			tutor_group_id: page.params.tutor_group_id
 		})

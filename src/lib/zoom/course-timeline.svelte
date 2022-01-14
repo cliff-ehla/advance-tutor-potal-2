@@ -7,6 +7,7 @@
 	const {open, closeModal} = getContext('simple-modal')
 	import PdfReaderDialog from '../../components/item/item-pdf-reader/pdf-reader-dialog.svelte'
 	import {tooltip} from "$lib/aciton/tooltip.js";
+	import {page} from "$app/stores";
 
 	dayjs.extend(utc)
 	const isPast = (zoom) => {
@@ -41,7 +42,7 @@
 							</a>
 							<div class="ml-2">
 								{#if isPast(zoom)}
-									<RateLabel rate={d.t_difficulty_rate}/>
+									<RateLabel student_id={$page.params.student_id} item_id={d.item_id} rate={d.t_difficulty_rate}/>
 								{/if}
 							</div>
 						</div>
