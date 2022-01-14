@@ -65,7 +65,11 @@
 		<Icon name="right" className="transform rotate-180 w-4"/>
 	</button>
 	{#each items as item}
-		<p>{item.title}</p>
+		<button class:text-blue-500={item.item_id === selected_item_id}
+		   on:click={() => {selected_item_id = item.item_id}}
+		   class="px-2 py-1 cursor-pointer rounded bg-gray-100 hover:bg-gray-200 border border-gray-300 mx-1">
+			{item.title}
+		</button>
 	{/each}
 </div>
 
