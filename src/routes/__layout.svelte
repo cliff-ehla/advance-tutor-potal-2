@@ -8,11 +8,7 @@
 		if (!get(org_store).id) {
 			await getUserOrgData(fetch)
 		}
-		return {
-			props: {
-				user_info: session.user_info
-			}
-		}
+		return true
 	}
 </script>
 
@@ -30,8 +26,6 @@
 	import {session} from '$app/stores'
 	import {page} from "$app/stores";
 	import {http} from "$lib/http.js";
-
-	export let user_info
 
 	onMount(async () => {
 		sentry.init()

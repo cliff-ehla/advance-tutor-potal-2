@@ -18,7 +18,6 @@
 		getAlertMessage()
 	})
 
-
 	const getAlertMessage = async () => {
 		const {data} = await http.get(fetch, '/messageApi/list_class_alert_message')
 		alert_message_options = data
