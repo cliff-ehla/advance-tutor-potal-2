@@ -5,11 +5,11 @@
 	import {getContext} from 'svelte'
 	import {page} from "$app/stores"
 	import {eventContent} from "$lib/calendar/event-content.js";
-
 	const {showPopper, closePopper} = getContext('popper')
 
+	$: slug = $page.params.view
+	$: calendar_view = slug === 'month' ? 'dayGridMonth' : 'timeGridWeek'
 	let calendar
-
 	const SOURCE_ID = 'id'
 
 	$: {
@@ -26,6 +26,12 @@
 		}
 	}
 
+	$: {
+		if (calendar_view && browser && calendar) {
+			calendar.changeView(calendar_view)
+		}
+	}
+
 	const init = (node) => {
 		calendar = new FullCalendar.Calendar(node, {
 			eventSources: [
@@ -37,7 +43,7 @@
 			eventContent,
 			height: 'calc(100vh - 120px)',
 			headerToolbar: false,
-			initialView: 'dayGridMonth',
+			initialView: calendar_view,
 			eventClick: ({event, el}) => {
 				let zoom = event.extendedProps
 				showPopper(el, ZoomPreviewPopup, {
@@ -45,7 +51,9 @@
 				}, {
 					placement: 'right'
 				})
-			}
+			},
+			allDaySlot: false,
+			scrollTimeReset: false,
 		})
 		calendar.render()
 	}

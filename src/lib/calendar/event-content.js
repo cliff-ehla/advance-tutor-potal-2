@@ -15,7 +15,6 @@ export const eventContent = (arg) => {
 	const is_cancel = zoom.is_cancel
 	const rated = zoom.t_difficulty_rate_has_rate
 
-
 	let wrapper_el = document.createElement('div')
 	wrapper_el.classList.add('flex', 'items-center', 'cursor-pointer', 'overflow-hidden', 'rounded-sm', 'w-full')
 	if (is_cancel) {
@@ -30,9 +29,9 @@ export const eventContent = (arg) => {
 	if (is_classroom) {
 		let code_el = document.createElement('div')
 		code_el.innerHTML = zoom.description_code_short_id
-		code_el.classList.add('overflow-hidden', 'px-1', 'text-xs', 'bg-gray-300', 'ml-auto', 'text-xs')
+		code_el.classList.add('overflow-hidden', 'px-0.5', 'text-xs', 'bg-gray-700', 'text-white', 'ml-auto', 'leading-tight')
 		let size_el = document.createElement('div')
-		size_el.classList.add('bg-purple-500', 'text-white', 'px-1' , 'leading-tight', 'text-xs', 'ml-1')
+		size_el.classList.add('bg-purple-500', 'text-white', 'px-0.5' , 'leading-tight', 'text-xs', 'ml-0.5')
 		size_el.innerHTML = `${zoom.reg_user_cnt}/${zoom.student_size}`
 		wrapper_el.append(code_el)
 		wrapper_el.append(size_el)
@@ -43,7 +42,7 @@ export const eventContent = (arg) => {
 		} else {
 			title_el.innerHTML = arg.event.title || '(no title)'
 		}
-		title_el.classList.add('text-xs')
+		title_el.classList.add('text-xs', 'whitespace-nowrap')
 		wrapper_el.appendChild(title_el)
 		if (!rated && is_before && !is_cancel) {
 			let rate_el = document.createElement('span')
