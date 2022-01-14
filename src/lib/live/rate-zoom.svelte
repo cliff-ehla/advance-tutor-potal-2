@@ -28,13 +28,13 @@
 	}
 </script>
 
-<div class="bg-green-500 px-4 py-2 text-center">
+<div class="rounded-lg shadow-lg bg-green-500 px-4 py-2 text-center">
 	<p class="text-center mb-2 text-white border-b border-white border-opacity-50 inline-block text-sm">Does the material fit for the level of the student?</p>
 	<div class="flex font-bold justify-center">
 		{#each [1,2,3,4,5] as opt}
 			<div class="mx-2 w-8 text-center">
 				<button on:click={(e) => {onRate(opt, e)}}
-				        class="{t_difficulty_rate === opt ? 'opacity-100' : 'opacity-80'} relative w-8 h-8 rounded-full flex items-center justify-center bg-white mb-1 hover:opacity-100">
+				        class="{t_difficulty_rate === opt ? 'opacity-100' : 'opacity-70'} relative w-8 h-8 rounded-full flex items-center justify-center bg-white mb-1 hover:opacity-100">
 					{opt}
 					{#if t_difficulty_rate === opt}
 						<span class="w-10 h-10 border-2 border-white absolute -inset-1 rounded-full"></span>

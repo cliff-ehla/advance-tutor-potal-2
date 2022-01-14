@@ -8,7 +8,7 @@
 				redirect: '/login'
 			}
 		}
-		await zoom_store.callIfNoCache(fetch)
+		await zoom_store.cacheFirst(fetch)
 		return true
 	}
 </script>

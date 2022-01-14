@@ -51,10 +51,15 @@ const create_store = () => {
 			time_zone: time_zone_options.find(opt => opt.tz === $time_zone)
 		}
 	})
-	const callIfNoCache = async (fetch) => {
-		if (get(store).length) {
-			return console.log('cached')
+	const cacheFirst = async (fetch) => {
+		const cache = get(store)
+		if (cache.length) {
+			fetchData(fetch)
+		} else {
+			await fetchData(fetch)
 		}
+	}
+	const fetchData = async (fetch) => {
 		let start_time = dayjs().subtract(8, 'month').format('YYYY-MM-DD HH:mm:ss')
 		let end_time = dayjs().add(3, 'month').format('YYYY-MM-DD HH:mm:ss')
 		const {data, success} = await http.post(fetch, '/zoomApi/zoom_list_all', {
@@ -86,7 +91,7 @@ const create_store = () => {
 	}
 	return {
 		subscribe: _store.subscribe,
-		callIfNoCache,
+		cacheFirst,
 		setTimeZoom
 	}
 }
