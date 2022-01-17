@@ -17,7 +17,6 @@
 <script>
 	import StudentWidget from '../../components/item/item-pdf-reader/student-widget.svelte'
 	import StudentListWidget from '$lib/zoom/student-list-widget.svelte'
-	import MessageWidgetForGroup from '$lib/live/message-widget-for-group.svelte'
 	import {session} from '$app/stores'
 	import Icon from '$lib/ui/icon.svelte'
 	import Countdown from '$lib/live/countdown.svelte'
@@ -86,15 +85,12 @@
 	{/if}
 </div>
 
-<div class="fixed bottom-2 left-1/2 transform -translate-x-1/2 flex items-center">
+<div
+				class="fixed bottom-2 left-1/2 transform -translate-x-1/2 flex items-center flex-col">
 	<Countdown
 					{student_id}
 					item_id={selected_item_id}
 					start_date={start_date}
+					{tutor_group_id}
           end_date={end_date}/>
-	{#if !is_one_on_one}
-		<div class="-mt-0.5 ml-1">
-		<MessageWidgetForGroup {tutor_group_id}/>
-		</div>
-	{/if}
 </div>

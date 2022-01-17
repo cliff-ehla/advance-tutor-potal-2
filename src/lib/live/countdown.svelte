@@ -5,12 +5,14 @@
 	export let end_date
 	export let student_id
 	export let item_id
+	export let tutor_group_id
 	import duration from 'dayjs/plugin/duration'
 	dayjs.extend(duration)
 	import Dropdown from '$lib/ui/dropdown3.svelte'
 	import RateZoom from './rate-zoom.svelte'
 	import {tooltip} from "$lib/aciton/tooltip.js";
 	import Icon from "$lib/ui/icon.svelte"
+	import MessageWidgetForGroup from '$lib/live/message-widget-for-group.svelte'
 	let started = false
 	let ended = false
 	let hh, mm, ss
@@ -51,13 +53,18 @@
 </script>
 
 {#if !started}
+	{#if !is_one_on_one}
+		<div class="flex justify-end w-full">
+			<MessageWidgetForGroup {tutor_group_id}/>
+		</div>
+	{/if}
 	<div class:bg-yellow-500={started} class="text-center rounded-sm text-sm px-4 py-2 bg-gray-200">
 		<p class="text-gray-500">Lesson starts at</p>
 		<p style="font-size: 2em" class="leading-none font-bold text-gray-400">{dayjs(start_date).format('h:mma')}</p>
 		<p class="mono">Countdown: {hh}:{mm}:{ss}</p>
 	</div>
 {:else}
-	<div class="flex">
+	<div class="flex items-center">
 		<div class="{ended ? 'bg-red-500' : 'bg-yellow-500'} h-5 flex items-center text-center rounded-sm text-xs px-2 py-1 mono leading-none font-bold">
 			{#if ended}
 				Lesson ended
@@ -74,6 +81,11 @@
 				</div>
 				<RateZoom {student_id} {item_id}/>
 			</Dropdown>
+		{/if}
+		{#if !is_one_on_one}
+			<div class="ml-1">
+				<MessageWidgetForGroup secondary={started} {tutor_group_id}/>
+			</div>
 		{/if}
 	</div>
 {/if}
