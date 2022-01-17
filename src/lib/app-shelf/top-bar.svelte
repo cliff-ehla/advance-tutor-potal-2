@@ -3,6 +3,7 @@
 	import Icon from '$lib/ui/icon.svelte'
 	import {session} from '$app/stores'
 	import {page} from '$app/stores'
+	import MobileMenu from '$lib/app-shelf/mobile-menu.svelte'
 
 	let nav_items = [
 		{
@@ -16,7 +17,8 @@
 	]
 </script>
 
-<div class="h-16 items-center flex px-4 border-gray-300 border-b">
+<div class="h-16 items-center flex pr-4 border-gray-300 border-b">
+	<MobileMenu/>
 	<a href="/" class="inline-block mr-4">
 		<img src="/logo.png" alt="logo" class="w-10 mx-auto">
 	</a>
