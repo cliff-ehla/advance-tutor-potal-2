@@ -16,5 +16,5 @@
 </script>
 
 {#if pdf_json}
-	<Reader pages_info_2={pdf_json}/>
+	<Reader pages_info_2={pdf_json} top_offset={200}/>
 {/if}

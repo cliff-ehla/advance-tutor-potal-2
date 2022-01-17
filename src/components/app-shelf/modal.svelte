@@ -3,13 +3,14 @@
 <script>
 	import { setContext as baseSetContext } from 'svelte';
 	import { fade, fly } from 'svelte/transition';
+	import Icon from '../ui-elements/icon.svelte'
 
 	export let key = 'simple-modal';
 	export let closeButton = true;
-	export let closeOnEsc = true;
-	export let closeOnOuterClick = true;
+	export let closeOnEsc = false;
+	export let closeOnOuterClick = false;
 	export let closeOnAnyClick = false;
-	export let styleBg = { top: 0, left: 0, zIndex: 9999 };
+	export let styleBg = { top: 0, left: 0 };
 	export let styleWindow = {};
 	export let styleContent = {};
 	export let setContext = baseSetContext;
@@ -19,7 +20,7 @@
 	export let transitionWindowProps = { duration: 300, y: 100 };
 
 	const defaultState = {
-		closeButton,
+		closeButton: true,
 		closeOnEsc,
 		closeOnOuterClick,
 		closeOnAnyClick,
@@ -30,13 +31,14 @@
 		transitionBgProps,
 		transitionWindow,
 		transitionWindowProps,
+		overflow: 'auto'
 	};
 	let state = { ...defaultState };
 
 	let Component = null;
 	let props = null;
 
-	let background;
+	let background_el;
 	let wrap;
 
 	const camelCaseToDash = str => str
@@ -50,6 +52,10 @@
 	$: cssContent = toCssString(state.styleContent);
 	$: currentTransitionBg = state.transitionBg;
 	$: currentTransitionWindow = state.transitionWindow;
+	$: width = state.width || 'auto'
+	let padding = '1em'
+	let bg_class = 'bg-white'
+	let overflow = 'auto'
 
 	const toVoid = () => {};
 	let onOpen = toVoid;
@@ -66,6 +72,9 @@
 		Component = NewComponent;
 		props = newProps;
 		state = { ...defaultState, ...options };
+		padding = state.padding
+		bg_class = state.bg_class
+		overflow = state.overflow
 		onOpen = callback.onOpen || toVoid;
 		onClose = callback.onClose || toVoid;
 		onOpened = callback.onOpened || toVoid;
@@ -89,7 +98,7 @@
 	const handleOuterClick = (event) => {
 		if (
 				state.closeOnOuterClick && (
-						event.target === background || event.target === wrap
+						event.target === background_el || event.target === wrap
 				)
 		) {
 			event.preventDefault();
@@ -106,7 +115,8 @@
 
 	setContext(key, {
 		open: open ,
-		close: close
+		openModal: open ,
+		closeModal: close
 	});
 </script>
 
@@ -114,15 +124,15 @@
 
 {#if Component}
 	<div
-					class="fixed flex justify-center items-center w-full h-full bg-black bg-opacity-60"
+					class="fixed flex justify-center items-center w-full h-full bg-black bg-opacity-60 z-40"
 					on:click={handleOuterClick}
-					bind:this={background}
+					bind:this={background_el}
 					transition:currentTransitionBg={state.transitionBgProps}
 					style={cssBg}
 	>
 		<div class="relative m-8 max-h-full" bind:this={wrap}>
 			<div
-							class="relative max-w-full max-h-full m-8 rounded bg-white"
+							class="relative max-w-full max-h-full m-8 rounded {bg_class}"
 							transition:currentTransitionWindow={state.transitionWindowProps}
 							on:introstart={onOpen}
 							on:outrostart={onClose}
@@ -130,10 +140,10 @@
 							on:outroend={onClosed}
 							style={cssWindow}
 			>
-				<div class="relative px-8 py-4 overflow-auto" style="{cssContent}; max-height: calc(100vh - 4rem)">
+				<div class="relative overflow-auto" style="{cssContent}; width: {width}; padding: {padding}; overflow: {state.overflow}; max-height: calc(100vh - 4rem)">
 					{#if state.closeButton}
-						<button class="cc w-8 h-8 absolute -right-8 -top-8 fill-current rounded-full bg-white hover:bg-opacity-80" on:click={close}>
-							<svg class="w-4" width="24" height="24" viewBox="0 0 24 24"><path d="M23.3846 19.4714L4.57577 0.662593C3.75546 -0.157713 2.42554 -0.157713 1.60652 0.662593L0.615229 1.65234C-0.205076 2.4729 -0.205076 3.80283 0.615229 4.62185L19.4241 23.4307C20.2446 24.251 21.5746 24.251 22.3936 23.4307L23.3833 22.4409C24.2052 21.6219 24.2052 20.2917 23.3846 19.4714Z"/><path d="M19.424 0.6624L0.615228 19.4712C-0.205076 20.2915 -0.205076 21.6217 0.615228 22.4407L1.60498 23.4305C2.42554 24.2508 3.75546 24.2508 4.57448 23.4305L23.3846 4.62294C24.2051 3.80263 24.2051 2.47271 23.3846 1.65369L22.3948 0.663938C21.5745 -0.157905 20.2446 -0.157905 19.424 0.6624Z"/></svg>
+						<button class="z-50 flex w-10 h-10 absolute right-2 top-2 rounded-full bg-white items-center justify-center hover:bg-blue-500 hover:text-white" on:click={close}>
+							<Icon name="close" className="w-4"/>
 						</button>
 					{/if}
 					<svelte:component this={Component} {...props} />

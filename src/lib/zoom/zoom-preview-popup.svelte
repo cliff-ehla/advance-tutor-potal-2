@@ -19,6 +19,9 @@
 	const previewMaterial = async (d) => {
 		open(PdfReaderDialog, {
 			item_id: d.item_id
+		}, {
+			padding: 0,
+			bg_class: 'transparent'
 		})
 	}
 </script>
@@ -49,8 +52,8 @@
 			{#if zoom.days.length}
 				{#each zoom.days as d}
 					<div class="relative">
-						<div on:click={() => {previewMaterial(d)}} class="cursor-pointer hover:text-blue-700 hover:bg-gray-200 my-2 group px-4 py-3 bg-gray-100 shadow rounded border-gray-300 border">
-							<p use:tooltip={'Preview material'} class="leading-tight">{d.title}</p>
+						<div use:tooltip={'Preview material'} on:click={() => {previewMaterial(d)}} class="cursor-pointer hover:text-blue-700 hover:bg-gray-200 my-2 group px-4 py-3 bg-gray-100 shadow rounded border-gray-300 border">
+							<p class="leading-tight">{d.title}</p>
 						</div>
 						{#if is_ended && !is_classroom}
 							<div class="ml-4 absolute -top-3 -right-4">

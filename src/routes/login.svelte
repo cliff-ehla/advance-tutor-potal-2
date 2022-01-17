@@ -24,12 +24,14 @@
 			session.set({
 				user_info: {
 					username: data.username,
-					nickname: data.nickname
+					nickname: data.nickname,
+					profile_pic: data.avatar.filepath
 				}
 			})
 			user_info.set({
 				username: data.username,
-				nickname: data.nickname
+				nickname: data.nickname,
+				profile_pic: data.avatar.filepath
 			})
 			sentry.setUser({
 				username: data.username,
