@@ -21,7 +21,8 @@
 			item_id: d.item_id
 		}, {
 			padding: 0,
-			bg_class: 'transparent'
+			bg_class: 'transparent',
+			width: '100%'
 		})
 	}
 </script>

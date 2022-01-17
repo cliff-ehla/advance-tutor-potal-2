@@ -30,7 +30,7 @@
 	onMount(async () => {
 		sentry.init()
 		let r = await http.post(fetch, '/tutorApi/list_zoom_status_in_tutor_group')
-		console.log('cliff: ', r)
+		console.log('cliff 2: ', r)
 	})
 </script>
 
