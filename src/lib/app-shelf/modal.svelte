@@ -3,7 +3,7 @@
 <script>
 	import { setContext as baseSetContext } from 'svelte';
 	import { fade, fly } from 'svelte/transition';
-	import Icon from '../ui-elements/icon.svelte'
+	import Icon from '$lib/ui/icon.svelte'
 
 	export let key = 'simple-modal';
 	export let closeButton = true;

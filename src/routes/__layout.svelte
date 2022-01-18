@@ -13,9 +13,9 @@
 	import '../styles/tailwind-output.css';
 	import {onMount} from 'svelte'
 	import Toast from '$lib/app-shelf/toast.svelte'
-	import Modal from '../components/app-shelf/modal.svelte'
-	import Popup from '../components/app-shelf/popup.svelte'
-	import Popper from '../components/app-shelf/popper.svelte'
+	import Modal from '$lib/app-shelf/modal.svelte'
+	import Popup from '$lib/app-shelf/popup.svelte'
+	import Popper from '$lib/app-shelf/popper.svelte'
 	import TopBar from '$lib/app-shelf/top-bar.svelte'
 	import {session} from '$app/stores'
 	import {page} from "$app/stores";

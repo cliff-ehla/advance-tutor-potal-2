@@ -17,7 +17,7 @@
 	import {slugToText} from "../../utils/slug-to-text";
 	import dayjs from "dayjs";
 	export let courses
-	console.log(courses)
+
 </script>
 
 <div class="p-6">
