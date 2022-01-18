@@ -1,13 +1,7 @@
 <script context="module">
-	import {org_store} from "../store";
-	import {get} from 'svelte/store'
-	import {getUserOrgData} from "../api/tutor-api";
 	import {user_info} from "$lib/store/user_info.js";
 	export const load = async ({fetch, session}) => {
 		user_info.set(session.user_info)
-		if (!get(org_store).id) {
-			await getUserOrgData(fetch)
-		}
 		return true
 	}
 </script>
@@ -25,12 +19,9 @@
 	import TopBar from '$lib/app-shelf/top-bar.svelte'
 	import {session} from '$app/stores'
 	import {page} from "$app/stores";
-	import {http} from "$lib/http.js";
 
 	onMount(async () => {
 		sentry.init()
-		let r = await http.post(fetch, '/tutorApi/list_zoom_status_in_tutor_group')
-		console.log('cliff 2: ', r)
 	})
 </script>
 

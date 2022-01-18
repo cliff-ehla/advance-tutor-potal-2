@@ -1,12 +1,33 @@
+<script context="module">
+	import {http, onFail} from "$lib/http";
+
+	export const load = async ({page, fetch}) => {
+		const {data, success, debug} = await http.post(fetch, '/tutorApi/list_fans_detail', {
+			student_id: page.params.student_id
+		})
+		if (!success) return onFail(debug)
+		return {
+			props: {
+				detail: data
+			}
+		}
+	}
+</script>
+
 <script>
 	import {tutor_group_store} from "../../../store";
 	import {page, session} from '$app/stores'
 	import NoteWidget from '../../../components/message/note-widget.svelte'
 	import {capitalize} from "$lib/helper/capitalize.js";
 
+	export let detail // TODO gender/ nickname/ level/ courses []/ upcoming_zoom_list []/ completed_zoom_list []/ last_lesson_date
+
 	const student_id = $page.params.student_id
 	$: student = $tutor_group_store ? tutor_group_store.getOOO(student_id) : null
 	$: tutor_group_id = $page.params.tutor_group_id
+	$:{
+		console.log(student, $tutor_group_store, student_id)
+	}
 </script>
 
 <div class="absolute">

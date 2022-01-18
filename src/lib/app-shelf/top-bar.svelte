@@ -3,7 +3,6 @@
 	import Icon from '$lib/ui/icon.svelte'
 	import {session} from '$app/stores'
 	import {page} from '$app/stores'
-	import MobileMenu from '$lib/app-shelf/mobile-menu.svelte'
 
 	let nav_items = [
 		{
@@ -13,33 +12,38 @@
 		{
 			href: '/course',
 			title: 'Course'
+		},
+		{
+			href: '/students',
+			title: 'Student'
 		}
 	]
 </script>
 
-<div class="h-16 items-center flex pr-4 border-gray-300 border-b">
-	<MobileMenu/>
-	<a href="/" class="inline-block mr-4">
-		<img src="/logo.png" alt="logo" class="w-10 mx-auto">
+<div class="h-14 items-center flex border-gray-300 border-b px-4 relative">
+	<a href="/" class="inline-flex items-center ml-1">
+		<img src="/logo.png" alt="logo" class="w-8 mx-auto">
+		<p class="ml-2 text-lg font-light leading-none mt-0.5 text-gray-500">EHLA</p>
 	</a>
-	{#each nav_items as item}
-		<a class="p-2" class:font-bold={$page.path.includes(item.href)} href={item.href}>{item.title}</a>
-	{/each}
+	<div class="flex items-center justify-center ml-6">
+		{#each nav_items as item}
+			<a class="relative h-14 flex items-center p-2 mx-1 font-light" class:text-blue-500={$page.path.includes(item.href)} href={item.href}>
+				{item.title}
+				{#if $page.path.includes(item.href)}
+					<span class="absolute block h-1 bg-blue-400 inset-x-0 bottom-0 rounded-full"></span>
+				{/if}
+			</a>
+		{/each}
+	</div>
 	<div class="ml-auto mr-2">
 		<button class="w-10 h-10 cc rounded-full hover:bg-gray-100 hover:text-blue-500">
-			<Icon className="w-5 text-gray-500 hover:text-current" name="bell"/>
+			<Icon className="w-4 text-gray-500 hover:text-current" name="bell"/>
 		</button>
 	</div>
 	<div>
 		<Dropdown placement="bottom-end">
 			<div slot="activator" class="inline-flex items-center">
-				<div class="rounded-full w-10 h-10 bg-cover bg-center" style="background-image: url({$session.user_info.profile_pic})"></div>
-				<div class="ml-2 leading-none">
-					<p class="text-xs text-gray-500">Teacher</p>
-					<p class="max-w-xs text-sm text-gray-700 whitespace-nowrap overflow-hidden overflow-ellipsis">
-						{$session.user_info.nickname}
-					</p>
-				</div>
+				<div class="rounded-full w-8 h-8 bg-cover bg-center" style="background-image: url({$session.user_info.profile_pic})"></div>
 			</div>
 			<div class="dropdown">
 				<a href="/logout" class="item">Logout</a>

@@ -36,13 +36,13 @@
 		<a href="/schedule/{dayjs().format('YYYY-MM-DD')}/{slug}" class="calendar-button">Today</a>
 		<div class="flex mx-2">
 			<a href="/schedule/{dayjs(date_key).subtract(1,slug).format('YYYY-MM-DD')}/{slug}" class="block cc w-8 h-8 rounded-full hover:bg-gray-200 transition-colors">
-				<Icon name="right" className="w-4 transform rotate-180"/>
+				<Icon name="right" className="w-3 transform rotate-180"/>
 			</a>
 			<a href="/schedule/{dayjs(date_key).add(1,slug).format('YYYY-MM-DD')}/{slug}" class="block cc w-8 h-8 rounded-full hover:bg-gray-200 transition-colors">
-				<Icon name="right" className="w-4"/>
+				<Icon name="right" className="w-3"/>
 			</a>
 		</div>
-		<div class="text-t2 flex items-center">
+		<div class="text-xl flex items-center">
 			{#if slug === 'week'}
 				<p>{start_of_week.format('DD MMM')} - {end_of_week.format('DD MMM YYYY')}</p>
 			{:else if slug === 'month' || slug === 'list'}
@@ -67,41 +67,7 @@
 	</div>
 </div>
 
-<div class="flex">
-	<div class="top-10 sticky w-56 border-gray-300 border-r overflow-y-scroll flex-shrink-0" style="max-height: calc(100vh - 3em)">
-<!--		<div class="h-64 px-3 py-3 border-b border-gray-300">-->
-<!--			<DatePicker on:input={onDateChange}/>-->
-<!--		</div>-->
-		{#if course_list}
-			<p class="uppercase text-xs mb-2 text-black font-bold px-4 pt-4">1-on-1 Courses</p>
-			{#each course_list as course}
-				<a href="/students/{course.student_id}/tutor-group/{course.tutor_group_id}" class="block cursor-pointer py-0.5 px-2.5 hover:bg-gray-200 rounded my-1 mx-2">
-					<div class="flex items-center">
-						<p class="text-sm relative leading-tight">
-							{course.student_name}
-							{#if course.unread_message_cnt}
-								<span class="w-2 h-2 bg-red-500 rounded-full absolute -left-2 top-0"></span>
-							{/if}
-						</p>
-						<div class="ml-auto flex items-center text-xs">
-
-<!--							<Icon name="bell" className="w-3 text-gray-300"/>-->
-<!--							<Icon name="chat" className="w-4 text-gray-300"/>-->
-						</div>
-					</div>
-					<div class="text-xs text-gray-400 flex">
-						<p class="text-xs text-gray-400 leading-tight">{course.title.split('(')[0]}</p>
-						<p class="ml-auto">{course.completion_cnt}/{course.total_lesson_cnt}</p>
-					</div>
-				</a>
-			{/each}
-		{/if}
-	</div>
-
-	<div class="w-full">
-		<slot/>
-	</div>
-</div>
+<slot/>
 
 <style>
 	.active {
