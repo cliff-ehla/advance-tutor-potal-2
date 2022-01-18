@@ -5,7 +5,7 @@
 	import utc from "dayjs/plugin/utc.js";
 	import {getContext} from 'svelte'
 	const {open, closeModal} = getContext('simple-modal')
-	import PdfReaderDialog from '../../components/item/item-pdf-reader/pdf-reader-dialog.svelte'
+	import PdfReaderDialog from '$lib/pdf-reader/pdf-reader-dialog.svelte'
 	import {tooltip} from "$lib/aciton/tooltip.js";
 	import {page} from "$app/stores";
 

@@ -5,7 +5,7 @@
 	import {tooltip} from "$lib/aciton/tooltip.js";
 	export let zoom
 	const {open} = getContext('simple-modal')
-	import PdfReaderDialog from '../../components/item/item-pdf-reader/pdf-reader-dialog.svelte'
+	import PdfReaderDialog from '$lib/pdf-reader/pdf-reader-dialog.svelte'
 	import RateLabel from '$lib/zoom/rate-label.svelte'
 	import isToday from "dayjs/plugin/isToday.js";
 	dayjs.extend(isToday)

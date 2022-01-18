@@ -15,7 +15,7 @@
 </script>
 
 <script>
-	import PdfReader from '../../components/item/item-pdf-reader/index.svelte'
+	import PdfReader from '$lib/pdf-reader/index.svelte'
 	export let pdf_json
 	console.log('cliff: ', pdf_json)
 </script>

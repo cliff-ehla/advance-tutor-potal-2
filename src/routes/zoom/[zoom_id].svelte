@@ -41,7 +41,7 @@
 	let pdf_json
 	let loading_item = true
 
-	import PdfReader from '../../components/item/item-pdf-reader/index.svelte'
+	import PdfReader from '$lib/pdf-reader/index.svelte'
 
 	$: {
 		if (selected_item_id) getItem()

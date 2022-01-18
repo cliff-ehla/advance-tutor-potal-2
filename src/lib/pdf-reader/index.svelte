@@ -1,11 +1,11 @@
 <script>
-	import Icon from '../../ui-elements/icon.svelte'
+	import Icon from '$lib/ui/icon.svelte'
 	import Reader from './puzzle-reader.svelte'
 	import { debounce } from "debounce";
 	import {domain} from "./puzzle-reader-constant";
 	import Panzoom from '@panzoom/panzoom'
 	// import tippy from "tippy.js";
-	import {pdf_keyboard_listener_active} from "../../../store";
+	import {pdf_keyboard_listener_active} from "../../store";
 
 	export let pages_info_2 = []
 	export let top_offset = 48

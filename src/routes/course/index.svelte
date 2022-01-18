@@ -14,7 +14,6 @@
 </script>
 
 <script>
-	import {slugToText} from "../../utils/slug-to-text";
 	import dayjs from "dayjs";
 	export let courses
 

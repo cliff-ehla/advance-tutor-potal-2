@@ -6,7 +6,7 @@
 	import tippy from "tippy.js";
 	export let zoom
 	const {open} = getContext('simple-modal')
-	import PdfReaderDialog from '../../components/item/item-pdf-reader/pdf-reader-dialog.svelte'
+	import PdfReaderDialog from '$lib/pdf-reader/pdf-reader-dialog.svelte'
 	import CoursePreviewPopup from '$lib/zoom/course-preview-popup.svelte'
 	import StudentPreviewPopup from '$lib/student/student-preview-popup.svelte'
 	import isToday from "dayjs/plugin/isToday.js";
