@@ -1,26 +1,47 @@
+<script context="module">
+	import {http, onFail} from "$lib/http";
+
+	export const load = async ({page, fetch}) => {
+		const {data, success, debug} = await http.post(fetch, '/zoomApi/list_tutor_salary')
+		if (!success) return onFail(debug)
+		return {
+			props: {
+				statements: data
+			}
+		}
+	}
+</script>
+
 <script>
 	import dayjs from "dayjs";
-	import SelectionBox from '../ui-elements/selection-box.svelte'
+	import SelectionBox from '$lib/ui/selection.svelte'
 
 	export let statements
 
 	let selected_month = statements[0].month_year
 	$: selected_statement = statements.find(s => s.month_year === selected_month)
 
+	const format_date = m_yyyy => {
+		const yyyy = m_yyyy.split('-')[1]
+		let mm = m_yyyy.split('-')[0]
+		mm.padStart(2,'0')
+		return dayjs(`${yyyy}-${mm}-01`).format('MMM YYYY')
+	}
+
 	let month_options = statements.map(s => ({
 		value: s.month_year,
-		label: s.month_year
+		label: format_date(s.month_year)
 	}))
 </script>
 
-<div class="flex items-center px-4 border-b border-gray-300">
+<div class="flex items-center px-4 border-b border-gray-300 py-2">
 	<div class="flex items-center">
-		<p class="font-bold mr-4">Monthly statement</p>
+		<p class="font-bold mr-4 whitespace-nowrap">Monthly statement</p>
 		<SelectionBox on:input={e => selected_month = e.detail} selected_value={selected_month} options={month_options}/>
 	</div>
 	<div class="ml-auto flex items-center">
 		<p class="mr-2">Salary</p>
-		<div style="font-size: 2em" class="text-t1 font-bold text-blue-500">${selected_statement.salary}</div>
+		<div class="text-xl font-bold text-blue-500">${selected_statement.salary}</div>
 	</div>
 </div>
 
@@ -63,7 +84,7 @@
 </div>
 
 <style>
-    td, th {
-        padding: 1em;
-    }
+	td, th {
+		padding: 1em;
+	}
 </style>

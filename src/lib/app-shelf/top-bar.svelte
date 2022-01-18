@@ -3,6 +3,7 @@
 	import Icon from '$lib/ui/icon.svelte'
 	import {session} from '$app/stores'
 	import {page} from '$app/stores'
+	import {user_info} from "$lib/store/user_info.js";
 
 	let nav_items = [
 		{
@@ -18,6 +19,7 @@
 			title: 'Student'
 		}
 	]
+	console.log('123: ', $session.user_info, $user_info)
 </script>
 
 <div class="h-14 items-center flex border-gray-300 border-b px-4 relative">
@@ -46,6 +48,7 @@
 				<div class="rounded-full w-8 h-8 bg-cover bg-center" style="background-image: url({$session.user_info.profile_pic})"></div>
 			</div>
 			<div class="dropdown">
+				<p>{$session.user_info.nickname}</p>
 				<a href="/logout" class="item">Logout</a>
 				<a href="/salary" class="item">Salary</a>
 			</div>
