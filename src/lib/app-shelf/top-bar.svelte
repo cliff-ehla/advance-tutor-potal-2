@@ -47,6 +47,7 @@
 			</div>
 			<div class="dropdown">
 				<a href="/logout" class="item">Logout</a>
+				<a href="/salary" class="item">Salary</a>
 			</div>
 		</Dropdown>
 	</div>
