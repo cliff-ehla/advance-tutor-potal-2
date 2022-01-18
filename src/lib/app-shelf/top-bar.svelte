@@ -47,10 +47,10 @@
 			<div slot="activator" class="inline-flex items-center">
 				<div class="rounded-full w-8 h-8 bg-cover bg-center" style="background-image: url({$session.user_info.profile_pic})"></div>
 			</div>
-			<div class="dropdown">
-				<p>{$session.user_info.nickname}</p>
+			<div class="dropdown w-56">
+				<p class="text-sm text-gray-500 p-2">{$session.user_info.nickname}</p>
+				<a href="/salary" class="item">My salary</a>
 				<a href="/logout" class="item">Logout</a>
-				<a href="/salary" class="item">Salary</a>
 			</div>
 		</Dropdown>
 	</div>
