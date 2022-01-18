@@ -72,9 +72,9 @@
 		Component = NewComponent;
 		props = newProps;
 		state = { ...defaultState, ...options };
-		padding = state.padding
-		bg_class = state.bg_class
-		overflow = state.overflow
+		padding = state.padding || '1em'
+		bg_class = state.bg_class || 'bg-white'
+		overflow = state.overflow || 'auto'
 		onOpen = callback.onOpen || toVoid;
 		onClose = callback.onClose || toVoid;
 		onOpened = callback.onOpened || toVoid;

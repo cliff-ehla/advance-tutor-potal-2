@@ -8,7 +8,7 @@
 	import {debounce} from 'debounce'
 	import {fade} from 'svelte/transition'
 	import {createEventDispatcher} from 'svelte'
-	import {isPdf} from "../../utils/is-pdf";
+	import {isPdf} from "$lib/helper/is-pdf";
 	import Panzoom from '@panzoom/panzoom'
 	import {getContext} from 'svelte'
 	const {close} = getContext('simple-modal')
