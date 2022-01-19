@@ -1,8 +1,8 @@
 <script>
 	import dayjs from "dayjs";
-	import DatePicker from '../ui-elements/date-picker/date-picker.svelte'
-	import Dropdown from '../ui-elements/dropdown3.svelte'
-	import Icon from '../ui-elements/icon.svelte'
+	import DatePicker from '$lib/ui/date-picker/date-picker.svelte'
+	import Dropdown from '$lib/ui/dropdown3.svelte'
+	import Icon from '$lib/ui/icon.svelte'
 	import {tick, createEventDispatcher, getContext} from 'svelte'
 	import {convertUtcSlotToLocal, convertLocalSlotToUtc} from "./parse-time-slot";
 	import {setTutorAvailableTimeSlot, deleteTutorAvailableTimeSlot} from "../../api/tutor-api";
@@ -45,41 +45,6 @@
 			selectMirror: true,
 			editable: true,
 			eventStartEditable: true,
-			select: e => {
-				let new_event = {
-					start: e.start,
-					end: e.end
-				}
-				calendar.addEventSource([new_event])
-				notifications.success('Time session added')
-				save()
-			},
-			eventClick: ({event, el}) => {
-				showPopper(el, EventMenu, {
-					onDelete: () => {
-						event.remove()
-						notifications.success(('Time session removed')
-						save()
-					}
-				}, {
-					placement: 'right'
-				})
-			},
-			eventDragStop: e => {
-				save()
-				notifications.success(('Time session Edited')
-			},
-			eventResizeStop: e => {
-				save()
-				notifications.success(('Time session Edited')
-			},
-			dayHeaderContent: (date) => {
-				let div = document.createElement('div')
-				div.innerHTML = day_of_week[date.dow]
-				return {
-					domNodes: [div]
-				}
-			},
 			allDaySlot: false,
 			headerToolbar: false
 		})

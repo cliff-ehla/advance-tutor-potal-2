@@ -1,18 +1,22 @@
-<script>
-	import {onMount} from 'svelte'
-	import {fetchTutorAvailableTimeSlot} from "../../api/tutor-api";
-	import TopBar from '../../components/top-bar.svelte'
-	// import TimeTableList from '../../components/calendar/available-time-table-list.svelte'
+<script context="module">
+	import {http, onFail} from "$lib/http";
 
-	let data
-
-	onMount(async () => {
-		data = await fetchTutorAvailableTimeSlot(fetch)
-	})
+	export const load = async ({page, fetch}) => {
+		const {data, success, debug} = await http.post(fetch, '/tutorApi/list_available_timeslot', {
+			tutor_group_id: page.params.tutor_group_id
+		})
+		if (!success) return onFail(debug)
+		return {
+			props: {
+				data: data
+			}
+		}
+	}
 </script>
 
-<TopBar/>
+<script>
+	import TimeTableList from '$lib/calendar/available-time-table-list.svelte'
+	export let data
+</script>
 
-{#if data}
-<!--	<TimeTableList time_slot_list={data}/>-->
-{/if}
+<TimeTableList time_slot_list={data}/>
