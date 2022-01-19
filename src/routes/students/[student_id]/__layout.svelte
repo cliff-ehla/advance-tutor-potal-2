@@ -9,6 +9,9 @@
 		return {
 			props: {
 				detail: data
+			},
+			stuff: {
+				overview: data
 			}
 		}
 	}

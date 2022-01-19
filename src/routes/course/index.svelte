@@ -7,26 +7,32 @@
 		if (!success) return onFail(debug)
 		return {
 			props: {
-				courses: data
+				classroom: data.classroom,
+				one_on_one: data.one_on_one
 			}
 		}
 	}
 </script>
 
 <script>
-	import dayjs from "dayjs";
-	export let courses
-
+	export let one_on_one
+	export let classroom
+	import CoursePreview from '$lib/zoom/course-preview.svelte'
+	console.log('cliff: ', one_on_one)
 </script>
 
-<div class="p-6">
-	<div class="max-w-screen-lg">
-		{#each courses as course}
-			<div class="p-4 border border-gray-200">
-				<a class="hover:text-red-500" href="/students/{course.student_id}/tutor-group/{course.tutor_group_id}">{course.title}</a>
-				<p>{dayjs(course.start_date).format('DD MMM')} - {dayjs(course.end_date).format('DD MMM')}</p>
-				<p>{course.zoom_completed_cnt} / {course.zoom_total_cnt}</p>
-			</div>
+<div class="max-w-screen-lg p-4 bg-gray-100">
+	<p class="mb-2 font-bold text-xl">My 1-on-1 courses</p>
+	<div class="grid grid-cols-3 gap-4">
+		{#each one_on_one as course}
+			<CoursePreview {course}/>
+		{/each}
+	</div>
+
+	<p class="mt-8 mb-2 font-bold text-xl">My big class courses</p>
+	<div class="grid grid-cols-3 gap-4">
+		{#each classroom as course}
+			<CoursePreview {course}/>
 		{/each}
 	</div>
 </div>

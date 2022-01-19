@@ -43,8 +43,7 @@
 							{zoom.title.split('(')[0]}
 						</a>
 						<div class="">
-							// TODO
-<!--							<CoursePreviewPopup tutor_group_id={zoom.tutor_group_id}/>-->
+							<CoursePreviewPopup tutor_group_id={zoom.tutor_group_id}/>
 						</div>
 					</Dropdown>
 				</div>

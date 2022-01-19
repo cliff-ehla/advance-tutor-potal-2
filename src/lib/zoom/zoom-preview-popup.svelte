@@ -11,6 +11,7 @@
 	dayjs.extend(isToday)
 	import CoursePreviewPopup from '$lib/zoom/course-preview-popup.svelte'
 	import Dropdown from '$lib/ui/dropdown3.svelte'
+	import StudentLabel from '$lib/student/student-label.svelte'
 	$: is_today = dayjs(zoom.start_date).isToday()
 	$: is_ended = dayjs().isAfter(dayjs(zoom.end_date))
 	$: student_id = zoom.students.length ? zoom.students[0].user_id : undefined
@@ -69,24 +70,9 @@
 				</div>
 			{/if}
 		</div>
-		{#if is_classroom}
-			{#each zoom.students as s}
-				<div class="inline-flex items-center mr-2 bg-blue-200 rounded-full mt-1">
-					<div class="w-6 h-6 rounded-full mr-1 cc text-xs bg-blue-500 text-white">{s.level.charAt(0).toUpperCase() + s.level.slice(1)}</div>
-					<span class="text-sm pr-2 py-1">{s.nickname}</span>
-				</div>
-			{/each}
-		{:else}
-			{#each zoom.students as s}
-				<a href="/students/{s.user_id}" class="inline-flex items-center mr-2 bg-blue-200 rounded-full mt-1 overflow-hidden border border-white hover:border-blue-300">
-					<div class="w-6 h-6 rounded-full mr-1 cc text-xs bg-blue-500 text-white">{s.level.charAt(0).toUpperCase() + s.level.slice(1)}</div>
-					<span class="text-sm py-1">{s.nickname}</span>
-					<div class="w-8 cc bg-white h-8 bg-opacity-50 ml-2">
-						<Icon name="report" className="w-3.5 text-gray-400 inline-block"/>
-					</div>
-				</a>
-			{/each}
-		{/if}
+		{#each zoom.students as s}
+			<StudentLabel student={s}/>
+		{/each}
 	</div>
 	{#if is_today}
 		<div class="mt-4">
