@@ -2,7 +2,7 @@
 	import {http, onFail} from "$lib/http";
 
 	export const load = async ({page, fetch}) => {
-		const {data, success, debug} = await http.post(fetch, '/tutorApi/list_fans_detail', {
+		const {data, success, debug} = await http.post(fetch, '/tutorApi/list_fans_detail_overview', {
 			student_id: page.params.student_id
 		})
 		if (!success) return onFail(debug)
@@ -21,6 +21,7 @@
 	import {capitalize} from "$lib/helper/capitalize.js";
 
 	export let detail // TODO gender/ nickname/ level/ courses []/ upcoming_zoom_list []/ completed_zoom_list []/ last_lesson_date
+	console.log('detail',detail)
 
 	const student_id = $page.params.student_id
 	$: student = $tutor_group_store ? tutor_group_store.getOOO(student_id) : null
