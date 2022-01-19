@@ -9,11 +9,9 @@
 </script>
 
 <script>
-	import dayjs from "dayjs";
-	import ZoomPreview from '$lib/zoom/zoom-preview.svelte'
+	import ZoomPreviewMinimal from '$lib/zoom/zoom-preview-minimal.svelte'
 
 	export let overview
-	console.log('cliff: ', overview)
 
 	$: archive_zoom_list = overview.archive_zoom_list
 	$: current_zoom_list = overview.current_zoom_list
@@ -23,10 +21,10 @@
 	<p class="mb-4 font-bold">Upcoming lessons</p>
 	{#if current_zoom_list.length}
 		{#each current_zoom_list as zoom}
-			<ZoomPreview {zoom}/>
+			<ZoomPreviewMinimal {zoom}/>
 		{/each}
 	{:else}
-		no data
+		<p class="text-gray-400">No coming lessons</p>
 	{/if}
 </div>
 
@@ -34,9 +32,9 @@
 	<p class="mb-4 font-bold">Last 5 lessons</p>
 	{#if archive_zoom_list.length}
 		{#each archive_zoom_list as zoom}
-			<ZoomPreview {zoom}/>
+			<ZoomPreviewMinimal {zoom}/>
 		{/each}
 	{:else}
-		no data
+		<p class="text-gray-400">No history</p>
 	{/if}
 </div>
