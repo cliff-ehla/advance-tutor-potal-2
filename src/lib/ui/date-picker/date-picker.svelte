@@ -48,7 +48,7 @@
 	<div class="whitespace-nowrap" slot="activator">
 		{selected.toDateString()}
 	</div>
-	<div>
+	<div class="dropdown">
 		<div class="px-2 py-2 flex items-center">
 			<div class="flex-1 px-2">{getMonthName(month)} {year}</div>
 			<button class="focus:outline-none w-8 h-8 flex items-center justify-center hover:bg-gray-100 rounded-full" on:click|stopPropagation={prev}>

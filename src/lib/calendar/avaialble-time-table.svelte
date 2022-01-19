@@ -5,11 +5,12 @@
 	import Icon from '$lib/ui/icon.svelte'
 	import {tick, createEventDispatcher, getContext} from 'svelte'
 	import {convertUtcSlotToLocal, convertLocalSlotToUtc} from "./parse-time-slot";
-	import {setTutorAvailableTimeSlot, deleteTutorAvailableTimeSlot} from "../../api/tutor-api";
+	import {deleteTutorAvailableTimeSlot} from "../../api/tutor-api";
 	import utc from "dayjs/plugin/utc.js";
 	import EventMenu from './event-menu.svelte'
 	const {showPopper} = getContext('popper')
 	import {notifications} from "$lib/store/notification.js";
+	import {http} from "$lib/http.js";
 
 	export let timeslot_id
 	export let start_day
@@ -35,7 +36,7 @@
 				end: dayjs().day(event.week).format("YYYY-MM-DD") + " " + event.end_time
 			})
 		})
-		console.log('converted_local_events', converted_local_events)
+		// console.log('converted_local_events', converted_local_events)
 
 		calendar = new FullCalendar.Calendar(node, {
 			initialView: 'timeGridWeek',
@@ -46,7 +47,42 @@
 			editable: true,
 			eventStartEditable: true,
 			allDaySlot: false,
-			headerToolbar: false
+			headerToolbar: false,
+			dayHeaderContent: (date) => {
+				let div = document.createElement('div')
+				div.innerHTML = day_of_week[date.dow]
+				return {
+					domNodes: [div]
+				}
+			},
+			select: e => {
+				let new_event = {
+					start: e.start,
+					end: e.end
+				}
+				calendar.addEventSource([new_event])
+				notifications.send('Time session added')
+				save()
+			},
+			eventClick: ({event, el}) => {
+				showPopper(el, EventMenu, {
+					onDelete: () => {
+						event.remove()
+						notifications.send('Time session removed')
+						save()
+					}
+				}, {
+					placement: 'right'
+				})
+			},
+			eventDragStop: e => {
+				save()
+				notifications.send('Time session Edited')
+			},
+			eventResizeStop: e => {
+				save()
+				notifications.send('Time session Edited')
+			},
 		})
 		calendar.render()
 	}
@@ -54,6 +90,7 @@
 	const save = () => {
 		setTimeout(() => {
 			let events = calendar.getEvents()
+			console.log('events', events)
 			let computed_events = events.map(e => {
 				let week = dayjs(e.start).day()
 				let start_time = dayjs(e.start).format('HH:mm:ss')
@@ -72,10 +109,11 @@
 				end_time: dayjs(end_day).format('YYYY-MM-DD HH:mm:ss'),
 				timeslot: utc_slots
 			}
-			console.log('utc_slots', start_day, end_day)
 			dispatch('update', payload)
-			setTutorAvailableTimeSlot(payload)
-			// console.log('call api update: ', payload)
+			console.log(payload)
+			http.post(fetch, '/tutorApi/set_available_time', payload, {
+				notification: 'Timetable updated'
+			})
 		}, 10)
 	}
 
