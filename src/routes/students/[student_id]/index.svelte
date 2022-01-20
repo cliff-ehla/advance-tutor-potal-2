@@ -64,7 +64,7 @@
 	<div class="flex-1 ml-4">
 		<div class="section-box">
 			<p class="mb-4 text uppercase text-gray-500">All courses</p>
-			<div class="grid grid-cols-2 gap-4">
+			<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
 				{#each one_on_one_course as course}
 					<CoursePreviewMinimal {student_id} {course}/>
 				{/each}

@@ -20,62 +20,88 @@
 <script>
 	import {page, session} from '$app/stores'
 	import {capitalize} from "$lib/helper/capitalize.js";
-
-	export let detail // TODO gender/ nickname/ level/ courses []/ upcoming_zoom_list []/ completed_zoom_list []/ last_lesson_date
+	import StudentNoteReadOnly from '$lib/student/student-note-readonly.svelte'
+	export let detail
 	$: student_id = $page.params.student_id
 	$: tutor_group_id = $page.params.tutor_group_id
 	$: slug = $page.path.split('/').pop()
-	console.log('detail',detail)
+	$: is_overview = $page.path.split('/').length === 3
 </script>
 
-<div class="bg-banner p-4">
-	<div class="max-w-screen-lg mx-auto">
-		<div class="flex p-2 text-blue-500 text-sm">
-			<a href="/students">Students</a>
-			<span class="mx-2"> > </span>
-			<a href="/students/{student_id}">{detail.nickname}</a>
+<div class="bg-gray-50">
+<div class="max-w-screen-lg mx-auto">
+	<div class="flex p-4 text-sm breadcrumb">
+		<a href="/students">Students</a>
+		<span class="mx-2"> > </span>
+		<a href="/students/{student_id}">{detail.nickname}</a>
+		{#if is_overview}
+		{:else}
 			{#if tutor_group_id}
 				<span class="mx-2"> > </span>
 				<span>{tutor_group_id}</span>
+			{:else}
+				<span class="mx-2"> > </span>
+				{slug}
 			{/if}
-			<span class="mx-2"> > </span>
-			{slug}
-		</div>
+		{/if}
+	</div>
+</div>
 
-		<div class="flex my-8">
-			<div class="w-72">
-				<div class="mx-auto w-28 h-28 rounded-full border-2 border-gray-300 relative shadow bg-white">
-					<img src="/student-{detail.gender}-icon.png" alt="gender" class="rounded-full">
-					<div class="absolute -bottom-2 -right-4 ml-2 w-10 h-10 bg-blue-500 rounded-full cc text-white">{capitalize(detail.level)}</div>
+{#if is_overview}
+	<div class="bg-banner p-4 -mt-12 pt-12">
+		<div class="max-w-screen-lg mx-auto">
+			<div class="flex my-8">
+				<div class="w-72">
+					<div class="mx-auto w-28 h-28 rounded-full border-2 border-gray-300 relative shadow bg-white">
+						<img src="/student-{detail.gender}-icon.png" alt="gender" class="rounded-full">
+						<div class="absolute -bottom-2 -right-4 ml-2 w-10 h-10 bg-blue-500 rounded-full cc text-white">{capitalize(detail.level)}</div>
+					</div>
 				</div>
-			</div>
-			<div class="ml-4">
-				<p style="font-size: 2em" class="font-light text-xl mb-4">{detail.nickname}</p>
-				<div class="grid grid-cols-3 gap-4">
-					<div>
-						<div class="flex items-end">
-							<p class="num">{detail.upcoming_zoom_cnt}</p>
-							<p class="text-xs ml-1 mb-0.5 text-gray-500 leading-none">Upcoming <br/>lessons</p>
+				<div class="ml-4">
+					<p style="font-size: 2em" class="font-light text-xl mb-4">{detail.nickname}</p>
+					<div class="grid grid-cols-3 gap-4">
+						<div>
+							<div class="flex items-end">
+								<p class="num">{detail.upcoming_zoom_cnt}</p>
+								<p class="text-xs ml-1 mb-0.5 text-gray-500 leading-none">Upcoming <br/>lessons</p>
+							</div>
 						</div>
-					</div>
-					<div>
-						<div class="flex items-end">
-							<p class="num">{detail.completed_zoom_cnt}</p>
-							<p class="text-xs ml-1 mb-0.5 text-gray-500 leading-none">Completed <br/>lessons</p>
+						<div>
+							<div class="flex items-end">
+								<p class="num">{detail.completed_zoom_cnt}</p>
+								<p class="text-xs ml-1 mb-0.5 text-gray-500 leading-none">Completed <br/>lessons</p>
+							</div>
 						</div>
-					</div>
-					<div class="leading-none mt-1.5">
-						<p class="text-xs text-gray-500 leading-none mb-1">Last lessons</p>
-						<p>2 weeks before</p>
+						<div class="leading-none mt-1.5">
+							<p class="text-xs text-gray-500 leading-none mb-1">Last lessons</p>
+							<p>2 weeks before</p>
+						</div>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-</div>
-
-<div class="p-4 py-8 bg-gray-100">
-	<slot/>
+	<div class="p-4 py-8 bg-gray-100">
+		<slot/>
+	</div>
+{:else}
+	<div class="relative max-w-screen-lg mx-auto">
+		<div class="w-64 absolute left-0 p-4 mt-4">
+			<div class="mx-auto w-20 h-20 rounded-full border-2 border-gray-300 relative shadow bg-white">
+				<img src="/student-{detail.gender}-icon.png" alt="gender" class="rounded-full">
+				<div class="absolute -bottom-2 -right-4 ml-2 w-10 h-10 bg-blue-500 rounded-full cc text-white">{capitalize(detail.level)}</div>
+			</div>
+			<p class="font-light text-xl mt-4 text-center">{detail.nickname}</p>
+			<div class="my-8">
+				<p class="section-title mb-4">Notes for {detail.nickname}</p>
+				<StudentNoteReadOnly {student_id}/>
+			</div>
+		</div>
+		<div class="ml-64">
+			<slot/>
+		</div>
+	</div>
+{/if}
 </div>
 
 <style>
@@ -86,5 +112,8 @@
 	.bg-banner {
 		background-image: url('/student-overiew-bg-1.png');
 		background-size: 38%;
+	}
+	.breadcrumb a {
+		@apply text-blue-500;
 	}
 </style>

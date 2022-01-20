@@ -5,7 +5,6 @@
 
     html {
 		    height: 100%;
-		    background: #f8f8f8;
     }
     body {
 	    font-family: "Century Gothic", CenturyGothic, Geneva, AppleGothic, sans-serif;
@@ -25,5 +24,9 @@
 
     .fc-theme-standard .fc-scrollgrid {
 	    border: none !important;
+    }
+
+    .note {
+	    @apply text-gray-500 text-sm;
     }
 </style>

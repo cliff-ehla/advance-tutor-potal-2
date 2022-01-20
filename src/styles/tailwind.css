@@ -33,3 +33,6 @@
 .section-title {
     @apply text-sm uppercase text-gray-500;
 }
+.note {
+    @apply text-sm text-gray-500;
+}
