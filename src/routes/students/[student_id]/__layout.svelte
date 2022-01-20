@@ -24,6 +24,7 @@
 	export let detail // TODO gender/ nickname/ level/ courses []/ upcoming_zoom_list []/ completed_zoom_list []/ last_lesson_date
 	$: student_id = $page.params.student_id
 	$: tutor_group_id = $page.params.tutor_group_id
+	$: slug = $page.path.split('/').pop()
 	console.log('detail',detail)
 </script>
 
@@ -33,6 +34,12 @@
 			<a href="/students">Students</a>
 			<span class="mx-2"> > </span>
 			<a href="/students/{student_id}">{detail.nickname}</a>
+			{#if tutor_group_id}
+				<span class="mx-2"> > </span>
+				<span>{tutor_group_id}</span>
+			{/if}
+			<span class="mx-2"> > </span>
+			{slug}
 		</div>
 
 		<div class="flex my-8">

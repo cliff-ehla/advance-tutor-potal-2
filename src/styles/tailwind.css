@@ -27,3 +27,9 @@
 .item {
     @apply cursor-pointer px-2 py-2 hover:bg-gray-100 hover:text-blue-500 flex items-center w-full text-sm;
 }
+.section-box {
+    @apply bg-white border border-gray-300 p-4 rounded;
+}
+.section-title {
+    @apply text-sm uppercase text-gray-500;
+}

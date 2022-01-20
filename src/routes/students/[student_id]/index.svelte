@@ -37,6 +37,7 @@
 				{#each upcoming_zoom_list as zoom}
 					<ZoomPreviewMinimal {zoom}/>
 				{/each}
+				<a href="/students/{student_id}/upcoming-lesson" class="text-sm text-blue-500 text-center block bg-gray-100 py-1 border border-gray-200 hover:border-blue-500">See all upcoming lessons</a>
 			{:else}
 				<p class="text-gray-400 px-6 my-2 text-xs">No upcoming lessons</p>
 			{/if}
@@ -53,6 +54,7 @@
 						<ZoomPreviewMinimal {zoom}/>
 					</div>
 				{/each}
+				<a href="/students/{student_id}/past-lesson" class="text-sm text-blue-500 text-center block bg-gray-100 py-1 border border-gray-200 hover:border-blue-500">See all past lessons</a>
 			{:else}
 				<p class="text-gray-400">No history</p>
 			{/if}

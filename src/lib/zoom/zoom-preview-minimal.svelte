@@ -37,13 +37,17 @@
 				</a>
 			{/if}
 		</div>
-		{#each zoom.days as d}
-			<div>
-				<div class="inline-flex items-center cursor-pointer hover:text-yellow-700 mb-1">
-					<p use:tooltip={'Preview material'} on:click={() => {previewMaterial(d)}} class="leading-tight mr-2">{d.title}</p>
-					<!--				<RateLabel rate={d.t_difficulty_rate}/>-->
+		{#if zoom.days.length}
+			{#each zoom.days as d}
+				<div>
+					<div class="inline-flex items-center cursor-pointer hover:text-yellow-700 mb-1">
+						<p use:tooltip={'Preview material'} on:click={() => {previewMaterial(d)}} class="leading-tight mr-2">{d.title}</p>
+						<!--				<RateLabel rate={d.t_difficulty_rate}/>-->
+					</div>
 				</div>
-			</div>
-		{/each}
+			{/each}
+		{:else}
+			<p class="text-gray-400">No material</p>
+		{/if}
 	</div>
 </div>

@@ -22,14 +22,16 @@
 	$: zoom_list = $course_store[tutor_group_id]
 </script>
 
-<h1 class="font-bold mb-4">{tutor_group && tutor_group.title.split('(')[0]}</h1>
-<div class="flex">
-	<div class="flex-1 bg-white p-4 border border-gray-300">
-		{#if zoom_list}
-			<CourseTimeLine {zoom_list}/>
-		{/if}
-	</div>
-	<div class="ml-4 bg-white border border-gray-300 w-48">
-		<MessageWidget {tutor_group_id} {student_id} height="calc(100vh - 200px)"/>
+<div class="max-w-screen-lg mx-auto">
+	<h1 class="font-bold mb-4">{tutor_group && tutor_group.title.split('(')[0]}</h1>
+	<div class="flex">
+		<div class="flex-1 bg-white p-4 border border-gray-300">
+			{#if zoom_list}
+				<CourseTimeLine {zoom_list}/>
+			{/if}
+		</div>
+		<div class="ml-4 bg-white border border-gray-300 w-48">
+			<MessageWidget {tutor_group_id} {student_id} height="calc(100vh - 200px)"/>
+		</div>
 	</div>
 </div>
