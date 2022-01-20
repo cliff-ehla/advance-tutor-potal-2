@@ -35,7 +35,9 @@
 			</div>
 			{#if upcoming_zoom_list.length}
 				{#each upcoming_zoom_list as zoom}
-					<ZoomPreviewMinimal {zoom}/>
+					<div class="my-4">
+						<ZoomPreviewMinimal {zoom}/>
+					</div>
 				{/each}
 				<a href="/students/{student_id}/upcoming-lesson" class="text-sm text-blue-500 text-center block bg-gray-100 py-1 border border-gray-200 hover:border-blue-500">See all upcoming lessons</a>
 			{:else}
@@ -63,7 +65,7 @@
 
 	<div class="flex-1 ml-4">
 		<div class="section-box">
-			<p class="mb-4 text uppercase text-gray-500">All courses</p>
+			<p class="mb-4 text uppercase text-gray-500">All 1-on-1 courses</p>
 			<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
 				{#each one_on_one_course as course}
 					<CoursePreviewMinimal {student_id} {course}/>

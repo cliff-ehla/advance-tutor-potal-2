@@ -18,13 +18,11 @@
 <script>
 	import Icon from '$lib/ui/icon.svelte'
 	import {page} from '$app/stores'
-	import {tutor_group_store} from "../../store";
 	import dayjs from "dayjs";
 	import {tooltip} from "$lib/aciton/tooltip.js";
 
-	const course_list = $tutor_group_store ? tutor_group_store.getAllCourse() : null
 	$: slug = $page.path.split('/').pop()
-	let zoom_list = $zoom_store.list
+	$: nav_key = slug === 'list' ? 'month' : slug
 	$: date_key = `${$page.params.yyyy}-${$page.params.mm}-${$page.params.dd}`
 	$: start_of_week = dayjs(date_key).startOf('week')
 	$: end_of_week = dayjs(date_key).endOf('week')
@@ -35,10 +33,10 @@
 	<div class="flex items-center">
 		<a href="/schedule/{dayjs().format('YYYY-MM-DD')}/{slug}" class="calendar-button">Today</a>
 		<div class="flex mx-2">
-			<a href="/schedule/{dayjs(date_key).subtract(1,slug).format('YYYY-MM-DD')}/{slug}" class="block cc w-8 h-8 rounded-full hover:bg-gray-200 transition-colors">
+			<a href="/schedule/{dayjs(date_key).subtract(1,nav_key).format('YYYY-MM-DD')}/{slug}" class="block cc w-8 h-8 rounded-full hover:bg-gray-200 transition-colors">
 				<Icon name="right" className="w-3 transform rotate-180"/>
 			</a>
-			<a href="/schedule/{dayjs(date_key).add(1,slug).format('YYYY-MM-DD')}/{slug}" class="block cc w-8 h-8 rounded-full hover:bg-gray-200 transition-colors">
+			<a href="/schedule/{dayjs(date_key).add(1,nav_key).format('YYYY-MM-DD')}/{slug}" class="block cc w-8 h-8 rounded-full hover:bg-gray-200 transition-colors">
 				<Icon name="right" className="w-3"/>
 			</a>
 		</div>

@@ -1,5 +1,7 @@
 import {variables} from "$lib/env";
 const base = variables.api_base + '/v1'
+const is_dev = variables.env === 'dev'
+const is_production_url = variables.api_base === 'https://usermodel.ehlacademy.org'
 
 export async function usermodel (request, resource, data) {
 	if (request.method === 'POST' && data) {
@@ -7,7 +9,7 @@ export async function usermodel (request, resource, data) {
 	}
 	const query = {
 		'encode': 1,
-		'access-token': request.locals.access_token // Jodiehappytest
+		'access-token': (is_dev && is_production_url) ? 'Jodiehappytest' : request.locals.access_token
 	}
 	let url = `${base}${resource}`
 	for (const property in query) {

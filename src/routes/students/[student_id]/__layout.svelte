@@ -61,21 +61,23 @@
 					<p style="font-size: 2em" class="font-light text-xl mb-4">{detail.nickname}</p>
 					<div class="grid grid-cols-3 gap-4">
 						<div>
-							<div class="flex items-end">
+							<a href="/students/{student_id}/upcoming-lesson"
+							   class="text-gray-500 flex items-end hover:text-blue-500 hover:bg-white transition-colors p-2 rounded hover:shadow">
 								<p class="num">{detail.upcoming_zoom_cnt}</p>
-								<p class="text-xs ml-1 mb-0.5 text-gray-500 leading-none">Upcoming <br/>lessons</p>
-							</div>
+								<p class="text-xs ml-1 mb-0.5 leading-none">Upcoming <br/>lessons</p>
+							</a>
 						</div>
 						<div>
-							<div class="flex items-end">
+							<a href="/students/{student_id}/past-lesson"
+							   class="text-gray-500 flex items-end hover:text-blue-500 hover:bg-white transition-colors p-2 rounded hover:shadow">
 								<p class="num">{detail.completed_zoom_cnt}</p>
 								<p class="text-xs ml-1 mb-0.5 text-gray-500 leading-none">Completed <br/>lessons</p>
-							</div>
+							</a>
 						</div>
-						<div class="leading-none mt-1.5">
+						<a class="leading-none mt-1.5 p-2">
 							<p class="text-xs text-gray-500 leading-none mb-1">Last lessons</p>
 							<p>TODO</p>
-						</div>
+						</a>
 					</div>
 				</div>
 			</div>
@@ -107,7 +109,7 @@
 <style>
 	.num {
 		font-size: 2.5em;
-		@apply leading-none font-light text-gray-500;
+		@apply leading-none font-light;
 	}
 	.bg-banner {
 		background-image: url('/student-overiew-bg-1.png');
@@ -115,5 +117,8 @@
 	}
 	.breadcrumb a {
 		@apply text-blue-500;
+	}
+	.stat-btn {
+
 	}
 </style>

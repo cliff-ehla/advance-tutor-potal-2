@@ -40,9 +40,8 @@
 		{#if zoom.days.length}
 			{#each zoom.days as d}
 				<div>
-					<div class="inline-flex items-center cursor-pointer hover:text-yellow-700 mb-1">
-						<p use:tooltip={'Preview material'} on:click={() => {previewMaterial(d)}} class="leading-tight mr-2">{d.title}</p>
-						<!--				<RateLabel rate={d.t_difficulty_rate}/>-->
+					<div class="inline-flex items-center cursor-pointer hover:text-blue-500 mb-1 text-sm">
+						<p on:click={() => {previewMaterial(d)}} class="leading-tight mr-2">{d.title}</p>
 					</div>
 				</div>
 			{/each}
