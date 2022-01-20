@@ -12,6 +12,7 @@
 	export let tutor_group_id
 	export let student_id
 	export let teacher_id
+	export let crazy_fetch = true
 	export let height = '600px'
 
 	let messages
@@ -22,11 +23,12 @@
 	let alert_message_options
 
 	onMount(() => {
-		const id = setInterval(updateMessage, 10000)
+		let id
+		if (crazy_fetch) id = setInterval(updateMessage, 10000)
 		getAlertMessage()
 		initMessageAndScrollToBottom()
 		return () => {
-			clearInterval(id)
+			if (id) clearInterval(id)
 		}
 	})
 

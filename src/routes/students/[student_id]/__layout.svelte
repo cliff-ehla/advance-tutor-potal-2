@@ -21,6 +21,7 @@
 	import {page, session} from '$app/stores'
 	import {capitalize} from "$lib/helper/capitalize.js";
 	import StudentNoteReadOnly from '$lib/student/student-note-readonly.svelte'
+	import MessageWidget from '$lib/message/message-widget.svelte'
 	export let detail
 	$: student_id = $page.params.student_id
 	$: tutor_group_id = $page.params.tutor_group_id
@@ -94,10 +95,16 @@
 				<div class="absolute -bottom-2 -right-4 ml-2 w-10 h-10 bg-blue-500 rounded-full cc text-white">{capitalize(detail.level)}</div>
 			</div>
 			<p class="font-light text-xl mt-4 text-center">{detail.nickname}</p>
-			<div class="my-8">
+			<div class="section-box mt-4">
 				<p class="section-title mb-4">Notes for {detail.nickname}</p>
 				<StudentNoteReadOnly {student_id}/>
 			</div>
+			{#if tutor_group_id}
+				<div class="bg-white border border-gray-300 rounded mt-2">
+					<p class="section-title p-4">Conversation</p>
+					<MessageWidget crazy_fetch={false} {tutor_group_id} {student_id} height="calc(200px)"/>
+				</div>
+			{/if}
 		</div>
 		<div class="ml-64">
 			<slot/>
@@ -117,8 +124,5 @@
 	}
 	.breadcrumb a {
 		@apply text-blue-500;
-	}
-	.stat-btn {
-
 	}
 </style>

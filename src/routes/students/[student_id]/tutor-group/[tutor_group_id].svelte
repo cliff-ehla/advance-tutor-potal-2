@@ -13,7 +13,6 @@
 <script>
 	import {page} from "$app/stores";
 	import {tutor_group_store} from "../../../../store/index.js";
-	import MessageWidget from '$lib/message/message-widget.svelte'
 	import CourseTimeLine from '$lib/zoom/course-timeline.svelte'
 	import Icon from '$lib/ui/icon.svelte'
 	import dayjs from "dayjs";
@@ -53,5 +52,4 @@
 			<CourseTimeLine {zoom_list}/>
 		{/if}
 	</div>
-	<!--			<MessageWidget {tutor_group_id} {student_id} height="calc(100vh - 200px)"/>-->
 </div>
