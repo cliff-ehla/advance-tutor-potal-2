@@ -74,7 +74,7 @@
 						</div>
 						<div class="leading-none mt-1.5">
 							<p class="text-xs text-gray-500 leading-none mb-1">Last lessons</p>
-							<p>2 weeks before</p>
+							<p>TODO</p>
 						</div>
 					</div>
 				</div>

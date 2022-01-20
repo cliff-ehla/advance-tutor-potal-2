@@ -30,7 +30,7 @@
 	$: end_of_week = dayjs(date_key).endOf('week')
 </script>
 
-<div class="px-4 flex h-12 items-center border-b border-gray-300 sticky top-0 bg-white z-10">
+<div class="px-4 flex h-14 items-center border-b border-gray-300 sticky top-0 bg-white z-20">
 
 	<div class="flex items-center">
 		<a href="/schedule/{dayjs().format('YYYY-MM-DD')}/{slug}" class="calendar-button">Today</a>

@@ -23,7 +23,7 @@
 </script>
 
 <div class="p-4 pt-0">
-	<h1 style="font-size: 1.5em" class="font-light mb-4">Speaking and reading class</h1>
+	<h1 style="font-size: 1.5em" class="font-light mb-4">Tutor group title [TODO]</h1>
 	<div class="section-box">
 		{#if zoom_list}
 			<CourseTimeLine {zoom_list}/>

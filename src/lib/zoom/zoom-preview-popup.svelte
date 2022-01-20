@@ -36,7 +36,7 @@
 			{:else}
 				<div class="text-blue-500">
 					<Dropdown activator_style="inline-block" placement="right" caveat_visible>
-						<a slot="activator" href="/students/{student_id}/tutor-group/{zoom.tutor_group_id}">
+						<a use:tooltip={'Click to check details'} slot="activator" href="/students/{student_id}/tutor-group/{zoom.tutor_group_id}">
 							{zoom.title.split('(')[0]}
 						</a>
 						<div class="">
