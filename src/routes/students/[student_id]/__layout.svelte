@@ -54,13 +54,13 @@
 				<div class="grid grid-cols-3 gap-4">
 					<div>
 						<div class="flex items-end">
-							<p class="num">0</p>
+							<p class="num">{detail.upcoming_zoom_cnt}</p>
 							<p class="text-xs ml-1 mb-0.5 text-gray-500 leading-none">Upcoming <br/>lessons</p>
 						</div>
 					</div>
 					<div>
 						<div class="flex items-end">
-							<p class="num">0</p>
+							<p class="num">{detail.completed_zoom_cnt}</p>
 							<p class="text-xs ml-1 mb-0.5 text-gray-500 leading-none">Completed <br/>lessons</p>
 						</div>
 					</div>

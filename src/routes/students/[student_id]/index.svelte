@@ -11,9 +11,7 @@
 <script>
 	import ZoomPreviewMinimal from '$lib/zoom/zoom-preview-minimal.svelte'
 	import CoursePreviewMinimal from '$lib/zoom/course-preview-minimal.svelte'
-	import {student_store} from "$lib/store/student.js";
-	import NoteWidget from '../../../components/message/note-widget.svelte'
-	import {session} from "$app/stores";
+	import StudentNoteReadOnly from '$lib/student/student-note-readonly.svelte'
 	import {page} from "$app/stores";
 	import Icon from '$lib/ui/icon.svelte'
 
@@ -24,6 +22,8 @@
 	$: completed_zoom_list = overview.completed_zoom_list
 	$: upcoming_zoom_list = overview.upcoming_zoom_list
 	$: one_on_one_course = overview.one_on_one_course
+	$: completed_zoom_cnt = overview.completed_zoom_cnt
+	$: upcoming_zoom_cnt = overview.upcoming_zoom_cnt
 </script>
 
 <div class="flex max-w-screen-lg mx-auto">
@@ -61,12 +61,19 @@
 		</div>
 	</div>
 
-	<div class="flex-1 ml-4 p-4 bg-white border border-gray-300">
-		<p class="mb-4 text uppercase text-gray-500">All courses</p>
-		<div class="grid grid-cols-2 gap-4">
-			{#each one_on_one_course as course}
-				<CoursePreviewMinimal {student_id} {course}/>
-			{/each}
+	<div class="flex-1 ml-4">
+		<div class="section-box">
+			<p class="mb-4 text uppercase text-gray-500">All courses</p>
+			<div class="grid grid-cols-2 gap-4">
+				{#each one_on_one_course as course}
+					<CoursePreviewMinimal {student_id} {course}/>
+				{/each}
+			</div>
+		</div>
+
+		<div class="section-box mt-4">
+			<p class="section-title mb-4">Notes for {overview.nickname}</p>
+			<StudentNoteReadOnly {student_id}/>
 		</div>
 	</div>
 </div>
