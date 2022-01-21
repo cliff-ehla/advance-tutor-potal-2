@@ -16,7 +16,7 @@
 		<p class="ml-1 text-gray-500 text-sm">{dayjs(course.start_date).format('DD MMM')} - {dayjs(course.end_date).format('DD MMM YYYY')}</p>
 		{#if completed}
 			<div class="text-xs bg-gray-400 rounded px-2 text-white ml-2">
-				Completed
+				{course.zoom_completed_cnt} of {course.zoom_total_cnt}
 			</div>
 		{:else}
 			<div class="text-xs bg-yellow-500 rounded px-2 text-white ml-4">

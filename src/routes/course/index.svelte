@@ -20,20 +20,20 @@
 	import CoursePreview from '$lib/zoom/course-preview.svelte'
 </script>
 
-<div class="bg-gray-50">
-	<div class="max-w-screen-lg p-4">
-		<p class="mb-2 font-bold text-xl">My 1-on-1 courses</p>
-		<div class="grid grid-cols-3 gap-4">
+<div class="bg-gray-100">
+	<div class="container pb-8">
+		<p style="font-size: 2em" class="font-light text-gray-500 py-4">My 1-on-1 courses</p>
+		<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
 			{#each one_on_one as course}
 				<CoursePreview {course}/>
 			{/each}
 		</div>
 
-		<p class="mt-8 mb-2 font-bold text-xl">My big class courses</p>
-		<div class="grid grid-cols-3 gap-4">
-			{#each classroom as course}
-				<CoursePreview {course}/>
-			{/each}
-		</div>
+<!--		<p class="mt-8 mb-2 font-bold text-xl">My big class courses</p>-->
+<!--		<div class="grid grid-cols-3 gap-4">-->
+<!--			{#each classroom as course}-->
+<!--				<CoursePreview {course}/>-->
+<!--			{/each}-->
+<!--		</div>-->
 	</div>
 </div>
