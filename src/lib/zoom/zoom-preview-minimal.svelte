@@ -40,7 +40,7 @@
 						<Icon name="classroom" className="text-purple-500 w-4"/>
 					</div>
 					<p class="ml-1 text-xs text-purple-500">{zoom.students.length}/{room_size}</p>
-					<p use:tooltip={zoom.sub_cat_en} class="bg-purple-500 text-white ml-1 px-1 text-xs rounded-sm">TODO</p>
+					<p use:tooltip={zoom.sub_cat_en} class="bg-purple-500 text-white ml-1 px-1 text-xs rounded-sm">{zoom.description_code_short_id}</p>
 				</div>
 			{:else}
 				<div class="flex items-start">

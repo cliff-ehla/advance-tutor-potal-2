@@ -90,7 +90,7 @@
 		<slot/>
 	</div>
 {:else}
-	<div class="relative max-w-screen-lg mx-auto">
+	<div class="relative container pb-8">
 		<div class="w-64 absolute left-0 p-4 mt-4">
 			<div class="mx-auto w-20 h-20 rounded-full border-2 border-gray-300 relative shadow bg-white">
 				<img src="/student-{detail.gender}-icon.png" alt="gender" class="rounded-full">

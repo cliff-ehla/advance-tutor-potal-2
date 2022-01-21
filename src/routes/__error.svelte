@@ -28,7 +28,7 @@
 
 <div class="container text-center py-12">
 	{#if is_reload}
-		<p class="mb-2">The site has updated, reloading now, please wait...</p>
+		<p class="mb-4">The site is updating, please wait...</p>
 		<Spinner/>
 	{:else}
 		<p class="text-h1 mb-4">{status}</p>
