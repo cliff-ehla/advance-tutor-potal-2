@@ -1,5 +1,6 @@
 import dayjs from "dayjs";
 import tippy from "tippy.js";
+import {capitalize} from "$lib/helper/capitalize.js";
 
 export const eventContent = (arg) => {
 	let zoom = arg.event.extendedProps
@@ -20,19 +21,24 @@ export const eventContent = (arg) => {
 	if (is_cancel) {
 		wrapper_el.classList.add('text-gray-300')
 	}
-	// wrapper_el.classList.add(is_classroom ? 'bg-purple-500' : 'bg-blue-500')
 	wrapper_el.appendChild(time_el)
 
 
 	let is_before = dayjs(arg.event.end).isBefore(dayjs())
 
 	if (is_classroom) {
+		let lv_el = document.createElement('div')
+		lv_el.innerHTML = capitalize(zoom.rc_level)
+		lv_el.classList.add('overflow-hidden', 'px-0.5', 'text-xs', 'bg-gray-200', 'hover:bg-gray-300', 'ml-auto', 'leading-tight')
+		tippy(lv_el, {content: zoom.rc_level})
 		let code_el = document.createElement('div')
 		code_el.innerHTML = zoom.description_code_short_id
-		code_el.classList.add('overflow-hidden', 'px-0.5', 'text-xs', 'bg-gray-700', 'text-white', 'ml-auto', 'leading-tight')
+		code_el.classList.add('overflow-hidden', 'px-0.5', 'text-xs', 'bg-gray-700', 'hover:bg-gray-800', 'text-white', 'ml-0.5', 'leading-tight')
+		tippy(code_el, {content: zoom.sub_cat})
 		let size_el = document.createElement('div')
 		size_el.classList.add('bg-purple-500', 'text-white', 'px-0.5' , 'leading-tight', 'text-xs', 'ml-0.5')
 		size_el.innerHTML = `${zoom.reg_user_cnt}/${zoom.student_size}`
+		wrapper_el.append(lv_el)
 		wrapper_el.append(code_el)
 		wrapper_el.append(size_el)
 	} else {

@@ -12,11 +12,12 @@
 	import CoursePreviewPopup from '$lib/zoom/course-preview-popup.svelte'
 	import Dropdown from '$lib/ui/dropdown3.svelte'
 	import StudentLabel from '$lib/student/student-label.svelte'
+	import {capitalize} from "$lib/helper/capitalize.js";
+
 	$: is_today = dayjs(zoom.start_date).isToday()
 	$: is_ended = dayjs().isAfter(dayjs(zoom.end_date))
 	$: student_id = zoom.students.length ? zoom.students[0].user_id : undefined
 	$: is_classroom = zoom.is_big_classroom
-	console.log(zoom.end_date, zoom.start_date)
 	$: duration = zoom.duration || dayjs(zoom.end_date).diff(dayjs(zoom.start_date), 'minute')
 
 	const previewMaterial = async (d) => {
@@ -30,7 +31,7 @@
 	}
 </script>
 
-<div class="p-8 border border-gray-300 w-full bg-white shadow-lg rounded max-w-xl" style="max-width: 400px">
+<div class="p-8 border border-gray-300 w-full bg-white shadow-lg rounded overflow-y-auto" style="max-width: 400px; max-height: 600px">
 	<div class="w-full">
 		<div class="text-blue-500 mb-1 text-lg">
 			<div class="absolute -top-4 -right-4 w-16 h-16 rounded-full bg-white border border-gray-200 shadow">
@@ -41,6 +42,7 @@
 				{/if}
 			</div>
 			{#if is_classroom}
+				<p class="text-xs bg-purple-400 rounded-sm text-white px-2 leading-tight inline-block">{capitalize(zoom.rc_level)}</p>
 				<div class="text-purple-500 leading-tight">{zoom.sub_cat || zoom.sub_cat_en}</div>
 			{:else}
 				<div class="text-blue-500">

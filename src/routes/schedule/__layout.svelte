@@ -28,9 +28,9 @@
 	$: end_of_week = dayjs(date_key).endOf('week')
 </script>
 
-<div class="px-4 flex h-14 items-center border-b border-gray-300 sticky top-0 bg-white z-20">
+<div class="px-4 flex h-12 items-center border-b border-gray-300 sticky top-14 bg-white z-10">
 
-	<div class="flex items-center">
+	<div class="flex items-center font-light">
 		<a href="/schedule/{dayjs().format('YYYY-MM-DD')}/{slug}" class="calendar-button">Today</a>
 		<div class="flex mx-2">
 			<a href="/schedule/{dayjs(date_key).subtract(1,nav_key).format('YYYY-MM-DD')}/{slug}" class="block cc w-8 h-8 rounded-full hover:bg-gray-200 transition-colors">
@@ -48,7 +48,7 @@
 			{/if}
 		</div>
 	</div>
-	<div class="ml-auto flex items-center">
+	<div class="ml-auto flex items-center text-gray-500">
 		{#each $zoom_store.time_zone_options as option}
 			<button use:tooltip={`Change time zone to ${option.label}`} on:click={zoom_store.setTimeZoom(option.tz)} class="calendar-button ml-1" class:active={option.active}>{option.label}</button>
 		{/each}
