@@ -118,4 +118,6 @@
 	<svg viewBox="0 0 36 36" class="fill-current {className}"><path d="M29 26v6H7v-6H3v10h30V26"></path><path d="M28 18V9.69L21 18V0h-6v18L8 9.69V18l10 11.077"></path></svg>
 {:else if name === 'list'}
 	<svg viewBox="0 0 36 36" class="fill-current {className}"><path d="M11 14h25v8H11zM0 25h8v7H0zM11 25h25v7H11zM11 4h25v7H11zM0 4h8v7H0zM0 14h8v8H0z"></path></svg>
+{:else if name === 'sort'}
+	<svg viewBox="0 0 36 36.387" class="fill-current {className}"><path d="M17 23.387L17 9.387 20.924 9.387 14.184 0.193 7.443 9.387 12 9.387 12 23.387"></path><path d="M24 27.387L24 13.387 19 13.387 19 27.387 15.075 27.387 21.816 36.58 28.557 27.387"></path></svg>
 {/if}

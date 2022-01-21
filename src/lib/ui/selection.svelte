@@ -1,6 +1,7 @@
 <script>
 	import {createEventDispatcher} from 'svelte'
 	import Dropdown from './dropdown3.svelte'
+	import Icon from '$lib/ui/icon.svelte'
 
 	export let options
 	export let selected_value
@@ -14,6 +15,8 @@
 	export let subtitle_key = ''
 	export let disabled = false
 	export let simple_array = false
+	export let icon = undefined
+	export let label = undefined
 	const dispatch = createEventDispatcher()
 	$: selected_option = Array.isArray(options) ? options.find(opt => opt[value_key] == selected_value) : null
 	$: selected_label = simple_array ? selected_value : selected_option ? selected_option[label_key] : null
@@ -41,21 +44,29 @@
 </script>
 
 <Dropdown full_width {caveat_visible} open_on_hover={false} offset={0} placement="bottom-start"
-          activator_style="bg-white border border-gray-300 rounded px-4 py-2 w-full">
-	<div use:setWidth slot="activator" className="flex items-center whitespace-nowrap w-full"
+          activator_style="bg-white border border-gray-300 hover:border-gray-500 rounded px-4 py-2 w-full">
+	<div use:setWidth slot="activator" class="flex items-center whitespace-nowrap w-full"
 	     class:opacity-40={!selected_label} class:cursor-not-allowed={disabled}>
-		{#if selected_label}
-			{#if simple_array}
-				{selected_value}
-			{:else}
-				{#if selected_option[image_key]}
-					<img src={selected_option[image_key]} alt="hi" className="w-8 h-8 rounded-full mr-2 flex-shrink-0">
-				{/if}
-				<div class="leading-tight">{selected_label}</div>
-			{/if}
-		{:else}
-			<p class="text-sm">{placeholder}</p>
+		{#if icon}
+			<Icon name={icon} className="w-8 text-gray-400 mr-2 -ml-2"/>
 		{/if}
+		<div>
+			{#if label}
+				<p class="text-xs leading-none text-gray-400">{label}</p>
+			{/if}
+			{#if selected_label}
+				{#if simple_array}
+					{selected_value}
+				{:else}
+					{#if selected_option[image_key]}
+						<img src={selected_option[image_key]} alt="hi" class="w-8 h-8 rounded-full mr-2 flex-shrink-0">
+					{/if}
+					<div class="leading-tight">{selected_label}</div>
+				{/if}
+			{:else}
+				<p class="text-sm">{placeholder}</p>
+			{/if}
+		</div>
 	</div>
 	<div style="width: {dropdown_menu_width}px"
 	     class="p-2 bg-white shadow-lg border border-gray-300 rounded max-h-80 overflow-y-scroll">

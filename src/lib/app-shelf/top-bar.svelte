@@ -28,7 +28,7 @@
 	</a>
 	<div class="flex items-center justify-center ml-6">
 		{#each nav_items as item}
-			<a class="relative h-14 flex items-center p-2 mx-1 font-light" class:text-blue-500={$page.path.includes(item.href)} href={item.href}>
+			<a class="relative h-14 flex items-center p-2 mx-1 font-light hover:bg-blue-50" class:text-blue-500={$page.path.includes(item.href)} href={item.href}>
 				{item.title}
 				{#if $page.path.includes(item.href)}
 					<span class="absolute block h-1 bg-blue-400 inset-x-0 bottom-0 rounded-full"></span>
@@ -36,12 +36,12 @@
 			</a>
 		{/each}
 	</div>
-	<div class="ml-auto mr-2">
-		<button class="w-10 h-10 cc rounded-full hover:bg-gray-100 hover:text-blue-500">
-			<Icon className="w-4 text-gray-500 hover:text-current" name="bell"/>
-		</button>
-	</div>
-	<div>
+<!--	<div class="ml-auto mr-2">-->
+<!--		<button class="w-10 h-10 cc rounded-full hover:bg-gray-100 hover:text-blue-500">-->
+<!--			<Icon className="w-4 text-gray-500 hover:text-current" name="bell"/>-->
+<!--		</button>-->
+<!--	</div>-->
+	<div class="ml-auto">
 		<Dropdown placement="bottom-end">
 			<div slot="activator" class="inline-flex items-center">
 				<div class="rounded-full w-8 h-8 bg-cover bg-center" style="background-image: url({$session.user_info.profile_pic})"></div>
