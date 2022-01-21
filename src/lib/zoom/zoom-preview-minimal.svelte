@@ -30,7 +30,7 @@
 	<div class="ml-2">
 		<div class="italic text-xs text-gray-400">
 			{#if zoom.is_big_classroom}
-				<div class="text-gray-500">{zoom.sub_cat}</div>
+				<div class="text-gray-500">{zoom.sub_cat_en}</div>
 			{:else}
 				<a href="/students/{zoom.students[0].user_id}/tutor-group/{zoom.tutor_group_id}">
 					{zoom.title.split('(')[0]}

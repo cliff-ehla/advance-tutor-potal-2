@@ -77,7 +77,7 @@
 						</div>
 						<a class="leading-none mt-1.5 p-2">
 							<p class="text-xs text-gray-500 leading-none mb-1">Last lessons</p>
-							<p>TODO</p>
+							<p>{detail.last_lesson_date}</p>
 						</a>
 					</div>
 				</div>

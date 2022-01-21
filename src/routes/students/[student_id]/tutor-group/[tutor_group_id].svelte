@@ -21,6 +21,7 @@
 	$: student_id = $page.params.student_id
 	$: tutor_group = $tutor_group_store.tutor_group[tutor_group_id]
 	$: zoom_list = $course_store[tutor_group_id]
+	$: tutor_group_title = zoom_list[0].tutor_group_title
 	$: course_start_date = zoom_list[0].start_date
 	$: course_end_date = zoom_list[zoom_list.length - 1].start_date
 	$: course_completed = dayjs().isAfter(dayjs(course_end_date))
@@ -28,7 +29,7 @@
 
 <div class="p-4 pt-0">
 	<div class="mb-4">
-		<h1 style="font-size: 1.5em" class="font-light">Tutor group title [TODO]</h1>
+		<h1 style="font-size: 1.5em" class="font-light">{tutor_group_title.split('(')[0]}</h1>
 		<div class="flex items-center mt-1">
 			<Icon name="calendar" className="w-6 text-gray-400"/>
 			<p class="ml-2 text-gray-500">{dayjs(course_start_date).format('DD MMM')} - {dayjs(course_end_date).format('DD MMM')}</p>
