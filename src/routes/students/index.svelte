@@ -42,7 +42,7 @@
 </script>
 
 <div class="bg-gray-100">
-	<div class="max-w-screen-lg mx-auto">
+	<div class="container pb-8">
 		<div class="flex items-center justify-between py-4">
 			<h1 class="font-light text-gray-500" style="font-size: 2em;">My Students</h1>
 			<div class="ml-auto flex items-center">
@@ -52,7 +52,7 @@
 				           selected_value={sort_by} on:input={e => sort_by = e.detail}/>
 			</div>
 		</div>
-		<div class="grid grid-cols-3 gap-4">
+		<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
 			{#each sorted_student_list as s}
 				<a href="/students/{s.user_id}" class="p-4 flex items-center bg-white rounded border border-gray-200 hover:shadow-lg hover:border-blue-500 transition-shadow">
 					<div class="w-20 h-20 rounded-full border-2 border-gray-300 relative shadow flex-shrink-0">

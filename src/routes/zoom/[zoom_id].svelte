@@ -22,7 +22,23 @@
 	import Countdown from '$lib/live/countdown.svelte'
 	import dayjs from "dayjs";
 	import utc from "dayjs/plugin/utc.js";
+	import {onMount} from "svelte";
+	import {page} from "$app/stores";
+	import {slack} from "$lib/helper/slack.js";
 	dayjs.extend(utc)
+
+	onMount(() => {
+		checkEnterClassTime()
+	})
+
+	const checkEnterClassTime = () => {
+		const diff = dayjs(start_date).diff(dayjs(), 'minute')
+		const is_late = diff < 0
+		if (is_late)
+			slack.send(`I am late for ${diff} minutes for zoom class - ${$page.params.zoom_id}`)
+		else
+			slack.send(`I arrive on time (${diff} before time start) for the zoom class - ${$page.params.zoom_id}`)
+	}
 
 	export let zoom
 	let start_date = dayjs.utc(zoom.start_date).local()

@@ -13,6 +13,7 @@
 	import Dropdown from '$lib/ui/dropdown3.svelte'
 	import StudentLabel from '$lib/student/student-label.svelte'
 	import {capitalize} from "$lib/helper/capitalize.js";
+	import {zoom_store} from '$lib/store/zoom.js'
 
 	$: is_today = dayjs(zoom.start_date).isToday()
 	$: is_ended = dayjs().isAfter(dayjs(zoom.end_date))
@@ -57,11 +58,11 @@
 				</div>
 			{/if}
 		</div>
-		<div class="flex">
+		<div class="flex items-center">
 			<Icon name="calendar" className="w-4 text-gray-400"/>
-			<p class="text-gray-500 text-sm ml-2">{dayjs(zoom.start_date).format('DD MMM (ddd), h:mma')} - {dayjs(zoom.end_date).format('h:mma')}</p>
+			<p class="text-gray-500 text-sm ml-2 mr-2">{dayjs(zoom.start_date).format('DD MMM (ddd), h:mma')} - {dayjs(zoom.end_date).format('h:mma')}</p>
+			<p style="font-size: 8px" class="ml-auto bg-gray-100 border border-gray-300 px-1">{$zoom_store.time_zone.label}</p>
 		</div>
-<!--		<span class="text-xs font-bold ml-2 bg-gray-100 border border-gray-300 px-1">{$zoom_store.time_zone.label}</span>-->
 		<div class="flex">
 			<Icon name="stopwatch" className="w-4 text-gray-400"/>
 			<p class="text-gray-500 text-sm ml-2">{duration}min</p>

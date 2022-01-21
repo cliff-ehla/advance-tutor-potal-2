@@ -3,6 +3,7 @@
 	import {is_loading} from "$lib/store/is_loading";
 	import {triggerReload} from "$lib/helper/trigger-reload.js";
 	import {tooltip} from "$lib/aciton/tooltip.js";
+	import {slack} from "$lib/helper/slack.js";
 
 	export let onRateSuccess = () => {}
 	export let t_difficulty_rate = undefined
@@ -26,6 +27,9 @@
 		}, {
 			notification: `You rated: ${map[value]}`
 		})
+		if (value !== 3) {
+			slack.send(`This item ${item_id} is ${map[value]} for student ${student_id}`)
+		}
 		triggerReload()
 		onRateSuccess(value)
 	}
