@@ -16,6 +16,8 @@
 	$: is_ended = dayjs().isAfter(dayjs(zoom.end_date))
 	$: student_id = zoom.students.length ? zoom.students[0].user_id : undefined
 	$: is_classroom = zoom.is_big_classroom
+	console.log(zoom.end_date, zoom.start_date)
+	$: duration = zoom.duration || dayjs(zoom.end_date).diff(dayjs(zoom.start_date), 'minute')
 
 	const previewMaterial = async (d) => {
 		open(PdfReaderDialog, {
@@ -28,11 +30,18 @@
 	}
 </script>
 
-<div class="p-8 border border-gray-300 w-full bg-white shadow-lg rounded max-w-xl">
+<div class="p-8 border border-gray-300 w-full bg-white shadow-lg rounded max-w-xl" style="max-width: 400px">
 	<div class="w-full">
 		<div class="text-blue-500 mb-1 text-lg">
+			<div class="absolute -top-4 -right-4 w-16 h-16 rounded-full bg-white border border-gray-200 shadow">
+				{#if is_classroom}
+					<Icon name="classroom" className="w-8 text-purple-500 absolute top-4 right-4"/>
+				{:else}
+					<Icon name="one-on-one" className="w-8 text-blue-500 absolute top-4 right-4"/>
+				{/if}
+			</div>
 			{#if is_classroom}
-				<div class="text-purple-500">{zoom.sub_cat}</div>
+				<div class="text-purple-500 leading-tight">{zoom.sub_cat || zoom.sub_cat_en}</div>
 			{:else}
 				<div class="text-blue-500">
 					<Dropdown activator_style="inline-block" placement="right" caveat_visible>
@@ -46,10 +55,15 @@
 				</div>
 			{/if}
 		</div>
-		<p class="text-gray-500 text-sm">
-			{dayjs(zoom.start_date).format('DD MMM (ddd), h:mma')} - {dayjs(zoom.end_date).format('h:mma')}
-<!--			<span class="text-xs font-bold ml-2 bg-gray-100 border border-gray-300 px-1">{$zoom_store.time_zone.label}</span>-->
-		</p>
+		<div class="flex">
+			<Icon name="calendar" className="w-4 text-gray-400"/>
+			<p class="text-gray-500 text-sm ml-2">{dayjs(zoom.start_date).format('DD MMM (ddd), h:mma')} - {dayjs(zoom.end_date).format('h:mma')}</p>
+		</div>
+<!--		<span class="text-xs font-bold ml-2 bg-gray-100 border border-gray-300 px-1">{$zoom_store.time_zone.label}</span>-->
+		<div class="flex">
+			<Icon name="stopwatch" className="w-4 text-gray-400"/>
+			<p class="text-gray-500 text-sm ml-2">{duration}min</p>
+		</div>
 		<div class="my-4">
 			{#if zoom.days.length}
 				{#each zoom.days as d}
@@ -70,9 +84,13 @@
 				</div>
 			{/if}
 		</div>
-		{#each zoom.students as s}
-			<StudentLabel student={s}/>
-		{/each}
+		{#if zoom.students.length}
+			{#each zoom.students as s}
+				<StudentLabel student={s}/>
+			{/each}
+		{:else}
+			<div class="text-sm text-gray-300 border border-gray-200 rounded-full px-4 py-1 inline-block">Classroom is empty</div>
+		{/if}
 	</div>
 	{#if is_today}
 		<div class="mt-4">

@@ -65,16 +65,26 @@
 
 	<div class="flex-1 ml-4">
 		<div class="section-box">
-			<p class="mb-4 text uppercase text-gray-500">All 1-on-1 courses</p>
+			<div class="flex mb-4 items-center">
+				<Icon name="one-on-one" className="w-8"/>
+				<p class="ml-2 text uppercase text-gray-500">1-on-1 courses</p>
+			</div>
 			<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-				{#each one_on_one_course as course}
-					<CoursePreviewMinimal {student_id} {course}/>
-				{/each}
+				{#if one_on_one_course.length}
+					{#each one_on_one_course as course}
+						<CoursePreviewMinimal {student_id} {course}/>
+					{/each}
+				{:else}
+					<p class="note">No courses</p>
+				{/if}
 			</div>
 		</div>
 
 		<div class="section-box mt-4">
-			<p class="section-title mb-4">Notes for {overview.nickname}</p>
+			<div class="flex mb-4 items-center">
+				<Icon name="report" className="w-8 text-gray-400"/>
+				<p class="ml-2 text uppercase text-gray-500">Notes</p>
+			</div>
 			<StudentNoteReadOnly {student_id}/>
 		</div>
 	</div>

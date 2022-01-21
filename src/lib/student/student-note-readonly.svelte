@@ -35,6 +35,6 @@
 			</div>
 		{/each}
 	{:else}
-		<div class="note">No note</div>
+		<div class="note">No notes</div>
 	{/if}
 {/if}

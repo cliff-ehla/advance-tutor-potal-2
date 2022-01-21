@@ -18,11 +18,15 @@
 	export let one_on_one
 	export let classroom
 	import CoursePreview from '$lib/zoom/course-preview.svelte'
+	import Icon from '$lib/ui/icon.svelte'
 </script>
 
 <div class="bg-gray-100">
 	<div class="container pb-8">
-		<p style="font-size: 2em" class="font-light text-gray-500 py-4">My 1-on-1 courses</p>
+		<div class="flex items-center py-4">
+			<Icon name="one-on-one" className="w-12 text-black-500"/>
+			<p style="font-size: 2em" class="font-light text-gray-500 ml-3">My 1-on-1 courses</p>
+		</div>
 		<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
 			{#each one_on_one as course}
 				<CoursePreview {course}/>

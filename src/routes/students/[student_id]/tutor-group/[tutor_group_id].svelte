@@ -25,6 +25,7 @@
 	$: course_start_date = zoom_list[0].start_date
 	$: course_end_date = zoom_list[zoom_list.length - 1].start_date
 	$: course_completed = dayjs().isAfter(dayjs(course_end_date))
+	$: course_not_started = dayjs().isBefore(dayjs(course_start_date))
 </script>
 
 <div class="p-4 pt-0">
@@ -35,9 +36,13 @@
 			<p class="ml-2 text-gray-500">{dayjs(course_start_date).format('DD MMM')} - {dayjs(course_end_date).format('DD MMM')}</p>
 			<div class="ml-4">
 				{#if course_completed}
-					<div class="text-sm px-4 py-1 bg-blue-100 rounded-full inline-flex items-center">
-						<div class="w-2 h-2 rounded-full bg-gray-400"></div>
-						<p class="ml-2 text-gray-700">Course completed</p>
+					<div class="text-sm px-4 py-1 bg-gray-200 rounded-full inline-flex items-center">
+						<p class="text-gray-500">Course completed</p>
+					</div>
+				{:else if course_not_started}
+					<div class="text-sm px-4 py-1 bg-green-100 rounded-full inline-flex items-center">
+						<div class="w-2 h-2 rounded-full bg-green-500"></div>
+						<p class="ml-2 text-green-600">To start</p>
 					</div>
 				{:else}
 					<div class="text-sm px-4 py-1 bg-yellow-100 rounded-full inline-flex items-center">

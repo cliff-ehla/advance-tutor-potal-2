@@ -22,6 +22,8 @@
 	import {capitalize} from "$lib/helper/capitalize.js";
 	import StudentNoteReadOnly from '$lib/student/student-note-readonly.svelte'
 	import MessageWidget from '$lib/message/message-widget.svelte'
+	import dayjs from "dayjs";
+	import Icon from '$lib/ui/icon.svelte'
 	export let detail
 	$: student_id = $page.params.student_id
 	$: tutor_group_id = $page.params.tutor_group_id
@@ -30,7 +32,7 @@
 </script>
 
 <div class="bg-gray-50">
-<div class="max-w-screen-lg mx-auto">
+<div class="max-w-screen-lg mx-auto text-gray-400">
 	<div class="flex p-4 text-sm breadcrumb">
 		<a href="/students">Students</a>
 		<span class="mx-2"> > </span>
@@ -63,7 +65,7 @@
 					<div class="grid grid-cols-3 gap-4">
 						<div>
 							<a href="/students/{student_id}/upcoming-lesson"
-							   class="text-gray-500 flex items-end hover:text-blue-500 hover:bg-white transition-colors p-2 rounded hover:shadow">
+							   class="text-gray-500 flex items-end hover:text-blue-500 border border-transparent hover:border-blue-500 hover:bg-white transition-colors p-2 rounded hover:shadow">
 								<p class="num">{detail.upcoming_zoom_cnt}</p>
 								<p class="text-xs ml-1 mb-0.5 leading-none">Upcoming <br/>lessons</p>
 							</a>
@@ -77,7 +79,7 @@
 						</div>
 						<a class="leading-none mt-1.5 p-2">
 							<p class="text-xs text-gray-500 leading-none mb-1">Last lessons</p>
-							<p>{detail.last_lesson_date}</p>
+							<p>{dayjs().diff(dayjs(detail.last_zoom_lesson_date), 'day')} <span class="text-gray-500">days</span></p>
 						</a>
 					</div>
 				</div>
@@ -96,12 +98,18 @@
 			</div>
 			<p class="font-light text-xl mt-4 text-center">{detail.nickname}</p>
 			<div class="section-box mt-4">
-				<p class="section-title mb-4">Notes for {detail.nickname}</p>
+				<div class="flex items-center mb-4">
+					<Icon name="report" className="w-6 text-gray-400"/>
+					<p class="section-title ml-1">Notes</p>
+				</div>
 				<StudentNoteReadOnly {student_id}/>
 			</div>
 			{#if tutor_group_id}
 				<div class="bg-white border border-gray-300 rounded mt-2">
-					<p class="section-title p-4">Conversation</p>
+					<div class="flex items-center p-4">
+						<Icon name="chat" className="w-6 text-gray-300"/>
+						<p class="section-title ml-1">Conversation</p>
+					</div>
 					<MessageWidget crazy_fetch={false} {tutor_group_id} {student_id} height="calc(200px)"/>
 				</div>
 			{/if}

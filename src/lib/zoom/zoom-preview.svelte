@@ -37,16 +37,18 @@
 	<div class="w-full">
 		<div class="italic text-sm mb-2">
 			{#if zoom.is_big_classroom}
-				<div class="text-purple-500">{zoom.sub_cat}</div>
+				<div class="flex items-center">
+					<Icon name="classroom" className="text-purple-500 w-6 mr-2"/>
+					<div class="text-purple-500">{zoom.sub_cat}</div>
+				</div>
 			{:else}
-				<div class="text-blue-500">
-					<Dropdown activator_style="inline-block" placement="right">
+				<div class="text-blue-500 flex items-center">
+					<div use:tooltip={'One on one'}><Icon name="one-on-one"/></div>
+					<Dropdown caveat_visible activator_active_style="underline" activator_style="inline-block ml-2" placement="right">
 						<a slot="activator" href="/students/{zoom.students[0].user_id}/tutor-group/{zoom.tutor_group_id}">
 							{zoom.title.split('(')[0]}
 						</a>
-						<div class="">
-							<CoursePreviewPopup tutor_group_id={zoom.tutor_group_id}/>
-						</div>
+						<CoursePreviewPopup tutor_group_id={zoom.tutor_group_id}/>
 					</Dropdown>
 				</div>
 			{/if}
