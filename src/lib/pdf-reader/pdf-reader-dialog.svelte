@@ -9,6 +9,7 @@
 	export let item_id
 	let pdf_json
 	let ppt_link
+	let youtube_links
 
 	onMount(async () => {
 		if (item_id) {
@@ -17,6 +18,7 @@
 			})
 			pdf_json = data[0].pdf_json
 			ppt_link = data[0].ppt_link
+			youtube_links = data[0].youtube_link
 			if (ppt_link) {
 				open(ppt_link, 'preview', 'popup')
 				closeModal()
@@ -31,7 +33,7 @@
 	</div>
 {:else}
 	{#if pdf_json}
-		<Reader pages_info_2={pdf_json} top_offset={200}/>
+		<Reader {youtube_links} pages_info_2={pdf_json} top_offset={200}/>
 	{:else}
 		<button on:click={closeModal}>Close</button>
 	{/if}

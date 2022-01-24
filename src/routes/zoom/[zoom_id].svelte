@@ -55,6 +55,7 @@
 	const student_id = is_one_on_one ? students[0].user_id : null
 	let selected_item_id = items[0].item_id
 	let pdf_json
+	let youtube_links
 	let loading_item = true
 
 	import PdfReader from '$lib/pdf-reader/index.svelte'
@@ -65,13 +66,18 @@
 
 	const getItem = async () => {
 		loading_item = true
-		const {data} = await http.post(fetch, '/itemApi/get_by_ids', {
+		const {data, success} = await http.post(fetch, '/itemApi/get_by_ids', {
 			ids: [selected_item_id]
 		})
-		if (data) {
-			pdf_json = data[0].pdf_json
-			loading_item = false
-			console.log(pdf_json)
+		if (success) {
+			let ppt_link = data[0].ppt_link
+			if (ppt_link) {
+				open(ppt_link, 'preview', 'popup')
+			} else {
+				pdf_json = data[0].pdf_json
+				youtube_links = data[0].youtube_link
+				loading_item = false
+			}
 		}
 	}
 </script>
@@ -90,7 +96,7 @@
 </div>
 
 {#if !loading_item}
-	<PdfReader pages_info_2={pdf_json}/>
+	<PdfReader {youtube_links} pages_info_2={pdf_json}/>
 {/if}
 
 <div class="fixed right-8 bottom-0 z-50">
