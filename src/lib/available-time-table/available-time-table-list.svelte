@@ -57,7 +57,7 @@
 </script>
 
 <div class="flex">
-	<div class="w-40 flex-shrink-0 border-r border-gray-300 mr-4">
+	<div class="w-40 flex-shrink-0 border-r border-gray-300">
 		<p class="font-bold p-4 border-b border-gray-300 mb-4">Time slot(s)</p>
 		<div class="p-2 border-b border-gray-300">
 			{#each time_slot_list as timeslot}

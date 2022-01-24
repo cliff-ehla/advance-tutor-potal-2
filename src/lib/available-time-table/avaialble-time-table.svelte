@@ -35,7 +35,6 @@
 				end: dayjs().day(event.week).format("YYYY-MM-DD") + " " + event.end_time
 			})
 		})
-		// console.log('converted_local_events', converted_local_events)
 
 		calendar = new FullCalendar.Calendar(node, {
 			initialView: 'timeGridWeek',
@@ -150,27 +149,21 @@
 	}
 </script>
 
-<div class="flex m-4 items-center">
+<div class="flex px-4 py-2 items-center border-b border-gray-300">
 	<div>
-		<p class="text-gray-400 text-sm">Start date</p>
+		<p class="note">Start date</p>
 		<DatePicker on:datechange={onStartDayChange} selected={dayjs(start_day, 'YYYY-MM-DD HH:mm:ss').toDate()}/>
 	</div>
 	<div class="ml-4">
-		<p class="text-gray-400 text-sm">End date</p>
+		<p class="note">End date</p>
 		<DatePicker {isAllowed} on:datechange={onEndDayChange} selected={dayjs(end_day, 'YYYY-MM-DD HH:mm:ss').toDate()}/>
 	</div>
-	<div class="ml-4">
-		<p class="text-gray-400 text-sm">Number of weeks</p>
-		<div class="p-1 text-center bg-gray-100">{no_of_weeks} weeks</div>
-	</div>
 	<div class="ml-auto flex items-center">
-		<p class="p-2 mr-2 bg-gray-200 rounded font-bold">{local_timezone}</p>
-		<Dropdown placement="bottom-end">
-			<div slot="activator">
-				<button class="w-10 h-10 rounded-full outline-none flex items-center justify-center">
-					<Icon name="more" className="w-4"/>
-				</button>
-			</div>
+		<p class="p-2 mr-2 bg-gray-200 rounded text-xs">{local_timezone}</p>
+		<Dropdown placement="bottom-end" activator_style="rounded-full w-8 h-8 cc">
+			<button slot="activator">
+				<Icon name="more" className="w-4"/>
+			</button>
 			<div class="dropdown">
 				<div on:click={onDelete} class="item">Delete</div>
 			</div>
