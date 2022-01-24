@@ -5,7 +5,6 @@
 	import Icon from '$lib/ui/icon.svelte'
 	import {tick, createEventDispatcher, getContext} from 'svelte'
 	import {convertUtcSlotToLocal, convertLocalSlotToUtc} from "./parse-time-slot";
-	import {deleteTutorAvailableTimeSlot} from "../../api/tutor-api";
 	import utc from "dayjs/plugin/utc.js";
 	import EventMenu from './event-menu.svelte'
 	const {showPopper} = getContext('popper')
@@ -131,8 +130,11 @@
 	}
 
 	const onDelete = () => {
-		console.log('delete!')
-		deleteTutorAvailableTimeSlot({timeslot_id})
+		http.post(fetch, '/tutorApi/delete_available_timeslot', {
+			timeslot_id
+		}, {
+			notification: 'Timeslot deleted'
+		})
 		dispatch('delete', timeslot_id)
 	}
 
@@ -158,12 +160,12 @@
 		<p class="p-2 mr-2 bg-gray-200 rounded font-bold">{local_timezone}</p>
 		<Dropdown placement="bottom-end">
 			<div slot="activator">
-				<button class="w-10 h-10 rounded outline-none flex items-center justify-center">
-					<Icon name="more" className="w-6"/>
+				<button class="w-10 h-10 rounded-full outline-none flex items-center justify-center">
+					<Icon name="more" className="w-4"/>
 				</button>
 			</div>
-			<div class="bg-white shadow-lg min-w-xs">
-				<div on:click={onDelete} class="p-4 cursor-pointer hover:bg-gray-200 hover:text-red-500">Delete</div>
+			<div class="dropdown">
+				<div on:click={onDelete} class="item">Delete</div>
 			</div>
 		</Dropdown>
 	</div>
