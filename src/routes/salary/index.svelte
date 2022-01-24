@@ -60,7 +60,7 @@
 				<td>{dayjs(t.start_date).format('DD MMM')}</td>
 				<td>{t.title}</td>
 				<td>
-					{t.number_of_student} (TODO)
+					{t.number_of_student}
 				</td>
 				<td>{t.duration}</td>
 				<td>

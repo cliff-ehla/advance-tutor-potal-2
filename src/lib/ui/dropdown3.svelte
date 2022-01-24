@@ -31,7 +31,6 @@
 
 	export const show = () => {
 		if (!popup_el) return
-		console.log('show')
 		popup_el.classList.remove('hidden')
 		popper_instance.update()
 		active = true

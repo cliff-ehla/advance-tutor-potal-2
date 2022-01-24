@@ -41,9 +41,24 @@
 <!--			<Icon className="w-4 text-gray-500 hover:text-current" name="bell"/>-->
 <!--		</button>-->
 <!--	</div>-->
-	<div class="ml-auto">
-		<Dropdown placement="bottom-end">
-			<div slot="activator" class="inline-flex items-center">
+	<div class="ml-auto flex items-center">
+		<Dropdown placement="bottom-end" activator_active_style="bg-gray-200" activator_style="bg-gray-100 border border-gray-300 w-6 h-6 rounded-full inline-flex items-center justify-center">
+			<div slot="activator">
+				<Icon name="info" className="w-3"/>
+			</div>
+			<div class="dropdown">
+				<a target="_blank" href="https://ehla-media-bucket.s3.ap-southeast-1.amazonaws.com/pdf/User+guide_teaching+portal_10Jan2022(1)+(1).pdf" class="item">
+					<Icon name="download" className="w-4 mr-2"/>
+					<span class="flex-1">User guide</span>
+				</a>
+				<a target="_blank" href="https://ehla-media-bucket.s3.ap-southeast-1.amazonaws.com/pdf/EHLA+Teacher+administrative+stuff_v31Dec2021(1).pdf" class="item">
+					<Icon name="download" className="w-4 mr-2"/>
+					<span class="flex-1">Administrative stuff</span>
+				</a>
+			</div>
+		</Dropdown>
+		<Dropdown placement="bottom-end" activator_style="rounded-full ml-3">
+			<div slot="activator">
 				<div class="rounded-full w-8 h-8 bg-cover bg-center" style="background-image: url({$session.user_info.profile_pic})"></div>
 			</div>
 			<div class="dropdown w-56">
