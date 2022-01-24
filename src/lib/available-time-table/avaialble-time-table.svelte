@@ -130,12 +130,19 @@
 	}
 
 	const onDelete = () => {
-		http.post(fetch, '/tutorApi/delete_available_timeslot', {
-			timeslot_id
-		}, {
-			notification: 'Timeslot deleted'
+		dialog.confirm({
+			message: 'Delete the time slot',
+			onConfirm: () => {
+				http.post(fetch, '/tutorApi/delete_available_timeslot', {
+					timeslot_id
+				}, {
+					notification: 'Timeslot deleted'
+				})
+			},
+			onSuccess: () => {
+				dispatch('delete', timeslot_id)
+			}
 		})
-		dispatch('delete', timeslot_id)
 	}
 
 	const isAllowed = (date) => {
