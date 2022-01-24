@@ -8,8 +8,10 @@
 	import utc from "dayjs/plugin/utc.js";
 	import EventMenu from './event-menu.svelte'
 	const {showPopper} = getContext('popper')
+	const {openModal} = getContext('simple-modal')
 	import {http} from "$lib/http.js";
 	import {dialog} from "$lib/store/dialog.js";
+	import AddSlotDialog from "$lib/available-time-table/add-slot-dialog.svelte";
 
 	export let timeslot_id
 	export let start_day
@@ -54,15 +56,14 @@
 				}
 			},
 			select: e => {
-				let new_event = {
+				openModal(AddSlotDialog, {
 					start: e.start,
-					end: e.end
-				}
-				dialog.confirm({
-					message: 'Add the slot to your calendar',
-					onConfirm: () => {
-						calendar.addEventSource([new_event])
-						save('Time session added')
+					end: e.end,
+					onConfirm: ({start, end}) => {
+						calendar.addEventSource([{
+							start, end
+						}])
+						save('Session added')
 					}
 				})
 			},
@@ -70,17 +71,17 @@
 				showPopper(el, EventMenu, {
 					onDelete: () => {
 						event.remove()
-						save('Time session removed')
+						save('Session removed')
 					}
 				}, {
 					placement: 'right'
 				})
 			},
 			eventDragStop: e => {
-				save('Time session Edited')
+				save('Session Edited')
 			},
 			eventResizeStop: e => {
-				save('Time session Edited')
+				save('Session Edited')
 			},
 		})
 		calendar.render()

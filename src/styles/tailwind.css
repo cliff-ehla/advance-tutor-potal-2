@@ -39,3 +39,6 @@
 .note {
     @apply text-sm text-gray-500;
 }
+.input {
+    @apply px-4 py-2 border border-gray-300 rounded hover:border-blue-500 focus:border-blue-500;
+}
