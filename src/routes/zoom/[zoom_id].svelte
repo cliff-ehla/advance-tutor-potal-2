@@ -25,6 +25,7 @@
 	import {onMount} from "svelte";
 	import {page} from "$app/stores";
 	import {slack} from "$lib/helper/slack.js";
+	import {tooltip} from "$lib/aciton/tooltip.js";
 	dayjs.extend(utc)
 
 	onMount(() => {
@@ -83,7 +84,8 @@
 </script>
 
 <div class="h-10 border-b border-gray-300 items-center flex">
-	<button on:click={() => {history.back()}} class="w-10 h-10 cc hover:bg-blue-200">
+	<button use:tooltip={'Back'} on:click={() => {history.back()}}
+	        class="w-8 h-8 rounded-full ml-1 cc hover:bg-blue-100 hover:text-gray-700 text-gray-500">
 		<Icon name="right" className="transform rotate-180 w-4"/>
 	</button>
 	{#each items as item}
