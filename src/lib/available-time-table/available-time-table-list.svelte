@@ -3,7 +3,7 @@
 
 	import TimeTable from './avaialble-time-table.svelte'
 	import dayjs from "dayjs";
-	import {setTutorAvailableTimeSlot} from "../../api/tutor-api";
+	import {http} from "$lib/http.js";
 
 	let selected_time_slot = time_slot_list.length ? time_slot_list[0] : null
 	let render = true
@@ -29,7 +29,10 @@
 			end_time: dayjs(end).format('YYYY-MM-DD HH:mm:ss'),
 			timeslot: []
 		}
-		selected_time_slot = await setTutorAvailableTimeSlot(create_new_timeslot_payload)
+		const {data} = await http.post(fetch, '/tutorApi/set_available_time', create_new_timeslot_payload, {
+			notification: 'New time slot created'
+		})
+		selected_time_slot = data
 		render = false
 		setTimeout(() => {
 			render = true
@@ -54,18 +57,18 @@
 </script>
 
 <div class="flex">
-	<div class="w-56 border-r border-gray-300 mr-4">
+	<div class="w-40 flex-shrink-0 border-r border-gray-300 mr-4">
 		<p class="font-bold p-4 border-b border-gray-300 mb-4">Time slot(s)</p>
 		<div class="p-2 border-b border-gray-300">
 			{#each time_slot_list as timeslot}
-				<div on:click={() => {onTimeSlotSelect(timeslot)}} class="cursor-pointer p-4 {selected_time_slot === timeslot ? 'bg-blue-100 text-blue-500' : ''}">
+				<div on:click={() => {onTimeSlotSelect(timeslot)}} class="cursor-pointer p-2 rounded {selected_time_slot === timeslot ? 'bg-blue-100 text-blue-500' : ''}">
 					{dayjs(timeslot.start_time).format('DD MMM')} -
 					{dayjs(timeslot.end_time).format('DD MMM')}
 				</div>
 			{/each}
 		</div>
-		<div class="p-4 text-center">
-			<button class="py-2 px-8 rounded bg-blue-500 text-white" on:click={onCreateNewSlot}>Create new slot</button>
+		<div class="p-2 text-center">
+			<button class="py-2 w-full cc rounded bg-blue-500 text-white" on:click={onCreateNewSlot}>Create new slot</button>
 		</div>
 	</div>
 	<div class="flex-1">

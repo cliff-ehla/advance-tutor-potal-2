@@ -91,7 +91,6 @@
 	const save = (notification) => {
 		setTimeout(() => {
 			let events = calendar.getEvents()
-			console.log('events', events)
 			let computed_events = events.map(e => {
 				let week = dayjs(e.start).day()
 				let start_time = dayjs(e.start).format('HH:mm:ss')
@@ -111,7 +110,6 @@
 				timeslot: utc_slots
 			}
 			dispatch('update', payload)
-			console.log(payload)
 			http.post(fetch, '/tutorApi/set_available_time', payload, {
 				notification
 			})
