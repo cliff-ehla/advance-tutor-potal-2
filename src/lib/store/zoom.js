@@ -51,18 +51,19 @@ const create_store = () => {
 			time_zone: time_zone_options.find(opt => opt.tz === $time_zone)
 		}
 	})
-	const cacheFirst = async (fetch) => {
+	const cacheFirst = (fetch) => {
 		const cache = get(store)
 		if (cache.length) {
 			fetchData(fetch)
+			return {success: true, data: cache}
 		} else {
-			await fetchData(fetch)
+			return fetchData(fetch)
 		}
 	}
 	const fetchData = async (fetch) => {
 		let start_time = dayjs().subtract(8, 'month').format('YYYY-MM-DD HH:mm:ss')
 		let end_time = dayjs().add(3, 'month').format('YYYY-MM-DD HH:mm:ss')
-		const {data, success} = await http.post(fetch, '/zoomApi/zoom_list_all', {
+		const {data, success, debug} = await http.post(fetch, '/zoomApi/zoom_list_all', {
 			start_time,
 			end_time
 		})
@@ -70,21 +71,21 @@ const create_store = () => {
 			start_date: start_time,
 			end_date: end_time,
 		})
-		if (success) {
-			data.forEach(zoom => {
-				res.data.forEach(zoom2 => {
-					if (zoom.wrapper_id === zoom2.zoom_id) {
-						const {description_code_short_id, sub_cat, rc_level, reg_user_cnt, student_size} = zoom2
-						zoom.sub_cat = sub_cat
-						zoom.rc_level = rc_level
-						zoom.reg_user_cnt = reg_user_cnt
-						zoom.student_size = student_size
-						zoom.description_code_short_id = description_code_short_id
-					}
-				})
+		if (!success) return {data, success, debug}
+		data.forEach(zoom => {
+			res.data.forEach(zoom2 => {
+				if (zoom.wrapper_id === zoom2.zoom_id) {
+					const {description_code_short_id, sub_cat, rc_level, reg_user_cnt, student_size} = zoom2
+					zoom.sub_cat = sub_cat
+					zoom.rc_level = rc_level
+					zoom.reg_user_cnt = reg_user_cnt
+					zoom.student_size = student_size
+					zoom.description_code_short_id = description_code_short_id
+				}
 			})
-			store.set(data)
-		}
+		})
+		store.set(data)
+		return {data, success, debug}
 	}
 	const setTimeZoom = (tz) => {
 		time_zone.set(tz)

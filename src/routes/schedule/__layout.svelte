@@ -1,15 +1,17 @@
 <script context="module">
 	import {zoom_store} from "$lib/store/zoom.js";
+	import {onFail} from "$lib/http.js";
 
 	export const load = async ({session, page, fetch, stuff}) => {
 		if (page.query.get('reload')) {}
 		if (!session.user_info) {
 			return {
 				status: 302,
-				redirect: '/login'
+				redirect: '/logout'
 			}
 		}
-		await zoom_store.cacheFirst(fetch)
+		const {data, success, debug} = await zoom_store.cacheFirst(fetch)
+		if (!success) return onFail(debug)
 		return true
 	}
 </script>

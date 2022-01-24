@@ -73,7 +73,7 @@ const onFail = (debug) => {
 	if (debug.err_code === 401) {
 		return {
 			status: 302,
-			redirect: '/login'
+			redirect: '/logout'
 		}
 	}
 	sentry.log(debug)
