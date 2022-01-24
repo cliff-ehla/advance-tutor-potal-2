@@ -15,7 +15,7 @@
 </script>
 
 <script>
-	import TimeTableList from '$lib/calendar/available-time-table-list.svelte'
+	import TimeTableList from '$lib/available-time-table/available-time-table-list.svelte'
 	export let data
 </script>
 
