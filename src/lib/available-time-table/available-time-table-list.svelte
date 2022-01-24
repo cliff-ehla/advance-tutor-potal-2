@@ -23,14 +23,14 @@
 		} else {
 			start = dayjs()
 		}
-		let end = start.add(52, 'week')
+		let end = start.add(24, 'week')
 		let create_new_timeslot_payload = {
 			start_time: dayjs(start).format('YYYY-MM-DD HH:mm:ss'),
 			end_time: dayjs(end).format('YYYY-MM-DD HH:mm:ss'),
 			timeslot: []
 		}
 		const {data} = await http.post(fetch, '/tutorApi/set_available_time', create_new_timeslot_payload, {
-			notification: 'New time slot created'
+			notification: 'New time slot created.'
 		})
 		selected_time_slot = data
 		render = false

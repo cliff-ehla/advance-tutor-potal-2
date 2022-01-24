@@ -117,7 +117,7 @@
 
 	const onStartDayChange = async (e) => {
 		start_day = dayjs(e.detail).format('YYYY-MM-DD HH:mm:ss')
-		save()
+		save('Start date updated')
 		await tick()
 		if (no_of_weeks <= min_no_of_week) {
 			end_day = dayjs(start_day, 'YYYY-MM-DD HH:mm:ss').add(min_no_of_week, 'week')
@@ -126,7 +126,7 @@
 
 	const onEndDayChange = (e) => {
 		end_day = dayjs(e.detail).format('YYYY-MM-DD HH:mm:ss')
-		save()
+		save('End date updated')
 	}
 
 	const onDelete = () => {
