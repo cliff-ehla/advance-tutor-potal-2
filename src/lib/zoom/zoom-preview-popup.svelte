@@ -20,6 +20,8 @@
 	$: student_id = zoom.students.length ? zoom.students[0].user_id : undefined
 	$: is_classroom = zoom.is_big_classroom
 	$: duration = zoom.duration || dayjs(zoom.end_date).diff(dayjs(zoom.start_date), 'minute')
+	const default_max_student_display = 5
+	let max_student_display = default_max_student_display
 
 	const previewMaterial = async (d) => {
 		open(PdfReaderDialog, {
@@ -88,9 +90,22 @@
 			{/if}
 		</div>
 		{#if zoom.students.length}
-			{#each zoom.students as s}
+			{#each zoom.students.slice(0,max_student_display) as s}
 				<StudentLabel student={s}/>
 			{/each}
+			{#if zoom.students.length > default_max_student_display}
+				{#if max_student_display === 9999}
+					<span class="text-sm text-blue-500 hover:text-blue-700 cursor-pointer whitespace-nowrap"
+					      on:click|stopPropagation={() => {max_student_display = 4}}>
+						show less
+					</span>
+				{:else}
+					<span class="text-sm text-blue-500 hover:text-blue-700 cursor-pointer whitespace-nowrap"
+					      on:click|stopPropagation={() => {max_student_display = 9999}}>
+						...{zoom.students.length - max_student_display}+ more
+					</span>
+				{/if}
+			{/if}
 		{:else}
 			<div class="text-sm text-gray-300 border border-gray-200 rounded-full px-4 py-1 inline-block">Classroom is empty</div>
 		{/if}
