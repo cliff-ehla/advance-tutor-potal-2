@@ -9,8 +9,8 @@
 	import utc from "dayjs/plugin/utc.js";
 	import EventMenu from './event-menu.svelte'
 	const {showPopper} = getContext('popper')
-	import {notifications} from "$lib/store/notification.js";
 	import {http} from "$lib/http.js";
+	import {dialog} from "$lib/store/dialog.js";
 
 	export let timeslot_id
 	export let start_day
@@ -60,34 +60,35 @@
 					start: e.start,
 					end: e.end
 				}
-				calendar.addEventSource([new_event])
-				notifications.send('Time session added')
-				save()
+				dialog.confirm({
+					message: 'Add the slot to your calendar',
+					onConfirm: () => {
+						calendar.addEventSource([new_event])
+						save('Time session added')
+					}
+				})
 			},
 			eventClick: ({event, el}) => {
 				showPopper(el, EventMenu, {
 					onDelete: () => {
 						event.remove()
-						notifications.send('Time session removed')
-						save()
+						save('Time session removed')
 					}
 				}, {
 					placement: 'right'
 				})
 			},
 			eventDragStop: e => {
-				save()
-				notifications.send('Time session Edited')
+				save('Time session Edited')
 			},
 			eventResizeStop: e => {
-				save()
-				notifications.send('Time session Edited')
+				save('Time session Edited')
 			},
 		})
 		calendar.render()
 	}
 
-	const save = () => {
+	const save = (notification) => {
 		setTimeout(() => {
 			let events = calendar.getEvents()
 			console.log('events', events)
@@ -112,7 +113,7 @@
 			dispatch('update', payload)
 			console.log(payload)
 			http.post(fetch, '/tutorApi/set_available_time', payload, {
-				notification: 'Timetable updated'
+				notification
 			})
 		}, 10)
 	}

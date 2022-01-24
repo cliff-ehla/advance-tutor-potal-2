@@ -17,6 +17,7 @@
 	import Popup from '$lib/app-shelf/popup.svelte'
 	import Popper from '$lib/app-shelf/popper.svelte'
 	import TopBar from '$lib/app-shelf/top-bar.svelte'
+	import Dialog from '$lib/app-shelf/dialog.svelte'
 	import {session} from '$app/stores'
 	import {page} from "$app/stores";
 
@@ -35,6 +36,7 @@
 	</div>
 {/if}
 <Toast/>
+<Dialog/>
 <Modal>
 	<Popup>
 		<Popper>
