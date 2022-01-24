@@ -29,7 +29,8 @@ export const eventContent = (arg) => {
 	if (is_classroom) {
 		let lv_el = document.createElement('div')
 		lv_el.innerHTML = capitalize(zoom.rc_level)
-		lv_el.classList.add('overflow-hidden', 'px-0.5', 'text-xs', 'bg-gray-200', 'hover:bg-gray-300', 'ml-auto', 'leading-tight')
+		lv_el.classList.add('overflow-hidden', 'whitespace-nowrap', 'px-0.5', 'text-xs', 'text-gray-500', 'bg-gray-200', 'hover:bg-gray-300', 'ml-auto', 'leading-tight')
+		lv_el.style.maxWidth = '40px'
 		tippy(lv_el, {content: zoom.rc_level})
 		let code_el = document.createElement('div')
 		code_el.innerHTML = zoom.description_code_short_id
