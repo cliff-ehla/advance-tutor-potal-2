@@ -18,6 +18,7 @@
 
 	$: is_today = dayjs(zoom.start_date).isToday()
 	$: is_ended = dayjs().isAfter(dayjs(zoom.end_date))
+	$: student = zoom.students.length ? zoom.students[0] : undefined
 	$: student_id = zoom.students.length ? zoom.students[0].user_id : undefined
 	$: student_gender = zoom.students.length ? zoom.students[0].gender : undefined
 	$: is_classroom = zoom.is_big_classroom
@@ -38,7 +39,7 @@
 
 <div class="p-8 border border-gray-300 w-full bg-white shadow-lg rounded overflow-y-auto" style="max-width: 400px; max-height: 600px">
 	<div class="w-full">
-		<div class="text-blue-500 mb-1 text-lg">
+		<div class="text-blue-500 text-lg">
 			<div class="absolute -top-4 -right-4 w-16 h-16 rounded-full bg-white border border-gray-200 shadow">
 				{#if is_classroom}
 					<Icon name="classroom" className="w-8 text-purple-500 absolute top-4 right-4"/>
@@ -48,9 +49,9 @@
 			</div>
 			{#if is_classroom}
 				<p class="text-sm bg-purple-400 rounded-sm font-bold text-white px-2 py-0.5 leading-tight inline-block">{capitalize(zoom.rc_level)}</p>
-				<div class="text-purple-500 leading-tight">{zoom.sub_cat || zoom.sub_cat_en}</div>
+				<div class="text-purple-500 leading-tight mt-1">{zoom.sub_cat || zoom.sub_cat_en}</div>
 			{:else}
-				<div class="text-blue-500">
+				<div class="text-gray-700">
 					<Dropdown activator_style="inline-block" placement="right" caveat_visible>
 						<a use:tooltip={'Click to check details'} slot="activator" href="/students/{student_id}/tutor-group/{zoom.tutor_group_id}">
 							{zoom.title.split('(')[0]}
@@ -62,6 +63,14 @@
 				</div>
 			{/if}
 		</div>
+		{#if !is_classroom}
+			<div class="flex items-center">
+				<img src="/student-{student.gender}-icon.png" alt="gender" class="rounded-full border border-gray-400 w-5">
+				<p class="text text-purple-500 ml-1">{student.nickname}</p>
+				<div style="font-size: 10px" class="bg-purple-400 text-white px-2 rounded-sm ml-1 text-xs font-bold">{capitalize(student.level)}</div>
+			</div>
+			<p class="mt-1 text-xs text-gray-500 pl-2 border-l-4 border-purple-400 bg-purple-50 py-0.5 leading-tight">Violet's parents requested to change to another teacher who can encourage Violet to speak more in a lively class.</p>
+		{/if}
 		<div class="grid grid-cols-2 bg-gray-50 leading-none border border-gray-200 mt-4">
 			<div class="text-center p-1 relative">
 				<img src={$user_info.profile_pic} alt="profile pic" class="border border-gray-400 rounded-full w-5 h-5 absolute left-1 top-1">
@@ -82,7 +91,7 @@
 				<p class="text-gray-500 text-xs -mt-1">{dayjs.utc(zoom.start_date_utc).tz($zoom_store.time_zone_options[1].tz).format('DD MMM')}</p>
 			</div>
 		</div>
-		<div class="my-4">
+		<div class="mt-4">
 			{#if zoom.days.length}
 				{#each zoom.days as d}
 					<div class="relative">
@@ -104,25 +113,27 @@
 				</div>
 			{/if}
 		</div>
-		{#if zoom.students.length}
-			{#each zoom.students.slice(0,max_student_display) as s}
-				<StudentLabel student={s}/>
-			{/each}
-			{#if zoom.students.length > default_max_student_display}
-				{#if max_student_display === 9999}
+		{#if is_classroom}
+			{#if zoom.students.length}
+				{#each zoom.students.slice(0,max_student_display) as s}
+					<StudentLabel student={s}/>
+				{/each}
+				{#if zoom.students.length > default_max_student_display}
+					{#if max_student_display === 9999}
 					<span class="text-sm text-blue-500 hover:text-blue-700 cursor-pointer whitespace-nowrap"
 					      on:click|stopPropagation={() => {max_student_display = 4}}>
 						show less
 					</span>
-				{:else}
+					{:else}
 					<span class="text-sm text-blue-500 hover:text-blue-700 cursor-pointer whitespace-nowrap"
 					      on:click|stopPropagation={() => {max_student_display = 9999}}>
 						...{zoom.students.length - max_student_display}+ more
 					</span>
+					{/if}
 				{/if}
+			{:else}
+				<div class="text-sm text-gray-300 border border-gray-200 rounded-full px-4 py-1 inline-block">Classroom is empty</div>
 			{/if}
-		{:else}
-			<div class="text-sm text-gray-300 border border-gray-200 rounded-full px-4 py-1 inline-block">Classroom is empty</div>
 		{/if}
 	</div>
 	{#if is_today}
