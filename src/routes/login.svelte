@@ -71,7 +71,7 @@
 </div>
 
 <svelte:head>
-	<title>Login | EHLA Zoom class</title>
+	<title>EHLA Zoom class</title>
 </svelte:head>
 
 <style>
