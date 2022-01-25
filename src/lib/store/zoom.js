@@ -33,7 +33,8 @@ const create_store = () => {
 			return {
 				...zoom,
 				start_date,
-				end_date
+				end_date,
+				start_date_utc: zoom.start_date
 			}
 		})
 		const events = zoom_list.map(zoom => {

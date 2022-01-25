@@ -14,10 +14,12 @@
 	import StudentLabel from '$lib/student/student-label.svelte'
 	import {capitalize} from "$lib/helper/capitalize.js";
 	import {zoom_store} from '$lib/store/zoom.js'
+	import {user_info} from "$lib/store/user_info.js";
 
 	$: is_today = dayjs(zoom.start_date).isToday()
 	$: is_ended = dayjs().isAfter(dayjs(zoom.end_date))
 	$: student_id = zoom.students.length ? zoom.students[0].user_id : undefined
+	$: student_gender = zoom.students.length ? zoom.students[0].gender : undefined
 	$: is_classroom = zoom.is_big_classroom
 	$: duration = zoom.duration || dayjs(zoom.end_date).diff(dayjs(zoom.start_date), 'minute')
 	const default_max_student_display = 5
@@ -60,21 +62,34 @@
 				</div>
 			{/if}
 		</div>
-		<div class="flex items-center">
-			<Icon name="calendar" className="w-4 text-gray-400"/>
-			<p class="text-gray-500 text-sm ml-2 mr-2">{dayjs(zoom.start_date).format('DD MMM (ddd), h:mma')} - {dayjs(zoom.end_date).format('h:mma')}</p>
-			<p style="font-size: 8px" class="ml-auto bg-gray-100 border border-gray-300 px-1">{$zoom_store.time_zone.label}</p>
-		</div>
-		<div class="flex">
-			<Icon name="stopwatch" className="w-4 text-gray-400"/>
-			<p class="text-gray-500 text-sm ml-2">{duration}min</p>
+		<div class="grid grid-cols-2 bg-gray-50 leading-none border border-gray-200 mt-4">
+			<div class="text-center p-1 relative">
+				<img src={$user_info.profile_pic} alt="profile pic" class="border border-gray-400 rounded-full w-5 h-5 absolute left-1 top-1">
+				<p class="tz mb-0.5">{$zoom_store.time_zone_options[0].label}</p>
+				<p class="text-gray-500 text-xl">{dayjs.utc(zoom.start_date_utc).tz($zoom_store.time_zone_options[0].tz).format('h:mma')}</p>
+				<p class="text-xs text-gray-500 -mt-1">{dayjs.utc(zoom.start_date_utc).local().format('DD MMM')}</p>
+			</div>
+			<div class="border-l border-gray-300 text-center p-1 relative">
+				<div style="font-size: 10px" class="absolute w-12 -ml-6 py-0.5 rounded-t-lg bg-gray-400 text-white left-0 bottom-0">{duration} min</div>
+				<Icon name="timezone" className="absolute -left-3 top-1/2 -mt-3 w-6 text-gray-400"/>
+				{#if is_classroom}
+					<Icon name="classroom" className="text-purple-900 w-5 absolute right-1 top-1"/>
+				{:else}
+					<img src="/student-{student_gender}-icon.png" alt="profile pic" class="border border-gray-500 rounded-full w-5 h-5 absolute right-1 top-1">
+				{/if}
+				<p class="tz mb-0.5">{$zoom_store.time_zone_options[1].label}</p>
+				<p class="text-gray-500 text-xl">{dayjs.utc(zoom.start_date_utc).tz($zoom_store.time_zone_options[1].tz).format('h:mma')}</p>
+				<p class="text-gray-500 text-xs -mt-1">{dayjs.utc(zoom.start_date_utc).tz($zoom_store.time_zone_options[1].tz).format('DD MMM')}</p>
+			</div>
 		</div>
 		<div class="my-4">
 			{#if zoom.days.length}
 				{#each zoom.days as d}
 					<div class="relative">
-						<div use:tooltip={'Preview material'} on:click={() => {previewMaterial(d)}} class="cursor-pointer hover:text-blue-700 hover:bg-gray-200 my-2 group px-4 py-3 bg-gray-100 shadow rounded border-gray-300 border">
-							<p class="leading-tight">{d.title}</p>
+						<div use:tooltip={'Preview material'} on:click={() => {previewMaterial(d)}}
+						     class="flex items-center cursor-pointer bg-gray-50 hover:text-blue-500 hover:bg-white transition-colors my-2 px-4 py-3 shadow rounded border-gray-300 border">
+							<Icon name="pdf" className="text-gray-500 w-6 flex-shrink-0"/>
+							<p class="leading-tight ml-2">{d.title}</p>
 						</div>
 						{#if is_ended && !is_classroom}
 							<div class="ml-4 absolute -top-3 -right-4">
@@ -123,3 +138,10 @@
 		</div>
 	{/if}
 </div>
+
+<style>
+	.tz {
+		@apply bg-gray-100 border border-gray-300 px-1 inline-block;
+		font-size: 9px;
+	}
+</style>
