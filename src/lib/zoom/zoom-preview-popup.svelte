@@ -15,6 +15,9 @@
 	import {capitalize} from "$lib/helper/capitalize.js";
 	import {zoom_store} from '$lib/store/zoom.js'
 	import {user_info} from "$lib/store/user_info.js";
+	import {student_store} from "$lib/store/student.js";
+	import {onMount} from "svelte";
+	import {is_loading} from "$lib/store/is_loading.js";
 
 	$: is_today = dayjs(zoom.start_date).isToday()
 	$: is_ended = dayjs().isAfter(dayjs(zoom.end_date))
@@ -23,8 +26,14 @@
 	$: student_gender = zoom.students.length ? zoom.students[0].gender : undefined
 	$: is_classroom = zoom.is_big_classroom
 	$: duration = zoom.duration || dayjs(zoom.end_date).diff(dayjs(zoom.start_date), 'minute')
+	$: student_note_list = $student_store[student_id]
+	$: student_note = student_note_list && student_note_list[0]
 	const default_max_student_display = 5
 	let max_student_display = default_max_student_display
+
+	onMount(() => {
+		student_store.fetchStudentNote(fetch, {student_id})
+	})
 
 	const previewMaterial = async (d) => {
 		open(PdfReaderDialog, {
@@ -51,7 +60,7 @@
 				<p class="text-sm bg-purple-400 rounded-sm font-bold text-white px-2 py-0.5 leading-tight inline-block">{capitalize(zoom.rc_level)}</p>
 				<div class="text-purple-500 leading-tight mt-1">{zoom.sub_cat || zoom.sub_cat_en}</div>
 			{:else}
-				<div class="text-gray-700">
+				<div class="text-gray-700 leading-tight mb-1">
 					<Dropdown activator_style="inline-block" placement="right" caveat_visible>
 						<a use:tooltip={'Click to check details'} slot="activator" href="/students/{student_id}/tutor-group/{zoom.tutor_group_id}">
 							{zoom.title.split('(')[0]}
@@ -69,7 +78,17 @@
 				<p class="text text-purple-500 ml-1">{student.nickname}</p>
 				<div style="font-size: 10px" class="bg-purple-400 text-white px-2 rounded-sm ml-1 text-xs font-bold">{capitalize(student.level)}</div>
 			</div>
-			<p class="mt-1 text-xs text-gray-500 pl-2 border-l-4 border-purple-400 bg-purple-50 py-0.5 leading-tight">Violet's parents requested to change to another teacher who can encourage Violet to speak more in a lively class.</p>
+			<div class="mt-1 text-xs text-gray-500 pl-2 border-l-4 border-purple-400 bg-purple-50 py-0.5 leading-tight">
+				{#if student_note}
+					<p>{student_note.note}</p>
+				{:else}
+					{#if $is_loading}
+						<p>Loading...</p>
+					{:else}
+						<p class="opacity-60">No notes for the student</p>
+					{/if}
+				{/if}
+			</div>
 		{/if}
 		<div class="grid grid-cols-2 bg-gray-50 leading-none border border-gray-200 mt-4">
 			<div class="text-center p-1 relative">
