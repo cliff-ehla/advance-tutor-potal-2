@@ -16,6 +16,7 @@ export const post = async (req) => {
 		let user_info = {
 			nickname: user.nickname,
 			username: user.username,
+			user_id: user.id,
 			profile_pic: user.avatar.filepath,
 		}
 		let user_info_cookie = cookie.serialize('user_info', JSON.stringify(user_info), {

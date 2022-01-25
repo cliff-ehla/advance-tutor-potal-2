@@ -101,6 +101,9 @@
 				<div class="flex items-center mb-4">
 					<Icon name="report" className="w-6 text-gray-400"/>
 					<p class="section-title ml-1">Notes</p>
+					<a href="/students/{student_id}/notes" class="ml-auto">
+						<Icon name="expand" className="w-4 text-gray-400"/>
+					</a>
 				</div>
 				<StudentNoteReadOnly {student_id}/>
 			</div>

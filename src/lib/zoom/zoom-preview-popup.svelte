@@ -75,11 +75,11 @@
 			{/if}
 		</div>
 		{#if !is_classroom}
-			<div class="flex items-center">
+			<a href="/students/{student_id}" class="group flex items-center">
 				<img src="/student-{student.gender}-icon.png" alt="gender" class="rounded-full border border-gray-400 w-5">
-				<p class="text text-purple-500 ml-1">{student.nickname}</p>
+				<p class="text text-purple-500 ml-1 group-hover:text-purple-700">{student.nickname}</p>
 				<div style="font-size: 10px" class="bg-purple-400 text-white px-2 rounded-sm ml-1 text-xs font-bold">{capitalize(student.level)}</div>
-			</div>
+			</a>
 			<div class:hover:bg-purple-100={student_note} class="mt-1 text-xs text-gray-500 pl-2 border-l-4 border-purple-400 bg-purple-50 py-0.5 leading-tight">
 				{#if student_note}
 					<Dropdown activator_style="inline-block" activator_active_style="bg-transparent">
@@ -102,7 +102,7 @@
 				{/if}
 			</div>
 		{/if}
-		<div class="grid grid-cols-2 bg-gray-50 leading-none border border-gray-200 mt-4">
+		<div style="min-width: 280px" class="grid grid-cols-2 bg-gray-50 leading-none border border-gray-200 mt-4">
 			<div class="text-center p-1 relative">
 				<img src={$user_info.profile_pic} alt="profile pic" class="border border-gray-400 rounded-full w-5 h-5 absolute left-1 top-1">
 				<p class="tz mb-0.5">{$zoom_store.time_zone_options[0].label}</p>
