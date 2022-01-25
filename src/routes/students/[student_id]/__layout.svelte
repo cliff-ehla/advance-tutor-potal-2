@@ -79,7 +79,7 @@
 						</div>
 						<a class="leading-none mt-1.5 p-2">
 							<p class="text-xs text-gray-500 leading-none mb-1">Last lessons</p>
-							<p>{dayjs().diff(dayjs(detail.last_zoom_lesson_date), 'day')} <span class="text-gray-500">days</span></p>
+							<p>{dayjs().diff(dayjs(detail.last_zoom_lesson_date), 'day')} <span class="text-gray-500">days ago</span></p>
 						</a>
 					</div>
 				</div>
