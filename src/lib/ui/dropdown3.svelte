@@ -74,7 +74,7 @@
 		<slot name="activator"/>
 		{#if caveat_visible}
 			<svg viewBox="0 0 36.001 36" class:rotate-180={active}
-			     class="transition transition-transform transform w-3 ml-2 svgicon center-block replaced-svg fill-current">
+			     class="flex-shrink-0 transition transition-transform transform w-3 ml-2 svgicon center-block replaced-svg fill-current">
 				<path d="M32.914 8.443L18.004 21.32 3.078 8.443 0 12.013l18.004 15.542L36 12.015"></path>
 			</svg>
 		{/if}
