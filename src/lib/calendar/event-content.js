@@ -5,7 +5,6 @@ import {tooltip} from "$lib/aciton/tooltip.js";
 
 export const eventContent = (arg) => {
 	let zoom = arg.event.extendedProps
-	console.log('cliff: ', zoom)
 	let title_el = document.createElement('i')
 	let time_el = document.createElement('div')
 	time_el.innerHTML = dayjs(arg.event.start).format('h:mma')

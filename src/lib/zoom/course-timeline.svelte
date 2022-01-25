@@ -54,7 +54,10 @@
 						</div>
 					{/each}
 				{:else}
-					<p class="text-gray-300">- No material -</p>
+					<div class="flex items-center">
+						<Icon name="alert" className="w-3 text-pink-400"/>
+						<p class="text-gray-300 ml-2">No material</p>
+					</div>
 				{/if}
 			</div>
 		</div>
