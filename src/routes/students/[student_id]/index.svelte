@@ -16,7 +16,6 @@
 	import Icon from '$lib/ui/icon.svelte'
 
 	export let overview
-	console.log(overview)
 
 	$: student_id = $page.params.student_id
 	$: completed_zoom_list = overview.completed_zoom_list
@@ -85,7 +84,7 @@
 				<Icon name="report" className="w-8 text-gray-400"/>
 				<p class="ml-2 text uppercase text-gray-500">Notes</p>
 			</div>
-			<StudentNoteReadOnly {student_id}/>
+			<StudentNoteReadOnly readonly {student_id}/>
 		</div>
 	</div>
 </div>

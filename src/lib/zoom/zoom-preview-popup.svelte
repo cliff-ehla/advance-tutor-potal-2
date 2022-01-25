@@ -80,7 +80,7 @@
 				<p class="text text-purple-500 ml-1 group-hover:text-purple-700">{student.nickname}</p>
 				<div style="font-size: 10px" class="bg-purple-400 text-white px-2 rounded-sm ml-1 text-xs font-bold">{capitalize(student.level)}</div>
 			</a>
-			<div class:hover:bg-purple-100={student_note} class="mt-1 text-xs text-gray-500 pl-2 border-l-4 border-purple-400 bg-purple-50 py-0.5 leading-tight">
+			<a href="/students/{student_id}/notes" class="hover:bg-purple-100 block mt-1 text-xs text-gray-500 pl-2 border-l-4 border-purple-400 bg-purple-50 py-0.5 leading-tight">
 				{#if student_note}
 					<Dropdown activator_style="inline-block" activator_active_style="bg-transparent">
 						<p slot="activator">
@@ -90,7 +90,7 @@
 							{/if}
 						</p>
 						<div class="bg-white p-4 shadow-lg border-2 border-purple-400 rounded">
-							<StudentNoteReadOnly {student_id}/>
+							<StudentNoteReadOnly readonly {student_id}/>
 						</div>
 					</Dropdown>
 				{:else}
@@ -100,7 +100,7 @@
 						<p class="opacity-60">No notes for the student</p>
 					{/if}
 				{/if}
-			</div>
+			</a>
 		{/if}
 		<div style="min-width: 280px" class="grid grid-cols-2 bg-gray-50 leading-none border border-gray-200 mt-4">
 			<div class="text-center p-1 relative">

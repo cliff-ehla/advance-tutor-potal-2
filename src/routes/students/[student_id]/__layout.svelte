@@ -29,6 +29,7 @@
 	$: tutor_group_id = $page.params.tutor_group_id
 	$: slug = $page.path.split('/').pop()
 	$: is_overview = $page.path.split('/').length === 3
+	$: is_overview_layout = $page.path.split('/').length === 3 || slug === 'notes'
 </script>
 
 <div class="bg-gray-50">
@@ -50,18 +51,18 @@
 	</div>
 </div>
 
-{#if is_overview}
+{#if is_overview_layout}
 	<div class="bg-banner p-4 -mt-12 pt-12">
 		<div class="max-w-screen-lg mx-auto">
 			<div class="flex my-8">
 				<div class="w-72">
-					<div class="mx-auto w-28 h-28 rounded-full border-2 border-gray-300 relative shadow bg-white">
+					<a href="/students/{student_id}" class="block mx-auto w-28 h-28 rounded-full border-2 border-gray-300 relative shadow bg-white">
 						<img src="/student-{detail.gender}-icon.png" alt="gender" class="rounded-full">
 						<div class="absolute -bottom-2 -right-4 ml-2 w-10 h-10 bg-blue-500 rounded-full cc text-white">{capitalize(detail.level)}</div>
-					</div>
+					</a>
 				</div>
 				<div class="ml-4">
-					<p style="font-size: 2em" class="font-light text-xl mb-4">{detail.nickname}</p>
+					<a href="/students/{student_id}" style="font-size: 2em" class="inline-block font-light text-xl mb-4 hover:text-blue-500">{detail.nickname}</a>
 					<div class="grid grid-cols-3 gap-4">
 						<div>
 							<a href="/students/{student_id}/upcoming-lesson"
@@ -91,21 +92,18 @@
 	</div>
 {:else}
 	<div class="relative container pb-8">
-		<div class="w-64 absolute left-0 p-4 mt-4">
+		<div class="w-64 absolute left-0 p-4 pr-0 mt-4">
 			<div class="mx-auto w-20 h-20 rounded-full border-2 border-gray-300 relative shadow bg-white">
 				<img src="/student-{detail.gender}-icon.png" alt="gender" class="rounded-full">
 				<div class="absolute -bottom-2 -right-4 ml-2 w-10 h-10 bg-blue-500 rounded-full cc text-white">{capitalize(detail.level)}</div>
 			</div>
-			<p class="font-light text-xl mt-4 text-center">{detail.nickname}</p>
+			<a href="/students/{student_id}" class="font-light text-xl mt-4 text-center hover:text-blue-500 block mx-auto">{detail.nickname}</a>
 			<div class="section-box mt-4">
 				<div class="flex items-center mb-4">
 					<Icon name="report" className="w-6 text-gray-400"/>
 					<p class="section-title ml-1">Notes</p>
-					<a href="/students/{student_id}/notes" class="ml-auto">
-						<Icon name="expand" className="w-4 text-gray-400"/>
-					</a>
 				</div>
-				<StudentNoteReadOnly {student_id}/>
+				<StudentNoteReadOnly readonly {student_id}/>
 			</div>
 			{#if tutor_group_id}
 				<div class="bg-white border border-gray-300 rounded mt-2">
