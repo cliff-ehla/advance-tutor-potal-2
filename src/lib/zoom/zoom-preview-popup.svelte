@@ -45,7 +45,7 @@
 				{/if}
 			</div>
 			{#if is_classroom}
-				<p class="text-xs bg-purple-400 rounded-sm text-white px-2 leading-tight inline-block">{capitalize(zoom.rc_level)}</p>
+				<p class="text-sm bg-purple-400 rounded-sm font-bold text-white px-2 py-0.5 leading-tight inline-block">{capitalize(zoom.rc_level)}</p>
 				<div class="text-purple-500 leading-tight">{zoom.sub_cat || zoom.sub_cat_en}</div>
 			{:else}
 				<div class="text-blue-500">
