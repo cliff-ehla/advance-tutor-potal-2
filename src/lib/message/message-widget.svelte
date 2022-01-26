@@ -3,7 +3,7 @@
 	import {onMount} from 'svelte'
 	import MessageView from './message-view.svelte'
 	import Dropdown from '$lib/ui/dropdown3.svelte'
-	import ConfirmSendMessage from "./confirm-send-message.svelte";
+	import {dialog} from "$lib/store/dialog.js";
 	import {getContext} from 'svelte'
 	const {open} = getContext('simple-modal')
 	import {createEventDispatcher} from 'svelte'
@@ -68,14 +68,19 @@
 	}
 
 	const onSendMessage = async (message) => {
-		open(ConfirmSendMessage, {
-			message: message.description,
-			onConfirm: async () => {
-				await sendAlertMessage({
+		dialog.confirm({
+			title: 'Send Message',
+			text_input: {
+				value: message.description
+			},
+			onConfirm: () => {
+				return sendAlertMessage({
 					tutor_group_id,
 					teacher_id,
 					message_id: message.id
 				}, fetch)
+			},
+			onSuccess: async () => {
 				await updateMessage()
 				scrollToBottom()
 			}

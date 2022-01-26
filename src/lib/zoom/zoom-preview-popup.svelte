@@ -167,7 +167,7 @@
 			{/if}
 		{/if}
 	</div>
-	{#if is_today}
+	{#if is_today || true}
 		<div class="mt-4">
 			<div class="flex items-center">
 				<a href="/zoom/{zoom.wrapper_id}" class="bg-gradient-to-b from-green-500 to-green-700 hover:shadow transition-transform transform hover:-translate-y-0.5 text-white py-1.5 rounded-full flex-1 flex items-center justify-center">

@@ -76,6 +76,7 @@
 			<MessageWidget on:unread={() => {is_message_unread = true}}
 			               on:read={() => {is_message_unread = false}}
 			               bind:this={message_widget_el}
+			               crazy_fetch={false}
 			               height="226px" {tutor_group_id} {student_id} {teacher_id}/>
 		</div>
 		<div class:hidden={selected_tab !== 'Reminder'}>

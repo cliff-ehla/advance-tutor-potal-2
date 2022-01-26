@@ -54,7 +54,7 @@
 	const tutor_group_id = zoom.tutor_group_id
 	const is_one_on_one = !zoom.big_classroom_type
 	const student_id = is_one_on_one ? students[0].user_id : null
-	let selected_item_id = items[0].item_id
+	let selected_item_id = items && items[0].item_id
 	let pdf_json
 	let youtube_links
 	let loading_item = true

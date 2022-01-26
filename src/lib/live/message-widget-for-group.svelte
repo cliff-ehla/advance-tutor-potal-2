@@ -1,10 +1,7 @@
 <script>
 	import {onMount} from 'svelte'
 	import Dropdown from '$lib/ui/dropdown3.svelte'
-	import ConfirmSendMessage from "../message/confirm-send-message.svelte";
-	import {getContext} from 'svelte'
-
-	const {open} = getContext('simple-modal')
+	import {dialog} from "$lib/store/dialog.js";
 	import {createEventDispatcher} from 'svelte'
 	import {http} from "$lib/http.js";
 
@@ -25,10 +22,10 @@
 	}
 
 	const onSendMessage = async (message) => {
-		open(ConfirmSendMessage, {
-			message: message.description,
-			onConfirm: async () => {
-				await http.post(fetch, '/messageApi/send_alert_message', {
+		dialog.confirm({
+			title: message.description,
+			onConfirm: () => {
+				return http.post(fetch, '/messageApi/send_alert_message', {
 					tutor_group_id,
 					message_id: message.id
 				}, {
