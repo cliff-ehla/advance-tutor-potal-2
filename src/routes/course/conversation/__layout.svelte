@@ -11,6 +11,9 @@
 
 <script>
 	import {capitalize} from "$lib/helper/capitalize.js";
+	import {page} from "$app/stores";
+	$: tutor_group_id = $page.params.tutor_group_id
+	import {tutor_group_store} from "../../../store/index.js";
 </script>
 
 <div class="flex">
@@ -18,7 +21,7 @@
 		{#each $course_list_store.one_on_one as course}
 			<div class="px-4 py-2">
 				{#each course.students as s}
-					<div class="flex">
+					<a href="/course/conversation/{course.id}" class="flex" class:bg-white={course.id === tutor_group_id}>
 						<div class="w-8 h-8 rounded-full border-1 border-gray-300 relative shadow flex-shrink-0">
 							<img src="/student-{s.gender}-icon.png" alt="gender" class="rounded-full border border-blue-500">
 							<div class="absolute shadow font-bold border border-white -bottom-2 -right-4 ml-2 w-7 h-7 bg-blue-500 rounded-full text-sm cc text-white">{capitalize(s.level)}</div>
@@ -27,7 +30,7 @@
 							<span class="text-sm py-1">{s.nickname}</span>
 							<p class="text-xs">{course.title.split('(')[0]}</p>
 						</div>
-					</div>
+					</a>
 				{/each}
 			</div>
 		{/each}

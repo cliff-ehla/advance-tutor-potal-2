@@ -17,9 +17,22 @@ const create_store = () => {
 		store.set(data)
 		return {data, success, debug}
 	}
+	const getTutorGroup = (tutor_group_id) => {
+		const cache = get(store)
+		const one_on_one = cache ? cache.one_on_one : undefined
+		return one_on_one ? one_on_one.find(tg => tg.id === tutor_group_id) : undefined
+	}
+	const getStudent = tutor_group_id => {
+		const tg = getTutorGroup(tutor_group_id)
+		if (tg) {
+			return tg.students[0]
+		}
+	}
 	return {
 		fetchData,
 		cacheFirst,
+		getStudent,
+		getTutorGroup,
 		subscribe: store.subscribe
 	}
 }
