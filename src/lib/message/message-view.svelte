@@ -74,13 +74,11 @@
 			</div>
 		{/each}
 	{:else}
-		<div class="text-gray-500 text-sm p-4">
-			<div class="max-w-md mx-auto">
-				<div class="relative" style="padding-top:90%;">
-					<img src="/chatroom-empty.png" alt="no message" class="inset-0 absolute">
-				</div>
+		<div class="max-w-md mx-auto px-12">
+			<div class="relative" style="padding-top:90%;">
+				<img src="/chatroom-empty.png" alt="no message" class="inset-0 absolute">
 			</div>
-			<p style="font-size: 1.8em" class="text-gray-300 text-center relative">No messages</p>
 		</div>
+		<p style="font-size: 1.8em" class="text-gray-300 text-center relative">No messages</p>
 	{/if}
 {/if}

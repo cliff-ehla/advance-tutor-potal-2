@@ -85,7 +85,7 @@
 
 <div class="h-10 border-b border-gray-300 items-center flex">
 	<button use:tooltip={'Back'} on:click={() => {history.back()}}
-	        class="w-8 h-8 rounded-full ml-1 cc hover:bg-blue-100 hover:text-gray-700 text-gray-500">
+	        class="icon-button text-gray-500">
 		<Icon name="right" className="transform rotate-180 w-4"/>
 	</button>
 	{#each items as item}

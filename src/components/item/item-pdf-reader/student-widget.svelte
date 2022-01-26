@@ -4,7 +4,7 @@
 	export let teacher_id
 
 	import MessageWidget from '$lib/message/message-widget.svelte'
-	import NoteWidget from '$lib/message/note-widget.svelte'
+	import NoteWidget from '$lib/student/student-note-readonly.svelte'
 	import Icon from '$lib/ui/icon.svelte'
 	import {getContext} from 'svelte'
 	const {open} = getContext('simple-modal')
@@ -25,7 +25,7 @@
 	const onTabSelect = t => {
 		if (t === 'Reminder') {
 			is_note_unread = false
-			note_widget_el.markAsReadAndScroll()
+			// note_widget_el.markAsReadAndScroll()
 		} else {
 			is_message_unread = false
 			message_widget_el.scrollToBottom()
