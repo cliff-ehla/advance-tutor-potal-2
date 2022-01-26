@@ -38,7 +38,7 @@
 
 	const initMessageAndScrollToBottom = async () => {
 		await updateMessage()
-		scroll_container_el.scrollTop = scroll_container_el.scrollHeight
+		scrollToBottom()
 	}
 
 	const getAlertMessage = async () => {
@@ -75,7 +75,7 @@
 					message_id: message.id
 				}, fetch)
 				await updateMessage()
-				scroll_container_el.scrollTop = scroll_container_el.scrollHeight
+				scrollToBottom()
 			}
 		})
 	}
@@ -107,17 +107,18 @@
 
 	export function scrollToBottom () {
 		setTimeout(() => {
+			if (!scroll_container_el) return
 			scroll_container_el.scrollTop = scroll_container_el.scrollHeight
 		}, 10)
 	}
 </script>
 
 <div>
-	<div style="height: {height}" use:handleScroll bind:this={scroll_container_el} class="overflow-y-scroll">
+	<div style="height: {height}" use:handleScroll bind:this={scroll_container_el} class="overflow-y-scroll px-2 pt-2">
 		<MessageView on:delete={onDelete} {messages} {teacher_id}/>
 	</div>
 
-	<div class="mt-2">
+	<div class="pt-1 pb-1 px-2 border-gray-200 border-t">
 		{#if alert_message_options}
 			<Dropdown full_width placement="top-start" offset="4" open_on_hover={false} caveat_visible activator_style="py-2 px-4 bg-blue-500 rounded w-full text-white w-full" activator_active_style="bg-blue-700">
 				<button slot="activator" class="w-full">Quick message</button>

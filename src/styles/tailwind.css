@@ -42,3 +42,6 @@
 .input {
     @apply px-4 py-2 border border-gray-300 rounded hover:border-blue-500 focus:border-blue-500;
 }
+.icon-button {
+    @apply w-8 h-8 cc rounded-full transition-colors focus:text-blue-300 hover:bg-blue-50;
+}

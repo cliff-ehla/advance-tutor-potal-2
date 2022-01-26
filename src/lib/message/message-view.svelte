@@ -31,8 +31,8 @@
 
 {#if messages && messages.length}
 	{#each messages as m}
-		<div class="mb-4">
-			<div class="text-center text-gray-400 text-xs mb-4">{dayjs(m.create_ts).format('DD MMM, H:mma')}</div>
+		<div class="mb-6">
+			<div class="text-center text-gray-400 text-xs mb-2">{dayjs.utc(m.create_ts).local().format('DD MMM, H:mma')}</div>
 			<div class="flex">
 				<div class="w-8 h-8 rounded-full bg-center bg-cover flex-shrink-0" style="background-image: url({m.avatar_filepath})"></div>
 				<div class="ml-2">
@@ -67,5 +67,8 @@
 		</div>
 	{/each}
 {:else}
-	<p class="text-gray-500 text-sm p-4">No message</p>
+	<div class="text-gray-500 text-sm p-4">
+		<img src="/chatroom-empty.png" alt="no message">
+		<p style="font-size: 1.8em" class="text-gray-300 text-center">No messages</p>
+	</div>
 {/if}
