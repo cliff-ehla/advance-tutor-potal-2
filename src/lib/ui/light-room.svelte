@@ -11,7 +11,7 @@
 	import {isPdf} from "$lib/helper/is-pdf";
 	import Panzoom from '@panzoom/panzoom'
 	import {getContext} from 'svelte'
-	const {close} = getContext('simple-modal')
+	const {closeModal} = getContext('simple-modal')
 
 	const dispatch = createEventDispatcher()
 
@@ -82,7 +82,7 @@
 	const onExit = () => {
 		dispatch('close')
 		idx = -1
-		close()
+		closeModal()
 		onClose()
 	}
 </script>
