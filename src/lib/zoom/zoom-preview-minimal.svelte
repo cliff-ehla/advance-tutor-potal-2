@@ -27,8 +27,8 @@
 	<div class="flex-shrink-0">
 		<div class="w-8 h-12 cc bg-gray-100 leading-tight text-center">
 			<div>
-				<p class="text-gray-500">{dayjs(zoom.start_date).format('DD')}</p>
-				<p class="text-gray-500 text-xs">{dayjs(zoom.start_date).format('MMM')}</p>
+				<p class="text-gray-500">{dayjs.utc(zoom.start_date).local().format('DD')}</p>
+				<p class="text-gray-500 text-xs">{dayjs.utc(zoom.start_date).local().format('MMM')}</p>
 			</div>
 		</div>
 	</div>

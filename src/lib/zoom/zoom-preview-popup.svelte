@@ -106,8 +106,8 @@
 			<div class="text-center p-1 relative">
 				<img src={$user_info.profile_pic} alt="profile pic" class="border border-gray-400 rounded-full w-5 h-5 absolute left-1 top-1">
 				<p class="tz mb-0.5">{$zoom_store.time_zone_options[0].label}</p>
-				<p class="text-gray-500 text-xl">{dayjs.utc(zoom.start_date_utc).tz($zoom_store.time_zone_options[0].tz).format('h:mma')}</p>
-				<p class="text-xs text-gray-500 -mt-1">{dayjs.utc(zoom.start_date_utc).local().format('DD MMM')}</p>
+				<p class="text-gray-500 text-xl">{dayjs.utc(zoom.start_date_utc || zoom.start_date).tz($zoom_store.time_zone_options[0].tz).format('h:mma')}</p>
+				<p class="text-xs text-gray-500 -mt-1">{dayjs.utc(zoom.start_date_utc || zoom.start_date).local().format('DD MMM')}</p>
 			</div>
 			<div class="border-l border-gray-300 text-center p-1 relative">
 				<div style="font-size: 10px" class="absolute w-12 -ml-6 py-0.5 rounded-t-lg bg-gray-400 text-white left-0 bottom-0">{duration} min</div>
@@ -118,8 +118,8 @@
 					<img src="/student-{student_gender}-icon.png" alt="profile pic" class="border border-gray-500 rounded-full w-5 h-5 absolute right-1 top-1">
 				{/if}
 				<p class="tz mb-0.5">{$zoom_store.time_zone_options[1].label}</p>
-				<p class="text-gray-500 text-xl">{dayjs.utc(zoom.start_date_utc).tz($zoom_store.time_zone_options[1].tz).format('h:mma')}</p>
-				<p class="text-gray-500 text-xs -mt-1">{dayjs.utc(zoom.start_date_utc).tz($zoom_store.time_zone_options[1].tz).format('DD MMM')}</p>
+				<p class="text-gray-500 text-xl">{dayjs.utc(zoom.start_date_utc || zoom.start_date).tz($zoom_store.time_zone_options[1].tz).format('h:mma')}</p>
+				<p class="text-gray-500 text-xs -mt-1">{dayjs.utc(zoom.start_date_utc || zoom.start_date).tz($zoom_store.time_zone_options[1].tz).format('DD MMM')}</p>
 			</div>
 		</div>
 		<div class="mt-4">

@@ -36,7 +36,7 @@
 		{/if}
 		<div class="ml-4" class:opacity-30={zoom.is_cancel}>
 			<p class="text-gray-500 text-sm">
-				{dayjs(zoom.start_date).format('DD MMM, h:mma')}
+				{dayjs.utc(zoom.start_date).local().format('DD MMM, h:mma')}
 			</p>
 			<div>
 				{#if zoom.days.length}

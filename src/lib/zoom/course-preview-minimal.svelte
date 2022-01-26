@@ -15,7 +15,7 @@
 	<div class="lg:flex items-center">
 		<div class="flex items-center mr-2">
 			<Icon name="calendar" className="text-gray-400 w-5 flex-shrink-0"/>
-			<p class="ml-1 text-gray-500 text-sm leading-tight">{dayjs(course.start_date).format('DD MMM')} - {dayjs(course.end_date).format('DD MMM YYYY')}</p>
+			<p class="ml-1 text-gray-500 text-sm leading-tight">{dayjs.utc(course.start_date).local().format('DD MMM')} - {dayjs.utc(course.end_date).local().format('DD MMM YYYY')}</p>
 		</div>
 		<div class="{completed ? 'bg-gray-400' : upcoming ? 'bg-green-500' : 'bg-yellow-500'} text-xs  rounded px-2 text-white inline-block">
 			{course.completed_zoom_cnt} of {total_zoom_cnt}
