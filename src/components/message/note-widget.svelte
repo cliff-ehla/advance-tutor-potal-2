@@ -72,8 +72,8 @@
 		{#if notes}
 			{#if notes.length}
 				{#each notes as note}
-					<div class="bg-white rounded p-2 mb-2 relative">
-						<p class="text-sm text-gray-400">
+					<div class="bg-white rounded p-4 mb-2 relative">
+						<p class="text-sm text-gray-400 mb-2">
 							{dayjs(note.update_ts).format('DD MMM')} from
 							<span class="border-b border-gray-400 text-gray-700">
 								{#if note.teacher_id === teacher_id}
@@ -103,10 +103,10 @@
 					</div>
 				{/each}
 			{:else}
-				<p class="p-4">No data</p>
+				<p class="p-4 text-gray-400 text-sm">No notes</p>
 			{/if}
 		{:else}
-			<p class="p-4">Loading...</p>
+			<p class="p-4 text-gray-400 text-sm">Loading...</p>
 		{/if}
 	</div>
 	<button on:click={onCreateNote} class="py-2 px-4 bg-blue-500 hover:bg-blue-700 rounded w-full text-white mt-2">Create note</button>

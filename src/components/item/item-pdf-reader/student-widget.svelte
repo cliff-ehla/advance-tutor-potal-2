@@ -4,8 +4,8 @@
 	export let teacher_id
 
 	import MessageWidget from '$lib/message/message-widget.svelte'
-	import NoteWidget from '../../../components/message/note-widget.svelte'
-	import Icon from '../../../components/ui-elements/icon.svelte'
+	import NoteWidget from '$lib/message/note-widget.svelte'
+	import Icon from '$lib/ui/icon.svelte'
 	import {getContext} from 'svelte'
 	const {open} = getContext('simple-modal')
 	import {tutor_group_store} from "../../../store";
