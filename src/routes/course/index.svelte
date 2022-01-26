@@ -1,22 +1,15 @@
 <script context="module">
-	import {http, onFail} from "$lib/http";
+	import {onFail} from "$lib/http";
+	import {course_list_store} from "$lib/store/course_list_store.js";
 
 	export const load = async ({page, fetch}) => {
-
-		const {data, success, debug} = await http.post(fetch, '/tutorApi/list_zoom_status_in_tutor_group')
+		const {data, success, debug} = await course_list_store.cacheFirst(fetch)
 		if (!success) return onFail(debug)
-		return {
-			props: {
-				classroom: data.classroom,
-				one_on_one: data.one_on_one
-			}
-		}
+		return true
 	}
 </script>
 
 <script>
-	export let one_on_one
-	export let classroom
 	import CoursePreview from '$lib/zoom/course-preview.svelte'
 	import Icon from '$lib/ui/icon.svelte'
 </script>
@@ -28,16 +21,9 @@
 			<p style="font-size: 2em" class="font-light text-gray-500 ml-3">My 1-on-1 courses</p>
 		</div>
 		<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-			{#each one_on_one as course}
+			{#each $course_list_store.one_on_one as course}
 				<CoursePreview {course}/>
 			{/each}
 		</div>
-
-<!--		<p class="mt-8 mb-2 font-bold text-xl">My big class courses</p>-->
-<!--		<div class="grid grid-cols-3 gap-4">-->
-<!--			{#each classroom as course}-->
-<!--				<CoursePreview {course}/>-->
-<!--			{/each}-->
-<!--		</div>-->
 	</div>
 </div>

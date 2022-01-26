@@ -21,7 +21,6 @@
 	import {page, session} from '$app/stores'
 	import {capitalize} from "$lib/helper/capitalize.js";
 	import StudentNoteReadOnly from '$lib/student/student-note-readonly.svelte'
-	import MessageWidget from '$lib/message/message-widget.svelte'
 	import dayjs from "dayjs";
 	import Icon from '$lib/ui/icon.svelte'
 	export let detail
@@ -105,15 +104,6 @@
 				</div>
 				<StudentNoteReadOnly readonly {student_id}/>
 			</div>
-			{#if tutor_group_id}
-				<div class="bg-white border border-gray-300 rounded mt-2">
-					<div class="flex items-center p-4">
-						<Icon name="chat" className="w-6 text-gray-300"/>
-						<p class="section-title ml-1">Conversation</p>
-					</div>
-					<MessageWidget crazy_fetch={false} {tutor_group_id} {student_id} height="calc(200px)"/>
-				</div>
-			{/if}
 		</div>
 		<div class="ml-64">
 			<slot/>

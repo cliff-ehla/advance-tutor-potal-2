@@ -14,6 +14,7 @@
 	import {page} from "$app/stores";
 	import {tutor_group_store} from "../../../../store/index.js";
 	import CourseTimeLine from '$lib/zoom/course-timeline.svelte'
+	import MessageWidget from '$lib/message/message-widget.svelte'
 	import Icon from '$lib/ui/icon.svelte'
 	import dayjs from "dayjs";
 
@@ -57,5 +58,17 @@
 		{#if zoom_list}
 			<CourseTimeLine {zoom_list}/>
 		{/if}
+	</div>
+	<div class="fixed bottom-0 right-4 w-72 bg-white border border-gray-300 rounded mt-2">
+		<div class="flex items-center p-4 border-b border-gray-300">
+			<Icon name="chat" className="w-6 text-gray-300"/>
+			<p class="section-title ml-1">Conversation</p>
+			<a href="/course/conversation/{tutor_group_id}" class="ml-auto">
+				<Icon name="expand" className="w-4 text-gray-300"/>
+			</a>
+		</div>
+		<div class="px-4 pb-1">
+			<MessageWidget crazy_fetch={false} {tutor_group_id} {student_id} height="calc(200px)"/>
+		</div>
 	</div>
 </div>
