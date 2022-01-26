@@ -125,9 +125,9 @@
 		<MessageView on:delete={onDelete} loading={updating_message} {messages} {teacher_id}/>
 	</div>
 
-	<div class="pt-1 pb-1 px-2 border-gray-200 border-t">
+	<div class="pt-1 pb-1 border-gray-200 border-t">
 		{#if alert_message_options}
-			<Dropdown full_width placement="top-start" offset="4" open_on_hover={false} caveat_visible activator_style="py-2 px-4 bg-blue-500 rounded w-full text-white w-full" activator_active_style="bg-blue-700">
+			<Dropdown full_width placement="top-start" offset="4" open_on_hover={false} caveat_visible activator_style="py-3 px-4 bg-blue-500 hover:bg-blue-600 rounded text-sm w-full text-white w-full" activator_active_style="bg-blue-700">
 				<button slot="activator" class="w-full">Quick message</button>
 				<div class="bg-white shadow-lg w-72 overflow-scroll" style="max-height: 400px;">
 					{#each alert_message_options as m}

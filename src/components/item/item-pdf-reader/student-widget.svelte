@@ -8,7 +8,12 @@
 	import Icon from '$lib/ui/icon.svelte'
 	import {getContext} from 'svelte'
 	const {open} = getContext('simple-modal')
-	import {tutor_group_store} from "../../../store";
+	import {course_list_store} from "$lib/store/course_list_store.js";
+	import {onMount} from "svelte";
+	import {capitalize} from "$lib/helper/capitalize.js";
+
+	$: student = $course_list_store ? course_list_store.getStudent(tutor_group_id) : undefined
+	$: student_name = student ? student.nickname : ''
 
 	let tabs = ['Message', 'Reminder']
 	let selected_tab = tabs[0]
@@ -19,8 +24,9 @@
 	let note_widget_el
 	let message_widget_el
 
-	$: student = tutor_group_store.getOOO(student_id)
-	$: student_name = student ? student.nickname : ''
+	onMount(() => {
+		if (!student) course_list_store.cacheFirst(fetch)
+	})
 
 	const onTabSelect = t => {
 		if (t === 'Reminder') {
@@ -39,8 +45,11 @@
 		<div class="flex-1 px-4 flex items-center">
 			{#if student}
 				<div class="inline-flex relative items-center h-8">
-					<div class="w-8 h-8 rounded-full bg-cover" style="background-image: url({student.avatar_filepath})"></div>
-					<p class="ml-2">{student_name}</p>
+					<div class="w-8 h-8 rounded-full border-1 border-gray-300 relative shadow flex-shrink-0">
+						<img src="/student-{student.gender}-icon.png" alt="gender" class="rounded-full border border-blue-500">
+						<div class="absolute shadow font-bold border border-white -bottom-2 -right-4 ml-2 w-7 h-7 bg-blue-500 rounded-full text-sm cc text-white">{capitalize(student.level)}</div>
+					</div>
+					<p class="ml-5">{student_name}</p>
 					{#if is_message_unread || is_note_unread}
 						<div class="absolute top-0 -right-2 w-2 h-2 rounded-full bg-red-500"></div>
 					{/if}
@@ -81,7 +90,7 @@
 		</div>
 		<div class:hidden={selected_tab !== 'Reminder'}>
 			<NoteWidget on:unread={() => {is_note_unread = true}}
-			            bind:this={note_widget_el} height="226px" {student_id} {teacher_id}/>
+			            bind:this={note_widget_el} height="216px" {student_id} {teacher_id}/>
 		</div>
 	</div>
 

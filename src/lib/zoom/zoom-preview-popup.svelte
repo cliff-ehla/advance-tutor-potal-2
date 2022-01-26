@@ -75,11 +75,16 @@
 			{/if}
 		</div>
 		{#if !is_classroom}
-			<a href="/students/{student_id}" class="group flex items-center">
-				<img src="/student-{student.gender}-icon.png" alt="gender" class="rounded-full border border-gray-400 w-5">
-				<p class="text text-purple-500 ml-1 group-hover:text-purple-700">{student.nickname}</p>
-				<div style="font-size: 10px" class="bg-purple-400 text-white px-2 rounded-sm ml-1 text-xs font-bold">{capitalize(student.level)}</div>
-			</a>
+			<div class="flex items-center">
+				<a href="/students/{student_id}" class="group flex items-center hover:bg-purple-50">
+					<img src="/student-{student.gender}-icon.png" alt="gender" class="rounded-full border border-gray-400 w-5">
+					<p class="text text-purple-500 ml-1 group-hover:text-purple-700">{student.nickname}</p>
+					<div style="font-size: 10px" class="bg-purple-400 text-white px-2 rounded-sm ml-1 text-xs font-bold">{capitalize(student.level)}</div>
+				</a>
+				<a href="/conversation/{zoom.tutor_group_id}" class="icon-button ml-1">
+					<Icon name="chat" className="w-4"/>
+				</a>
+			</div>
 			<a href="/students/{student_id}/notes" class="hover:bg-purple-100 block mt-1 text-xs text-gray-500 pl-2 border-l-4 border-purple-400 bg-purple-50 py-0.5 leading-tight">
 				{#if student_note}
 					<Dropdown activator_style="inline-block" activator_active_style="bg-transparent">

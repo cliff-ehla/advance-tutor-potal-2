@@ -6,5 +6,5 @@
 
 <div class="section-box">
 	<h2 class="section-title text-lg mb-2">Notes</h2>
-	<StudentNoteReadOnly {student_id}/>
+	<StudentNoteReadOnly height="calc(100vh - 480px)" {student_id}/>
 </div>

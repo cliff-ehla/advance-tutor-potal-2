@@ -23,7 +23,10 @@
 
 	const onSendMessage = async (message) => {
 		dialog.confirm({
-			title: message.description,
+			title: 'Send message',
+			text_input: {
+				value: message.description
+			},
 			onConfirm: () => {
 				return http.post(fetch, '/messageApi/send_alert_message', {
 					tutor_group_id,
