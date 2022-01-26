@@ -13,7 +13,6 @@
 	import {capitalize} from "$lib/helper/capitalize.js";
 	import {page} from "$app/stores";
 	$: tutor_group_id = $page.params.tutor_group_id
-	import {tutor_group_store} from "../../../store/index.js";
 </script>
 
 <div class="flex">
@@ -25,7 +24,7 @@
 			{#each $course_list_store.one_on_one as course}
 				<div class="mb-2">
 					{#each course.students as s}
-						<a href="/course/conversation/{course.id}"
+						<a href="/conversation/{course.id}"
 						   class="flex p-2 bg-white rounded border border-gray-100 transition transform hover:-translate-y-0.5 duration-100 focus:border-blue-500 focus:translate-y-0.5"
 						   class:border-blue-300={course.id === tutor_group_id}
 						   class:shadow={course.id === tutor_group_id}>

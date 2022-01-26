@@ -42,6 +42,11 @@
 <!--		</button>-->
 <!--	</div>-->
 	<div class="ml-auto flex items-center">
+		<a href="/conversation"
+		   class:text-blue-500={$page.path.includes('conversation')}
+		   class="w-8 h-8 cc rounded-full border border-gray-300 mr-2">
+			<Icon name="chat" className="w-4"/>
+		</a>
 		<Dropdown placement="bottom-end" activator_active_style="bg-gray-200" activator_style="bg-gray-100 border border-gray-300 w-6 h-6 rounded-full inline-flex items-center justify-center">
 			<div slot="activator">
 				<Icon name="info" className="w-3"/>

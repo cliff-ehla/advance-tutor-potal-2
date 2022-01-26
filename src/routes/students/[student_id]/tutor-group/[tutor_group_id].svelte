@@ -63,7 +63,7 @@
 		<div class="flex items-center p-4 border-b border-gray-300">
 			<Icon name="chat" className="w-6 text-gray-300"/>
 			<p class="section-title ml-1">Conversation</p>
-			<a href="/course/conversation/{tutor_group_id}" class="ml-auto">
+			<a href="/conversation/{tutor_group_id}" class="ml-auto">
 				<Icon name="expand" className="w-4 text-gray-300"/>
 			</a>
 		</div>
