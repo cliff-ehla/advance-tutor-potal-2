@@ -23,7 +23,10 @@
 	let alert_message_options
 
 	$: {
-		if (tutor_group_id) updateMessage()
+		if (tutor_group_id) {
+			messages = undefined
+			updateMessage()
+		}
 	}
 
 	onMount(() => {
@@ -46,7 +49,6 @@
 	}
 
 	const updateMessage = async () => {
-		console.log('updateMessage')
 		updating_message = true
 		messages = await fetchMessage({
 			tutor_group_id,
@@ -115,7 +117,7 @@
 
 <div>
 	<div style="height: {height}" use:handleScroll bind:this={scroll_container_el} class="overflow-y-scroll px-2 pt-2">
-		<MessageView on:delete={onDelete} {messages} {teacher_id}/>
+		<MessageView on:delete={onDelete} loading={updating_message} {messages} {teacher_id}/>
 	</div>
 
 	<div class="pt-1 pb-1 px-2 border-gray-200 border-t">

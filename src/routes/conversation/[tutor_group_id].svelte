@@ -37,7 +37,9 @@
 	</a>
 {/if}
 {#if student_id && tutor_group_id}
-	<div class="px-4 pt-4">
-		<MessageWidget crazy_fetch={false} {tutor_group_id} {student_id} height="calc(100vh - 15em)"/>
+	<div class="bg-gray-50">
+		<div class="pt-4 max-w-screen-md mx-auto bg-white">
+			<MessageWidget crazy_fetch={false} {tutor_group_id} {student_id} height="calc(100vh - 15em)"/>
+		</div>
 	</div>
 {/if}
