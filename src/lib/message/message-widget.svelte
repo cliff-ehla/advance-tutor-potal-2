@@ -22,6 +22,10 @@
 	let is_message_unread
 	let alert_message_options
 
+	$: {
+		if (tutor_group_id) updateMessage()
+	}
+
 	onMount(() => {
 		let id
 		if (crazy_fetch) id = setInterval(updateMessage, 10000)
@@ -42,6 +46,7 @@
 	}
 
 	const updateMessage = async () => {
+		console.log('updateMessage')
 		updating_message = true
 		messages = await fetchMessage({
 			tutor_group_id,
