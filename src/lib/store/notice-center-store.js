@@ -1,4 +1,4 @@
-import {writable} from "svelte/store";
+import {get, derived, writable} from "svelte/store";
 import {http} from "$lib/http.js";
 
 const create_store = () => {
@@ -7,6 +7,20 @@ const create_store = () => {
 		message_list: [],
 		notice_list: []
 	})
+	const d_store = derived(store, $store => {
+		const master_list = [...$store.message_list, ...$store.notice_list]
+		master_list.sort((a,b) => {
+			return a.create_ts > b.create_ts ? 1 : -1
+		})
+		return {
+			master_list,
+			...$store
+		}
+	})
+	const fetchNoticeAndMessage = (fetch) => {
+		fetchMessage(fetch)
+		fetchNotice(fetch)
+	}
 	const fetchUnreadCount = async (fetch) => {
 		const {data, success, debug} = await http.get(fetch, '/tutorApi/list_unread_message_and_notice')
 		if (success) {
@@ -30,10 +44,24 @@ const create_store = () => {
 		}
 		return {data, success, debug}
 	}
+	const fetchNotice = async (fetch) => {
+		const {data, success, debug} = await http.post(fetch, '/tutorApi/list_notice', {
+			is_new: true
+		})
+		if (success) {
+			store.update(v => ({
+				...v,
+				notice_list: data
+			}))
+		}
+		return {data, success, debug}
+	}
 	return {
 		fetchUnreadCount,
 		fetchMessage,
-		subscribe: store.subscribe
+		fetchNotice,
+		fetchNoticeAndMessage,
+		subscribe: d_store.subscribe
 	}
 }
 

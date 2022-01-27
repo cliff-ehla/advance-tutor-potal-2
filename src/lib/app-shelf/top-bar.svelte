@@ -41,7 +41,7 @@
 	</div>
 	<div class="ml-auto flex items-center">
 		<Dropdown placement="bottom-end" open_on_hover={false}>
-			<button slot="activator" on:click={() => {noticeCenterStore.fetchMessage(fetch)}} class="relative w-10 h-10 cc rounded-full hover:bg-gray-100 hover:text-blue-500">
+			<button slot="activator" on:click={() => {noticeCenterStore.fetchNoticeAndMessage(fetch)}} class="relative w-10 h-10 cc rounded-full hover:bg-gray-100 hover:text-blue-500">
 				<Icon className="w-4 text-gray-500 hover:text-current" name="bell"/>
 				<div class="absolute bg-pink-500 text-white px-0.5 leading-tight rounded-sm top-1 right-1" style="font-size: 8px">
 					{$noticeCenterStore.unread_count}
@@ -51,8 +51,14 @@
 				{#if $is_loading}
 					loading...
 				{:else}
-					{#each $noticeCenterStore.message_list as m}
-						<IncomeMessagePreview message={m}/>
+					{#each $noticeCenterStore.master_list as m}
+						{#if m.tutor_group_id}
+							<IncomeMessagePreview message={m}/>
+						{:else}
+							<div>
+								<a href="/students/{m.student_id}/notes">{m.nickname} {m.note} </a>
+							</div>
+						{/if}
 					{/each}
 				{/if}
 			</div>
