@@ -6,7 +6,11 @@
 	import dayjs from "dayjs";
 	import utc from "dayjs/plugin/utc.js";
 	import {capitalize} from "$lib/helper/capitalize.js";
+	import {onMount} from "svelte";
 
+	onMount(() => {
+		if (!course) course_list_store.cacheFirst(fetch)
+	})
 	dayjs.extend(utc)
 	$: tutor_group_id = $page.params.tutor_group_id
 	$: course = $course_list_store ? course_list_store.getTutorGroup(tutor_group_id) : undefined
