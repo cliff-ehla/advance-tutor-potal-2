@@ -2,6 +2,7 @@
 	import {zoom_store} from "$lib/store/zoom.js";
 	import {browser} from "$app/env";
 	import ZoomPreviewPopup from '$lib/zoom/zoom-preview-popup.svelte'
+	import Spinner from '$lib/ui/spinner.svelte'
 	import {getContext} from 'svelte'
 	import {page} from "$app/stores"
 	import {eventContent} from "$lib/calendar/event-content.js";
@@ -70,4 +71,9 @@
 	}
 </script>
 
+{#if !browser}
+	<div class="w-full p-4 cc">
+		<Spinner/>
+	</div>
+{/if}
 <div class="w-full" use:init></div>

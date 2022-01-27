@@ -1,7 +1,11 @@
 <script context="module">
 	import {user_info} from "$lib/store/user_info.js";
+	import {http, onFail} from "$lib/http.js";
+	import {noticeCenterStore} from "$lib/store/notice-center-store.js";
+
 	export const load = async ({fetch, session}) => {
 		user_info.set(session.user_info)
+		await noticeCenterStore.fetchUnreadCount(fetch)
 		return true
 	}
 </script>
