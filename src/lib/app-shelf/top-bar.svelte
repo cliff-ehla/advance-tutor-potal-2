@@ -40,10 +40,29 @@
 		{/each}
 	</div>
 	<div class="ml-auto flex items-center">
-		<Dropdown placement="bottom-end" open_on_hover={false}>
-			<button slot="activator" on:click={() => {noticeCenterStore.fetchNoticeAndMessage(fetch)}} class="relative w-10 h-10 cc rounded-full hover:bg-gray-100 hover:text-blue-500">
-				<Icon className="w-4 text-gray-500 hover:text-current" name="bell"/>
-				<div class="absolute bg-pink-500 text-white px-0.5 leading-tight rounded-sm top-1 right-1" style="font-size: 8px">
+		<Dropdown open_on_hover={false} placement="bottom-end"
+		          activator_active_style="bg-blue-50"
+		          activator_style="icon-button mx-1">
+			<div slot="activator">
+				<Icon name="info" className="w-3"/>
+			</div>
+			<div class="dropdown">
+				<a target="_blank" href="https://ehla-media-bucket.s3.ap-southeast-1.amazonaws.com/pdf/User+guide_teaching+portal_10Jan2022(1)+(1).pdf" class="item">
+					<Icon name="download" className="w-4 mr-2"/>
+					<span class="flex-1">User guide</span>
+				</a>
+				<a target="_blank" href="https://ehla-media-bucket.s3.ap-southeast-1.amazonaws.com/pdf/EHLA+Teacher+administrative+stuff_v31Dec2021(1).pdf" class="item">
+					<Icon name="download" className="w-4 mr-2"/>
+					<span class="flex-1">Administrative stuff</span>
+				</a>
+			</div>
+		</Dropdown>
+		<Dropdown activator_style="icon-button text-gray-900 relative mx-2 active:text-blue-400"
+		          activator_active_style="bg-blue-50 text-blue-500"
+		          placement="bottom-end" open_on_hover={false}>
+			<button slot="activator" on:click={() => {noticeCenterStore.fetchNoticeAndMessage(fetch)}}>
+				<Icon className="w-5" name="bell"/>
+				<div class="font-bold absolute rounded-full w-4 h-4 cc bg-pink-500 text-white leading-none rounded-sm top-0 right-0" style="font-size: 9px">
 					{$noticeCenterStore.unread_count}
 				</div>
 			</button>
@@ -64,25 +83,10 @@
 			</div>
 		</Dropdown>
 		<a href="/conversation"
-		   class="w-8 h-8 cc rounded-full transition-colors focus:text-blue-300 hover:bg-blue-50 mr-2 {$page.path.includes('conversation') ? 'bg-blue-50 text-blue-500' : 'text-gray-600'}">
+		   class="w-8 h-8 cc rounded-full transition-colors focus:text-blue-300 hover:bg-blue-50 mx-2 {$page.path.includes('conversation') ? 'bg-blue-50 text-blue-500' : 'text-gray-600'}">
 			<Icon name="chat" className="w-5"/>
 		</a>
-		<Dropdown placement="bottom-end" activator_active_style="bg-gray-200" activator_style="bg-gray-100 border border-gray-300 w-6 h-6 rounded-full inline-flex items-center justify-center">
-			<div slot="activator">
-				<Icon name="info" className="w-3"/>
-			</div>
-			<div class="dropdown">
-				<a target="_blank" href="https://ehla-media-bucket.s3.ap-southeast-1.amazonaws.com/pdf/User+guide_teaching+portal_10Jan2022(1)+(1).pdf" class="item">
-					<Icon name="download" className="w-4 mr-2"/>
-					<span class="flex-1">User guide</span>
-				</a>
-				<a target="_blank" href="https://ehla-media-bucket.s3.ap-southeast-1.amazonaws.com/pdf/EHLA+Teacher+administrative+stuff_v31Dec2021(1).pdf" class="item">
-					<Icon name="download" className="w-4 mr-2"/>
-					<span class="flex-1">Administrative stuff</span>
-				</a>
-			</div>
-		</Dropdown>
-		<Dropdown placement="bottom-end" activator_style="rounded-full ml-3">
+		<Dropdown open_on_hover={false} placement="bottom-end" activator_style="rounded-full ml-3">
 			<div slot="activator">
 				<div class="rounded-full w-8 h-8 bg-cover bg-center" style="background-image: url({$session.user_info.profile_pic})"></div>
 			</div>

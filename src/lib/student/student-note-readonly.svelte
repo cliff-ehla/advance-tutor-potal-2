@@ -11,9 +11,16 @@
 	import {dialog} from "$lib/store/dialog.js";
 	import {student_store} from "$lib/store/student.js";
 	import {http} from "$lib/http.js";
+	import {noticeCenterStore} from "$lib/store/notice-center-store.js";
 	$: notes = $student_store[student_id]
-	onMount(() => {
-		student_store.fetchStudentNote(fetch, {student_id})
+	onMount(async () => {
+		await student_store.fetchStudentNote(fetch, {student_id})
+		if (!readonly) {
+			await http.post(fetch, '/studentNoteApi/read_student_note', {
+				student_id
+			})
+			await noticeCenterStore.fetchUnreadCount(fetch)
+		}
 	})
 	const onCreateNote = () => {
 		dialog.confirm({
