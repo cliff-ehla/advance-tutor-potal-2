@@ -1,12 +1,14 @@
 <script>
 	import Dropdown from '$lib/ui/dropdown3.svelte'
 	import Icon from '$lib/ui/icon.svelte'
+	import Spinner from '$lib/ui/spinner.svelte'
 	import {session} from '$app/stores'
 	import {page} from '$app/stores'
 	import {user_info} from "$lib/store/user_info.js";
 	import {noticeCenterStore} from "$lib/store/notice-center-store.js";
 	import {is_loading} from "$lib/store/is_loading.js";
 	import IncomeMessagePreview from '$lib/notice-center/income-message-preview.svelte'
+	import dayjs from "dayjs";
 
 	let nav_items = [
 		{
@@ -62,23 +64,40 @@
 		          placement="bottom-end" open_on_hover={false}>
 			<button slot="activator" on:click={() => {noticeCenterStore.fetchNoticeAndMessage(fetch)}}>
 				<Icon className="w-5" name="bell"/>
-				<div class="font-bold absolute rounded-full w-4 h-4 cc bg-pink-500 text-white leading-none rounded-sm top-0 right-0" style="font-size: 9px">
-					{$noticeCenterStore.unread_count}
-				</div>
+				{#if $noticeCenterStore.unread_count > 0}
+					<div class="font-bold absolute rounded-full w-4 h-4 cc bg-pink-500 text-white leading-none rounded-sm top-0 right-0" style="font-size: 9px">
+						{$noticeCenterStore.unread_count}
+					</div>
+				{/if}
 			</button>
 			<div class="dropdown w-72">
 				{#if $is_loading}
-					loading...
+					<div class="p-4"><Spinner/></div>
 				{:else}
-					{#each $noticeCenterStore.master_list as m}
-						{#if m.tutor_group_id}
-							<IncomeMessagePreview message={m}/>
-						{:else}
-							<div>
-								<a href="/students/{m.student_id}/notes">{m.nickname} {m.note} </a>
-							</div>
-						{/if}
-					{/each}
+					{#if $noticeCenterStore.master_list.length}
+						{#each $noticeCenterStore.master_list as m}
+							{#if m.tutor_group_id}
+								<IncomeMessagePreview message={m}/>
+							{:else}
+								<a href="/students/{m.student_id}/notes" class="flex items-center px-2 py-1 rounded transition-colors hover:bg-gray-100">
+									<div class="w-8 flex-shrink-0">
+										<img src="/logo.png" alt="icon" class="rounded-full w-6 mx-auto">
+									</div>
+									<div class="ml-3">
+										<p class="text-sm text-gray-700">Note for {m.nickname}</p>
+										<div class="flex items-center text-xs">
+											<p class="text-xs text-gray-500 overflow-hidden overflow-ellipsis whitespace-nowrap w-40">
+												{m.note}
+											</p>
+											<span class="whitespace-nowrap ml-2 text-blue-300">{dayjs(m.create_ts).format('DD MMM')}</span>
+										</div>
+									</div>
+								</a>
+							{/if}
+						{/each}
+					{:else}
+						<p class="note p-4">Inbox is empty</p>
+					{/if}
 				{/if}
 			</div>
 		</Dropdown>
