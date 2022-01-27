@@ -18,8 +18,21 @@ const create_store = () => {
 		}
 		return {data, success, debug}
 	}
+	const fetchMessage = async (fetch) => {
+		const {data, success, debug} = await http.post(fetch, '/tutorApi/list_message', {
+			is_new: true
+		})
+		if (success) {
+			store.update(v => ({
+				...v,
+				message_list: data
+			}))
+		}
+		return {data, success, debug}
+	}
 	return {
 		fetchUnreadCount,
+		fetchMessage,
 		subscribe: store.subscribe
 	}
 }
