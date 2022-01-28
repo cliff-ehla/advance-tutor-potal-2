@@ -83,7 +83,8 @@
 						{/each}
 						<a href="/notification" class="mt-2 see-all-button">See all notifications ({$noticeCenterStore.master_list.length})</a>
 					{:else}
-						<p class="note p-4">Inbox is empty</p>
+						<img src="/notification-empty-2.png" alt="inbox-empty" class="w-36 mx-auto"/>
+						<p class="text-xl text-gray-300 text-center pb-4">You inbox is empty</p>
 					{/if}
 				{/if}
 			</div>

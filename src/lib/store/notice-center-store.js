@@ -19,7 +19,7 @@ const create_store = () => {
 	})
 	const fetchNoticeAndMessage = (fetch) => {
 		fetchMessage(fetch)
-		fetchNotice(fetch)
+		return fetchNotice(fetch)
 	}
 	const fetchUnreadCount = async (fetch) => {
 		const {data, success, debug} = await http.get(fetch, '/tutorApi/list_unread_message_and_notice')

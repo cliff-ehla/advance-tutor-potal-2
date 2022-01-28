@@ -1,6 +1,7 @@
 <script>
 	import dayjs from "dayjs";
 	export let message
+	export let truncate = true
 	import {capitalize} from "$lib/helper/capitalize.js";
 </script>
 
@@ -13,7 +14,7 @@
 	<div class="ml-4">
 		<p class="text-sm">{message.nickname}</p>
 		<div class="flex text-xs">
-			<div class="text-gray-500 overflow-hidden overflow-ellipsis whitespace-nowrap w-40">
+			<div class="text-gray-500" class:truncate>
 				{#if message.image_url}
 					[image]
 				{:else if message.audio_url}
@@ -26,3 +27,9 @@
 		</div>
 	</div>
 </a>
+
+<style>
+	.truncate {
+		@apply overflow-hidden overflow-ellipsis whitespace-nowrap w-40;
+	}
+</style>

@@ -44,7 +44,7 @@
 <div class="bg-gray-100">
 	<div class="container pb-8">
 		<div class="flex items-center justify-between py-4">
-			<h1 class="font-light text-gray-500" style="font-size: 2em;">My Students</h1>
+			<h1 class="page-title">My Students</h1>
 			<div class="ml-auto flex items-center">
 				<Selection {options}
 				           icon="sort"

@@ -36,6 +36,10 @@
 .section-title {
     @apply text-sm uppercase text-gray-500;
 }
+.page-title {
+    @apply font-light text-gray-500;
+    font-size: 1.8em;
+}
 .note {
     @apply text-sm text-gray-500;
 }
