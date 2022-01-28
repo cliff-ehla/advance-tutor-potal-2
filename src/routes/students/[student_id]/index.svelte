@@ -47,7 +47,7 @@
 		<div class="p-4">
 			<div class="flex items-center">
 				<Icon name="stopwatch" className="w-4 text-gray-500"/>
-				<p class="ml-2 text-sm uppercase text-gray-500">Recent lessons</p>
+				<p class="ml-2 text-sm uppercase text-gray-500">Learning history</p>
 			</div>
 			{#if completed_zoom_list.length}
 				{#each completed_zoom_list as zoom}
@@ -55,7 +55,7 @@
 						<ZoomPreviewMinimal {zoom}/>
 					</div>
 				{/each}
-				<a href="/students/{student_id}/past-lesson" class="text-sm text-blue-500 text-center block bg-gray-100 py-1 border border-gray-200 hover:border-blue-500">See all past lessons</a>
+				<a href="/students/{student_id}/past-lesson" class="text-sm text-blue-500 text-center block bg-gray-100 py-1 border border-gray-200 hover:border-blue-500">See all learning history</a>
 			{:else}
 				<p class="text-gray-400">No history</p>
 			{/if}
@@ -83,6 +83,9 @@
 			<div class="flex mb-4 items-center">
 				<Icon name="report" className="w-8 text-gray-400"/>
 				<p class="ml-2 text uppercase text-gray-500">Notes</p>
+				<a href="/students/{student_id}/notes" class="ml-auto icon-button">
+					<Icon name="edit" className="w-5 text-blue-500"/>
+				</a>
 			</div>
 			<StudentNoteReadOnly readonly {student_id}/>
 		</div>

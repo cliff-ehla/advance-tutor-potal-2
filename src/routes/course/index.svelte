@@ -18,7 +18,7 @@
 	<div class="container pb-8">
 		<div class="flex items-center py-4">
 			<Icon name="one-on-one" className="w-12 text-black-500"/>
-			<p class="page-title ml-3">My 1-on-1 courses</p>
+			<p class="page-title ml-3">My 1-on-1 classes</p>
 		</div>
 		<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
 			{#each $course_list_store.one_on_one as course}

@@ -16,7 +16,7 @@
 		},
 		{
 			href: '/course',
-			title: 'Course'
+			title: 'My class'
 		},
 		{
 			href: '/students',
