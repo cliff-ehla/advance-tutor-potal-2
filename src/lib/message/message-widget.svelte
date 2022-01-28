@@ -7,6 +7,8 @@
 	import {getContext} from 'svelte'
 	const {open} = getContext('simple-modal')
 	import {createEventDispatcher} from 'svelte'
+	import {noticeCenterStore} from "$lib/store/notice-center-store.js";
+
 	const dispatch = createEventDispatcher()
 
 	export let tutor_group_id
@@ -65,6 +67,7 @@
 			last_message_id = _last_message_id
 		}
 		updating_message = false
+		noticeCenterStore.fetchUnreadCount(fetch)
 	}
 
 	const onSendMessage = async (message) => {

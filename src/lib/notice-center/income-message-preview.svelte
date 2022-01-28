@@ -12,9 +12,17 @@
 	</div>
 	<div class="ml-4">
 		<p class="text-sm">{message.nickname}</p>
-		<p class="text-xs">
-			<span class="italic text-blue-600">{dayjs(message.create_ts).format('DD MMM')} -</span>
-			<span class="text-gray-500">{message.message}</span>
-		</p>
+		<div class="flex text-xs">
+			<div class="text-gray-500 overflow-hidden overflow-ellipsis whitespace-nowrap w-40">
+				{#if message.image_url}
+					[image]
+				{:else if message.audio_url}
+					[audio]
+				{:else}
+					{message.message}
+				{/if}
+			</div>
+			<span class="whitespace-nowrap ml-2 text-blue-300">{dayjs(message.create_ts).format('DD MMM')}</span>
+		</div>
 	</div>
 </a>

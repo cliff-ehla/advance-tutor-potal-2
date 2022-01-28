@@ -35,6 +35,9 @@
 					   class:shadow={c.tutor_group_id === tutor_group_id}>
 						<div class="w-8 h-8 rounded-full border border-gray-400 relative shadow flex-shrink-0">
 							<img src="/student-{c.gender}-icon.png" alt="gender" class="rounded-full">
+							{#if !c.is_read}
+								<div class="absolute -top-0.5 -right-1.5 w-3 h-3 bg-pink-500 rounded-full"></div>
+							{/if}
 							<div class="absolute shadow font-bold border border-white -bottom-2 -right-2 ml-2 w-5 h-5 bg-blue-500 rounded-full text-xs cc text-white">{capitalize(c.level)}</div>
 						</div>
 						<div class="ml-4 -mt-0.5 leading-tight">

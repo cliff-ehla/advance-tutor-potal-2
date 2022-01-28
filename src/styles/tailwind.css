@@ -45,3 +45,6 @@
 .icon-button {
     @apply w-8 h-8 cc rounded-full transition-colors focus:text-blue-300 hover:bg-blue-50;
 }
+.see-all-button {
+    @apply cursor-pointer text-sm text-blue-500 text-center block bg-gray-100 py-1 border border-gray-200 hover:border-blue-500;
+}

@@ -4,11 +4,10 @@
 	import Spinner from '$lib/ui/spinner.svelte'
 	import {session} from '$app/stores'
 	import {page} from '$app/stores'
-	import {user_info} from "$lib/store/user_info.js";
 	import {noticeCenterStore} from "$lib/store/notice-center-store.js";
 	import {is_loading} from "$lib/store/is_loading.js";
 	import IncomeMessagePreview from '$lib/notice-center/income-message-preview.svelte'
-	import dayjs from "dayjs";
+	import IncomeNotePreview from '$lib/notice-center/income-note-preview.svelte'
 
 	let nav_items = [
 		{
@@ -75,26 +74,14 @@
 					<div class="p-4"><Spinner/></div>
 				{:else}
 					{#if $noticeCenterStore.master_list.length}
-						{#each $noticeCenterStore.master_list as m}
+						{#each $noticeCenterStore.master_list.slice(0,6) as m}
 							{#if m.tutor_group_id}
 								<IncomeMessagePreview message={m}/>
 							{:else}
-								<a href="/students/{m.student_id}/notes" class="flex items-center px-2 py-1 rounded transition-colors hover:bg-gray-100">
-									<div class="w-8 flex-shrink-0">
-										<img src="/logo.png" alt="icon" class="rounded-full w-6 mx-auto">
-									</div>
-									<div class="ml-3">
-										<p class="text-sm text-gray-700">Note for {m.nickname}</p>
-										<div class="flex items-center text-xs">
-											<p class="text-xs text-gray-500 overflow-hidden overflow-ellipsis whitespace-nowrap w-40">
-												{m.note}
-											</p>
-											<span class="whitespace-nowrap ml-2 text-blue-300">{dayjs(m.create_ts).format('DD MMM')}</span>
-										</div>
-									</div>
-								</a>
+								<IncomeNotePreview message={m}/>
 							{/if}
 						{/each}
+						<a href="/notification" class="mt-2 see-all-button">See all notifications ({$noticeCenterStore.master_list.length})</a>
 					{:else}
 						<p class="note p-4">Inbox is empty</p>
 					{/if}
