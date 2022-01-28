@@ -23,6 +23,9 @@
 		if (a[sort_by] > b[sort_by]) return -1
 		if (a[sort_by] < b[sort_by]) return 1
 	})
+	$: filtered_list = search_text ? sorted_student_list.filter(s => {
+		return s.nickname.toLowerCase().includes(search_text.toLowerCase())
+	}) : sorted_student_list
 	const options = [
 		{
 			label: 'Upcoming lessons',
@@ -47,7 +50,9 @@
 		<div class="flex items-center justify-between py-4">
 			<h1 class="page-title">My Students</h1>
 			<div class="ml-auto flex items-center">
-				<input type="text" class="input" bind:value={search_text} placeholder="Search by name">
+				<input type="text"
+				       class="bg-gray-50 hover:bg-white px-4 py-3 border border-gray-300 rounded hover:border-blue-500 focus:border-blue-500 mr-2"
+				       bind:value={search_text} placeholder="Search by name">
 				<Selection {options}
 				           icon="sort"
 				           label="Sort by"
@@ -55,33 +60,37 @@
 			</div>
 		</div>
 		<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-			{#each sorted_student_list as s}
-				<a href="/students/{s.user_id}" class="p-4 flex items-center bg-white rounded border border-gray-200 hover:shadow-lg hover:border-blue-500 transition-shadow">
-					<div class="w-20 h-20 rounded-full border-2 border-gray-300 relative shadow flex-shrink-0">
-						<img src="/student-{s.gender}-icon.png" alt="gender" class="rounded-full">
-						<div class="absolute -bottom-2 -right-4 ml-2 w-10 h-10 bg-blue-500 rounded-full cc text-white">{capitalize(s.level)}</div>
-					</div>
-					<div class="ml-6">
-						<p class="font-bold">{s.nickname}</p>
-						<p class="text-xs text-gray-500 mb-1">Seen <b>{dayjs().diff(dayjs(s.last_lesson_date),'day')}</b> days before</p>
-						{#if s.upcoming_zoom_cnt}
-							<div class="inline-flex items-center text-xs">
-								<div class="w-2 h-2 rounded-full bg-red-500 mx-0.5"></div>
-								<div class="ml-1"><b>{s.upcoming_zoom_cnt}</b> <span class="text-gray-500">Upcoming Lessons</span></div>
-							</div>
-						{:else}
-							<div class="inline-flex items-center text-xs">
-								<div class="w-2 h-2 rounded-full bg-gray-300 mx-0.5"></div>
-								<div class="ml-1"><span class="text-gray-400">No upcoming lessons</span></div>
-							</div>
-						{/if}
-						<div class="inline-flex items-center text-xs">
-							<Icon name="stopwatch" className="w-3"/>
-							<div class="ml-1"><b>{s.completed_zoom_cnt}</b> <span class="text-gray-500">Completed Lessons</span></div>
+			{#if filtered_list.length}
+				{#each filtered_list as s}
+					<a href="/students/{s.user_id}" class="p-4 flex items-center bg-white rounded border border-gray-200 hover:shadow-lg hover:border-blue-500 transition-shadow">
+						<div class="w-20 h-20 rounded-full border-2 border-gray-300 relative shadow flex-shrink-0">
+							<img src="/student-{s.gender}-icon.png" alt="gender" class="rounded-full">
+							<div class="absolute -bottom-2 -right-4 ml-2 w-10 h-10 bg-blue-500 rounded-full cc text-white">{capitalize(s.level)}</div>
 						</div>
-					</div>
-				</a>
-			{/each}
+						<div class="ml-6">
+							<p class="font-bold">{s.nickname}</p>
+							<p class="text-xs text-gray-500 mb-1">Seen <b>{dayjs().diff(dayjs(s.last_lesson_date),'day')}</b> days before</p>
+							{#if s.upcoming_zoom_cnt}
+								<div class="inline-flex items-center text-xs">
+									<div class="w-2 h-2 rounded-full bg-red-500 mx-0.5"></div>
+									<div class="ml-1"><b>{s.upcoming_zoom_cnt}</b> <span class="text-gray-500">Upcoming Lessons</span></div>
+								</div>
+							{:else}
+								<div class="inline-flex items-center text-xs">
+									<div class="w-2 h-2 rounded-full bg-gray-300 mx-0.5"></div>
+									<div class="ml-1"><span class="text-gray-400">No upcoming lessons</span></div>
+								</div>
+							{/if}
+							<div class="inline-flex items-center text-xs">
+								<Icon name="stopwatch" className="w-3"/>
+								<div class="ml-1"><b>{s.completed_zoom_cnt}</b> <span class="text-gray-500">Completed Lessons</span></div>
+							</div>
+						</div>
+					</a>
+				{/each}
+			{:else}
+				<div class="note">No result found</div>
+			{/if}
 		</div>
 	</div>
 </div>
