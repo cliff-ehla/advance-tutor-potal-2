@@ -13,4 +13,11 @@
 	}
 </script>
 
-<p class="note p-4">Conversation not found</p>
+<div class="h-72 cc text-center">
+	<div>
+		<p class="page-title mb-4">No conversation found.</p>
+		<p class="note">
+			You don't have any ongoing 1-on-1 courses.
+		</p>
+	</div>
+</div>

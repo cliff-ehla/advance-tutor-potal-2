@@ -19,7 +19,7 @@
 		<h1 class="page-title mb-4">Notifications</h1>
 		<div class="max-w-screen-sm section-box">
 			{#if $noticeCenterStore.master_list.length}
-				{#each $noticeCenterStore.master_list.slice(0,6) as m}
+				{#each $noticeCenterStore.master_list as m}
 					{#if m.tutor_group_id}
 						<IncomeMessagePreview truncate={false} message={m}/>
 					{:else}

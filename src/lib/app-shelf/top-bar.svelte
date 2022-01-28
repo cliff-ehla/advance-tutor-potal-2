@@ -58,10 +58,10 @@
 				</a>
 			</div>
 		</Dropdown>
-		<Dropdown activator_style="icon-button text-gray-900 relative mx-2 active:text-blue-400"
+		<Dropdown activator_style="rounded-full text-gray-900 relative mx-2 active:text-blue-400"
 		          activator_active_style="bg-blue-50 text-blue-500"
 		          placement="bottom-end" open_on_hover={false}>
-			<button slot="activator" on:click={() => {noticeCenterStore.fetchNoticeAndMessage(fetch)}}>
+			<button slot="activator" class="icon-button" on:click={() => {noticeCenterStore.fetchNoticeAndMessage(fetch)}}>
 				<Icon className="w-5" name="bell"/>
 				{#if $noticeCenterStore.unread_count > 0}
 					<div class="font-bold absolute rounded-full w-4 h-4 cc bg-pink-500 text-white leading-none rounded-sm top-0 right-0" style="font-size: 9px">

@@ -10,7 +10,7 @@ const create_store = () => {
 	const d_store = derived(store, $store => {
 		const master_list = [...$store.message_list, ...$store.notice_list]
 		master_list.sort((a,b) => {
-			return a.create_ts > b.create_ts ? 1 : -1
+			return a.create_ts > b.create_ts ? -1 : 1
 		})
 		return {
 			master_list,
