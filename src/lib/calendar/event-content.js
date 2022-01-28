@@ -22,13 +22,13 @@ export const eventContent = (arg) => {
 	wrapper_el.classList.add('p-0.5', 'flex', 'items-center', 'cursor-pointer', 'overflow-hidden', 'rounded-sm', 'w-full')
 	if (is_classroom) {
 		// background is classroom class
-		wrapper_el.classList.add('bg-blue-700', 'hover:bg-blue-500', 'text-white')
+		wrapper_el.classList.add('bg-purple-700', 'hover:bg-purple-500', 'text-white')
 	} else {
 		// background of trial vs standard class
 		if (is_trial) {
 			wrapper_el.classList.add('bg-green-600', 'hover:bg-green-500')
 		} else {
-			wrapper_el.classList.add('bg-gray-600', 'hover:bg-gray-800')
+			wrapper_el.classList.add('bg-blue-700', 'hover:bg-blue-800')
 		}
 		// cancel display dim text, otherwise sharp white text
 		wrapper_el.classList.add(is_cancel ? 'text-gray-400' : 'text-white')
@@ -41,12 +41,12 @@ export const eventContent = (arg) => {
 	if (is_classroom) {
 		let lv_el = document.createElement('div')
 		lv_el.innerHTML = capitalize(zoom.rc_level)
-		lv_el.classList.add('overflow-hidden', 'whitespace-nowrap', 'px-0.5', 'text-xs', 'bg-blue-500', 'text-white', 'ml-auto', 'leading-tight')
+		lv_el.classList.add('overflow-hidden', 'whitespace-nowrap', 'px-0.5', 'text-xs', 'bg-purple-500', 'hover:bg-gray-800', 'text-white', 'ml-auto', 'leading-tight')
 		lv_el.style.maxWidth = '40px'
 		tippy(lv_el, {content: zoom.rc_level})
 		let code_el = document.createElement('div')
 		code_el.innerHTML = zoom.description_code_short_id
-		code_el.classList.add('overflow-hidden', 'px-0.5', 'text-xs', 'bg-blue-500', 'hover:bg-gray-800', 'text-white', 'ml-0.5', 'leading-tight')
+		code_el.classList.add('overflow-hidden', 'px-0.5', 'text-xs', 'bg-purple-500', 'hover:bg-gray-800', 'text-white', 'ml-0.5', 'leading-tight')
 		tippy(code_el, {content: zoom.sub_cat})
 		let size_el = document.createElement('div')
 		size_el.classList.add('bg-yellow-600', 'text-white', 'px-0.5' , 'leading-tight', 'text-xs', 'ml-0.5')
