@@ -41,7 +41,8 @@
 							<div class="absolute shadow font-bold border border-white -bottom-2 -right-2 ml-2 w-5 h-5 bg-blue-500 rounded-full text-xs cc text-white">{capitalize(c.level)}</div>
 						</div>
 						<div class="ml-4 -mt-0.5 leading-tight">
-							<span class="text-sm text-gray-700 leading-none">{c.nickname}</span>
+							<p class="text text-gray-700 leading-none">{c.nickname}</p>
+							<p style="font-size: 11px" class="text-xs font-light text-gray-500 leading-tight my-0.5 overflow-ellipsis overflow-hidden w-40 whitespace-nowrap">{c.title.split('(')[0]}</p>
 							<p class="text-gray-500 text-xs whitespace-nowrap overflow-ellipsis overflow-hidden w-40">
 								{#if c.message}
 									{c.message}

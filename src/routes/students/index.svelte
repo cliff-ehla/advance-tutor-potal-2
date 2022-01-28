@@ -39,6 +39,7 @@
 	]
 
 	let sort_by = 'upcoming_zoom_cnt'
+	let search_text
 </script>
 
 <div class="bg-gray-100">
@@ -46,6 +47,7 @@
 		<div class="flex items-center justify-between py-4">
 			<h1 class="page-title">My Students</h1>
 			<div class="ml-auto flex items-center">
+				<input type="text" class="input" bind:value={search_text} placeholder="Search by name">
 				<Selection {options}
 				           icon="sort"
 				           label="Sort by"

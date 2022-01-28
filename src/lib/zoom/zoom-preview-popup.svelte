@@ -32,9 +32,11 @@
 	$: student_note = student_note_list && student_note_list[0]
 	const default_max_student_display = 5
 	let max_student_display = default_max_student_display
+	let alert_on
 
-	onMount(() => {
-		student_store.fetchStudentNote(fetch, {student_id})
+	onMount(async () => {
+		const {data, success, metadata} = await student_store.fetchStudentNote(fetch, {student_id})
+		alert_on = metadata.alert_on
 	})
 
 	const previewMaterial = async (d) => {
@@ -87,13 +89,16 @@
 			</div>
 			<a href="/students/{student_id}/notes" class="hover:bg-purple-100 block mt-1 text-xs text-gray-500 pl-2 border-l-4 border-purple-400 bg-purple-50 py-0.5 leading-tight">
 				{#if student_note}
-					<Dropdown activator_style="inline-block" activator_active_style="bg-transparent">
-						<p slot="activator">
+					<Dropdown activator_style="inline-block relative" activator_active_style="bg-transparent">
+						<div slot="activator">
+							{#if alert_on}
+								<div class="absolute bg-pink-500 w-3 h-3 rounded-full -left-4 -top-2"></div>
+							{/if}
 							{student_note.note}
 							{#if student_note_count > 1}
 								<span style="font-size: 9px" class="ml-1 px-1 bg-purple-400 text-white rounded font-bold">{student_note_count - 1}+</span>
 							{/if}
-						</p>
+						</div>
 						<div class="bg-white p-4 shadow-lg border-2 border-purple-400 rounded">
 							<StudentNoteReadOnly readonly {student_id}/>
 						</div>
