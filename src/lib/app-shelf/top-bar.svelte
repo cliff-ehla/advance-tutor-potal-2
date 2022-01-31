@@ -99,7 +99,7 @@
 			</div>
 			<div class="dropdown w-56">
 				<p class="text-sm text-gray-500 p-2">{$session.user_info.nickname}</p>
-				<a href="/salary" class="item">My salary</a>
+<!--				<a href="/salary" class="item">My salary</a>-->
 				<a href="/workday-setting/available" class="item">Workday setting</a>
 				<a href="/logout" class="item">Logout</a>
 			</div>

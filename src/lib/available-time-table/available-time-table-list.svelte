@@ -19,9 +19,9 @@
 	const onCreateNewSlot = async () => {
 		let start
 		if (time_slot_list.length) {
-			start = dayjs(time_slot_list[time_slot_list.length - 1].end_time, 'YYYY-MM-DD HH:mm:ss').add(1, 'day')
+			start = dayjs(time_slot_list[time_slot_list.length - 1].end_time, 'YYYY-MM-DD HH:mm:ss').add(1, 'day').startOf('day')
 		} else {
-			start = dayjs()
+			start = dayjs().startOf('day')
 		}
 		let end = start.add(24, 'week')
 		let create_new_timeslot_payload = {
