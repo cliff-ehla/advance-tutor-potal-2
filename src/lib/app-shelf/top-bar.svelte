@@ -20,7 +20,7 @@
 		},
 		{
 			href: '/students',
-			title: 'Student'
+			title: 'Students'
 		}
 	]
 </script>

@@ -28,7 +28,7 @@ export const eventContent = (arg) => {
 		if (is_trial) {
 			wrapper_el.classList.add('bg-green-600', 'hover:bg-green-500')
 		} else {
-			wrapper_el.classList.add('bg-blue-700', 'hover:bg-blue-800')
+			wrapper_el.classList.add('bg-blue-800', 'hover:bg-blue-500')
 		}
 		// cancel display dim text, otherwise sharp white text
 		wrapper_el.classList.add(is_cancel ? 'text-gray-400' : 'text-white')

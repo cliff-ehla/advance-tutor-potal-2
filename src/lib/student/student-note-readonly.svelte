@@ -45,7 +45,7 @@
 	}
 	const onDelete = (note) => {
 		dialog.confirm({
-			message: 'Delete this note',
+			message: 'Do you want to delete this note',
 			onConfirm: () => {
 				return http.post(fetch, '/studentNoteApi/delete_student_note', {
 					note_id: note.note_id

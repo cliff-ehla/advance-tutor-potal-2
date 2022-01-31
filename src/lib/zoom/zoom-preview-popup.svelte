@@ -92,7 +92,7 @@
 					<Dropdown activator_style="inline-block relative" activator_active_style="bg-transparent">
 						<div slot="activator">
 							{#if alert_on}
-								<div class="absolute bg-pink-500 w-3 h-3 rounded-full -left-4 -top-2"></div>
+								<div class="absolute border-pink-500 shadow border-2 bg-pink-400 w-4 h-4 rounded-full -right-2 -top-2.5"></div>
 							{/if}
 							{student_note.note}
 							{#if student_note_count > 1}

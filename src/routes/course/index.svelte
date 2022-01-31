@@ -21,9 +21,13 @@
 			<p class="page-title ml-3">My 1-on-1 classes</p>
 		</div>
 		<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-			{#each $course_list_store.one_on_one as course}
-				<CoursePreview {course}/>
-			{/each}
+			{#if !$course_list_store.one_on_one.length}
+				{#each $course_list_store.one_on_one as course}
+					<CoursePreview {course}/>
+				{/each}
+			{:else}
+				<p class="note py-4">You have no course</p>
+			{/if}
 		</div>
 	</div>
 </div>
