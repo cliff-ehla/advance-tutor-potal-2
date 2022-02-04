@@ -34,11 +34,22 @@
 		{#if i < zoom_list.length - 1}
 			<div class="transform -translate-x-1/2 absolute w-0.5 bg-green-500 inset-y-0 ml-2 top-0 h-full"></div>
 		{/if}
-		<div class="ml-4" class:opacity-30={zoom.is_cancel}>
+		<div class="ml-4">
+			{#if zoom.is_cancel}
+				<p class="text-pink-400 text-sm">
+					{#if zoom.s_sick_leave}
+						(Student leave)
+					{:else if zoom.t_sick_leave}
+						(Teacher leave)
+					{:else}
+						(Cancel)
+					{/if}
+				</p>
+			{/if}
 			<p class="text-gray-500 text-sm">
-				{dayjs.utc(zoom.start_date).local().format('DD MMM, h:mma')}
+				<span class:opacity-30={zoom.is_cancel}>{dayjs.utc(zoom.start_date).local().format('DD MMM, h:mma')}</span>
 			</p>
-			<div>
+			<div class:opacity-30={zoom.is_cancel}>
 				{#if zoom.days.length}
 					{#each zoom.days as d}
 						<div class="flex">

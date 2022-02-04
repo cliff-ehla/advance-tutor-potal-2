@@ -14,7 +14,7 @@ export const eventContent = (arg) => {
 	let student_count = zoom.students.length
 	let big_classroom_type = zoom.big_classroom_type
 	const is_classroom = !!big_classroom_type
-	const is_cancel = zoom.is_cancel
+	const {is_cancel, s_sick_leave, t_sick_leave} = zoom
 	const rated = zoom.t_difficulty_rate_has_rate
 	const is_trial = zoom.is_trial
 
@@ -55,11 +55,14 @@ export const eventContent = (arg) => {
 		wrapper_el.append(code_el)
 		wrapper_el.append(size_el)
 	} else {
-		title_el.innerHTML = arg.event.title
-		if (student_count > 1) {
-			title_el.innerHTML = `${student_count} students`
+		if (s_sick_leave) {
+			title_el.innerHTML = 'Student leave'
+		} else if (t_sick_leave) {
+			title_el.innerHTML = 'My leave'
+		} else if (is_cancel) {
+			title_el.innerHTML = 'Canceled' // if canceled and is not t_sick or s_sick
 		} else {
-			title_el.innerHTML = arg.event.title || '(no title)'
+			title_el.innerHTML = arg.event.title
 		}
 		title_el.classList.add('text-xs', 'whitespace-nowrap')
 		wrapper_el.appendChild(title_el)
