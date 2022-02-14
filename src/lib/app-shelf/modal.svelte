@@ -4,6 +4,7 @@
 	import { setContext as baseSetContext } from 'svelte';
 	import { fade, fly } from 'svelte/transition';
 	import Icon from '$lib/ui/icon.svelte'
+	import {page} from "$app/stores";
 
 	export let key = 'simple-modal';
 	export let closeButton = true;
@@ -18,6 +19,10 @@
 	export let transitionBgProps = { duration: 300 };
 	export let transitionWindow = fly;
 	export let transitionWindowProps = { duration: 300, y: 100 };
+
+	$: {
+		if ($page) close()
+	}
 
 	const defaultState = {
 		closeButton: true,
