@@ -33,7 +33,7 @@
 	</div>
 {:else}
 	{#if pdf_json}
-		<Reader {youtube_links} pages_info_2={pdf_json} top_offset={200}/>
+		<Reader close_modal_button_visible {youtube_links} pages_info_2={pdf_json}/>
 	{:else}
 		<button on:click={closeModal}>Close</button>
 	{/if}

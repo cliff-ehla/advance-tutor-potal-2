@@ -83,10 +83,10 @@
 	}
 </script>
 
-<div class="h-10 border-b border-gray-300 items-center flex">
+<div class="h-10 items-center flex relative z-50 px-2">
 	<button use:tooltip={'Back'} on:click={() => {history.back()}}
-	        class="icon-button text-gray-500">
-		<Icon name="right" className="transform rotate-180 w-4"/>
+	        class="w-8 h-8 shadow-lg border-2 border-gray-200 hover:bg-blue-50 hover:border-blue-300 hover:text-blue-500 bg-white rounded-full cc mr-2">
+		<Icon name="right" className="transform rotate-180 w-3"/>
 	</button>
 	{#each items as item}
 		<button class:text-blue-500={item.item_id === selected_item_id}
@@ -109,8 +109,7 @@
 	{/if}
 </div>
 
-<div
-				class="fixed bottom-2 left-1/2 transform -translate-x-1/2 flex items-center flex-col">
+<div class="fixed bottom-2 left-1/2 transform -translate-x-1/2 flex items-center flex-col">
 	<Countdown
 					{student_id}
 					item_id={selected_item_id}

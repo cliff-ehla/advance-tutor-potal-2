@@ -45,7 +45,8 @@
 		}, {
 			padding: 0,
 			bg_class: 'transparent',
-			width: '100%'
+			width: '100%',
+			closeButton: false
 		})
 	}
 </script>

@@ -1,15 +1,15 @@
 <script>
 	import Icon from '$lib/ui/icon.svelte'
 	import Reader from './puzzle-reader.svelte'
-	import { debounce } from "debounce";
 	import {domain} from "./puzzle-reader-constant";
 	import Panzoom from '@panzoom/panzoom'
-	// import tippy from "tippy.js";
+	import {getContext} from 'svelte'
+	const {closeModal} = getContext('simple-modal')
 	import {pdf_keyboard_listener_active} from "../../store";
 
 	export let pages_info_2 = []
-	export let top_offset = 48
 	export let youtube_links = []
+	export let close_modal_button_visible = false
 
 	pages_info_2 = pages_info_2.sort((a,b) => a.file_page_num > b.file_page_num ? 1: -1)
 	$: nav_thumbs = pages_info_2.map(p => `${domain}/${p.file_name}_${p.file_page_num}_thumb.jpg`)
@@ -19,8 +19,6 @@
 	$: total_page = pages_info_2.length
 
 	import {onMount} from 'svelte'
-	let body_height
-	let menu_height = 120
 	let menu_visible = false
 	let panzoom
 	let main_stage_el
@@ -33,12 +31,6 @@
 	$: is_last = index === pages_info_2.length - 1
 	$: can_zoom_in = zoom_scale < max_zoom_scale
 	$: can_zoom_out = zoom_scale > 1
-	$: computed_body_height = body_height + menu_height
-	$: computed_body_padding = menu_visible ? menu_height : 0
-
-	const setDimension = () => {
-		body_height = window.innerHeight - top_offset - menu_height
-	}
 
 	const resetPanZoom = () => {
 		zoom_scale = 1
@@ -101,18 +93,12 @@
 	}
 
 	onMount(() => {
-		const dHandler = debounce(setDimension, 100)
-		setDimension()
 		setTimeout(() => {
 			panzoom = Panzoom(main_stage_el)
 			main_stage_el.addEventListener('contextmenu', e => {
 				e.preventDefault()
 			})
 		}, 1)
-		window.addEventListener('resize', dHandler)
-		return () => {
-			window.removeEventListener('resize', dHandler)
-		}
 	})
 
 	const goToYoutube = href => {
@@ -167,24 +153,27 @@
 	</div>
 
 
-	<div style="height: {computed_body_height}px; padding-bottom: {computed_body_padding}px">
-		<button on:click={onLeftClick} class:opacity-30={is_first} class="z-50 flex items-center justify-center hover:bg-gray-500 hover:text-white w-12 h-12 bg-white rounded-full border border-gray-300 absolute top-1/2 left-4 transform -translate-y-1/2">
+	<div>
+		<button on:click={onLeftClick} class:opacity-30={is_first} class="z-50 flex items-center justify-center hover:bg-gray-500 hover:text-white w-12 h-12 bg-white rounded-full border border-gray-300 fixed top-1/2 left-4 transform -translate-y-1/2">
 			<Icon name="right" className="transform rotate-180 w-6"/>
 		</button>
-		<button on:click={onRightClick} class:opacity-30={is_last} class="z-50 flex items-center justify-center hover:bg-gray-500 hover:text-white w-12 h-12 bg-white rounded-full border border-gray-300 absolute top-1/2 right-4 transform -translate-y-1/2">
+		<button on:click={onRightClick} class:opacity-30={is_last} class="z-50 flex items-center justify-center hover:bg-gray-500 hover:text-white w-12 h-12 bg-white rounded-full border border-gray-300 fixed top-1/2 right-4 transform -translate-y-1/2">
 			<Icon name="right" className="w-6"/>
 		</button>
 
-		{#if body_height}
-			<div class="w-full h-full" bind:this={main_stage_el}>
-				<Reader width={current_page.width} height={current_page.height} file_page_number={current_page.file_page_num} file_name={current_page.file_name}/>
-			</div>
+		{#if close_modal_button_visible}
+			<button on:click={closeModal} class="z-50 fixed right-4 top-4 w-14 h-14 shadow-lg border-4 border-gray-200 hover:bg-blue-50 hover:border-blue-300 hover:text-blue-500 bg-white rounded-full cc">
+				<Icon name="close" className="w-4"/>
+			</button>
 		{/if}
+		<div class="fixed inset-0" bind:this={main_stage_el}>
+			<Reader width={current_page.width} height={current_page.height} file_page_number={current_page.file_page_num} file_name={current_page.file_name}/>
+		</div>
 	</div>
 
-	<div class="bg-white px-8 absolute inset-x-0 bottom-0 transform transition-transform" class:translate-y-full={!menu_visible}>
+	<div class="bg-white px-8 fixed inset-x-0 bottom-0 transform transition-transform" class:translate-y-full={!menu_visible}>
 		<div class="overflow-x-scroll text-center">
-			<div class="inline-flex py-4" style="height: {menu_height}px">
+			<div class="inline-flex py-4" style="height: 140px">
 				{#each nav_thumbs as src, i}
 					<img on:click={() => {index = i}}
 					     class="{i === index ? 'opacity-100 border-4 border-black' : 'opacity-40'} h-full mx-2 rounded flex cursor-pointer"
