@@ -41,7 +41,9 @@
 
 	const previewMaterial = async (d) => {
 		open(PdfReaderDialog, {
-			item_id: d.item_id
+			item_id: d.item_id,
+			start_date: zoom.start_date,
+			end_date: zoom.end_date,
 		}, {
 			padding: 0,
 			bg_class: 'transparent',
