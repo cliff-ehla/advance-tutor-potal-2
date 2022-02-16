@@ -10,6 +10,7 @@
 	import isToday from "dayjs/plugin/isToday.js";
 	dayjs.extend(isToday)
 	import CoursePreviewPopup from '$lib/zoom/course-preview-popup.svelte'
+	import TutorCoursePreviewPopup from '$lib/zoom/tutor-course-preview-popup.svelte'
 	import Dropdown from '$lib/ui/dropdown3.svelte'
 	import StudentLabel from '$lib/student/student-label.svelte'
 	import {capitalize} from "$lib/helper/capitalize.js";
@@ -65,7 +66,10 @@
 			</div>
 			{#if is_classroom}
 				<p class="text-sm bg-purple-400 rounded-sm font-bold text-white px-2 py-0.5 leading-tight inline-block">{capitalize(zoom.rc_level)}</p>
-				<div class="text-purple-500 leading-tight mt-1">{zoom.sub_cat || zoom.sub_cat_en}</div>
+				<Dropdown activator_style="inline-block" placement="right" caveat_visible>
+					<p slot="activator" class="text-purple-500 leading-tight mt-1">{zoom.sub_cat || zoom.sub_cat_en}</p>
+					<TutorCoursePreviewPopup tutor_course_id={zoom.tutor_course_id}/>
+				</Dropdown>
 			{:else}
 				<div class="text-gray-700 leading-tight mb-1">
 					<Dropdown activator_style="inline-block" placement="right" caveat_visible>
