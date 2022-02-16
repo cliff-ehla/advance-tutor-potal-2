@@ -14,6 +14,8 @@
 	})
 </script>
 
-{#if existing_classroom}
-	<TutorCourseTimeline {existing_classroom}/>
-{/if}
+<div class="dropdown">
+	{#if existing_classroom}
+		<TutorCourseTimeline {existing_classroom}/>
+	{/if}
+</div>

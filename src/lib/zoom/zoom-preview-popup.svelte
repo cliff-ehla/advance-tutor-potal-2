@@ -67,7 +67,7 @@
 			{#if is_classroom}
 				<p class="text-sm bg-purple-400 rounded-sm font-bold text-white px-2 py-0.5 leading-tight inline-block">{capitalize(zoom.rc_level)}</p>
 				<Dropdown activator_style="inline-block" placement="right" caveat_visible>
-					<p slot="activator" class="text-purple-500 leading-tight mt-1">{zoom.sub_cat || zoom.sub_cat_en}</p>
+					<a href="/course/{zoom.tutor_course_id}" slot="activator" class="text-purple-500 hover:text-purple-700 leading-tight mt-1">{zoom.sub_cat || zoom.sub_cat_en}</a>
 					<TutorCoursePreviewPopup tutor_course_id={zoom.tutor_course_id}/>
 				</Dropdown>
 			{:else}

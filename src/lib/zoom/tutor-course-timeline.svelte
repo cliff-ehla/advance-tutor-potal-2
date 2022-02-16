@@ -1,6 +1,8 @@
 <script>
 	export let existing_classroom
 	import dayjs from "dayjs";
+	import utc from "dayjs/plugin/utc.js";
+	dayjs.extend(utc)
 	const isPast = (classroom) => {
 		return dayjs.utc(classroom.start_date).local().isBefore(dayjs())
 	}
@@ -16,7 +18,7 @@
 			<p class="text-gray-500 text-sm">
 				<span>{dayjs.utc(classroom.start_date).local().format('DD MMM (ddd), h:mma')}</span>
 			</p>
-			<div>{classroom.title}</div>
+			<div class="text-xs">{classroom.title}</div>
 		</div>
 	</div>
 {/each}
