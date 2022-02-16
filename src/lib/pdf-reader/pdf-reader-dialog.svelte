@@ -17,7 +17,7 @@
 	export let end_date = undefined
 	let pdf_json
 	let ppt_link
-	let youtube_links
+	let youtube_link_obj
 	let reminder_visible = false
 
 	$: is_expired = dayjs().isAfter(end_date)
@@ -31,7 +31,7 @@
 			})
 			pdf_json = data[0].pdf_json
 			ppt_link = data[0].ppt_link
-			youtube_links = data[0].youtube_link
+			youtube_link_obj = data[0].youtube_link_obj
 			if (ppt_link) {
 				open(ppt_link, 'preview', 'popup')
 				closeModal()
@@ -60,7 +60,7 @@
 		</div>
 	{/if}
 	{#if pdf_json}
-		<Reader close_modal_button_visible {youtube_links} pages_info_2={pdf_json}/>
+		<Reader close_modal_button_visible {youtube_link_obj} pages_info_2={pdf_json}/>
 	{:else}
 		<button on:click={closeModal}>Close</button>
 	{/if}

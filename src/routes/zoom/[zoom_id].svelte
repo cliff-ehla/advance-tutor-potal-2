@@ -56,7 +56,7 @@
 	const student_id = is_one_on_one ? students[0].user_id : null
 	let selected_item_id = items && items[0].item_id
 	let pdf_json
-	let youtube_links
+	let youtube_link_obj
 	let loading_item = true
 
 	import PdfReader from '$lib/pdf-reader/index.svelte'
@@ -76,7 +76,7 @@
 				open(ppt_link, 'preview', 'popup')
 			} else {
 				pdf_json = data[0].pdf_json
-				youtube_links = data[0].youtube_link
+				youtube_link_obj = data[0].youtube_link_obj
 				loading_item = false
 			}
 		}
@@ -98,7 +98,7 @@
 </div>
 
 {#if !loading_item}
-	<PdfReader {youtube_links} pages_info_2={pdf_json}/>
+	<PdfReader {youtube_link_obj} pages_info_2={pdf_json}/>
 {/if}
 
 <div class="fixed right-8 bottom-0 z-50">

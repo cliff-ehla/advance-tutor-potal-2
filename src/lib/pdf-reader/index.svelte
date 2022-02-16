@@ -1,5 +1,6 @@
 <script>
 	import Icon from '$lib/ui/icon.svelte'
+	import Dropdown from '$lib/ui/dropdown3.svelte'
 	import Reader from './puzzle-reader.svelte'
 	import {domain} from "./puzzle-reader-constant";
 	import Panzoom from '@panzoom/panzoom'
@@ -8,7 +9,7 @@
 	import {pdf_keyboard_listener_active} from "../../store";
 
 	export let pages_info_2 = []
-	export let youtube_links = []
+	export let youtube_link_obj = []
 	export let close_modal_button_visible = false
 
 	pages_info_2 = pages_info_2.sort((a,b) => a.file_page_num > b.file_page_num ? 1: -1)
@@ -139,15 +140,24 @@
 			<div class="h-4 flex justify-center items-center border-t border-gray-300 text-xs text-gray-500">
 				{index + 1} / {total_page}
 			</div>
-			{#if youtube_links.length}
-				<div class="flex justify-center border-gray-300 border-t">
-					{#each youtube_links as href}
-						<button on:click={() => {goToYoutube(href)}} target="_blank"
-						   class="bg-white text-black w-8 h-8 flex items-center justify-center hover:bg-gray-100 hover:text-blue-500">
-							<Icon name="music" className="w-4"/>
-						</button>
-					{/each}
-				</div>
+			{#if youtube_link_obj.length}
+				<Dropdown
+								placement="top"
+								activator_style="w-full flex justify-center border-t border-gray-300 py-1">
+					<div slot="activator" class="relative w-full flex justify-center">
+						<Icon name="music" className="w-4"/>
+						<div class="bg-gray-100 rounded-full cc w-4 h-4 absolute right-1 text-gray-500 border border-gray-300" style="font-size: 10px; margin-top: 1px">{youtube_link_obj.length}</div>
+					</div>
+					<div class="dropdown w-72 transform translate-y-8">
+						{#each youtube_link_obj as obj}
+							<button on:click={() => {goToYoutube(obj.link)}} target="_blank"
+							        class="item flex items-center">
+								<Icon name="music" className="w-4"/>
+								<span class="ml-2">{obj.name || 'Go to youtube'}</span>
+							</button>
+						{/each}
+					</div>
+				</Dropdown>
 			{/if}
 		</div>
 	</div>
