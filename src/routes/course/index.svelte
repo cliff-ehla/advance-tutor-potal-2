@@ -11,7 +11,11 @@
 
 <script>
 	import CoursePreview from '$lib/zoom/course-preview.svelte'
+	import TutorCoursePreview from '$lib/zoom/tutor-course-preview.svelte'
 	import Icon from '$lib/ui/icon.svelte'
+	$: {
+		console.log('cliff: ', $course_list_store)
+	}
 </script>
 
 <div class="bg-gray-100">
@@ -21,12 +25,25 @@
 			<p class="page-title ml-3">My 1-on-1 classes</p>
 		</div>
 		<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-			{#if !$course_list_store.one_on_one.length}
+			{#if $course_list_store.one_on_one.length}
 				{#each $course_list_store.one_on_one as course}
 					<CoursePreview {course}/>
 				{/each}
 			{:else}
-				<p class="note py-4">You have no course</p>
+				<p class="note py-4">You have no 1-on-1 course</p>
+			{/if}
+		</div>
+		<div class="flex items-center py-4">
+			<Icon name="classroom" className="w-12 text-gray-500"/>
+			<p class="page-title ml-3">My group classes</p>
+		</div>
+		<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+			{#if $course_list_store.tutor_course.length}
+				{#each $course_list_store.tutor_course as course}
+					<TutorCoursePreview {course}/>
+				{/each}
+			{:else}
+				<p class="note py-4">You have no group classes</p>
 			{/if}
 		</div>
 	</div>
