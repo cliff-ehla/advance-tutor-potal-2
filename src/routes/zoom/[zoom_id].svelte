@@ -29,7 +29,7 @@
 	dayjs.extend(utc)
 
 	onMount(() => {
-		checkEnterClassTime()
+		// checkEnterClassTime()
 	})
 
 	const checkEnterClassTime = () => {
