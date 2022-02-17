@@ -11,6 +11,7 @@
 <script>
 	import ZoomPreviewMinimal from '$lib/zoom/zoom-preview-minimal.svelte'
 	import CoursePreviewMinimal from '$lib/zoom/course-preview-minimal.svelte'
+	import TutorCoursePreview from '$lib/zoom/tutor-course-preview.svelte'
 	import StudentNoteReadOnly from '$lib/student/student-note-readonly.svelte'
 	import {page} from "$app/stores";
 	import Icon from '$lib/ui/icon.svelte'
@@ -21,6 +22,7 @@
 	$: completed_zoom_list = overview.completed_zoom_list
 	$: upcoming_zoom_list = overview.upcoming_zoom_list
 	$: one_on_one_course = overview.one_on_one_course
+	$: tutor_course = overview.tutor_course
 	$: completed_zoom_cnt = overview.completed_zoom_cnt
 	$: upcoming_zoom_cnt = overview.upcoming_zoom_cnt
 </script>
@@ -72,6 +74,22 @@
 				{#if one_on_one_course.length}
 					{#each one_on_one_course as course}
 						<CoursePreviewMinimal {student_id} {course}/>
+					{/each}
+				{:else}
+					<p class="note">No courses</p>
+				{/if}
+			</div>
+		</div>
+
+		<div class="section-box mt-4">
+			<div class="flex mb-4 items-center">
+				<Icon name="one-on-one" className="w-8"/>
+				<p class="ml-2 text uppercase text-gray-500">Group courses</p>
+			</div>
+			<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+				{#if tutor_course.length}
+					{#each tutor_course as course}
+						<TutorCoursePreview {course}/>
 					{/each}
 				{:else}
 					<p class="note">No courses</p>
