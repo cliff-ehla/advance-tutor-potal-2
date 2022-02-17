@@ -143,11 +143,11 @@
 			{#if zoom.days.length}
 				{#each zoom.days as d}
 					<div class="relative">
-						<div use:tooltip={'Preview material'} on:click={() => {previewMaterial(d)}}
+						<a href="/zoom/{zoom.wrapper_id}"
 						     class="flex items-center cursor-pointer bg-gray-50 hover:text-blue-500 hover:bg-white transition-colors my-2 px-4 py-3 shadow rounded border-gray-300 border">
 							<Icon name="pdf" className="text-gray-500 w-6 flex-shrink-0"/>
 							<p class="leading-tight ml-2">{d.title}</p>
-						</div>
+						</a>
 						{#if is_ended && !is_classroom}
 							<div class="ml-4 absolute -top-3 -right-4">
 								<RateLabel {student_id} item_id={d.item_id} rate={d.t_difficulty_rate}/>

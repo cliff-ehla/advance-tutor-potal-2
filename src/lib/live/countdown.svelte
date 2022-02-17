@@ -82,7 +82,7 @@
 				<RateZoom {student_id} {item_id}/>
 			</Dropdown>
 		{/if}
-		{#if !is_one_on_one}
+		{#if !is_one_on_one && !ended}
 			<div class="ml-1">
 				<MessageWidgetForGroup secondary={started} {tutor_group_id}/>
 			</div>

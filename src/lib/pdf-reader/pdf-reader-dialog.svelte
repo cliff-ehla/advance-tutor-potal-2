@@ -24,7 +24,7 @@
 	$: lesson_now = dayjs().isAfter(start_date) && dayjs().isBefore(end_date)
 
 	onMount(async () => {
-		setTimeout(() => {reminder_visible = true}, 600)
+		if (start_date) setTimeout(() => {reminder_visible = true}, 600)
 		if (item_id) {
 			let {data} = await http.post(fetch, '/itemApi/get_by_ids', {
 				ids: [item_id]
