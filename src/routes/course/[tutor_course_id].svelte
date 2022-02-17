@@ -15,11 +15,25 @@
 </script>
 
 <script>
+	import PdfReaderDialog from "$lib/pdf-reader/pdf-reader-dialog.svelte";
 	export let course_detail
 	import TutorCourseTimeline from '$lib/zoom/tutor-course-timeline.svelte'
+	import {getContext} from 'svelte'
+	const {openModal, closeModal} = getContext('simple-modal')
 
 	$: existing_classroom = course_detail.existing_classroom
 	$: material_status = course_detail.material_status
+
+	const previewMaterial = async (item_id) => {
+		openModal(PdfReaderDialog, {
+			item_id
+		}, {
+			padding: 0,
+			bg_class: 'transparent',
+			width: '100%',
+			closeButton: false
+		})
+	}
 </script>
 
 <div class="bg-banner p-4 -mt-12 pt-12">
@@ -44,9 +58,10 @@
 				<p class="text-xl mb-4 text-gray-700">Course materials</p>
 				<div class="grid grid-cols-3 gap-4">
 					{#each material_status as m}
-						<div class="relative bg-white rounded-lg shadow-lg border border-gray-300">
-							<div class="h-40 overflow-hidden rounded">
-								<img class="shadow border border-gray-300 rounded" src={m.thumbnail_path} alt={m.title}/>
+						<div on:click={() => {previewMaterial(m.item_id)}}
+						     class="hover:-translate-y-1 hover:shadow-lg hover:border-blue-500 transition transform bg-white rounded-lg border border-gray-300 cursor-pointer">
+							<div class="h-40 overflow-hidden rounded-lg">
+								<img class="rounded" src={m.thumbnail_path} alt={m.title}/>
 							</div>
 							<p class="p-2 leading-tight text-sm">{m.name}</p>
 						</div>
