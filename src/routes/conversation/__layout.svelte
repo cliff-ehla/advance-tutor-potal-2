@@ -1,7 +1,8 @@
 <script context="module">
+	import {conversation_store} from "$lib/store/conversation.js";
 	import {http, onFail} from "$lib/http";
 	export const load = async ({page, fetch}) => {
-		const {data, success, debug} = await http.get(fetch, '/tutorApi/list_conversation')
+		const {data, success, debug} = await conversation_store.fetchConversation(fetch)
 		if (!success) return onFail(debug)
 		return {
 			stuff: {
