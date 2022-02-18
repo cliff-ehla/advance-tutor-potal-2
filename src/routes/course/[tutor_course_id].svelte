@@ -39,8 +39,12 @@
 <div class="bg-banner p-4 -mt-12 pt-12">
 	<div class="container mx-auto">
 		<div class="my-8">
+			<p class="text bg-purple-400 rounded-sm font-bold text-white px-2 py-0.5 leading-tight inline-block">
+				{course_detail.description_code_short_id || 'NA'}
+			</p>
+			<p class="text-purple-800 leading-tight mt-1">{course_detail.sub_cat || 'NA'}</p>
 			<h1 class="page-title mb-4">{course_detail.title}</h1>
-			<p class="text-gray-600 my-4 max-w-screen-sm">In this Zoom class, native speaker teachers will guide and train students to improve and enhance their English speaking proficiency, and to better prepare for answering the interview questions. It provides a very good opportunity and English environment for students to conduct daily conversations in English and  group interview practice. The teacher will guide students to improve through the training process.</p>
+			<p class="text-gray-600 my-4 max-w-screen-sm">{course_detail.description || 'Course desc - NA'}</p>
 		</div>
 	</div>
 </div>
