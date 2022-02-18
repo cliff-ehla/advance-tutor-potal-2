@@ -20,9 +20,11 @@
 	import TutorCourseTimeline from '$lib/zoom/tutor-course-timeline.svelte'
 	import {getContext} from 'svelte'
 	const {openModal, closeModal} = getContext('simple-modal')
+	import {capitalize} from "$lib/helper/capitalize.js";
 
 	$: existing_classroom = course_detail.existing_classroom
 	$: material_status = course_detail.material_status
+	$: first_classroom = existing_classroom && existing_classroom[0]
 
 	const previewMaterial = async (item_id) => {
 		openModal(PdfReaderDialog, {
@@ -39,12 +41,15 @@
 <div class="bg-banner p-4 -mt-12 pt-12">
 	<div class="container mx-auto">
 		<div class="my-8">
-			<p class="text bg-purple-400 rounded-sm font-bold text-white px-2 py-0.5 leading-tight inline-block">
-				{course_detail.description_code_short_id || 'NA'}
+			<p class="text-lg bg-purple-400 border border-purple-400 rounded-sm font-bold text-white px-2 py-0.5 leading-tight inline-block">
+				{first_classroom.description_code_short_id || 'NA'}
 			</p>
-			<p class="text-purple-800 leading-tight mt-1">{course_detail.sub_cat || 'NA'}</p>
+			<p class="text-lg bg-purple-50 border border-purple-200 rounded-sm text-purple-500 px-2 py-0.5 leading-tight inline-block">
+				{capitalize(first_classroom.rc_level)}
+			</p>
+			<p class="text-purple-800 leading-tight mt-1">{first_classroom.sub_cat || 'NA'}</p>
 			<h1 class="page-title mb-4">{course_detail.title}</h1>
-			<p class="text-gray-600 my-4 max-w-screen-sm">{course_detail.description || 'Course desc - NA'}</p>
+			<p class="text-gray-600 my-4 max-w-screen-md leading-loose">{first_classroom.description || 'Course desc - NA'}</p>
 		</div>
 	</div>
 </div>
