@@ -2,9 +2,24 @@
 	export let existing_classroom
 	import dayjs from "dayjs";
 	import utc from "dayjs/plugin/utc.js";
+	import PdfReaderDialog from '$lib/pdf-reader/pdf-reader-dialog.svelte'
+	import {getContext} from 'svelte'
+	import {tooltip} from "$lib/aciton/tooltip.js";
+
+	const {openModal, closeModal} = getContext('simple-modal')
 	dayjs.extend(utc)
 	const isPast = (classroom) => {
 		return dayjs.utc(classroom.start_date).local().isBefore(dayjs())
+	}
+	const onPreview = (item_id) => {
+		openModal(PdfReaderDialog, {
+			item_id
+		}, {
+			padding: 0,
+			bg_class: 'transparent',
+			width: '100%',
+			closeButton: false
+		})
 	}
 </script>
 
@@ -18,7 +33,7 @@
 			<p class="text-gray-500 text-sm">
 				<span>{dayjs.utc(classroom.start_date).local().format('DD MMM (ddd), h:mma')}</span>
 			</p>
-			<div class="text-xs">{classroom.title}</div>
+			<div use:tooltip={'Preview'} on:click={() => {onPreview(classroom.item_id)}} class="cursor-pointer hover:text-blue-700 text-xs">{classroom.title}</div>
 		</div>
 	</div>
 {/each}
