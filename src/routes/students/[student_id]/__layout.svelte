@@ -23,6 +23,8 @@
 	import StudentNoteReadOnly from '$lib/student/student-note-readonly.svelte'
 	import dayjs from "dayjs";
 	import Icon from '$lib/ui/icon.svelte'
+	import {slugToText} from "$lib/helper/slug-to-text.js";
+
 	export let detail
 	$: student_id = $page.params.student_id
 	$: tutor_group_id = $page.params.tutor_group_id
@@ -44,7 +46,7 @@
 				<span>{tutor_group_id}</span>
 			{:else}
 				<span class="mx-2"> > </span>
-				{slug}
+				{slugToText(slug)}
 			{/if}
 		{/if}
 	</div>
@@ -65,21 +67,23 @@
 					<div class="grid grid-cols-3 gap-4">
 						<div>
 							<a href="/students/{student_id}/upcoming-lesson"
-							   class="text-gray-500 flex items-end hover:text-blue-500 border border-transparent hover:border-blue-500 hover:bg-white transition-colors p-2 rounded hover:shadow">
+							   class="text-gray-700 flex items-end bg-white hover:text-blue-500 border border-transparent hover:border-blue-500 transition-colors p-2 rounded">
 								<p class="num">{detail.upcoming_zoom_cnt}</p>
 								<p class="text-xs ml-1 mb-0.5 leading-none">Upcoming <br/>lessons</p>
+								<Icon name="right" className="w-3 mb-1.5 text-gray-400 ml-1"/>
 							</a>
 						</div>
 						<div>
-							<a href="/students/{student_id}/past-lesson"
-							   class="text-gray-500 flex items-end hover:text-blue-500 hover:bg-white transition-colors p-2 rounded hover:shadow">
+							<a href="/students/{student_id}/historical-lessons"
+							   class="text-gray-700 flex items-end bg-white hover:text-blue-500 border border-transparent hover:border-blue-500 transition-colors p-2 rounded">
 								<p class="num">{detail.completed_zoom_cnt}</p>
 								<p class="text-xs ml-1 mb-0.5 text-gray-500 leading-none">Completed <br/>lessons</p>
+								<Icon name="right" className="w-3 mb-1.5 text-gray-400 ml-1"/>
 							</a>
 						</div>
-						<a class="leading-none mt-1.5 p-2">
-							<p class="text-xs text-gray-500 leading-none mb-1">Last lessons</p>
-							<p>{dayjs().diff(dayjs(detail.last_zoom_lesson_date), 'day')} <span class="text-gray-500">days ago</span></p>
+						<a class="leading-none p-2 bg-white">
+							<p class="text-sm text-gray-500 leading-none mb-1 mt-1">Last lessons</p>
+							<p class="text-lg leading-none">{dayjs().diff(dayjs(detail.last_zoom_lesson_date), 'day')} <span class="text-gray-500">days ago</span></p>
 						</a>
 					</div>
 				</div>

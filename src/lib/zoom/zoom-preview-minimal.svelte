@@ -7,6 +7,7 @@
 	const {showPopper} = getContext('popper')
 	import {tooltip} from "$lib/aciton/tooltip.js";
 	import ZoomPreviewPopup from '$lib/zoom/zoom-preview-popup.svelte'
+	import {rc_level_to_label} from "$lib/store/rc-level-to-label.js";
 
 	export let zoom
 	let type = zoom.big_classroom_type
@@ -40,6 +41,7 @@
 						<Icon name="classroom" className="text-purple-500 w-4"/>
 					</div>
 					<p class="ml-1 text-xs text-purple-500">{zoom.students.length}/{room_size}</p>
+					<p class="bg-purple-100 text-purple-500 text-white ml-1 px-1 text-xs rounded-sm">#{rc_level_to_label[zoom.rc_level]}</p>
 					<p use:tooltip={zoom.sub_cat_en} class="bg-purple-500 text-white ml-1 px-1 text-xs rounded-sm">{zoom.description_code_short_id}</p>
 				</div>
 			{:else}

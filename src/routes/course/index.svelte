@@ -13,9 +13,6 @@
 	import CoursePreview from '$lib/zoom/course-preview.svelte'
 	import TutorCoursePreview from '$lib/zoom/tutor-course-preview.svelte'
 	import Icon from '$lib/ui/icon.svelte'
-	$: {
-		console.log('cliff: ', $course_list_store)
-	}
 </script>
 
 <div class="bg-gray-100">

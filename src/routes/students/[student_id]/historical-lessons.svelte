@@ -22,7 +22,7 @@
 
 <div class="mx-auto max-w-screen-lg">
 	<div class="section-box">
-		<p class="section-title">Past lessons</p>
+		<p class="section-title">Historical lessons</p>
 		{#each zoom_list as zoom}
 			<div class="my-4">
 				<ZoomPreviewMinimal {zoom}/>

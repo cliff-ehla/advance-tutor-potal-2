@@ -93,7 +93,7 @@
 			</div>
 		{/each}
 	{:else}
-		<div class="text-xs text-gray-400 pb-4">No notes</div>
+		<div class="text-xs text-gray-400 pb-4">No note</div>
 	{/if}
 	</div>
 	<div class="">

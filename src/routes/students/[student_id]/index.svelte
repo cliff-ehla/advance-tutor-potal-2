@@ -57,7 +57,7 @@
 						<ZoomPreviewMinimal {zoom}/>
 					</div>
 				{/each}
-				<a href="/students/{student_id}/past-lesson" class="text-sm text-blue-500 text-center block bg-gray-100 py-1 border border-gray-200 hover:border-blue-500">See all learning history</a>
+				<a href="/students/{student_id}/historical-lessons" class="text-sm text-blue-500 text-center block bg-gray-100 py-1 border border-gray-200 hover:border-blue-500">See all learning history</a>
 			{:else}
 				<p class="text-gray-400">No history</p>
 			{/if}

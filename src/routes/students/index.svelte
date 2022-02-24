@@ -54,9 +54,9 @@
 			<div>
 				<h1 class="page-title">My Students</h1>
 				<div class="flex items-center">
-					<div class="w-2.5 h-2.5 rounded-full bg-red-500 mx-0.5 mt-0.5"></div>
-					<p use:tooltip={'Students with upcoming lessons'} class="text-gray-700 ml-1 text-red-700">Active students
-						<span class="bg-red-500 px-1 rounded text-white text-sm">{active_student_count}</span>
+					<div class="w-2.5 h-2.5 rounded-full bg-green-500 mx-0.5 mt-0.5"></div>
+					<p use:tooltip={'Students with upcoming lessons'} class="text-gray-700 ml-1 text-green-700">Active students
+						<span class="bg-green-500 px-1 rounded text-white text-sm">{active_student_count}</span>
 					</p>
 				</div>
 			</div>
@@ -83,8 +83,8 @@
 							<p class="text-xs text-gray-500 mb-1">Seen <b>{dayjs().diff(dayjs(s.last_lesson_date),'day')}</b> days before</p>
 							{#if s.upcoming_zoom_cnt}
 								<div class="inline-flex items-center text-xs">
-									<div class="w-2 h-2 rounded-full bg-red-500 mx-0.5"></div>
-									<div class="ml-1" class:text-red-600={s.upcoming_zoom_cnt > 5}><b>{s.upcoming_zoom_cnt}</b> <span class="text-gray-500">Upcoming Lessons</span></div>
+									<div class="w-2.5 h-2.5 mr-0.5 rounded-full bg-green-500 shadow"></div>
+									<div class="ml-1 text-green-600"><b>{s.upcoming_zoom_cnt}</b> <span class="text-green-700">Upcoming Lessons</span></div>
 								</div>
 							{:else}
 								<div class="inline-flex items-center text-xs">
@@ -93,8 +93,8 @@
 								</div>
 							{/if}
 							<div class="inline-flex items-center text-xs">
-								<Icon name="stopwatch" className="w-3"/>
-								<div class="ml-1"><b>{s.completed_zoom_cnt}</b> <span class="text-gray-500">Completed Lessons</span></div>
+								<Icon name="stopwatch" className="w-3 text-gray-400"/>
+								<div class="ml-1"><b class="text-gray-500">{s.completed_zoom_cnt}</b> <span class="text-gray-500">Completed Lessons</span></div>
 							</div>
 						</div>
 					</a>
