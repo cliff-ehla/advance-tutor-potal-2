@@ -20,7 +20,7 @@
 	<div class="flex-1 px-4 py-2 overflow-y-scroll" style="max-height: 300px">
 		{#each student_list as s}
 			<p class="border-b border-gray-200 my-1 py-1 relative">
-				{#if s.is_trial_vip}
+				{#if s.is_trial_vip === "1"}
 					<span class="absolute w-2 h-2 -left-2 top-0">*</span>
 				{/if}
 				{s.nickname}

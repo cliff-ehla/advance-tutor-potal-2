@@ -41,7 +41,7 @@
 						<Icon name="classroom" className="text-purple-500 w-4"/>
 					</div>
 					<p class="ml-1 text-xs text-purple-500">{zoom.students.length}/{room_size}</p>
-					<p class="bg-purple-100 text-purple-500 text-white ml-1 px-1 text-xs rounded-sm">#{rc_level_to_label[zoom.rc_level]}</p>
+					<p class="bg-purple-100 text-purple-500 text-white ml-1 px-1 text-xs rounded-sm">#{rc_level_to_label[zoom.rc_level] || zoom.rc_level}</p>
 					<p use:tooltip={zoom.sub_cat_en} class="bg-purple-500 text-white ml-1 px-1 text-xs rounded-sm">{zoom.description_code_short_id}</p>
 				</div>
 			{:else}

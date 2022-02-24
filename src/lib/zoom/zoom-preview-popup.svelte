@@ -66,7 +66,7 @@
 				{/if}
 			</div>
 			{#if is_classroom}
-				<p class="text-sm bg-purple-400 rounded-sm font-bold text-white px-2 py-0.5 leading-tight inline-block">#{rc_level_to_label[zoom.rc_level]}</p>
+				<p class="text-sm bg-purple-400 rounded-sm font-bold text-white px-2 py-0.5 leading-tight inline-block">{rc_level_to_label[zoom.rc_level]}</p>
 				<Dropdown activator_style="inline-block" placement="right" caveat_visible>
 					<a href="/course/{zoom.tutor_course_id}" slot="activator" class="text-purple-500 hover:text-purple-700 leading-tight mt-1">{zoom.sub_cat || zoom.sub_cat_en}</a>
 					<TutorCoursePreviewPopup tutor_course_id={zoom.tutor_course_id}/>
