@@ -67,9 +67,9 @@
 					<div class="grid grid-cols-3 gap-4">
 						<div>
 							<a href="/students/{student_id}/upcoming-lesson"
-							   class="text-gray-700 flex items-end bg-white hover:text-blue-500 border border-transparent hover:border-blue-500 transition-colors p-2 rounded">
-								<p class="num">{detail.upcoming_zoom_cnt}</p>
-								<p class="text-xs ml-1 mb-0.5 leading-none">Upcoming <br/>lessons</p>
+							   class="text-gray-700 flex items-end bg-white border border-transparent hover:border-green-500 transition-colors p-2 rounded">
+								<p class="num text-green-600">{detail.upcoming_zoom_cnt}</p>
+								<p class="text-xs ml-1 mb-0.5 leading-none text-green-600">Upcoming <br/>lessons</p>
 								<Icon name="right" className="w-3 mb-1.5 text-gray-400 ml-1"/>
 							</a>
 						</div>

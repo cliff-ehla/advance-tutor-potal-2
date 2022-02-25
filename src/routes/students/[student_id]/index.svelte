@@ -31,7 +31,7 @@
 	<div class="w-72 flex-shrink-0 bg-white border border-gray-300 rounded">
 		<div class="p-4 border-b border-gray-300">
 			<div class="flex items-center">
-				<div class="w-2 h-2 mx-1 rounded-full {upcoming_zoom_list.length ? 'bg-red-500' : 'bg-gray-400'}"></div>
+				<div class="w-2.5 h-2.5 mx-1 rounded-full {upcoming_zoom_list.length ? 'bg-green-500' : 'bg-gray-400'}"></div>
 				<p class="ml-2 text-sm uppercase text-gray-500">Upcoming lessons</p>
 			</div>
 			{#if upcoming_zoom_list.length}
