@@ -21,6 +21,7 @@
 	import {is_loading} from "$lib/store/is_loading.js";
 	import StudentNoteReadOnly from '$lib/student/student-note-readonly.svelte'
 	import {rc_level_to_label} from "$lib/store/rc-level-to-label.js";
+	import {http} from "$lib/http.js";
 
 	$: is_today = dayjs(zoom.start_date).isToday()
 	$: is_ended = dayjs().isAfter(dayjs(zoom.end_date))
@@ -35,24 +36,25 @@
 	const default_max_student_display = 5
 	let max_student_display = default_max_student_display
 	let alert_on
+	let existing_classroom // only for is_classroom = true
+	let tutor_course_description // only for is_classroom = true
 
 	onMount(async () => {
 		const {data, success, metadata} = await student_store.fetchStudentNote(fetch, {student_id})
 		alert_on = metadata.alert_on
-	})
 
-	const previewMaterial = async (d) => {
-		open(PdfReaderDialog, {
-			item_id: d.item_id,
-			start_date: zoom.start_date,
-			end_date: zoom.end_date,
-		}, {
-			padding: 0,
-			bg_class: 'transparent',
-			width: '100%',
-			closeButton: false
-		})
-	}
+		if (is_classroom) {
+			const res = await http.post(fetch, '/tutorCourseApi/list_tutor_course_by_id', {
+				tutor_course_id: zoom.tutor_course_id
+			})
+			if (res.success) {
+				let data = res.data
+				existing_classroom = data.existing_classroom
+				let first_classroom = existing_classroom && existing_classroom[0]
+				tutor_course_description = first_classroom && first_classroom.description
+			}
+		}
+	})
 </script>
 
 <div class="p-8 border border-gray-300 w-full bg-white shadow-lg rounded overflow-y-auto" style="max-width: 400px; max-height: 600px">
@@ -66,10 +68,32 @@
 				{/if}
 			</div>
 			{#if is_classroom}
-				<p class="text-sm bg-purple-400 rounded-sm font-bold text-white px-2 py-0.5 leading-tight inline-block">{rc_level_to_label[zoom.rc_level]}</p>
+				<div class="flex items-center">
+					<p class="text-sm bg-purple-400 border border-purple-400 rounded-sm font-bold text-white px-2 py-0.5 leading-tight inline-block">
+						#{zoom.description_code_short_id || 'NA'}
+					</p>
+					<p class="text-sm bg-purple-50 border border-purple-200 rounded-sm text-purple-500 px-2 py-0.5 leading-tight inline-block ml-1">
+						{rc_level_to_label[zoom.rc_level] || zoom.rc_level}
+					</p>
+					<Dropdown activator_style="inline-flex items-center justify-center w-6 h-6 rounded-full border border-gray-300 ml-1 block"
+					          placement="bottom">
+						<button slot="activator">
+							<Icon name="info" className="w-3 text-gray-500"/>
+						</button>
+						<div class="bg-white p-4 shadow-lg border border-gray-300 rounded">
+							<p class="mb-2 text-gray-700">Teaching instruction</p>
+							<p class="text-sm text-gray-500">
+								{@html tutor_course_description}
+							</p>
+						</div>
+					</Dropdown>
+				</div>
+
 				<Dropdown activator_style="inline-block" placement="right" caveat_visible>
-					<a href="/course/{zoom.tutor_course_id}" slot="activator" class="text-purple-500 hover:text-purple-700 leading-tight mt-1">{zoom.sub_cat || zoom.sub_cat_en}</a>
-					<TutorCoursePreviewPopup tutor_course_id={zoom.tutor_course_id}/>
+					<div class="flex items-center" slot="activator">
+						<a href="/course/{zoom.tutor_course_id}" class="text-purple-500 hover:text-purple-700 leading-tight mt-1">{zoom.sub_cat || zoom.sub_cat_en}</a>
+					</div>
+					<TutorCoursePreviewPopup {existing_classroom}/>
 				</Dropdown>
 			{:else}
 				<div class="text-gray-700 leading-tight mb-1">

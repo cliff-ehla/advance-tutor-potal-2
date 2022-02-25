@@ -42,10 +42,10 @@
 <div class="bg-banner p-4 -mt-12 pt-12">
 	<div class="container mx-auto">
 		<div class="my-8">
-			<p class="text-lg bg-purple-400 border border-purple-400 rounded-sm font-bold text-white px-2 py-0.5 leading-tight inline-block">
-				{first_classroom.description_code_short_id || 'NA'}
+			<p class="text-sm bg-purple-400 border border-purple-400 rounded-sm font-bold text-white px-2 py-0.5 leading-tight inline-block">
+				#{first_classroom.description_code_short_id || 'NA'}
 			</p>
-			<p class="text-lg bg-purple-50 border border-purple-200 rounded-sm text-purple-500 px-2 py-0.5 leading-tight inline-block">
+			<p class="text-sm bg-purple-50 border border-purple-200 rounded-sm text-purple-500 px-2 py-0.5 leading-tight inline-block">
 				{rc_level_to_label[first_classroom.rc_level] || first_classroom.rc_level}
 			</p>
 			<p class="text-purple-800 leading-tight mt-1">{first_classroom.sub_cat || 'NA'}</p>
