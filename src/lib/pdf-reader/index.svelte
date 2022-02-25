@@ -192,6 +192,8 @@
 			</div>
 		</div>
 	</div>
+
+	<slot/>
 </div>
 
 <svelte:window on:keydown={onKeydown}/>

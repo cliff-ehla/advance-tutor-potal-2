@@ -98,22 +98,22 @@
 </div>
 
 {#if !loading_item}
-	<PdfReader {youtube_link_obj} pages_info_2={pdf_json}/>
+	<PdfReader {youtube_link_obj} pages_info_2={pdf_json}>
+		<div class="fixed right-8 bottom-0 z-50">
+			{#if is_one_on_one}
+				<StudentWidget {student_id} {tutor_group_id} teacher_id={$session.user_id}/>
+			{:else}
+				<StudentListWidget student_list={students}/>
+			{/if}
+		</div>
+
+		<div class="fixed bottom-2 left-1/2 transform -translate-x-1/2 flex items-center flex-col">
+			<Countdown
+							{student_id}
+							item_id={selected_item_id}
+							start_date={start_date}
+							{tutor_group_id}
+							end_date={end_date}/>
+		</div>
+	</PdfReader>
 {/if}
-
-<div class="fixed right-8 bottom-0 z-50">
-	{#if is_one_on_one}
-		<StudentWidget {student_id} {tutor_group_id} teacher_id={$session.user_id}/>
-	{:else}
-		<StudentListWidget student_list={students}/>
-	{/if}
-</div>
-
-<div class="fixed bottom-2 left-1/2 transform -translate-x-1/2 flex items-center flex-col">
-	<Countdown
-					{student_id}
-					item_id={selected_item_id}
-					start_date={start_date}
-					{tutor_group_id}
-          end_date={end_date}/>
-</div>
