@@ -12,7 +12,6 @@
 	export let zoom
 	let type = zoom.big_classroom_type
 	let room_size = type === 'SMALL' ? 4 : type === 'UNLIMITED' ? 9999 : 20
-	console.log(zoom)
 
 	const previewMaterial = async (e, zoom) => {
 		showPopper(e.target, ZoomPreviewPopup, {
