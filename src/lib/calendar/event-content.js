@@ -2,6 +2,7 @@ import dayjs from "dayjs";
 import tippy from "tippy.js";
 import {capitalize} from "$lib/helper/capitalize.js";
 import {tooltip} from "$lib/aciton/tooltip.js";
+import {rc_level_to_label} from "$lib/store/rc-level-to-label.js";
 
 export const eventContent = (arg) => {
 	let zoom = arg.event.extendedProps
@@ -40,13 +41,15 @@ export const eventContent = (arg) => {
 
 	if (is_classroom) {
 		let lv_el = document.createElement('div')
-		lv_el.innerHTML = capitalize(zoom.rc_level)
+		const _lv = rc_level_to_label[zoom.rc_level] || zoom.rc_level
+		lv_el.innerHTML = _lv
 		lv_el.classList.add('overflow-hidden', 'whitespace-nowrap', 'px-0.5', 'text-xs', 'bg-purple-500', 'hover:bg-gray-800', 'text-white', 'ml-auto', 'leading-tight')
 		lv_el.style.maxWidth = '40px'
-		tippy(lv_el, {content: zoom.rc_level})
+		tippy(lv_el, {content: _lv})
 		let code_el = document.createElement('div')
 		code_el.innerHTML = zoom.description_code_short_id
 		code_el.classList.add('overflow-hidden', 'px-0.5', 'text-xs', 'bg-purple-500', 'hover:bg-gray-800', 'text-white', 'ml-0.5', 'leading-tight')
+		code_el.style.maxWidth = '40px'
 		tippy(code_el, {content: zoom.sub_cat})
 		let size_el = document.createElement('div')
 		size_el.classList.add('bg-yellow-600', 'text-white', 'px-0.5' , 'leading-tight', 'text-xs', 'ml-0.5')
