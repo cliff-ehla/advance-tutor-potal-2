@@ -77,9 +77,9 @@
 					</p>
 					<Dropdown activator_style="inline-flex items-center justify-center w-6 h-6 rounded-full border border-gray-300 ml-1 block"
 					          placement="bottom">
-						<button slot="activator">
+						<a href="/course/{zoom.tutor_course_id}" slot="activator">
 							<Icon name="info" className="w-3 text-gray-500"/>
-						</button>
+						</a>
 						<div class="bg-white p-4 shadow-lg border border-gray-300 rounded">
 							<p class="mb-2 text-gray-700">Teaching instruction</p>
 							<p class="text-sm text-gray-500">
