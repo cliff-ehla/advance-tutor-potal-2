@@ -6,7 +6,7 @@
 	import {is_loading} from "$lib/store/is_loading.js";
 	import Icon from "$lib/ui/icon.svelte";
 	import dayjs from "dayjs";
-	import relativeTime from "dayjs/plugin/relativeTime";
+	import relativeTime from "dayjs/plugin/relativeTime.js";
 	import {fly} from "svelte/transition";
 
 	dayjs.extend(relativeTime)

@@ -13,7 +13,7 @@
 	import {tooltip} from "$lib/aciton/tooltip.js";
 	import Icon from "$lib/ui/icon.svelte"
 	import MessageWidgetForGroup from '$lib/live/message-widget-for-group.svelte'
-	import relativeTime from "dayjs/plugin/relativeTime";
+	import relativeTime from "dayjs/plugin/relativeTime.js";
 	dayjs.extend(relativeTime)
 
 	let status
