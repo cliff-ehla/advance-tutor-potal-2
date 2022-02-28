@@ -212,7 +212,7 @@
 	{#if is_today}
 		<div class="mt-4">
 			<div class="flex items-center">
-				<a href="{zoom.zoom_link}" class="bg-blue-500 hover:shadow transition-transform transform hover:-translate-y-0.5 text-white py-1.5 rounded-full flex-1 flex items-center justify-center">
+				<a href="{zoom.zoom_link}" target="_blank" class="bg-blue-500 hover:shadow transition-transform transform hover:-translate-y-0.5 text-white py-1.5 rounded-full flex-1 flex items-center justify-center">
 					<Icon name="zoom" className="w-8"/>
 					<p class="ml-2">Open zoom application</p>
 				</a>
