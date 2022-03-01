@@ -50,8 +50,7 @@
 			if (res.success) {
 				let data = res.data
 				existing_classroom = data.existing_classroom
-				let first_classroom = existing_classroom && existing_classroom[0]
-				tutor_course_description = first_classroom && first_classroom.description
+				tutor_course_description = data.instruction_html
 			}
 		}
 	})

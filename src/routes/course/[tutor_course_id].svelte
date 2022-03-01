@@ -50,7 +50,7 @@
 			</p>
 			<p class="text-purple-800 leading-tight mt-1">{first_classroom.sub_cat || 'NA'}</p>
 			<h1 class="page-title mb-4">{course_detail.title}</h1>
-			<p class="text-gray-600 my-4 max-w-screen-md leading-loose">{@html first_classroom.description || 'Course desc - NA'}</p>
+			<p class="text-gray-600 my-4 max-w-screen-md leading-loose">{@html course_detail.instruction_html  || 'Course desc - NA'}</p>
 		</div>
 	</div>
 </div>
@@ -65,6 +65,14 @@
 				</div>
 			</div>
 			<div class="ml-4">
+				<p class="text-xl mb-4 text-gray-700">Video guide</p>
+				<div class="grid grid-cols-2 gap-4 mb-4">
+					{#each course_detail.videos as src}
+						<div>
+							<video {src} controls></video>
+						</div>
+					{/each}
+				</div>
 				<p class="text-xl mb-4 text-gray-700">Course materials</p>
 				<div class="grid grid-cols-3 gap-4">
 					{#each material_status as m}
