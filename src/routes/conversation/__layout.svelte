@@ -1,25 +1,21 @@
-<script context="module">
-	import {conversation_store} from "$lib/store/conversation.js";
-	import {http, onFail} from "$lib/http";
-	export const load = async ({page, fetch}) => {
-		const {data, success, debug} = await conversation_store.fetchConversation(fetch)
-		if (!success) return onFail(debug)
-		return {
-			stuff: {
-				conversation_list: data
-			},
-			props: {
-				conversation_list: data
-			}
-		}
-	}
-</script>
-
 <script>
-	export let conversation_list
+	import {conversation_store} from "$lib/store/conversation.js";
 	import {capitalize} from "$lib/helper/capitalize.js";
 	import {page} from "$app/stores";
+	import {onMount} from "svelte";
+	import {goto} from "$app/navigation";
+
 	$: tutor_group_id = $page.params.tutor_group_id
+	$: conversation_list = $conversation_store || []
+
+	onMount(async () => {
+		const {data, success} = await conversation_store.fetchConversation(fetch)
+		if (success) {
+			let first_tg = data ? data[0] : undefined
+			let id = first_tg ? first_tg.tutor_group_id : undefined
+			if (id) goto(`/conversation/${id}`)
+		}
+	})
 </script>
 
 <div class="flex">
