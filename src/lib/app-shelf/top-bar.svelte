@@ -41,7 +41,7 @@
 		{/each}
 	</div>
 	<div class="ml-auto flex items-center">
-		<Dropdown open_on_hover={false} placement="bottom-end"
+		<Dropdown open_on_hover={true} placement="bottom-end"
 		          activator_active_style="bg-blue-50"
 		          activator_style="icon-button mx-1">
 			<div slot="activator">

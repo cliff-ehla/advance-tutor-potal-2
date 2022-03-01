@@ -7,6 +7,7 @@
 	const {open} = getContext('simple-modal')
 	import PdfReaderDialog from '$lib/pdf-reader/pdf-reader-dialog.svelte'
 	import RateLabel from '$lib/zoom/rate-label.svelte'
+	import Spinner from '$lib/ui/spinner.svelte'
 	import isToday from "dayjs/plugin/isToday.js";
 	dayjs.extend(isToday)
 	import CoursePreviewPopup from '$lib/zoom/course-preview-popup.svelte'
@@ -82,7 +83,11 @@
 						<div class="bg-white p-4 shadow-lg border border-gray-300 rounded">
 							<p class="mb-2 text-gray-700">Teaching instruction</p>
 							<p class="text-sm text-gray-500">
-								{@html tutor_course_description}
+								{#if tutor_course_description}
+									{@html tutor_course_description}
+								{:else}
+									<Spinner/>
+								{/if}
 							</p>
 						</div>
 					</Dropdown>
