@@ -59,7 +59,7 @@
 	<div class="container py-4 mx-auto">
 		<div class="flex my-4">
 			<div style="width: 240px" class="flex-shrink-0">
-				<div class="section-box sticky top-20">
+				<div class="section-box sticky top-20 z-50">
 					<p class="section-title mb-4">Class history</p>
 					<TutorCourseTimeline {existing_classroom}/>
 				</div>
