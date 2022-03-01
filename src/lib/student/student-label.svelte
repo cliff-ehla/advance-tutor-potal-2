@@ -8,5 +8,5 @@
 		<img src="/student-{student.gender}-icon.png" alt="gender" class="rounded-full border border-blue-500">
 		<div class="absolute shadow font-bold border border-white -bottom-2 -right-4 ml-2 w-7 h-7 bg-blue-500 rounded-full text-sm cc text-white">{capitalize(student.level)}</div>
 	</div>
-	<span class="text-sm pr-4 py-1 ml-4">{student.nickname}</span>
+	<span class="text-sm pr-4 py-1 ml-4 whitespace-nowrap">{student.nickname}</span>
 </a>

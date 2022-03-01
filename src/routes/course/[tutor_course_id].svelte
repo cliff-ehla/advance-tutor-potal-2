@@ -69,8 +69,9 @@
 				<div class="grid grid-cols-2 gap-4 mb-4">
 					{#if course_detail.videos}
 						{#each course_detail.videos as src}
-							<div>
-								<video {src} controls></video>
+							<div class="bg-white rounded border border-gray-300">
+								<video class="rounded" src={src.link} controls></video>
+								<p class="px-2 py-1">{src.title}</p>
 							</div>
 						{/each}
 					{:else}
