@@ -25,10 +25,10 @@
 	<div class="flex w-full mt-1">
 		<p class="flex-1 text-purple-800 text-sm leading-tight">{course.sub_cat}</p>
 		<Dropdown placement="right" activator_style="inline-flex items-center justify-center w-6 h-6 rounded-full border border-gray-300 ml-1 block">
-			<button slot="activator" on:mouseenter={onHover}>
+			<button slot="activator" class="w-6 h-6 cc" on:mouseenter={onHover}>
 				<Icon className="w-3 text-gray-500" name="info"/>
 			</button>
-			<div class="dropdown">
+			<div class="dropdown overflow-y-scroll" style="max-height: 400px">
 				{#if existing_classroom}
 					<TutorCourseTimeline {existing_classroom}/>
 				{:else}

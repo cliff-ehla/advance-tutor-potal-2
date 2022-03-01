@@ -60,7 +60,7 @@
 					<div class="w-4 h-4 cc" on:mouseenter={() => {onHover(classroom)}} slot="activator">
 						<Icon name="avatar" className="w-3 text-gray-500"/>
 					</div>
-					<div class="bg-white p-4 shadow-lg border border-gray-300 rounded overflow-y-scroll" style="max-height: 400px">
+					<div class="bg-white py-4 px-8 shadow-lg border border-gray-300 rounded">
 						<p class="mb-2 text-gray-700">Students</p>
 						{#if obj[classroom.zoom_id]}
 							{#each obj[classroom.zoom_id] as student}
