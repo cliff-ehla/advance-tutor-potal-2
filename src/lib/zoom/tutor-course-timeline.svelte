@@ -14,6 +14,11 @@
 
 	const {openModal, closeModal} = getContext('simple-modal')
 	dayjs.extend(utc)
+	let show_full_history = false
+	$: _timeline = show_full_history ? existing_classroom : existing_classroom.filter(zoom => {
+		return dayjs(zoom.start_date).isAfter(dayjs().subtract(2, 'week'))
+	})
+	$: collapsed_history_count = existing_classroom.length - _timeline.length
 	let obj = {}
 	const isPast = (classroom) => {
 		return dayjs.utc(classroom.start_date).local().isBefore(dayjs())
@@ -41,10 +46,20 @@
 	}
 </script>
 
-{#each existing_classroom as classroom, i}
+{#if !show_full_history && collapsed_history_count > 0}
+	<div class="flex relative pb-2">
+		<div class="opacity-30 transform -translate-x-1/2 absolute w-0.5 bg-green-500 inset-y-0 ml-2 top-0 h-full"></div>
+		<div class="ml-8 w-full pb-1 mt-2">
+			<button on:click|stopPropagation={() => {show_full_history = true}} class="border-blue-300 border rounded-full py-1 px-2 text-blue-500 text-xs text-center hover:bg-blue-50 hover:border-current">
+				Show earlier history ({collapsed_history_count})
+			</button>
+		</div>
+	</div>
+{/if}
+{#each _timeline as classroom, i}
 	<div class="flex relative pb-2">
 		<div class="cc z-10 flex-shrink-0 w-4 h-4 border border-green-500 rounded-full {!isPast(classroom) ? 'bg-white' : 'bg-green-500'}"></div>
-		{#if i < existing_classroom.length - 1}
+		{#if i < _timeline.length - 1}
 			<div class="transform -translate-x-1/2 absolute w-0.5 bg-green-500 inset-y-0 ml-2 top-0 h-full"></div>
 		{/if}
 		<div class="ml-4 w-full">
