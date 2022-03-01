@@ -48,9 +48,9 @@
 			<p class="text-sm bg-purple-50 border border-purple-200 rounded-sm text-purple-500 px-2 py-0.5 leading-tight inline-block">
 				{rc_level_to_label[first_classroom.rc_level] || first_classroom.rc_level}
 			</p>
-			<p class="text-purple-800 leading-tight mt-1">{first_classroom.sub_cat || 'NA'}</p>
-			<h1 class="page-title mb-4">{course_detail.title}</h1>
-			<p class="text-gray-600 my-4 max-w-screen-md leading-loose">{@html course_detail.instruction_html  || 'Course desc - NA'}</p>
+			<p class="page-title text-purple-800 leading-tight mt-1">{first_classroom.sub_cat || 'NA'}</p>
+			<h1 class="mb-4 text text-gray-500">{course_detail.title}</h1>
+			<p class="text-gray-600 my-4 max-w-screen-md">{@html course_detail.instruction_html  || 'Course desc - NA'}</p>
 		</div>
 	</div>
 </div>
@@ -60,12 +60,12 @@
 		<div class="flex my-4">
 			<div style="width: 240px" class="flex-shrink-0">
 				<div class="section-box sticky top-20 z-10">
-					<p class="section-title mb-4">Class history</p>
+					<p class="section-title mb-4">Class schedule</p>
 					<TutorCourseTimeline {existing_classroom}/>
 				</div>
 			</div>
 			<div class="ml-4">
-				<p class="text-xl mb-4 text-gray-700">Video guide</p>
+				<p class="text-xl mb-4 text-gray-700">Videos for reference</p>
 				<div class="grid grid-cols-2 gap-4 mb-4">
 					{#if course_detail.videos}
 						{#each course_detail.videos as src}
@@ -78,7 +78,7 @@
 						<p class="note bg-white p-4 w-full">No video guide</p>
 					{/if}
 				</div>
-				<p class="text-xl mb-4 text-gray-700">Course materials</p>
+				<p class="text-xl mb-4 text-gray-700">Class materials</p>
 				<div class="grid grid-cols-3 gap-4">
 					{#each material_status as m}
 						<div on:click={() => {previewMaterial(m.item_id)}}
