@@ -67,11 +67,15 @@
 			<div class="ml-4">
 				<p class="text-xl mb-4 text-gray-700">Video guide</p>
 				<div class="grid grid-cols-2 gap-4 mb-4">
-					{#each course_detail.videos as src}
-						<div>
-							<video {src} controls></video>
-						</div>
-					{/each}
+					{#if course_detail.videos}
+						{#each course_detail.videos as src}
+							<div>
+								<video {src} controls></video>
+							</div>
+						{/each}
+					{:else}
+						<p class="note bg-white p-4 w-full">No video guide</p>
+					{/if}
 				</div>
 				<p class="text-xl mb-4 text-gray-700">Course materials</p>
 				<div class="grid grid-cols-3 gap-4">

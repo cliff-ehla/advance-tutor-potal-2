@@ -80,7 +80,7 @@
 						<a href="/course/{zoom.tutor_course_id}" slot="activator">
 							<Icon name="info" className="w-3 text-gray-500"/>
 						</a>
-						<div class="bg-white p-4 shadow-lg border border-gray-300 rounded">
+						<div class="bg-white p-4 shadow-lg border border-gray-300 rounded overflow-scroll" style="max-height: 400px">
 							<p class="mb-2 text-gray-700">Teaching instruction</p>
 							<p class="text-sm text-gray-500">
 								{#if tutor_course_description}
