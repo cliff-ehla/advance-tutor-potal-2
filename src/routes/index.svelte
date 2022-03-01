@@ -1,4 +1,6 @@
 <script context="module">
+	import dayjs from "dayjs";
+
 	export const load = async ({session, fetch}) => {
 		if (!session.user_info) {
 			return {
@@ -8,7 +10,7 @@
 		}
 		return {
 			status: 302,
-			redirect: '/schedule'
+			redirect: `/schedule/${dayjs().format('YYYY-MM-DD')}/month`
 		}
 	}
 </script>

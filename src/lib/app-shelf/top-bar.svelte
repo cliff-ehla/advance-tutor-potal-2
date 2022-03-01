@@ -8,10 +8,11 @@
 	import {is_loading} from "$lib/store/is_loading.js";
 	import IncomeMessagePreview from '$lib/notice-center/income-message-preview.svelte'
 	import IncomeNotePreview from '$lib/notice-center/income-note-preview.svelte'
+	import dayjs from "dayjs";
 
 	let nav_items = [
 		{
-			href: '/schedule',
+			href: `/schedule/${dayjs().format('YYYY-MM-DD')}/month`,
 			title: 'Schedule'
 		},
 		{
