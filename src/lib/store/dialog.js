@@ -7,10 +7,11 @@ function createDialogStore () {
 		message: '',
 		checkbox: '',
 		text_input: '',
+		image_url: '',
 		onConfirm: () => {},
 		onSuccess: () => {}
 	})
-	const confirm = ({message, title, checkbox, text_input, onConfirm, onSuccess}) => {
+	const confirm = ({message, title, checkbox, text_input, image_url, onConfirm, onSuccess}) => {
 		if (!onConfirm) onConfirm = () => {}
 		if (!onSuccess) onSuccess = () => {}
 		store.set({
@@ -19,6 +20,7 @@ function createDialogStore () {
 			checkbox,
 			text_input,
 			message,
+			image_url,
 			onConfirm,
 			onSuccess
 		})
@@ -30,6 +32,7 @@ function createDialogStore () {
 			message: '',
 			checkbox: '',
 			text_input: '',
+			image_url: '',
 			onConfirm: () => {},
 			onSuccess: () => {}
 		})

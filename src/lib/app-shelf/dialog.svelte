@@ -40,6 +40,11 @@
 				          placeholder="{$dialog.text_input.placeholder}">{$dialog.text_input.value}</textarea>
 			</div>
 		{/if}
+		{#if $dialog.image_url}
+			<div class="mb-2 px-4">
+				<img src={$dialog.image_url} alt="image" class="rounded">
+			</div>
+		{/if}
 		<div class="flex justify-between p-4">
 			<button class="flex-1 bg-gray-100 hover:border-gray-400 border border-gray-200 rounded px-1 py-1" on:click={() => {dialog.close()}}>Cancel</button>
 			<Button button_class="flex-1 py-2 ml-4" on:click={onConfirm}>Confirm</Button>

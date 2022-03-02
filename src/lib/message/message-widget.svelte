@@ -125,8 +125,14 @@
 	}
 
 	const sendCurrentPdf = () => {
-		let url = getImageFile()
-		console.log('open dialog and confirm this url: ' + url)
+		let image_url = getImageFile()
+		dialog.confirm({
+			title: 'Send this image?',
+			image_url,
+			onConfirm: () => {
+				console.log('call API')
+			}
+		})
 	}
 </script>
 
