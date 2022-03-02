@@ -8,6 +8,8 @@
 	const {open} = getContext('simple-modal')
 	import {createEventDispatcher} from 'svelte'
 	import {noticeCenterStore} from "$lib/store/notice-center-store.js";
+	const pdfReaderFunc = getContext('pdf-reader')
+	const getImageFile = pdfReaderFunc ? pdfReaderFunc.getImageFile : undefined
 
 	const dispatch = createEventDispatcher()
 
@@ -121,6 +123,11 @@
 			scroll_container_el.scrollTop = scroll_container_el.scrollHeight
 		}, 10)
 	}
+
+	const sendCurrentPdf = () => {
+		let url = getImageFile()
+		console.log('open dialog and confirm this url: ' + url)
+	}
 </script>
 
 <div>
@@ -128,7 +135,10 @@
 		<MessageView on:delete={onDelete} loading={updating_message} {messages} {teacher_id}/>
 	</div>
 
-	<div class="pt-1 pb-1 border-gray-200 border-t">
+	<div class="pt-1 pb-1 border-gray-200 border-t flex items-center">
+		{#if getImageFile}
+			<button on:click={sendCurrentPdf}>IMG</button>
+		{/if}
 		{#if alert_message_options}
 			<Dropdown full_width placement="top-start" offset="4" open_on_hover={false} caveat_visible activator_style="py-3 px-4 bg-blue-500 hover:bg-blue-600 rounded text-sm w-full text-white w-full" activator_active_style="bg-blue-700">
 				<button slot="activator" class="w-full">Quick message</button>

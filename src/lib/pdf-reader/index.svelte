@@ -4,11 +4,12 @@
 	import Reader from './puzzle-reader.svelte'
 	import {domain} from "./puzzle-reader-constant";
 	import Panzoom from '@panzoom/panzoom'
-	import {getContext} from 'svelte'
+	import {setContext, getContext} from 'svelte'
 	const {closeModal} = getContext('simple-modal')
 	import {pdf_keyboard_listener_active} from "../../store";
 
 	export let pages_info_2 = []
+	export let pdf_array = []
 	export let youtube_link_obj = []
 	export let close_modal_button_visible = false
 
@@ -118,6 +119,14 @@
 			update: showTooltip
 		}
 	}
+
+	const getImageFile = () => {
+		return pdf_array[index]
+	}
+
+	setContext('pdf-reader', {
+		getImageFile
+	})
 </script>
 
 <div bind:this={fullscreen_el} class="relative overflow-hidden">
