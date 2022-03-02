@@ -3,6 +3,7 @@
 	import {onMount} from 'svelte'
 	import MessageView from './message-view.svelte'
 	import Dropdown from '$lib/ui/dropdown3.svelte'
+	import Icon from '$lib/ui/icon.svelte'
 	import {dialog} from "$lib/store/dialog.js";
 	import {getContext} from 'svelte'
 	const {open} = getContext('simple-modal')
@@ -10,6 +11,7 @@
 	import {noticeCenterStore} from "$lib/store/notice-center-store.js";
 	const pdfReaderFunc = getContext('pdf-reader')
 	const getImageFile = pdfReaderFunc ? pdfReaderFunc.getImageFile : undefined
+	import {tooltip} from "$lib/aciton/tooltip.js";
 
 	const dispatch = createEventDispatcher()
 
@@ -143,7 +145,9 @@
 
 	<div class="pt-1 pb-1 border-gray-200 border-t flex items-center">
 		{#if getImageFile}
-			<button on:click={sendCurrentPdf}>IMG</button>
+			<button use:tooltip={'Send current page to student'} class="w-10 flex-shrink-0 cc text-gray-500 hover:text-blue-500" on:click={sendCurrentPdf}>
+				<Icon name="upload-image" className="w-8"/>
+			</button>
 		{/if}
 		{#if alert_message_options}
 			<Dropdown full_width placement="top-start" offset="4" open_on_hover={false} caveat_visible activator_style="py-3 px-4 bg-blue-500 hover:bg-blue-600 rounded text-sm w-full text-white w-full" activator_active_style="bg-blue-700">
