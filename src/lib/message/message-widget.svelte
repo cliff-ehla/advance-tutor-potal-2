@@ -12,6 +12,7 @@
 	const pdfReaderFunc = getContext('pdf-reader')
 	const getImageFile = pdfReaderFunc ? pdfReaderFunc.getImageFile : undefined
 	import {tooltip} from "$lib/aciton/tooltip.js";
+	import {http} from "$lib/http.js";
 
 	const dispatch = createEventDispatcher()
 
@@ -131,8 +132,14 @@
 		dialog.confirm({
 			title: 'Send this image?',
 			image_url,
-			onConfirm: () => {
-				console.log('call API')
+			onConfirm: async () => {
+				await http.post(fetch, '/messageApi/send_message', {
+					tutor_group_id,
+					student_id,
+					image_url
+				})
+				await updateMessage()
+				scrollToBottom()
 			}
 		})
 	}
