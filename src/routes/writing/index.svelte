@@ -48,7 +48,7 @@
 				<div class="w-1/4 flex justify-end">
 					{#if w.disclose === '1'}
 					{:else if w.disclose === '0'}
-						<button class="button">Continue</button>
+						<a href="/writing/{w.identifier}" class="button">Continue</a>
 					{:else if w.disclose === null}
 						<button class="button">Mark now</button>
 					{/if}
