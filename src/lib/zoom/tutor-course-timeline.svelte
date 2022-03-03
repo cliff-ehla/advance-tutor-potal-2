@@ -20,6 +20,8 @@
 	})
 	$: collapsed_history_count = existing_classroom.length - _timeline.length
 	let obj = {}
+	$: upcoming_zoom = existing_classroom.find(z => dayjs(z.start_date).isAfter(dayjs()))
+	$: upcoming_zoom_id = upcoming_zoom ? upcoming_zoom.wrapper_id: upcoming_zoom
 	const isPast = (classroom) => {
 		return dayjs.utc(classroom.start_date).local().isBefore(dayjs())
 	}
@@ -58,9 +60,9 @@
 {/if}
 {#each _timeline as classroom, i}
 	<div class="flex relative pb-2">
-		<div class="cc z-10 flex-shrink-0 w-4 h-4 border border-green-500 rounded-full {!isPast(classroom) ? 'bg-white' : 'bg-green-500'}"></div>
+		<div class="cc z-10 flex-shrink-0 w-4 h-4 rounded-full {isPast(classroom) ? 'border-gray-300 bg-gray-100 border' : upcoming_zoom_id === classroom.wrapper_id ? 'bg-green-500 shadow-lg' : 'border-2 border-green-500 bg-white'}"></div>
 		{#if i < _timeline.length - 1}
-			<div class="transform -translate-x-1/2 absolute w-0.5 bg-green-500 inset-y-0 ml-2 top-0 h-full"></div>
+			<div class="transform -translate-x-1/2 absolute w-0.5 {isPast(classroom) ? 'bg-green-500 opacity-30' : 'bg-green-500'} inset-y-0 ml-2 top-0 h-full"></div>
 		{/if}
 		<div class="ml-4 w-full">
 			<p class="text-gray-500 text-sm">
