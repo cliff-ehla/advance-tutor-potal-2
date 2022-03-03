@@ -19,6 +19,9 @@
 	export let comments
 	export let title
 	export let writing_id
+	import Writing from '$lib/writing/index.svelte'
 	
 	console.log('cliff: ', para, edit_log, comments, title, writing_id)
 </script>
+
+<Writing {para} {edit_log} {comments} {title} {writing_id}/>
