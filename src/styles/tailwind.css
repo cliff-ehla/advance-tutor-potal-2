@@ -10,7 +10,7 @@
     @apply mx-auto max-w-screen-lg px-4;
 }
 .button {
-    @apply bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-500;
+    @apply bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600;
 }
 .calendar-button {
     @apply inline-flex border border-gray-300 px-2 h-8 items-center rounded hover:text-blue-500 hover:border-current;

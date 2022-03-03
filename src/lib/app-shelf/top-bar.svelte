@@ -22,6 +22,10 @@
 		{
 			href: '/students',
 			title: 'Students'
+		},
+		{
+			href: '/writing',
+			title: 'Writings'
 		}
 	]
 </script>

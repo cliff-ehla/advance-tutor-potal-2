@@ -6,7 +6,8 @@ const create_store = () => {
 		unread_count: 0,
 		message_cnt: 0,
 		message_list: [],
-		notice_list: []
+		notice_list: [],
+		writing_list: []
 	})
 	const d_store = derived(store, $store => {
 		const master_list = [...$store.message_list, ...$store.notice_list]
@@ -62,10 +63,21 @@ const create_store = () => {
 		}
 		return {data, success, debug}
 	}
+	const fetchWriting = async (fetch) => {
+		const {data, success, debug} = await http.post(fetch, '/tutorApi/writing_submission_list')
+		if (success) {
+			store.update(v => ({
+				...v,
+				writing_list: data
+			}))
+		}
+		return {data, success, debug}
+	}
 	return {
 		fetchUnreadCount,
 		fetchMessage,
 		fetchNotice,
+		fetchWriting,
 		fetchNoticeAndMessage,
 		subscribe: d_store.subscribe
 	}
