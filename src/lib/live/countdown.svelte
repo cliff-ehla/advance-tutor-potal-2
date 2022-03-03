@@ -44,7 +44,7 @@
 			status = 'in_progress'
 		}
 		if (status !== 'ended') {
-			if (status === 'started') {
+			if (status === 'in_progress') {
 				let diff = dayjs(end_date).diff(dayjs())
 				let d = dayjs.duration(diff)
 				hh = d.hours().toString().padStart(2, '0')
