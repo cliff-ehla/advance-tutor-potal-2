@@ -22,20 +22,30 @@
 	import Writing from '$lib/writing/index.svelte'
 	import WritingMarking from '$lib/writing/_writing_marking.svelte'
 	import WritingComment from '$lib/writing/_writing_comment.svelte'
+	import TemplateTextBox from '$lib/writing/_template-text-box.svelte'
 	import {onMount} from "svelte";
 
 	let marking_category
 	let user_handwriting_images
 	let overall_msg
 	let active_image_url
+	let overall_options
 
 	onMount(async () => {
 		const {data, success} = await http.post(fetch, '/writingApi/get_student_writing_submission', {
 			user_writing_id: writing_id
 		})
 		overall_msg = data.overall_msg
-		marking_category = data.marking_category
+		let _marking_category = data.marking_category
 		user_handwriting_images = data.user_handwriting_images
+
+		let res = await http.get(fetch, '/writingApi/writings_comment_map')
+		let data2 = res.data
+		overall_options = data.overall
+		_marking_category.forEach(cat => {
+			cat.comment_template = data2[cat.title]
+		})
+		marking_category = _marking_category
 	})
 </script>
 
@@ -65,7 +75,7 @@
 				<div class="flex items-center py-4">
 					<p class="font-bold w-32">Overall</p>
 					<div class="flex-1 px-4">
-<!--						<TemplateTextBox value={overall_msg} on:input={e => {overall_msg = e.detail}} options={overall_options}/>-->
+						<TemplateTextBox value={overall_msg} on:input={e => {overall_msg = e.detail}} options={overall_options}/>
 					</div>
 				</div>
 			</div>
