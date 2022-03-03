@@ -21,6 +21,7 @@
 	export let writing_id
 	import Writing from '$lib/writing/index.svelte'
 	import WritingMarking from '$lib/writing/_writing_marking.svelte'
+	import WritingComment from '$lib/writing/_writing_comment.svelte'
 	import {onMount} from "svelte";
 
 	let marking_category
@@ -55,6 +56,18 @@
 			<div class="max-w-screen-lg px-12 py-8 mx-auto">
 				<h2 class="text-gray-500 text-t1 mb-2 font-bold border-b-2 inline-block border-current pb-1">Rating</h2>
 				<WritingMarking on:input={e => {marking_category = e.detail}} {marking_category}/>
+			</div>
+		</div>
+		<div class="bg-gray-100 border-b border-gray-300">
+			<div class="bg-gray-100 border-t border-gray-300 max-w-screen-lg px-12 py-8 mx-auto">
+				<h2 class="text-gray-500 text-t1 mb-2 font-bold border-b-2 inline-block border-current pb-1">Comments</h2>
+				<WritingComment on:input={e => {marking_category = e.detail}} {marking_category}/>
+				<div class="flex items-center py-4">
+					<p class="font-bold w-32">Overall</p>
+					<div class="flex-1 px-4">
+<!--						<TemplateTextBox value={overall_msg} on:input={e => {overall_msg = e.detail}} options={overall_options}/>-->
+					</div>
+				</div>
 			</div>
 		</div>
 	{/if}
