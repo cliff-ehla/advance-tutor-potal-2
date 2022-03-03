@@ -20,6 +20,7 @@
 	export let title
 	export let writing_id
 	import Writing from '$lib/writing/index.svelte'
+	import WritingMarking from '$lib/writing/_writing_marking.svelte'
 	import {onMount} from "svelte";
 
 	let marking_category
@@ -46,6 +47,14 @@
 				{#each user_handwriting_images as img_obj}
 					<img on:click={() => {active_image_url = img_obj.image_url}} class="cursor-pointer w-40 rounded mr-4" src={img_obj.image_url} alt="handwriting">
 				{/each}
+			</div>
+		</div>
+	{/if}
+	{#if marking_category}
+		<div class="bg-gray-100 border-t border-gray-300">
+			<div class="max-w-screen-lg px-12 py-8 mx-auto">
+				<h2 class="text-gray-500 text-t1 mb-2 font-bold border-b-2 inline-block border-current pb-1">Rating</h2>
+				<WritingMarking on:input={e => {marking_category = e.detail}} {marking_category}/>
 			</div>
 		</div>
 	{/if}
