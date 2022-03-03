@@ -14,6 +14,8 @@
 	import {capitalize} from "$lib/helper/capitalize.js";
 	import Dropdown from '$lib/ui/dropdown3.svelte'
 	import Icon from '$lib/ui/icon.svelte'
+	import relativeTime from "dayjs/plugin/relativeTime.js";
+	dayjs.extend(relativeTime)
 </script>
 
 <div class="bg-gray-50">
@@ -41,7 +43,9 @@
 					{:else if w.disclose === null || w.disclose === '0'}
 						<div class="inline-flex border items-center border-gray-300 pl-2 pr-4 rounded-full py-1 text-sm">
 							<div class="w-2 h-2 bg-red-500 rounded-full"></div>
-							<p class="ml-2 text-gray-500">3 days left</p>
+							<p class="ml-2 text-gray-500">
+								{dayjs(w.next_lesson_date).fromNow()}
+							</p>
 						</div>
 					{/if}
 				</div>

@@ -4,7 +4,7 @@
 	import EditComment from './edit-comment.svelte'
 	import CommentSvg from './comment-svg.svelte'
 	import {createEventDispatcher} from 'svelte'
-	import {tooltip} from "$lib/aciton/tooltip.js";
+	import {tooltip} from "$lib/action/tooltip.js";
 
 	const dispatch = createEventDispatcher()
 	const {open} = getContext('simple-popup')
@@ -663,7 +663,7 @@
 
 <svelte:window on:keydown={onkeydown} on:mousemove={onMouseMove} on:resize={onWindowResize}/>
 
-<div class="text-xs p-4 leading-tight" style="font-size: 12px">
+<div class="text-xs p-4 leading-tight hidden" style="font-size: 12px">
 	<p>cursor: {cursor_idx}</p>
 	<p>para: {para_idx}</p>
 	<p>mouse start: {mousedown_start_idx}</p>

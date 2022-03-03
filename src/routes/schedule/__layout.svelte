@@ -21,7 +21,7 @@
 	import Icon from '$lib/ui/icon.svelte'
 	import {page} from '$app/stores'
 	import dayjs from "dayjs";
-	import {tooltip} from "$lib/aciton/tooltip.js";
+	import {tooltip} from "$lib/action/tooltip.js";
 
 	$: slug = $page.path.split('/').pop()
 	$: nav_key = slug === 'list' ? 'month' : slug

@@ -2,7 +2,7 @@
 	import dayjs from "dayjs";
 	import Icon from '$lib/ui/icon.svelte'
 	import {getContext} from "svelte";
-	import {tooltip} from "$lib/aciton/tooltip.js";
+	import {tooltip} from "$lib/action/tooltip.js";
 	export let zoom
 	const {open} = getContext('simple-modal')
 	import PdfReaderDialog from '$lib/pdf-reader/pdf-reader-dialog.svelte'

@@ -7,7 +7,7 @@
 	const {open, closeModal} = getContext('simple-modal')
 	import PdfReaderDialog from '$lib/pdf-reader/pdf-reader-dialog.svelte'
 	import Icon from '$lib/ui/icon.svelte'
-	import {tooltip} from "$lib/aciton/tooltip.js";
+	import {tooltip} from "$lib/action/tooltip.js";
 	import {page} from "$app/stores";
 
 	dayjs.extend(utc)

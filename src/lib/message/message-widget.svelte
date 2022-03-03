@@ -11,7 +11,7 @@
 	import {noticeCenterStore} from "$lib/store/notice-center-store.js";
 	const pdfReaderFunc = getContext('pdf-reader')
 	const getImageFile = pdfReaderFunc ? pdfReaderFunc.getImageFile : undefined
-	import {tooltip} from "$lib/aciton/tooltip.js";
+	import {tooltip} from "$lib/action/tooltip.js";
 	import {http} from "$lib/http.js";
 
 	const dispatch = createEventDispatcher()

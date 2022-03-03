@@ -6,7 +6,7 @@
 	import utc from "dayjs/plugin/utc.js";
 	import PdfReaderDialog from '$lib/pdf-reader/pdf-reader-dialog.svelte'
 	import {getContext} from 'svelte'
-	import {tooltip} from "$lib/aciton/tooltip.js";
+	import {tooltip} from "$lib/action/tooltip.js";
 	import Icon from "$lib/ui/icon.svelte";
 	import Dropdown from "$lib/ui/dropdown3.svelte";
 	import Spinner from "$lib/ui/spinner.svelte";

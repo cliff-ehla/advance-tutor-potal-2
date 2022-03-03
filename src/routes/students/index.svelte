@@ -18,7 +18,7 @@
 	import {capitalize} from "$lib/helper/capitalize.js";
 	import Icon from '$lib/ui/icon.svelte'
 	import Selection from '$lib/ui/selection.svelte'
-	import {tooltip} from "$lib/aciton/tooltip.js";
+	import {tooltip} from "$lib/action/tooltip.js";
 
 	$: active_student_count = student_list.filter(s => s.upcoming_zoom_cnt > 0).length
 	$: sorted_student_list = student_list.sort((a,b) => {

@@ -25,7 +25,7 @@
 	import {onMount} from "svelte";
 	import {page} from "$app/stores";
 	import {slack} from "$lib/helper/slack.js";
-	import {tooltip} from "$lib/aciton/tooltip.js";
+	import {tooltip} from "$lib/action/tooltip.js";
 	dayjs.extend(utc)
 
 	onMount(() => {

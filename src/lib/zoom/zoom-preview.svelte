@@ -11,7 +11,7 @@
 	import RateLabel from '$lib/zoom/rate-label.svelte'
 	import StudentLabel from '$lib/student/student-label.svelte'
 	import isToday from "dayjs/plugin/isToday.js";
-	import {tooltip} from "$lib/aciton/tooltip.js";
+	import {tooltip} from "$lib/action/tooltip.js";
 
 	dayjs.extend(isToday)
 

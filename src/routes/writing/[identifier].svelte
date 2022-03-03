@@ -24,4 +24,7 @@
 	console.log('cliff: ', para, edit_log, comments, title, writing_id)
 </script>
 
-<Writing {para} {edit_log} {comments} {title} {writing_id}/>
+<div class="p-4">
+	<h1 class="page-title mb-4">{title}</h1>
+	<Writing {para} {edit_log} {comments} {title} {writing_id}/>
+</div>

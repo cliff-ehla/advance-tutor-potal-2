@@ -2,7 +2,7 @@
 	import {http} from "$lib/http.js";
 	import {is_loading} from "$lib/store/is_loading";
 	import {triggerReload} from "$lib/helper/trigger-reload.js";
-	import {tooltip} from "$lib/aciton/tooltip.js";
+	import {tooltip} from "$lib/action/tooltip.js";
 	import {slack} from "$lib/helper/slack.js";
 
 	export let onRateSuccess = () => {}

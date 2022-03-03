@@ -1,7 +1,7 @@
 import dayjs from "dayjs";
 import tippy from "tippy.js";
 import {capitalize} from "$lib/helper/capitalize.js";
-import {tooltip} from "$lib/aciton/tooltip.js";
+import {tooltip} from "$lib/action/tooltip.js";
 import {rc_level_to_label} from "$lib/store/rc-level-to-label.js";
 
 export const eventContent = (arg) => {

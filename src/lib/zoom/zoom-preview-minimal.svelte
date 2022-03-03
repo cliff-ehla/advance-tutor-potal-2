@@ -5,7 +5,7 @@
 	import Icon from '$lib/ui/icon.svelte'
 	import {getContext} from "svelte";
 	const {showPopper} = getContext('popper')
-	import {tooltip} from "$lib/aciton/tooltip.js";
+	import {tooltip} from "$lib/action/tooltip.js";
 	import ZoomPreviewPopup from '$lib/zoom/zoom-preview-popup.svelte'
 	import {rc_level_to_label} from "$lib/store/rc-level-to-label.js";
 
