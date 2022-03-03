@@ -21,7 +21,7 @@
 <div class="bg-gray-50">
 	<div class="container py-4">
 		{#each $noticeCenterStore.writing_list as w}
-			<div class="cursor-pointer pl-4 pr-2 py-4 border border-gray-200 my-1 rounded leading-none bg-white flex items-center">
+			<a href="/writing/{w.identifier}" class="cursor-pointer pl-4 pr-2 py-4 border border-gray-200 my-1 rounded leading-none bg-white flex items-center">
 				<div class="w-1/2">
 					<p>{w.title || 'No title'}</p>
 					<a href="/students/{w.student_id}" class="inline-flex items-center mr-2 rounded-full mt-1.5 group">
@@ -67,7 +67,7 @@
 						</Dropdown>
 					</div>
 				</div>
-			</div>
+			</a>
 		{/each}
 	</div>
 </div>
