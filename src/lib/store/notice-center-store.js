@@ -4,6 +4,7 @@ import {http} from "$lib/http.js";
 const create_store = () => {
 	const store = writable({
 		unread_count: 0,
+		message_cnt: 0,
 		message_list: [],
 		notice_list: []
 	})
@@ -28,6 +29,7 @@ const create_store = () => {
 				const {message_cnt, notice_cnt} = data
 				store.update(v => ({
 					...v,
+					message_cnt,
 					unread_count: message_cnt + notice_cnt
 				}))
 			}
