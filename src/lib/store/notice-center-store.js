@@ -5,6 +5,7 @@ const create_store = () => {
 	const store = writable({
 		unread_count: 0,
 		message_cnt: 0,
+		writing_submission_cnt: 0,
 		message_list: [],
 		notice_list: [],
 		writing_list: []
@@ -27,10 +28,11 @@ const create_store = () => {
 		try {
 			const {data, success, debug} = await http.get(fetch, '/tutorApi/list_unread_message_and_notice')
 			if (success) {
-				const {message_cnt, notice_cnt} = data
+				const {message_cnt, notice_cnt, writing_submission_cnt} = data
 				store.update(v => ({
 					...v,
 					message_cnt,
+					writing_submission_cnt,
 					unread_count: message_cnt + notice_cnt
 				}))
 			}

@@ -50,7 +50,7 @@
 </script>
 
 <div class="p-4">
-	<h1 class="page-title mb-4">{title}</h1>
+	<h1 class="page-title mb-4">{title || 'No title'}</h1>
 	<Writing {para} {edit_log} {comments} {title} {writing_id}/>
 	{#if user_handwriting_images && user_handwriting_images.length}
 		<div class="mb-8 flex">

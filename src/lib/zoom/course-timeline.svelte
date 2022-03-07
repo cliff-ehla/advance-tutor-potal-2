@@ -75,6 +75,14 @@
 						<p class="text-gray-300 ml-2">No material</p>
 					</div>
 				{/if}
+				<div>
+					{#if zoom.writing}
+						<a href="/writing/{zoom.writing.identifier}" class="inline-flex items-center px-2 py-0.5 rounded border border-gray-300 text-xs text-gray-600 hover:text-blue-500 hover:bg-gray-50">
+							<Icon name="report" className="w-3"/>
+							<p class="ml-1">{zoom.writing.title}</p>
+						</a>
+					{/if}
+				</div>
 			</div>
 		</div>
 	</div>
