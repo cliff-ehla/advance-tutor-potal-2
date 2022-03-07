@@ -19,27 +19,20 @@
 	import StudentListWidget from '$lib/zoom/student-list-widget.svelte'
 	import {session} from '$app/stores'
 	import Icon from '$lib/ui/icon.svelte'
+	import Dropdown from '$lib/ui/dropdown3.svelte'
 	import Countdown from '$lib/live/countdown.svelte'
 	import dayjs from "dayjs";
 	import utc from "dayjs/plugin/utc.js";
 	import {onMount} from "svelte";
-	import {page} from "$app/stores";
-	import {slack} from "$lib/helper/slack.js";
 	import {tooltip} from "$lib/action/tooltip.js";
 	dayjs.extend(utc)
 
-	onMount(() => {
-		// checkEnterClassTime()
+	onMount(async () => {
+		let {data} = await http.post(fetch, '/tutorApi/writing_submission_list_by_tutor_group_id', {
+			tutor_group_id: zoom.tutor_group_id
+		})
+		writing_submission = data
 	})
-
-	const checkEnterClassTime = () => {
-		const diff = dayjs(start_date).diff(dayjs(), 'minute')
-		const is_late = diff < 0
-		if (is_late)
-			slack.send(`I am late for ${diff} minutes for zoom class - ${$page.params.zoom_id}`)
-		else
-			slack.send(`I arrive on time (${diff} before time start) for the zoom class - ${$page.params.zoom_id}`)
-	}
 
 	export let zoom
 	let start_date = dayjs.utc(zoom.start_date).local()
@@ -59,6 +52,7 @@
 	let pdf_array
 	let youtube_link_obj
 	let loading_item = true
+	let writing_submission = []
 
 	import PdfReader from '$lib/pdf-reader/index.svelte'
 
@@ -97,6 +91,21 @@
 			{item.title}
 		</button>
 	{/each}
+	{#if writing_submission}
+		<Dropdown activator_style="px-2 py-1 cursor-pointer rounded bg-gray-100 border border-gray-300 mx-1">
+			<button slot="activator" class="flex items-center">
+				<Icon name="report" className="w-4"/>
+				<p class="ml-1 text-sm">Writing</p>
+			</button>
+			<div class="dropdown">
+				{#each writing_submission as w}
+					<div class="item">
+						{w.title}
+					</div>
+				{/each}
+			</div>
+		</Dropdown>
+	{/if}
 </div>
 
 {#if !loading_item}
