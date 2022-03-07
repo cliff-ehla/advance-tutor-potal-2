@@ -12,8 +12,8 @@
 </script>
 
 {#each marking_category as cat}
-	<div class="flex items-center py-4">
-		<p class="font-bold w-32">{cat.title.charAt(0).toUpperCase() + cat.title.slice(1)}</p>
+	<div class="flex items-start py-2">
+		<p class="text-gray-700 w-28 text-right pt-4">{cat.title.charAt(0).toUpperCase() + cat.title.slice(1)}</p>
 		<div class="flex-1 px-4">
 			{#if cat.comment_template}
 				<SelectionBox on:input={e => onInput(cat, e)} value="{cat.comments}" options="{cat.comment_template}"/>

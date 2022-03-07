@@ -68,11 +68,11 @@
 <div class="border border-gray-300 rounded bg-white p-2">
 	<div>
 		{#each value as v}
-			<div class="bg-gray-200 rounded-sm mb-1 flex items-center overflow-hidden pl-2">
+			<div class="bg-gray-50 border border-gray-200 rounded-sm mb-1 flex items-center py-1 overflow-hidden pl-2">
 				<div class="label {type_to_color[v.comment_subtype]}">
 					{type_to_label[v.comment_subtype]}
 				</div>
-				<div class="px-2 flex-1 text-sm leading-tight">{v.comment_msg}</div>
+				<div class="px-2 flex-1 text-sm leading-none text-gray-700">{v.comment_msg}</div>
 				<div on:click={() => {onToggle(v)}} class="w-8 h-8 cursor-pointer flex items-center justify-center hover:text-red-500">
 					<Icon name="close" className="w-2"/>
 				</div>
@@ -82,8 +82,11 @@
 	<Dropdown
 					on:input={e => {is_opened = e.detail}}
 					opened={is_opened}
+					open_on_hover={false}
+					full_width
+					placement="bottom-start"
 					classname="absolute rounded py-2 shadow-lg left-0 bg-white border border-gray-300 w-full z-50 overflow-y-scroll max-h-80">
-		<div slot="activator" class="flex h-8 items-center">
+		<div slot="activator" class="flex h-8 items-center w-full">
 			<div class="mx-2 text-gray-400">
 				<Icon name="search" className="w-4"/>
 			</div>
@@ -92,7 +95,7 @@
 				<Icon name="right" className="w-3 transform rotate-90"/>
 			</div>
 		</div>
-		<div class="p-2">
+		<div class="dropdown max-w-sm overflow-y-scroll" style="max-height: 400px">
 			{#each filtered_options as opt, i}
 				<div class:bg-gray-200={focus_idx === i} on:click={() => {onToggle(opt)}} class="cursor-pointer px-2 py-2 hover:bg-gray-200 flex items-center">
 					<div class="{type_to_color[opt.comment_subtype]} label">{type_to_label[opt.comment_subtype]}</div>
@@ -108,6 +111,7 @@
 
 <style>
 	.label {
-		@apply text-xs font-bold text-white px-2 py-1 rounded-sm;
+		@apply text-white px-2 py-1 rounded-sm;
+		font-size: 10px;
 	}
 </style>

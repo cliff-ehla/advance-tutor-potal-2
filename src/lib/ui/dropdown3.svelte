@@ -70,6 +70,7 @@
 
 <div class:w-full={full_width} class="flex" on:mouseenter={onMouseEnter} on:mouseleave={onMouseLeave}>
 	<div bind:this={activator_el} on:mouseenter={onMouseEnter} on:click={onToggle}
+	     class:w-full={full_width}
 	     class="activator cursor-pointer inline-flex items-center {activator_style} {active ? activator_active_style : ''}">
 		<slot name="activator"/>
 		{#if caveat_visible}

@@ -16,7 +16,7 @@
 
 {#each marking_category as cat}
 	<div class="flex items-center py-4 text-gray-400">
-		<p class="font-bold w-32">{cat.title.charAt(0).toUpperCase() + cat.title.slice(1)}</p>
+		<p class="w-28 text-gray-600 text-right">{cat.title.charAt(0).toUpperCase() + cat.title.slice(1)}</p>
 		<div class="flex-1 px-4">
 			<div class="flex bg-white border-gray-300 border rounded shadow-inner">
 				{#each range(0, cat.max_mark) as i}
@@ -30,18 +30,18 @@
 				{/each}
 			</div>
 		</div>
-		<div class="w-28 flex items-end justify-end">
-			<p class="font-bold text-h1 leading-none">{cat.user_mark || 0}</p>
+		<div class="w-16 flex items-center justify-end">
+			<p class="font-bold leading-none">{cat.user_mark || 0}</p>
 			<p class="mx-1">/</p>
 			<p>{cat.max_mark}</p>
 		</div>
 	</div>
 {/each}
 
-<div class="flex py-4 border-t border-gray-300 items-end text-gray-400">
-	<div class="flex-1 text-right font-bold text-t1 leading-none mb-0.5">Total:</div>
-	<div class="w-28 flex items-end justify-end">
-		<p class="font-bold text-h1 leading-none">{total_user_mark}</p>
+<div class="flex py-4 border-t border-gray-300 items-center text-gray-400">
+	<div class="flex-1 text-right leading-none">Total:</div>
+	<div class="w-20 flex items-center justify-end">
+		<p class="font-bold leading-none">{total_user_mark}</p>
 		<p class="mx-1">/</p>
 		<p>{total_max_mark}</p>
 	</div>

@@ -47,5 +47,5 @@
 			</div>
 		</Dropdown>
 	</div>
-	<textarea id="template-text-box" on:input={onInput} rows="4" {placeholder} class="focus:outline-none p-4 pr-16 w-full" bind:value={value}/>
+	<textarea id="template-text-box" on:input={onInput} rows="4" {placeholder} class="focus:outline-none p-4 pr-16 rounded w-full" bind:value={value}/>
 </div>

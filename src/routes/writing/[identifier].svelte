@@ -49,7 +49,7 @@
 	})
 </script>
 
-<div class="p-4">
+<div class="p-4 bg-gray-50">
 	<h1 class="page-title mb-4">{title || 'No title'}</h1>
 	<Writing {para} {edit_log} {comments} {title} {writing_id}/>
 	{#if user_handwriting_images && user_handwriting_images.length}
@@ -62,20 +62,29 @@
 		</div>
 	{/if}
 	{#if marking_category}
-		<div class="bg-gray-100 border-t border-gray-300">
-			<div class="max-w-screen-lg px-12 py-8 mx-auto">
-				<h2 class="text-gray-500 text-t1 mb-2 font-bold border-b-2 inline-block border-current pb-1">Rating</h2>
-				<WritingMarking on:input={e => {marking_category = e.detail}} {marking_category}/>
+		<div class="my-4 bg-white border border-gray-200 rounded-lg">
+			<div class="max-w-screen-lg mx-auto">
+				<div class="px-4 py-2 bg-blue-50 text-blue-500 border-b border-gray-200 rounded-t-lg">
+					Rating
+				</div>
+				<div class="px-8 py-4">
+					<WritingMarking on:input={e => {marking_category = e.detail}} {marking_category}/>
+				</div>
 			</div>
 		</div>
-		<div class="bg-gray-100 border-b border-gray-300">
-			<div class="bg-gray-100 border-t border-gray-300 max-w-screen-lg px-12 py-8 mx-auto">
-				<h2 class="text-gray-500 text-t1 mb-2 font-bold border-b-2 inline-block border-current pb-1">Comments</h2>
-				<WritingComment on:input={e => {marking_category = e.detail}} {marking_category}/>
-				<div class="flex items-center py-4">
-					<p class="font-bold w-32">Overall</p>
-					<div class="flex-1 px-4">
-						<TemplateTextBox value={overall_msg} on:input={e => {overall_msg = e.detail}} options={overall_options}/>
+
+		<div class="my-4 bg-white border border-gray-200 rounded-lg">
+			<div class="max-w-screen-lg mx-auto">
+				<div class="px-4 py-2 bg-blue-50 text-blue-500 border-b border-gray-200 rounded-t-lg">
+					Comments
+				</div>
+				<div class="px-8 py-4">
+					<WritingComment on:input={e => {marking_category = e.detail}} {marking_category}/>
+					<div class="flex items-start py-2">
+						<p class="text-gray-700 w-28 pt-4 text-right">Overall</p>
+						<div class="flex-1 px-4">
+							<TemplateTextBox value={overall_msg} on:input={e => {overall_msg = e.detail}} options={overall_options}/>
+						</div>
 					</div>
 				</div>
 			</div>
