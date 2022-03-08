@@ -132,15 +132,17 @@
 		{/each}
 		{#if writing_submission}
 			{#if last_writing_submission}
-				<button class:text-blue-500={selected_writing_identifier === last_writing_submission.identifier}
-				        on:click={() => {onWritingSelected(last_writing_submission.identifier)}}
-				        class="pl-2 cursor-pointer rounded bg-gray-100 hover:bg-gray-200 border border-gray-300 mx-1 text-sm flex items-stretch">
-					<Icon name="report" className="w-4"/>
-					<p use:tooltip={'Last writing submission'} class="py-1 ml-1 text-sm">{last_writing_submission.title}</p>
+				<div class="cursor-pointer rounded bg-gray-100 border border-gray-300 mx-1 text-sm flex items-stretch">
+					<button class:text-blue-500={selected_writing_identifier === last_writing_submission.identifier}
+					        on:click={() => {onWritingSelected(last_writing_submission.identifier)}}
+					        class="flex items-center hover:bg-white pl-2 pr-1">
+						<Icon name="report" className="w-4"/>
+						<p use:tooltip={'Last writing submission'} class="py-1 ml-1 text-sm">{last_writing_submission.title}</p>
+					</button>
 					<Dropdown
 									placement="bottom-end"
 									activator_active_style="text-blue-500 bg-white"
-									activator_style="px-1 py-1 border-l border-gray-300 ml-1">
+									activator_style="px-1 py-1 border-l border-gray-300">
 						<button slot="activator">
 							<Icon name="more" className="w-3"/>
 						</button>
@@ -164,8 +166,7 @@
 							{/each}
 						</div>
 					</Dropdown>
-
-				</button>
+				</div>
 			{/if}
 		{/if}
 		<button on:click={onToggleFullScreen} class="px-2 py-1 cursor-pointer rounded bg-gray-100 hover:bg-gray-200 border border-gray-300 mx-1 text-sm ml-auto">
