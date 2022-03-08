@@ -49,52 +49,55 @@
 	})
 </script>
 
-<div class="p-4 bg-gray-50">
-	<h1 class="font-light text-gray-700 mb-4" style="font-size: 1.8em">{title || 'No title'}</h1>
-	<Writing {para} {edit_log} {comments} {title} {writing_id}/>
-	{#if user_handwriting_images && user_handwriting_images.length}
-		<div class="mb-8 flex">
-			<div>
-				{#each user_handwriting_images as img_obj}
-					<img on:click={() => {active_image_url = img_obj.image_url}} class="cursor-pointer w-40 rounded mr-4" src={img_obj.image_url} alt="handwriting">
-				{/each}
-			</div>
-		</div>
-	{/if}
-	{#if marking_category}
-		<div class="my-4 bg-white border border-gray-200 rounded-lg">
-			<div class="max-w-screen-lg mx-auto">
-				<div class="px-4 py-2 bg-blue-50 text-blue-500 border-b border-gray-200 rounded-t-lg">
-					Rating
-				</div>
-				<div class="px-8 py-4">
-					<WritingMarking on:input={e => {marking_category = e.detail}} {marking_category}/>
-				</div>
-			</div>
-		</div>
+<div class="bg-gray-50">
+	<div class="p-4 max-w-screen-lg mx-auto">
+		<h1 class="font-light text-gray-700 mb-4" style="font-size: 1.8em">{title || 'No title'}</h1>
+		<Writing {para} {edit_log} {comments} {title} {writing_id}/>
 
-		<div class="my-4 bg-white border border-gray-200 rounded-lg">
-			<div class="max-w-screen-lg mx-auto">
-				<div class="px-4 py-2 bg-blue-50 text-blue-500 border-b border-gray-200 rounded-t-lg">
-					Comments
+		{#if user_handwriting_images && user_handwriting_images.length}
+			<div class="my-8 flex">
+				<div>
+					{#each user_handwriting_images as img_obj}
+						<img on:click={() => {active_image_url = img_obj.image_url}} class="cursor-pointer w-40 rounded mr-4" src={img_obj.image_url} alt="handwriting">
+					{/each}
 				</div>
-				<div class="px-8 py-4">
-					<WritingComment on:input={e => {marking_category = e.detail}} {marking_category}/>
-					<div class="flex items-start py-2">
-						<p class="text-gray-700 w-28 pt-4 text-right">Overall</p>
-						<div class="flex-1 px-4">
-							<TemplateTextBox value={overall_msg} on:input={e => {overall_msg = e.detail}} options={overall_options}/>
+			</div>
+		{/if}
+		{#if marking_category}
+			<div class="my-4 bg-white border border-gray-200 rounded-lg">
+				<div class="max-w-screen-lg mx-auto">
+					<div class="px-4 py-2 bg-blue-50 text-blue-500 border-b border-gray-200 rounded-t-lg">
+						Rating
+					</div>
+					<div class="px-8 py-4">
+						<WritingMarking on:input={e => {marking_category = e.detail}} {marking_category}/>
+					</div>
+				</div>
+			</div>
+
+			<div class="my-4 bg-white border border-gray-200 rounded-lg">
+				<div class="max-w-screen-lg mx-auto">
+					<div class="px-4 py-2 bg-blue-50 text-blue-500 border-b border-gray-200 rounded-t-lg">
+						Comments
+					</div>
+					<div class="px-8 py-4">
+						<WritingComment on:input={e => {marking_category = e.detail}} {marking_category}/>
+						<div class="flex items-start py-2">
+							<p class="text-gray-700 w-28 pt-4 text-right">Overall</p>
+							<div class="flex-1 px-4">
+								<TemplateTextBox value={overall_msg} on:input={e => {overall_msg = e.detail}} options={overall_options}/>
+							</div>
 						</div>
 					</div>
 				</div>
 			</div>
+		{/if}
+	</div>
+
+	{#if active_image_url}
+		<div on:click={() => {active_image_url = null}} class="fixed z-40 inset-0 bg-black opacity-60"></div>
+		<div class="fixed z-50 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 rounded" style="width: 600px">
+			<img src={active_image_url} alt="image">
 		</div>
 	{/if}
 </div>
-
-{#if active_image_url}
-	<div on:click={() => {active_image_url = null}} class="fixed z-40 inset-0 bg-black opacity-60"></div>
-	<div class="fixed z-50 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 rounded" style="width: 600px">
-		<img src={active_image_url} alt="image">
-	</div>
-{/if}

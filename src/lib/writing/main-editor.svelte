@@ -773,7 +773,7 @@
 											<div class="absolute z-20 inset-0 bg-red-500 opacity-20"></div>
 										{/if}
 									{/if}
-									<div style="line-height: 2" class="relative z-30 {isSymbol(w) ? 'pr-1 -ml-1' : 'px-1'}">
+									<div style="line-height: 2" class="relative z-10 {isSymbol(w) ? 'pr-1 -ml-1' : 'px-1'}">
 										{w.wording}
 									</div>
 									{#if w.amendment_type === 'delete' || w.amendment_type === 'correction'}
@@ -784,7 +784,7 @@
 									{/if}
 									{#if cursor_idx === w.wid && para_idx === w.pid && !is_readonly}
 										<div bind:this={cursor_el}
-										     class="{cursor_visible ? 'cursor' : 'opacity-0'} bg-red-500 w-0.5 ml-0.5 absolute inset-y-0 left-0 z-30"></div>
+										     class="{cursor_visible ? 'cursor' : 'opacity-0'} bg-red-500 w-0.5 ml-0.5 absolute inset-y-0 left-0 z-10"></div>
 									{/if}
 								</div>
 							{/if}
