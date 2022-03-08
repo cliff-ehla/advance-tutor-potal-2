@@ -9,7 +9,7 @@ export async function usermodel (request, resource, data) {
 	}
 	const query = {
 		'encode': 1,
-		'access-token': request.locals.access_token // (is_dev && is_production_url) ? 'Jodiehappytest' :
+		'access-token': (is_dev && is_production_url) ? 'Jodiehappytest' : request.locals.access_token
 	}
 	let url = `${base}${resource}`
 	for (const property in query) {

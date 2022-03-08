@@ -41,9 +41,11 @@
 			<a class="relative h-14 flex items-center p-2 mx-1 font-light hover:bg-blue-50" class:text-blue-500={$page.path.includes(item.href)} href={item.href}>
 				{item.title}
 				{#if item.is_writing}
-					<div class="font-bold absolute rounded-full w-4 h-4 cc bg-pink-500 text-white leading-none rounded-sm top-2.5 -right-1" style="font-size: 9px">
-						{$noticeCenterStore.writing_submission_cnt}
-					</div>
+					{#if $noticeCenterStore.writing_submission_cnt}
+						<div class="font-bold absolute rounded-full w-4 h-4 cc bg-pink-500 text-white leading-none rounded-sm top-2.5 -right-1" style="font-size: 9px">
+							{$noticeCenterStore.writing_submission_cnt}
+						</div>
+					{/if}
 				{/if}
 				{#if $page.path.includes(item.href)}
 					<span class="absolute block h-1 bg-blue-400 inset-x-0 bottom-0 rounded-full"></span>
