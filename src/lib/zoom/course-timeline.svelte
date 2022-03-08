@@ -81,7 +81,7 @@
 							<Icon name="report" className="w-3"/>
 							<p class="ml-1">{zoom.writing.title}</p>
 						</a>
-<!--						<a href="/zoom/{zoom.wrapper_id}">test</a>-->
+						<a href="/zoom/{zoom.wrapper_id}">test</a>
 					{/if}
 				</div>
 			</div>

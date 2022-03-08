@@ -17,6 +17,7 @@
 <script>
 	import StudentWidget from '../../components/item/item-pdf-reader/student-widget.svelte'
 	import StudentListWidget from '$lib/zoom/student-list-widget.svelte'
+	import ReadonlyWriting from '$lib/writing/read-only-index.svelte'
 	import {session} from '$app/stores'
 	import Icon from '$lib/ui/icon.svelte'
 	import Dropdown from '$lib/ui/dropdown3.svelte'
@@ -28,10 +29,17 @@
 	dayjs.extend(utc)
 
 	onMount(async () => {
-		let {data} = await http.post(fetch, '/tutorApi/writing_submission_list_by_tutor_group_id', {
+		let {data, success} = await http.post(fetch, '/tutorApi/writing_submission_list_by_tutor_group_id', {
 			tutor_group_id: zoom.tutor_group_id
 		})
-		writing_submission = data
+		if (success) {
+			writing_submission = data
+			writing_submission.sort((a,b) => {
+				return a.submission_date > b.submission_date ? -1 : 1
+			})
+			last_writing_submission = writing_submission[0]
+		}
+		getItem()
 	})
 
 	export let zoom
@@ -40,7 +48,7 @@
 	start_date = start_date.format('YYYY-MM-DD HH:mm:ss')
 	end_date = end_date.format('YYYY-MM-DD HH:mm:ss')
 	const items = zoom.days.map(d => ({
-		item_id: d.item_ids[0],
+		item_id: d.item_ids && d.item_ids[0],
 		title: d.title
 	}))
 	const students = zoom.students
@@ -53,12 +61,10 @@
 	let youtube_link_obj
 	let loading_item = true
 	let writing_submission = []
+	let selected_writing_identifier
+	let last_writing_submission
 
 	import PdfReader from '$lib/pdf-reader/index.svelte'
-
-	$: {
-		if (selected_item_id) getItem()
-	}
 
 	const getItem = async () => {
 		loading_item = true
@@ -77,6 +83,17 @@
 			}
 		}
 	}
+
+	const onItemSelected = (item) => {
+		selected_writing_identifier = null
+		selected_item_id = item.item_id
+		getItem()
+	}
+
+	const onWritingSelected = (identifier) => {
+		selected_item_id = null
+		selected_writing_identifier = identifier
+	}
 </script>
 
 <div class="h-10 items-center flex relative z-50 px-2">
@@ -86,45 +103,65 @@
 	</button>
 	{#each items as item}
 		<button class:text-blue-500={item.item_id === selected_item_id}
-		   on:click={() => {selected_item_id = item.item_id}}
-		   class="px-2 py-1 cursor-pointer rounded bg-gray-100 hover:bg-gray-200 border border-gray-300 mx-1">
+		   on:click={() => {onItemSelected(item)}}
+		   class="px-2 py-1 cursor-pointer rounded bg-gray-100 hover:bg-gray-200 border border-gray-300 mx-1 text-sm">
 			{item.title}
 		</button>
 	{/each}
 	{#if writing_submission}
-		<Dropdown activator_style="px-2 py-1 cursor-pointer rounded bg-gray-100 border border-gray-300 mx-1">
-			<button slot="activator" class="flex items-center">
+		{#if last_writing_submission}
+			<button class:text-blue-500={selected_writing_identifier === last_writing_submission.identifier}
+			        on:click={() => {onWritingSelected(last_writing_submission.identifier)}}
+			        class="pl-2 cursor-pointer rounded bg-gray-100 hover:bg-gray-200 border border-gray-300 mx-1 text-sm flex items-stretch">
 				<Icon name="report" className="w-4"/>
-				<p class="ml-1 text-sm">Writing</p>
-			</button>
-			<div class="dropdown">
-				{#each writing_submission as w}
-					<div class="item">
-						{w.title}
+				<p use:tooltip={'Last writing submission'} class="py-1 ml-1 text-sm">{last_writing_submission.title}</p>
+				<Dropdown
+								placement="bottom-end"
+								activator_active_style="text-blue-500 bg-white"
+								activator_style="px-1 py-1 border-l border-gray-300 ml-1">
+					<button slot="activator">
+						<Icon name="more" className="w-3"/>
+					</button>
+					<div class="dropdown">
+						{#each writing_submission as w}
+							<div on:click={() => {onWritingSelected(w.identifier)}} class="item text-left">
+								<div>
+									<p>{w.title}</p>
+									<p class="text-xs text-gray-500">{dayjs(w.submission_date).format('DD MMM')}</p>
+								</div>
+							</div>
+						{/each}
 					</div>
-				{/each}
-			</div>
-		</Dropdown>
+				</Dropdown>
+
+			</button>
+		{/if}
 	{/if}
 </div>
 
 {#if !loading_item}
-	<PdfReader {pdf_array} {youtube_link_obj} pages_info_2={pdf_json}>
-		<div class="fixed right-8 bottom-0 z-50">
-			{#if is_one_on_one}
-				<StudentWidget {student_id} {tutor_group_id} teacher_id={$session.user_id}/>
-			{:else}
-				<StudentListWidget student_list={students}/>
-			{/if}
+	{#if selected_writing_identifier}
+		<div class="p-4">
+			<ReadonlyWriting identifier={selected_writing_identifier}/>
 		</div>
+	{:else}
+		<PdfReader {pdf_array} {youtube_link_obj} pages_info_2={pdf_json}>
+			<div class="fixed right-8 bottom-0 z-50">
+				{#if is_one_on_one}
+					<StudentWidget {student_id} {tutor_group_id} teacher_id={$session.user_id}/>
+				{:else}
+					<StudentListWidget student_list={students}/>
+				{/if}
+			</div>
 
-		<div class="fixed bottom-2 left-1/2 transform -translate-x-1/2 flex items-center flex-col">
-			<Countdown
-							{student_id}
-							item_id={selected_item_id}
-							start_date={start_date}
-							{tutor_group_id}
-							end_date={end_date}/>
-		</div>
-	</PdfReader>
+			<div class="fixed bottom-2 left-1/2 transform -translate-x-1/2 flex items-center flex-col">
+				<Countdown
+								{student_id}
+								item_id={selected_item_id}
+								start_date={start_date}
+								{tutor_group_id}
+								end_date={end_date}/>
+			</div>
+		</PdfReader>
+	{/if}
 {/if}
