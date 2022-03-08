@@ -52,12 +52,14 @@
 	const items = zoom.days.map(d => ({
 		item_id: d.item_ids && d.item_ids[0],
 		title: d.title
-	}))
+	})).filter(item => {
+		return item.item_id
+	})
 	const students = zoom.students
 	const tutor_group_id = zoom.tutor_group_id
 	const is_one_on_one = !zoom.big_classroom_type
 	const student_id = is_one_on_one ? students[0].user_id : null
-	let selected_item_id = items && items[0].item_id
+	let selected_item_id = items.length && items[0].item_id
 	let pdf_json
 	let pdf_array
 	let youtube_link_obj
@@ -71,6 +73,7 @@
 	import PdfReader from '$lib/pdf-reader/index.svelte'
 
 	const getItem = async () => {
+		if (!selected_item_id) return
 		loading_item = true
 		const {data, success} = await http.post(fetch, '/itemApi/get_by_ids', {
 			ids: [selected_item_id]
@@ -199,5 +202,12 @@
 		{:else}
 			<PdfReader {pdf_array} {youtube_link_obj} pages_info_2={pdf_json}/>
 		{/if}
+	{/if}
+
+	{#if !selected_item_id && !selected_writing_identifier}
+		<div class="text-center">
+			<p class="p-4 text-gray-500">This is no material uploaded for this class</p>
+			<button class="button" on:click={() => {history.back()}}>Back</button>
+		</div>
 	{/if}
 </div>
