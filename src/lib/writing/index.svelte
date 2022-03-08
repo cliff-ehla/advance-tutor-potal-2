@@ -7,8 +7,9 @@
 	export let edit_log = []
 	export let is_readonly = false
 	export let text_editor_active = undefined
+	export let font_size = 48
 </script>
 
 <Popup>
-	<MainEditor {para} {comments} {edit_log} {is_readonly} {text_editor_active}/>
+	<MainEditor {font_size} {para} {comments} {edit_log} {is_readonly} {text_editor_active}/>
 </Popup>

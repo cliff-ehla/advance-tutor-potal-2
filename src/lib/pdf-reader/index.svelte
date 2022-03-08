@@ -107,19 +107,6 @@
 		window.open(href, '_blank').focus();
 	}
 
-	const tooltip = (node, is_fullscreen) => {
-		const showTooltip = (is_fullscreen) => {
-			// tippy(node, {
-			// 	content: !is_fullscreen ? 'Fullscreen' : `Collapse`,
-			// 	placement: 'right'
-			// })
-		}
-		showTooltip(is_fullscreen)
-		return {
-			update: showTooltip
-		}
-	}
-
 	const getImageFile = () => {
 		return pdf_array[index]
 	}
@@ -132,7 +119,7 @@
 <div bind:this={fullscreen_el} class="relative overflow-hidden">
 	<div class="w-16 fixed left-4 bottom-4 z-50">
 		<div class="bg-white shadow border rounded">
-			<button use:tooltip={is_fullscreen} on:click={onToggleFullScreen} class="w-full h-16 flex items-center justify-center border-gray-300 border-b hover:bg-gray-100 hover:text-blue-500 focus:outline-none">
+			<button on:click={onToggleFullScreen} class="w-full h-16 flex items-center justify-center border-gray-300 border-b hover:bg-gray-100 hover:text-blue-500 focus:outline-none">
 				<Icon name="{!is_fullscreen ? 'expand' : 'collapse'}" className="w-8 text-gray-500"/>
 			</button>
 			<div class="flex grid grid-cols-2">

@@ -63,6 +63,8 @@
 	let writing_submission = []
 	let selected_writing_identifier
 	let last_writing_submission
+	let fullscreen_el
+	let is_fullscreen
 
 	import PdfReader from '$lib/pdf-reader/index.svelte'
 
@@ -94,74 +96,92 @@
 		selected_item_id = null
 		selected_writing_identifier = identifier
 	}
+
+	const onToggleFullScreen = () => {
+		if (!document.fullscreenElement) {
+			fullscreen_el.requestFullscreen();
+			is_fullscreen = true
+		} else {
+			if (document.exitFullscreen) {
+				document.exitFullscreen();
+				is_fullscreen = false
+			}
+		}
+	}
 </script>
 
-<div class="h-10 items-center flex relative z-50 px-2">
-	<button use:tooltip={'Back'} on:click={() => {history.back()}}
-	        class="w-8 h-8 shadow-lg border-2 border-gray-200 hover:bg-blue-50 hover:border-blue-300 hover:text-blue-500 bg-white rounded-full cc mr-2">
-		<Icon name="right" className="transform rotate-180 w-3"/>
-	</button>
-	{#each items as item}
-		<button class:text-blue-500={item.item_id === selected_item_id}
-		   on:click={() => {onItemSelected(item)}}
-		   class="px-2 py-1 cursor-pointer rounded bg-gray-100 hover:bg-gray-200 border border-gray-300 mx-1 text-sm">
-			{item.title}
-		</button>
-	{/each}
-	{#if writing_submission}
-		{#if last_writing_submission}
-			<button class:text-blue-500={selected_writing_identifier === last_writing_submission.identifier}
-			        on:click={() => {onWritingSelected(last_writing_submission.identifier)}}
-			        class="pl-2 cursor-pointer rounded bg-gray-100 hover:bg-gray-200 border border-gray-300 mx-1 text-sm flex items-stretch">
-				<Icon name="report" className="w-4"/>
-				<p use:tooltip={'Last writing submission'} class="py-1 ml-1 text-sm">{last_writing_submission.title}</p>
-				<Dropdown
-								placement="bottom-end"
-								activator_active_style="text-blue-500 bg-white"
-								activator_style="px-1 py-1 border-l border-gray-300 ml-1">
-					<button slot="activator">
-						<Icon name="more" className="w-3"/>
-					</button>
-					<div class="dropdown">
-						{#each writing_submission as w}
-							<div on:click={() => {onWritingSelected(w.identifier)}} class="item text-left">
-								<div>
-									<p>{w.title}</p>
-									<p class="text-xs text-gray-500">{dayjs(w.submission_date).format('DD MMM')}</p>
-								</div>
-							</div>
-						{/each}
-					</div>
-				</Dropdown>
+<div bind:this={fullscreen_el} class="bg-white">
 
+	<div class="h-10 items-center flex relative z-50 px-2">
+		<button use:tooltip={'Back'} on:click={() => {history.back()}}
+		        class="w-8 h-8 shadow-lg border-2 border-gray-200 hover:bg-blue-50 hover:border-blue-300 hover:text-blue-500 bg-white rounded-full cc mr-2">
+			<Icon name="right" className="transform rotate-180 w-3"/>
+		</button>
+		{#each items as item}
+			<button class:text-blue-500={item.item_id === selected_item_id}
+			   on:click={() => {onItemSelected(item)}}
+			   class="px-2 py-1 cursor-pointer rounded bg-gray-100 hover:bg-gray-200 border border-gray-300 mx-1 text-sm">
+				{item.title}
 			</button>
+		{/each}
+		{#if writing_submission}
+			{#if last_writing_submission}
+				<button class:text-blue-500={selected_writing_identifier === last_writing_submission.identifier}
+				        on:click={() => {onWritingSelected(last_writing_submission.identifier)}}
+				        class="pl-2 cursor-pointer rounded bg-gray-100 hover:bg-gray-200 border border-gray-300 mx-1 text-sm flex items-stretch">
+					<Icon name="report" className="w-4"/>
+					<p use:tooltip={'Last writing submission'} class="py-1 ml-1 text-sm">{last_writing_submission.title}</p>
+					<Dropdown
+									placement="bottom-end"
+									activator_active_style="text-blue-500 bg-white"
+									activator_style="px-1 py-1 border-l border-gray-300 ml-1">
+						<button slot="activator">
+							<Icon name="more" className="w-3"/>
+						</button>
+						<div class="dropdown">
+							{#each writing_submission as w}
+								<div on:click={() => {onWritingSelected(w.identifier)}} class="item text-left">
+									<div>
+										<p>{w.title}</p>
+										<p class="text-xs text-gray-500">{dayjs(w.submission_date).format('DD MMM')}</p>
+									</div>
+								</div>
+							{/each}
+						</div>
+					</Dropdown>
+
+				</button>
+			{/if}
+		{/if}
+		<button on:click={onToggleFullScreen} class="px-2 py-1 cursor-pointer rounded bg-gray-100 hover:bg-gray-200 border border-gray-300 mx-1 text-sm ml-auto">
+			<Icon name="{!is_fullscreen ? 'expand' : 'collapse'}" className="w-5 text-gray-500"/>
+		</button>
+	</div>
+
+	<div class="fixed right-8 bottom-0 z-50">
+		{#if is_one_on_one}
+			<StudentWidget {student_id} {tutor_group_id} teacher_id={$session.user_id}/>
+		{:else}
+			<StudentListWidget student_list={students}/>
+		{/if}
+	</div>
+
+	<div class="fixed bottom-2 left-1/2 transform -translate-x-1/2 flex items-center flex-col">
+		<Countdown
+						{student_id}
+						item_id={selected_item_id}
+						start_date={start_date}
+						{tutor_group_id}
+						end_date={end_date}/>
+	</div>
+
+	{#if !loading_item}
+		{#if selected_writing_identifier}
+			<div class="p-4 max-w-screen-xl">
+				<ReadonlyWriting identifier={selected_writing_identifier}/>
+			</div>
+		{:else}
+			<PdfReader {pdf_array} {youtube_link_obj} pages_info_2={pdf_json}/>
 		{/if}
 	{/if}
 </div>
-
-{#if !loading_item}
-	{#if selected_writing_identifier}
-		<div class="p-4">
-			<ReadonlyWriting identifier={selected_writing_identifier}/>
-		</div>
-	{:else}
-		<PdfReader {pdf_array} {youtube_link_obj} pages_info_2={pdf_json}>
-			<div class="fixed right-8 bottom-0 z-50">
-				{#if is_one_on_one}
-					<StudentWidget {student_id} {tutor_group_id} teacher_id={$session.user_id}/>
-				{:else}
-					<StudentListWidget student_list={students}/>
-				{/if}
-			</div>
-
-			<div class="fixed bottom-2 left-1/2 transform -translate-x-1/2 flex items-center flex-col">
-				<Countdown
-								{student_id}
-								item_id={selected_item_id}
-								start_date={start_date}
-								{tutor_group_id}
-								end_date={end_date}/>
-			</div>
-		</PdfReader>
-	{/if}
-{/if}

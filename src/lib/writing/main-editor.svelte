@@ -45,8 +45,8 @@
 
 	let active_button = null
 
-	let font_size = 24
-	const max_font_size = 32
+	export let font_size = 24
+	const max_font_size = 64
 	const min_font_size = 16
 
 	let is_mobile
