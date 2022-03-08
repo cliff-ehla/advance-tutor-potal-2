@@ -7,6 +7,7 @@
 	const {open, closeModal} = getContext('simple-modal')
 	import PdfReaderDialog from '$lib/pdf-reader/pdf-reader-dialog.svelte'
 	import Icon from '$lib/ui/icon.svelte'
+	import Dropdown from '$lib/ui/dropdown3.svelte'
 	import {tooltip} from "$lib/action/tooltip.js";
 	import {page} from "$app/stores";
 
@@ -77,11 +78,58 @@
 				{/if}
 				<div>
 					{#if zoom.writing}
-						<a href="/writing/{zoom.writing.identifier}" class="inline-flex items-center px-2 py-0.5 rounded border border-gray-300 text-xs text-gray-600 hover:text-blue-500 hover:bg-gray-50">
-							<Icon name="report" className="w-3"/>
-							<p class="ml-1">{zoom.writing.title}</p>
-						</a>
-						<a href="/zoom/{zoom.wrapper_id}">test</a>
+						<Dropdown placement="right">
+							<a slot="activator" href="/writing/{zoom.writing.identifier}" class="inline-flex items-center px-2 py-0.5 rounded border border-gray-300 text-xs text-gray-600 hover:text-blue-500 hover:bg-gray-50">
+								{#if zoom.writing.disclose === '1'}
+									<Icon name="report" className="w-3"/>
+								{:else}
+									<Icon name="alert" className="w-3 text-pink-400"/>
+								{/if}
+								<p class="ml-1">{zoom.writing.title}</p>
+							</a>
+							<div class="bg-white p-4 shadow-lg border border-gray-300 rounded max-w-xs">
+								{#if zoom.writing.disclose === '1'}
+									<div class="flex">
+										<div class="w-12 h-12 rounded-full cc bg-gray-100 text-xl">
+											{Number(zoom.writing.organizations_mark) + Number(zoom.writing.vocabulary_mark) + Number(zoom.writing.sentence_mark) + Number(zoom.writing.content_mark)}
+										</div>
+										<div class="grid grid-cols-2 gap-1 w-48">
+											<div class="text-xs flex items-center">
+												<p class="w-20 text-right mr-0.5 text-gray-500" style="font-size: 10px;">Organizations</p>
+												<p>{zoom.writing.organizations_mark}</p>
+											</div>
+											<div class="text-xs flex items-center">
+												<p class="w-20 text-right mr-0.5 text-gray-500" style="font-size: 10px;">Vocab</p>
+												<p>{zoom.writing.vocabulary_mark}</p>
+											</div>
+											<div class="text-xs flex items-center">
+												<p class="w-20 text-right mr-0.5 text-gray-500" style="font-size: 10px;">Sentence</p>
+												<p>{zoom.writing.sentence_mark}</p>
+											</div>
+											<div class="text-xs flex items-center">
+												<p class="w-20 text-right mr-0.5 text-gray-500" style="font-size: 10px;">Content</p>
+												<p>{zoom.writing.content_mark}</p>
+											</div>
+										</div>
+									</div>
+									<p class="text-xs mt-2">{zoom.writing.overall_msg}</p>
+									<a href="/writing/{zoom.writing.identifier}" class="see-all-button mt-1 w-full">Details</a>
+								{:else if zoom.writing.disclose === null}
+									<div class="flex items-center p-2">
+										<Icon name="alert" className="w-4 text-pink-400"/>
+										<p class="ml-1 text-xs text-pink-400">Not yet marked</p>
+									</div>
+									<a href="/writing/{zoom.writing.identifier}" class="see-all-button mt-1 w-full">Mark now</a>
+								{:else if zoom.writing.disclose === '0'}
+									<div class="flex items-center p-2">
+										<Icon name="alert" className="w-4 text-pink-400"/>
+										<p class="ml-1 text-xs text-pink-400">Marking draft not yet sent to student</p>
+									</div>
+									<a href="/writing/{zoom.writing.identifier}" class="see-all-button mt-1 w-full">Continue marking</a>
+								{/if}
+							</div>
+						</Dropdown>
+<!--						<a href="/zoom/{zoom.wrapper_id}">test</a>-->
 					{/if}
 				</div>
 			</div>
