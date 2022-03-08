@@ -7,6 +7,8 @@
 	import {setContext, getContext} from 'svelte'
 	const {closeModal} = getContext('simple-modal')
 	import {pdf_keyboard_listener_active} from "../../store";
+	const liveFunction = getContext('live')
+	const toggleLiveFullScreen = liveFunction ? liveFunction.toggleFullScreen : undefined
 
 	export let pages_info_2 = []
 	export let pdf_array = []
@@ -67,16 +69,20 @@
 	}
 
 	const onToggleFullScreen = () => {
-		resetPanZoom()
-		if (!document.fullscreenElement) {
-			fullscreen_el.requestFullscreen();
-			is_fullscreen = true
+		if (toggleLiveFullScreen) {
+			toggleLiveFullScreen()
 		} else {
-			if (document.exitFullscreen) {
-				document.exitFullscreen();
-				is_fullscreen = false
+			if (!document.fullscreenElement) {
+				fullscreen_el.requestFullscreen();
+				is_fullscreen = true
+			} else {
+				if (document.exitFullscreen) {
+					document.exitFullscreen();
+					is_fullscreen = false
+				}
 			}
 		}
+		resetPanZoom()
 	}
 
 	const onKeydown = (e) => {

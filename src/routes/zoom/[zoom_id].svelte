@@ -26,6 +26,8 @@
 	import utc from "dayjs/plugin/utc.js";
 	import {onMount} from "svelte";
 	import {tooltip} from "$lib/action/tooltip.js";
+	import {setContext} from "svelte";
+
 	dayjs.extend(utc)
 
 	onMount(async () => {
@@ -108,6 +110,10 @@
 			}
 		}
 	}
+
+	setContext('live', {
+		toggleFullScreen: onToggleFullScreen
+	})
 </script>
 
 <div bind:this={fullscreen_el} class="bg-white">
