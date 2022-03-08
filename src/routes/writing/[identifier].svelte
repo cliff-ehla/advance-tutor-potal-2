@@ -4,6 +4,7 @@
 	export const load = async ({page, fetch}) => {
 		const identifier = page.params.identifier
 		const {data, success, debug} = await http.get(fetch, `/writingApi/get_user_writing?identifier=${identifier}`)
+		console.log(123, data)
 		const {para, edit_log, comments, title, writing_id} = data
 		return {
 			props: {
@@ -23,6 +24,7 @@
 	import WritingMarking from '$lib/writing/_writing_marking.svelte'
 	import WritingComment from '$lib/writing/_writing_comment.svelte'
 	import TemplateTextBox from '$lib/writing/_template-text-box.svelte'
+	import Button from '$lib/ui/button.svelte'
 	import {onMount} from "svelte";
 
 	let marking_category
@@ -31,10 +33,13 @@
 	let active_image_url
 	let overall_options
 
+	let is_edit
+
 	onMount(async () => {
 		const {data, success} = await http.post(fetch, '/writingApi/get_student_writing_submission', {
 			user_writing_id: writing_id
 		})
+		console.log(data)
 		overall_msg = data.overall_msg
 		let _marking_category = data.marking_category
 		user_handwriting_images = data.user_handwriting_images
@@ -47,6 +52,42 @@
 		})
 		marking_category = _marking_category
 	})
+
+	const onSubmitClick = async (is_draft) => {
+		const obj = {}
+		const comments = []
+		marking_category.forEach(cat => {
+			obj[cat.title] = cat.user_mark
+			cat.comments.forEach(c => comments.push(c))
+		})
+
+		// loading = true
+		await http.post(fetch, '/writingApi/modify_mark', {
+			user_writing_id: writing_id,
+			disclose: is_draft ? 0 : 1,
+			content_mark: obj.content,
+			language_mark: obj.language,
+			organizations_mark: obj.organizations,
+			vocabulary_mark: obj.vocabulary,
+			sentence_mark: obj.sentence,
+			overall_msg
+		})
+		await http.post(fetch, '/writingApi/submit_comment', {
+			user_writing_id: writing_id,
+			comments
+		})
+		// loading = false
+		if (is_edit) {
+			// showNotification('Your marking is updated')
+		} else {
+			if (is_draft) {
+				// showNotification('Your marking draft is saved')
+			} else {
+				// showNotification('Marking sent to student')
+			}
+		}
+		history.back()
+	}
 </script>
 
 <div class="bg-gray-50">
@@ -88,6 +129,28 @@
 								<TemplateTextBox value={overall_msg} on:input={e => {overall_msg = e.detail}} options={overall_options}/>
 							</div>
 						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="py-4 flex items-center">
+				<div class="flex">
+					<button on:click={() => {history.back()}} class="text-blue-500 rounded bg-white border border-gray-200 px-4 py-2">
+						Cancel
+					</button>
+					{#if !is_edit}
+						<div class="ml-2">
+							<Button on:click={() => {onSubmitClick(true)}}>
+								Save draft
+							</Button>
+						</div>
+					{/if}
+				</div>
+				<div class="ml-auto flex items-center">
+					<div class="ml-2">
+						<Button on:click={() => {onSubmitClick(false)}}>
+							{is_edit ? 'Edit' : 'Complete marking and send to student'}
+						</Button>
 					</div>
 				</div>
 			</div>

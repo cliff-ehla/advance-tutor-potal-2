@@ -81,11 +81,9 @@
 	</div>
 	<Dropdown
 					on:input={e => {is_opened = e.detail}}
-					opened={is_opened}
 					open_on_hover={false}
 					full_width
-					placement="bottom-start"
-					classname="absolute rounded py-2 shadow-lg left-0 bg-white border border-gray-300 w-full z-50 overflow-y-scroll max-h-80">
+					placement="bottom-start">
 		<div slot="activator" class="flex h-8 items-center w-full">
 			<div class="mx-2 text-gray-400">
 				<Icon name="search" className="w-4"/>
