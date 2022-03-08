@@ -147,9 +147,18 @@
 						<div class="dropdown">
 							{#each writing_submission as w}
 								<div on:click={() => {onWritingSelected(w.identifier)}} class="item text-left">
-									<div>
+									<div class="flex items-center w-full">
 										<p>{w.title}</p>
-										<p class="text-xs text-gray-500">{dayjs(w.submission_date).format('DD MMM')}</p>
+										<div class="ml-auto flex items-center">
+											<p class="text-xs text-gray-500 mx-1 bg-gray-100 rounded-full px-1">{dayjs(w.submission_date).format('DD MMM')}</p>
+											{#if w.disclose === '1'}
+												<div class="ml-2 w-5 h-5 rounded-full cc bg-blue-100 text-blue-700" style="font-size: 10px">{Number(w.organizations_mark) + Number(w.vocabulary_mark) + Number(w.sentence_mark) + Number(w.content_mark)}</div>
+											{:else}
+												<div use:tooltip={'Not yet marked'} class="ml-2">
+													<Icon name="alert" className="w-3 text-gray-500"/>
+												</div>
+											{/if}
+										</div>
 									</div>
 								</div>
 							{/each}
@@ -172,7 +181,7 @@
 		{/if}
 	</div>
 
-	<div class="fixed bottom-2 left-1/2 transform -translate-x-1/2 flex items-center flex-col">
+	<div class="fixed z-30 bottom-2 left-1/2 transform -translate-x-1/2 flex items-center flex-col">
 		<Countdown
 						{student_id}
 						item_id={selected_item_id}
