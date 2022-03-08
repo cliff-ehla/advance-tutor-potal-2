@@ -15,6 +15,7 @@
 	import Dropdown from '$lib/ui/dropdown3.svelte'
 	import Icon from '$lib/ui/icon.svelte'
 	import relativeTime from "dayjs/plugin/relativeTime.js";
+	import {tooltip} from "$lib/action/tooltip.js";
 	dayjs.extend(relativeTime)
 </script>
 
@@ -22,7 +23,7 @@
 	<div class="container py-4">
 		{#if $noticeCenterStore.writing_list.length}
 			{#each $noticeCenterStore.writing_list as w}
-				<a href="/writing/{w.identifier}" class="cursor-pointer pl-4 pr-2 py-4 border border-gray-200 my-1 rounded leading-none bg-white flex items-center">
+				<a href="/writing/{w.identifier}" class="cursor-pointer pl-4 pr-2 py-4 border border-gray-200 my-2 rounded leading-none bg-white flex items-center hover:border-blue-300 hover:bg-blue-50">
 					<div class="w-1/2">
 						<p>{w.title || 'No title'}</p>
 						<a href="/students/{w.student_id}" class="inline-flex items-center mr-2 rounded-full mt-1.5 group">
@@ -37,28 +38,43 @@
 					</div>
 					<div class="w-1/4 flex justify-center">
 						{#if w.disclose === '1'}
-							<div class="inline-flex border items-center border-gray-300 pl-2 pr-4 rounded-full py-1 text-sm">
-								<div class="w-2 h-2 bg-green-500 rounded-full"></div>
-								<p class="ml-2 text-gray-500">Completed</p>
+							<div class="flex items-center">
+								<div class="inline-flex border items-center border-gray-300 pl-2 bg-white rounded-full text-sm">
+									<div class="w-2 h-2 bg-green-500 rounded-full"></div>
+									<p class="ml-2 text-gray-500">Marking complete</p>
+									<p class="ml-2 w-8 h-8 rounded-full cc bg-gray-100 text-gray-700 border-l border-gray-300">{Number(w.organizations_mark) + Number(w.vocabulary_mark) + Number(w.sentence_mark) + Number(w.content_mark)}</p>
+								</div>
+								<div class="w-8">
+								{#if w.overall_msg}
+									<div class="ml-2" use:tooltip={w.overall_msg}>
+										<Icon name="report" className="w-4 text-gray-500"/>
+									</div>
+								{/if}
+								</div>
 							</div>
 						{:else if w.disclose === null || w.disclose === '0'}
-							<div class="inline-flex border items-center border-gray-300 pl-2 pr-4 rounded-full py-1 text-sm">
+							<div class="inline-flex border items-center border-gray-300 pl-2 bg-white pr-4 rounded-full py-1 text-sm">
 								<div class="w-2 h-2 bg-red-500 rounded-full"></div>
 								<p class="ml-2 text-gray-500">
-									{dayjs(w.next_lesson_date).fromNow()}
+									{#if w.next_lesson_date}
+										{dayjs(w.next_lesson_date).fromNow()}
+									{:else}
+										No more class
+									{/if}
 								</p>
 							</div>
 						{/if}
 					</div>
 					<div class="w-1/4 flex justify-end">
 						{#if w.disclose === '1'}
+							<a href="/writing/{w.identifier}" class="secondary-button">View</a>
 						{:else if w.disclose === '0'}
 							<a href="/writing/{w.identifier}" class="button">Continue</a>
 						{:else if w.disclose === null}
 							<button class="button">Mark now</button>
 						{/if}
 						<div class="ml-0.5">
-							<Dropdown placement="bottom-end" activator_style="icon-button text-gray-500" activator_active_style="bg-blue-50">
+							<Dropdown placement="bottom-end" activator_style="icon-button text-gray-500" activator_active_style="bg-white">
 								<button slot="activator">
 									<Icon name="more" className="w-4"/>
 								</button>

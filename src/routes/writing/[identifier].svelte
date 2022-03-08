@@ -4,7 +4,6 @@
 	export const load = async ({page, fetch}) => {
 		const identifier = page.params.identifier
 		const {data, success, debug} = await http.get(fetch, `/writingApi/get_user_writing?identifier=${identifier}`)
-		console.log(123, data)
 		const {para, edit_log, comments, title, writing_id} = data
 		return {
 			props: {
@@ -15,6 +14,8 @@
 </script>
 
 <script>
+	import {dialog} from "$lib/store/dialog.js";
+
 	export let para
 	export let edit_log
 	export let comments
@@ -76,17 +77,13 @@
 			user_writing_id: writing_id,
 			comments
 		})
-		// loading = false
-		if (is_edit) {
-			// showNotification('Your marking is updated')
-		} else {
-			if (is_draft) {
-				// showNotification('Your marking draft is saved')
-			} else {
-				// showNotification('Marking sent to student')
+		dialog.confirm({
+			title: is_draft ? 'Draft saved' : is_edit ? 'Marking updated' : 'Marking completed',
+			message: is_draft ? 'Click confirm to go back' : 'Your marking has been sent to the student',
+			onConfirm: () => {
+				history.back()
 			}
-		}
-		history.back()
+		})
 	}
 </script>
 
