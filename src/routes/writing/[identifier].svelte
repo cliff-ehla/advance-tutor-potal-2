@@ -27,6 +27,7 @@
 	import TemplateTextBox from '$lib/writing/_template-text-box.svelte'
 	import Button from '$lib/ui/button.svelte'
 	import {onMount} from "svelte";
+	import {notifications} from "$lib/store/notification.js";
 
 	let marking_category
 	let user_handwriting_images
@@ -55,32 +56,32 @@
 	})
 
 	const onSubmitClick = async (is_draft) => {
-		const obj = {}
-		const comments = []
-		marking_category.forEach(cat => {
-			obj[cat.title] = cat.user_mark
-			cat.comments.forEach(c => comments.push(c))
-		})
-
-		// loading = true
-		await http.post(fetch, '/writingApi/modify_mark', {
-			user_writing_id: writing_id,
-			disclose: is_draft ? 0 : 1,
-			content_mark: obj.content,
-			language_mark: obj.language,
-			organizations_mark: obj.organizations,
-			vocabulary_mark: obj.vocabulary,
-			sentence_mark: obj.sentence,
-			overall_msg
-		})
-		await http.post(fetch, '/writingApi/submit_comment', {
-			user_writing_id: writing_id,
-			comments
-		})
 		dialog.confirm({
-			title: is_draft ? 'Draft saved' : is_edit ? 'Marking updated' : 'Marking completed',
-			message: is_draft ? 'Click confirm to go back' : 'Your marking has been sent to the student',
-			onConfirm: () => {
+			message: is_draft ? 'Save draft' : 'Send marking to the student',
+			onConfirm: async () => {
+				const obj = {}
+				const comments = []
+				marking_category.forEach(cat => {
+					obj[cat.title] = cat.user_mark
+					cat.comments.forEach(c => comments.push(c))
+				})
+
+				// loading = true
+				await http.post(fetch, '/writingApi/modify_mark', {
+					user_writing_id: writing_id,
+					disclose: is_draft ? 0 : 1,
+					content_mark: obj.content,
+					language_mark: obj.language,
+					organizations_mark: obj.organizations,
+					vocabulary_mark: obj.vocabulary,
+					sentence_mark: obj.sentence,
+					overall_msg
+				})
+				await http.post(fetch, '/writingApi/submit_comment', {
+					user_writing_id: writing_id,
+					comments
+				})
+				notifications.success(is_draft ? 'Draft saved' : is_edit ? 'Marking updated' : 'Your marking have sent to student')
 				history.back()
 			}
 		})
