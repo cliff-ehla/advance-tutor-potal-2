@@ -21,6 +21,7 @@
 
 <div class="bg-gray-50">
 	<div class="container py-4">
+		<div class="page-title mb-4">Writing submission</div>
 		{#if $noticeCenterStore.writing_list.length}
 			{#each $noticeCenterStore.writing_list as w}
 				<a href="/writing/{w.identifier}" class="cursor-pointer pl-4 pr-2 py-4 border border-gray-200 my-2 rounded leading-none bg-white flex items-center hover:border-blue-300 hover:bg-blue-50">
@@ -41,7 +42,13 @@
 							<div class="flex items-center">
 								<div class="inline-flex border items-center border-gray-300 pl-2 bg-white rounded-full text-sm">
 									<div class="w-2 h-2 bg-green-500 rounded-full"></div>
-									<p class="ml-2 text-gray-500">Marking complete</p>
+									<p class="ml-2 text-gray-500">
+										{#if w.is_read === '1'}
+											Student received
+										{:else}
+											Marking sent
+										{/if}
+									</p>
 									<p class="ml-2 w-8 h-8 rounded-full cc bg-gray-100 text-gray-700 border-l border-gray-300">{Number(w.organizations_mark) + Number(w.vocabulary_mark) + Number(w.sentence_mark) + Number(w.content_mark)}</p>
 								</div>
 								<div class="w-8">
@@ -67,7 +74,11 @@
 					</div>
 					<div class="w-1/4 flex justify-end">
 						{#if w.disclose === '1'}
-							<a href="/writing/{w.identifier}" class="secondary-button">View</a>
+							{#if w.is_read === '1'}
+								<a href="/writing/{w.identifier}" class="secondary-button">View</a>
+							{:else}
+								<a href="/writing/{w.identifier}" class="secondary-button">Edit</a>
+							{/if}
 						{:else if w.disclose === '0'}
 							<a href="/writing/{w.identifier}" class="button">Continue</a>
 						{:else if w.disclose === null}
