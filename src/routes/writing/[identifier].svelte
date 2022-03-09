@@ -36,6 +36,8 @@
 	let overall_options
 
 	let is_edit
+	let disclose
+	let is_read
 
 	onMount(async () => {
 		const {data, success} = await http.post(fetch, '/writingApi/get_student_writing_submission', {
@@ -49,6 +51,8 @@
 		let res = await http.get(fetch, '/writingApi/writings_comment_map')
 		let data2 = res.data
 		overall_options = data.overall
+		disclose = data.disclose
+		is_read = data.is_read
 		_marking_category.forEach(cat => {
 			cat.comment_template = data2[cat.title]
 		})
@@ -57,7 +61,7 @@
 
 	const onSubmitClick = async (is_draft) => {
 		dialog.confirm({
-			message: is_draft ? 'Save draft' : 'Send marking to the student',
+			message: is_draft ? 'Save draft' : disclose === '1' ? 'Edit the marking' : 'Send marking to the student',
 			onConfirm: async () => {
 				const obj = {}
 				const comments = []
@@ -65,8 +69,6 @@
 					obj[cat.title] = cat.user_mark
 					cat.comments.forEach(c => comments.push(c))
 				})
-
-				// loading = true
 				await http.post(fetch, '/writingApi/modify_mark', {
 					user_writing_id: writing_id,
 					disclose: is_draft ? 0 : 1,
@@ -81,7 +83,7 @@
 					user_writing_id: writing_id,
 					comments
 				})
-				notifications.success(is_draft ? 'Draft saved' : is_edit ? 'Marking updated' : 'Your marking have sent to student')
+				notifications.success(is_draft ? 'Draft saved' : disclose === '1' ? 'Marking updated' : 'Your marking have sent to student')
 				history.back()
 			}
 		})
@@ -131,26 +133,39 @@
 				</div>
 			</div>
 
-			<div class="py-4 flex items-center">
-				<div class="flex">
-					<button on:click={() => {history.back()}} class="text-blue-500 rounded bg-white border border-gray-200 px-4 py-2">
-						Cancel
-					</button>
-					{#if !is_edit}
+			<div class="py-4 flex items-center justify-center">
+				{#if disclose === '1'}
+					{#if is_read === '1'}
+						<button on:click={() => {history.back()}} class="text-gray-500 hover:text-blue-500 hover:border-blue-500 rounded bg-white border border-gray-200 px-4 py-2 w-40 text-center">
+							Back
+						</button>
+					{:else}
+						<button on:click={() => {history.back()}} class="text-gray-500 hover:text-blue-500 hover:border-blue-500 rounded bg-white border border-gray-200 px-4 py-2 w-40 text-center">
+							Back
+						</button>
+						<div class="ml-8">
+							<Button button_class="px-8 w-40 py-2" on:click={() => {onSubmitClick(false)}}>
+								Edit
+							</Button>
+						</div>
+					{/if}
+				{:else}
+					<div class="flex items-center justify-center">
+						<button on:click={() => {history.back()}} class="text-gray-500 hover:text-blue-500 hover:border-blue-500 rounded bg-white border border-gray-200 px-4 py-2 w-40 text-center">
+							Back
+						</button>
 						<div class="ml-2">
 							<Button on:click={() => {onSubmitClick(true)}}>
 								Save draft
 							</Button>
 						</div>
-					{/if}
-				</div>
-				<div class="ml-auto flex items-center">
-					<div class="ml-2">
+					</div>
+					<div class="ml-16">
 						<Button on:click={() => {onSubmitClick(false)}}>
-							{is_edit ? 'Edit' : 'Complete marking and send to student'}
+							Complete marking and send to student
 						</Button>
 					</div>
-				</div>
+				{/if}
 			</div>
 		{/if}
 	</div>

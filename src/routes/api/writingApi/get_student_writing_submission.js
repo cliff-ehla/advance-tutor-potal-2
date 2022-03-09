@@ -16,7 +16,9 @@ export const post = async (req) => {
 	const result = {
 		marking_category,
 		user_handwriting_images: data.images,
-		overall_msg: data.overall_msg
+		overall_msg: data.overall_msg,
+		disclose: data.disclose,
+		is_read: data.is_read
 	}
 	return {
 		status,
