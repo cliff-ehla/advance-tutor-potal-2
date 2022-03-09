@@ -17,13 +17,32 @@
 	import relativeTime from "dayjs/plugin/relativeTime.js";
 	import {tooltip} from "$lib/action/tooltip.js";
 	dayjs.extend(relativeTime)
+	let filter = 'all'
+	$: filtered_list = $noticeCenterStore.writing_list.filter(w => {
+		if (filter === 'all') {
+			return true
+		} else if (filter === 'pending') {
+			return w.disclose !== '1'
+		} else if (filter === 'completed') {
+			return w.disclose === '1'
+		}
+	})
 </script>
 
 <div class="bg-gray-50">
 	<div class="container py-4">
-		<div class="page-title mb-4">Writing submission</div>
-		{#if $noticeCenterStore.writing_list.length}
-			{#each $noticeCenterStore.writing_list as w}
+		<div class="page-title mb-2">Writing submission</div>
+		<div class="flex mb-4 items-center">
+			<span class="text-gray-500 text-sm mr-4">Filter:</span>
+			{#each ['all', 'pending', 'completed'] as f,i}
+				<button class:active={filter === f} class="px-2 text-gray-500 bg-gray-100 mr-1 rounded text-sm py-1 hover:text-blue-500 hover:bg-blue-50" on:click={() => {filter = f}}>{capitalize(f)}</button>
+				{#if i === 0}
+					<span style="width: 1px" class="h-4 mr-3 ml-2 bg-gray-400"></span>
+				{/if}
+			{/each}
+		</div>
+		{#if filtered_list.length}
+			{#each filtered_list as w}
 				<a href="/writing/{w.identifier}" class="cursor-pointer pl-4 pr-2 py-4 border border-gray-200 my-2 rounded leading-none bg-white flex items-center hover:border-blue-300 hover:bg-blue-50">
 					<div class="w-1/2">
 						<p>{w.title || 'No title'}</p>
@@ -98,7 +117,19 @@
 				</a>
 			{/each}
 		{:else}
-			<p class="text-gray-500 p-4">No writing submission</p>
+			{#if filter === 'all'}
+				<p class="text-gray-500 p-8 bg-white">No writing submission</p>
+			{:else if filter === 'pending'}
+				<p class="text-gray-500 p-8 bg-white">You have no pending writing submission to mark</p>
+			{:else}
+				<p class="text-gray-500 p-8 bg-white">You have not yet completed any marking yet</p>
+			{/if}
 		{/if}
 	</div>
 </div>
+
+<style>
+	.active {
+		@apply font-bold text-black bg-blue-50 text-blue-500;
+	}
+</style>
