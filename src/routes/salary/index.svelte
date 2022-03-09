@@ -49,6 +49,7 @@
 	<table class="w-full">
 		<tr class="text-left border-b border-gray-300">
 			<th>Date</th>
+			<th>Type</th>
 			<th>Lesson</th>
 			<th>Student(s)</th>
 			<th>Duration (min)</th>
@@ -56,31 +57,56 @@
 			<th>Salary</th>
 		</tr>
 		{#each selected_statement.zooms as t}
-			<tr class="border-b border-gray-200 text-sm leading-tight">
-				<td>{dayjs(t.start_date).format('DD MMM')}</td>
-				<td>{t.title}</td>
-				<td>
-					{t.number_of_student}
-				</td>
-				<td>{t.duration}</td>
-				<td>
-					{#if t.s_no_show}
-						<p class="text-xs leading-none">Student absent</p>
-					{/if}
-					{#if t.t_no_show}
-						<p class="text-xs leading-none">Teacher absent</p>
-					{/if}
-					{#if t.reschedule}
-						<p class="text-xs leading-none">Teacher reschedule</p>
-					{/if}
-					{#if t.is_trial}
-						<p class="text-xs leading-none">Trail</p>
-					{/if}
-				</td>
-				<td>${t.salary}</td>
-			</tr>
+			{#if !t.zoom_id}
+				<tr class="border-b border-gray-200 text-sm leading-tight">
+					<td></td>
+					<td></td>
+					<td>{t.title}</td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td>${t.salary}</td>
+				</tr>
+			{:else}
+				<tr class="border-b border-gray-200 text-sm leading-tight">
+					<td>{dayjs(t.start_date).format('DD MMM')}</td>
+					<td>{t.is_big_classroom ? t.big_classroom_type === 'BIG' ? 'Big class' : 'Small class' : '1-on-1'}</td>
+					<td>{t.title}</td>
+					<td>
+						{#if t.number_of_student > 4}
+							{t.number_of_student} students
+						{:else}
+							{#each t.students as s}
+								<p class="mx-1">{s.nickname}</p>
+							{/each}
+						{/if}
+					</td>
+					<td>{t.duration}</td>
+					<td>
+						{#if t.s_no_show}
+							<p class="text-xs leading-none">Student absent</p>
+						{/if}
+						{#if t.t_no_show}
+							<p class="text-xs leading-none">Teacher absent</p>
+						{/if}
+						{#if t.reschedule}
+							<p class="text-xs leading-none">Teacher reschedule</p>
+						{/if}
+						{#if t.is_trial}
+							<p class="text-xs leading-none">Trail</p>
+						{/if}
+					</td>
+					<td>
+						${t.salary}
+						{#if t.is_renewal}
+							*
+						{/if}
+					</td>
+				</tr>
+			{/if}
 		{/each}
 	</table>
+	<p class="p-4 text-right text-sm text-gray-500">* Renewal incentive is included</p>
 </div>
 
 <style>
