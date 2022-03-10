@@ -199,12 +199,12 @@
 			<div class="p-4 max-w-screen-xl">
 				<ReadonlyWriting identifier={selected_writing_identifier}/>
 			</div>
-		{:else}
+		{:else if pdf_json}
 			<PdfReader {pdf_array} {youtube_link_obj} pages_info_2={pdf_json}/>
 		{/if}
 	{/if}
 
-	{#if !selected_item_id && !selected_writing_identifier}
+	{#if !(selected_item_id && pdf_json) && !selected_writing_identifier}
 		<div class="text-center">
 			<p class="p-4 text-gray-500">This is no material uploaded for this class</p>
 			<button class="button" on:click={() => {history.back()}}>Back</button>
