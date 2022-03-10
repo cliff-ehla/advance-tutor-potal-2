@@ -23,9 +23,9 @@
 	$: student_id = $page.params.student_id
 	$: tutor_group = $tutor_group_store.tutor_group[tutor_group_id]
 	$: zoom_list = $course_store[tutor_group_id]
-	$: tutor_group_title = zoom_list ? zoom_list[0].tutor_group_title : undefined
-	$: course_start_date = zoom_list ? zoom_list[0].start_date : undefined
-	$: course_end_date = zoom_list ? zoom_list[zoom_list.length - 1].start_date : undefined
+	$: tutor_group_title = (zoom_list && zoom_list.length) ? zoom_list[0].tutor_group_title : undefined
+	$: course_start_date = (zoom_list && zoom_list.length)  ? zoom_list[0].start_date : undefined
+	$: course_end_date = (zoom_list && zoom_list.length)  ? zoom_list[zoom_list.length - 1].start_date : undefined
 	$: course_completed = dayjs().isAfter(dayjs(course_end_date))
 	$: course_not_started = dayjs().isBefore(dayjs(course_start_date))
 </script>
