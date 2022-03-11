@@ -39,7 +39,9 @@ const http = (() => {
 			const {success, data, metadata, debug} = await res.json()
 			if (!success && debug && debug.err_code === 401 && browser) {
 				// note: could only redirect in client side (server side do not have history API)
-				goto('/logout')
+				// NOTE: do not use `goto('/logout'), as before going to logout successfully there error will be thrown.
+				// Need a full refresh.
+				window.location.replace("/logout");
 			}
 			const actually_not_success = data ? data.status === 'failure' : false
 			is_loading.set(false)
