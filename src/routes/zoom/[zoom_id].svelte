@@ -21,6 +21,7 @@
 	import {session} from '$app/stores'
 	import Icon from '$lib/ui/icon.svelte'
 	import Dropdown from '$lib/ui/dropdown3.svelte'
+	import Spinner from '$lib/ui/Spinner.svelte'
 	import Countdown from '$lib/live/countdown.svelte'
 	import dayjs from "dayjs";
 	import utc from "dayjs/plugin/utc.js";
@@ -73,7 +74,7 @@
 	import PdfReader from '$lib/pdf-reader/index.svelte'
 
 	const getItem = async () => {
-		if (!selected_item_id) return
+		if (!selected_item_id) return loading_item = false
 		loading_item = true
 		const {data, success} = await http.post(fetch, '/itemApi/get_by_ids', {
 			ids: [selected_item_id]
@@ -202,12 +203,15 @@
 		{:else if pdf_json}
 			<PdfReader {pdf_array} {youtube_link_obj} pages_info_2={pdf_json}/>
 		{/if}
-	{/if}
-
-	{#if !(selected_item_id && pdf_json) && !selected_writing_identifier}
-		<div class="text-center">
-			<p class="p-4 text-gray-500">This is no material uploaded for this class</p>
-			<button class="button" on:click={() => {history.back()}}>Back</button>
+		{#if !(selected_item_id && pdf_json) && !selected_writing_identifier}
+			<div class="text-center">
+				<p class="p-4 text-gray-500">This is no material uploaded for this class</p>
+				<button class="button" on:click={() => {history.back()}}>Back</button>
+			</div>
+		{/if}
+	{:else}
+		<div class="text-center p-4">
+			<Spinner/>
 		</div>
 	{/if}
 </div>
