@@ -21,7 +21,7 @@
 	import {session} from '$app/stores'
 	import Icon from '$lib/ui/icon.svelte'
 	import Dropdown from '$lib/ui/dropdown3.svelte'
-	import Spinner from '$lib/ui/Spinner.svelte'
+	import Spinner from '$lib/ui/spinner.svelte'
 	import Countdown from '$lib/live/countdown.svelte'
 	import dayjs from "dayjs";
 	import utc from "dayjs/plugin/utc.js";
