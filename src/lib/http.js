@@ -23,7 +23,7 @@ const http = (() => {
 				}
 			}
 			const {success, data, metadata, debug} = await res.json()
-			if (!success && debug && debug.err_code === 401 && browser) {
+			if (!success && debug && debug.err_code === 401 && browser && window.location.pathname !== '/login') {
 				window.location.replace("/logout")
 			}
 			is_loading.set(false)
@@ -60,7 +60,7 @@ const http = (() => {
 				}
 			}
 			const {success, data, metadata, debug} = await res.json()
-			if (!success && debug && debug.err_code === 401 && browser) {
+			if (!success && debug && debug.err_code === 401 && browser && window.location.pathname !== '/login') {
 				window.location.replace("/logout")
 			}
 			const actually_not_success = data ? data.status === 'failure' : false
