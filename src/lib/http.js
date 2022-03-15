@@ -1,9 +1,9 @@
 import {sentry} from "$lib/sentry";
 import {is_loading} from "$lib/store/is_loading";
 import {notifications} from "$lib/store/notification";
-import {goto} from "$app/navigation";
 import {browser} from "$app/env";
 
+// handle 到 usermodel 500, 或者自己 500
 const http = (() => {
 	async function get (fetch, resource, query) {
 		if (query) {
@@ -15,11 +15,26 @@ const http = (() => {
 		try {
 			is_loading.set(true)
 			const res = await fetch('/api' + resource)
+			let status = res.status
+			if (status >= 500) { // timeout
+				return {
+					success: false,
+					status
+				}
+			} else if (status === 401 && browser) {
+				window.location.replace("/logout")
+			}
 			const {success, data, metadata, debug} = await res.json()
 			is_loading.set(false)
-			return {success, data, metadata, debug}
+			return {success, data, metadata, debug, status}
 		} catch (e) {
-			console.log(`fatal error: ${resource} this mostly happened when usermodel do not return a json body`, e)
+			return {
+				success: false,
+				status: 500,
+				debug: {
+					debug_msg: `${resource}: <br> ${e}`
+				}
+			}
 		}
 
 	}
@@ -36,13 +51,19 @@ const http = (() => {
 				},
 				body: body && JSON.stringify(body)
 			})
-			const {success, data, metadata, debug} = await res.json()
-			if (!success && debug && debug.err_code === 401 && browser) {
+			const status = res.status
+			if (status >= 500) { // timeout
+				return {
+					success: false,
+					status
+				}
+			} else if (status === 401 && browser) {
 				// note: could only redirect in client side (server side do not have history API)
 				// NOTE: do not use `goto('/logout'), as before going to logout successfully there error will be thrown.
 				// Need a full refresh.
-				window.location.replace("/logout");
+				window.location.replace("/logout")
 			}
+			const {success, data, metadata, debug} = await res.json()
 			const actually_not_success = data ? data.status === 'failure' : false
 			is_loading.set(false)
 			if (!!notification) {
@@ -53,14 +74,14 @@ const http = (() => {
 					notifications.success(notification)
 				}
 			}
-			return {success, data, metadata, debug}
+			return {success, data, metadata, debug, status}
 		} catch (e) {
-			notifications.alert('Oops! Fatal Error')
 			return {
 				success: false,
-				data: false,
-				status: 400,
-				debug: 'Usermodel return fatal error'
+				status: 500,
+				debug: {
+					debug_msg: `${resource}: <br> ${e}`
+				}
 			}
 		}
 	}
@@ -71,17 +92,16 @@ const http = (() => {
 	}
 })()
 
-const onFail = (debug) => {
-	if (debug.err_code === 401) {
+const onFail = (debug, status) => {
+	if ((debug.err_code || status) === 401) {
 		return {
 			status: 302,
 			redirect: '/logout'
 		}
 	}
-	sentry.log(debug)
 	return {
-		error: new Error(debug.debug_msg),
-		status: 400
+		error: debug && debug.debug_msg,
+		status
 	}
 }
 

@@ -3,7 +3,8 @@
 
 	export const load = async ({page, fetch}) => {
 		const identifier = page.params.identifier
-		const {data, success, debug} = await http.get(fetch, `/writingApi/get_user_writing?identifier=${identifier}`)
+		const {data, success, debug, status} = await http.get(fetch, `/writingApi/get_user_writing?identifier=${identifier}`)
+		if (!success) return onFail(debug, status)
 		const {para, edit_log, comments, title, writing_id} = data
 		return {
 			props: {

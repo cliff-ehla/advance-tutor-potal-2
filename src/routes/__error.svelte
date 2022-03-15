@@ -31,7 +31,15 @@
 		<p class="mb-4">The site is updating, please wait...</p>
 		<Spinner/>
 	{:else}
-		<p class="text-h1 mb-4">{status}</p>
-		<h1 class="text-t2 mb-8">{error_message}</h1>
+		{#if status === 504}
+			<p class="page-title">504</p>
+			<p class="pb-4 text-gray-500">The page takes too long to response.</p>
+			<button on:click={() => {window.location.reload()}} class="button">Reload again</button>
+		{:else}
+			<div class="bg-red-500 text-white inline-block p-4 rounded">
+				<p style="font-size: 1.8em" class="mb-2 text-xl font-light">{status}</p>
+				<h1>{@html error_message}</h1>
+			</div>
+		{/if}
 	{/if}
 </div>

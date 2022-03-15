@@ -18,7 +18,8 @@ export const post = async (req) => {
 		user_handwriting_images: data.images,
 		overall_msg: data.overall_msg,
 		disclose: data.disclose,
-		is_read: data.is_read
+		is_read: data.is_read,
+		identifier: data.identifier
 	}
 	return {
 		status,
