@@ -21,10 +21,11 @@ const http = (() => {
 					success: false,
 					status
 				}
-			} else if (status === 401 && browser) {
-				window.location.replace("/logout")
 			}
 			const {success, data, metadata, debug} = await res.json()
+			if (!success && debug && debug.err_code === 401 && browser) {
+				window.location.replace("/logout")
+			}
 			is_loading.set(false)
 			return {success, data, metadata, debug, status}
 		} catch (e) {
@@ -57,13 +58,11 @@ const http = (() => {
 					success: false,
 					status
 				}
-			} else if (status === 401 && browser) {
-				// note: could only redirect in client side (server side do not have history API)
-				// NOTE: do not use `goto('/logout'), as before going to logout successfully there error will be thrown.
-				// Need a full refresh.
-				window.location.replace("/logout")
 			}
 			const {success, data, metadata, debug} = await res.json()
+			if (!success && debug && debug.err_code === 401 && browser) {
+				window.location.replace("/logout")
+			}
 			const actually_not_success = data ? data.status === 'failure' : false
 			is_loading.set(false)
 			if (!!notification) {
@@ -93,7 +92,7 @@ const http = (() => {
 })()
 
 const onFail = (debug, status) => {
-	if ((debug.err_code || status) === 401) {
+	if ((debug.err_code) === 401) {
 		return {
 			status: 302,
 			redirect: '/logout'
