@@ -31,7 +31,10 @@
 
 <div class="bg-gray-50">
 	<div class="container py-4">
-		<div class="page-title mb-2">Writing submission</div>
+		<div class="page-title mb-4 flex items-center">
+			<Icon name="inbox" className="w-6 mt-1 opacity-70 mr-4"/>
+			<span>Writing tasks to grade</span>
+		</div>
 		<div class="flex mb-4 items-center">
 			<span class="text-gray-500 text-sm mr-4">Filter:</span>
 			{#each ['all', 'pending', 'completed'] as f,i}

@@ -62,7 +62,8 @@
 
 	const onSubmitClick = async (is_draft) => {
 		dialog.confirm({
-			message: is_draft ? 'Save draft' : disclose === '1' ? 'Edit the marking' : 'Send marking to the student',
+			title: disclose === '1' ? 'Reminder' : '',
+			message: is_draft ? 'Save draft' : disclose === '1' ? 'You grading was sent to the student, do you want to revise your grading?' : 'Send marking to the student',
 			onConfirm: async () => {
 				const obj = {}
 				const comments = []
