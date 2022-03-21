@@ -108,7 +108,7 @@
 			</div>
 		{:else}
 			<a href="/students/{student_id}/notes" class="text-sm text-blue-500 text-center block bg-gray-100 py-1 border border-gray-200 hover:border-blue-500 mt-2">
-				See all notes ({notes && notes.length})
+				Add note/See all ({notes && notes.length})
 			</a>
 		{/if}
 	</div>
