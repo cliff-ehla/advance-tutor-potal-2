@@ -19,7 +19,10 @@ const http = (() => {
 			if (status >= 500) { // timeout
 				return {
 					success: false,
-					status
+					status,
+					debug: {
+						debug_msg: 'Probably 504 timeout'
+					}
 				}
 			}
 			const {success, data, metadata, debug} = await res.json()
