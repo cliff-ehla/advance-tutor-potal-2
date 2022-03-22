@@ -2,6 +2,8 @@
 	import Icon from '$lib/ui/icon.svelte'
 	import Dropdown from '$lib/ui/dropdown3.svelte'
 	import RateZoom from '$lib/live/rate-zoom.svelte'
+	import {rating_number_to_label} from "$lib/store/rating-number-to-label.js";
+
 	export let student_id = undefined
 	export let item_id = undefined
 
