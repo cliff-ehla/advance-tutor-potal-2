@@ -36,6 +36,7 @@
 				let image = new Image()
 				// image.crossOrigin="anonymous"
 				image.onload = () => {
+					if (!canvas_el) return
 					const ctx = canvas_el.getContext('2d')
 					let x = i * tile_w
 					let y= j * tile_h * 0.995
