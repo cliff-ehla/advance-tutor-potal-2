@@ -22,19 +22,10 @@
 		if (file_page_number >= 0) render()
 	}
 
-	export const getImageFile = () => {
-		console.log('get image file blob')
-		canvas_el.toBlob((blob) => {
-			//console.log('cliff: ', blob)
-			console.log(URL.createObjectURL(blob))
-		})
-	}
-
 	const render = () => {
 		for (let i = 0; i < 5 ; i++){
 			for (let j = 0; j < 5 ; j++){
 				let image = new Image()
-				// image.crossOrigin="anonymous"
 				image.onload = () => {
 					if (!canvas_el) return
 					const ctx = canvas_el.getContext('2d')
