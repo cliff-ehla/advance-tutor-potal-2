@@ -4,16 +4,16 @@ export const get = async (req) => {
 	const {body, status} = await usermodel(req, `/writingApi/get_user_writing?id=${req.query.get('identifier')}`)
 	const data = body.data
 
-	let legacy_data = data[0].revised_result
-	let new_data = data[0].extra_json
+	let legacy_data = data.revised_result
+	let new_data = data.extra_json
 	let content = new_data ? new_data : parseLegacyData(legacy_data)
 	let {para, edit_log, comments} = content
 	const result = {
 		para,
 		edit_log,
 		comments,
-		title: data[0].title,
-		writing_id: data[0].id
+		title: data.title,
+		writing_id: data.id
 	}
 	return {
 		status,
