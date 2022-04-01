@@ -16,12 +16,12 @@ const http = (() => {
 			is_loading.set(true)
 			const res = await fetch('/api' + resource)
 			let status = res.status
-			if (status >= 500) { // timeout
+			if (status >= 500) {
 				return {
 					success: false,
 					status,
 					debug: {
-						debug_msg: 'Probably 504 timeout'
+						debug_msg: 'Internal server error'
 					}
 				}
 			}

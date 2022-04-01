@@ -11,5 +11,5 @@
 </script>
 
 <Popup>
-	<MainEditor {font_size} {para} {comments} {edit_log} {is_readonly} {text_editor_active}/>
+	<MainEditor on:update {font_size} {para} {comments} {edit_log} {is_readonly} {text_editor_active}/>
 </Popup>
