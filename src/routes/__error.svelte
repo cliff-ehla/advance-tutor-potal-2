@@ -15,12 +15,14 @@
 	export let status;
 	import {sentry} from "$lib/sentry";
 	import Spinner from '$lib/ui/spinner.svelte'
+	import {browser} from "$app/env";
 
 	let is_reload = false
 
-	if (error_message.includes('Failed to fetch dynamically imported module')) {
+	const errs = ['Importing a module script failed', 'Failed to fetch dynamically imported module']
+	if (errs.some(err => error_message.startsWith(err))) {
 		is_reload = true
-		window.location.reload()
+		if (browser) window.location.reload()
 	} else {
 		sentry.log(error_message)
 	}
