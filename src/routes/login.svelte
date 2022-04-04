@@ -2,7 +2,6 @@
 	import {http} from "$lib/http";
 	import {goto} from '$app/navigation'
 	import {getStores} from "$app/stores";
-	import {sentry} from "$lib/sentry";
 	import {user_info} from "$lib/store/user_info.js";
 
 	let env = import.meta.env.VITE_ENV
@@ -32,10 +31,6 @@
 				username: data.username,
 				nickname: data.nickname,
 				profile_pic: data.avatar.filepath
-			})
-			sentry.setUser({
-				username: data.username,
-				nickname: data.nickname
 			})
 			goto('/')
 		} else {

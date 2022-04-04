@@ -1,15 +1,21 @@
 <script context="module">
 	import {user_info} from "$lib/store/user_info.js";
 	import {noticeCenterStore} from "$lib/store/notice-center-store.js";
+	import {sentry} from "$lib/sentry";
 
 	export const load = async ({fetch, session}) => {
 		user_info.set(session.user_info)
+		if (session.user_info) {
+			sentry.setUser({
+				username: session.user_info.username,
+				nickname: session.user_info.nickname
+			})
+		}
 		return true
 	}
 </script>
 
 <script>
-	import {sentry} from "$lib/sentry";
 	import LoadingBar from '$lib/ui/indeterminate-loading-bar.svelte'
 	import {navigating} from "$app/stores";
 	import '../styles/tailwind-output.css';
