@@ -9,6 +9,7 @@ let env = import.meta.env.VITE_ENV
 
 const create_store = () => {
 	const store = writable([])
+	const month_log = writable([])
 	const time_zone = writable('Asia/Hong_Kong')
 	const _store = derived([store, time_zone], ([$store, $time_zone]) => {
 		let time_zone_options = [
@@ -52,23 +53,27 @@ const create_store = () => {
 			time_zone: time_zone_options.find(opt => opt.tz === $time_zone)
 		}
 	})
-	const cacheFirst = (fetch) => {
-		const cache = get(store)
-		if (cache.length) {
-			fetchData(fetch)
-			return {success: true, data: cache}
+	const cacheFirst = (fetch, {month}) => {
+		if (get(month_log).includes(month)) {
+			return {
+				success: true
+			}
 		} else {
-			return fetchData(fetch)
+			return fetchData(fetch, {month})
 		}
 	}
-	const fetchData = async (fetch) => {
-		let start_time = dayjs().subtract(8, 'month').format('YYYY-MM-DD HH:mm:ss')
-		let end_time = dayjs().add(3, 'month').format('YYYY-MM-DD HH:mm:ss')
-		const {data, success, debug} = await http.post(fetch, '/zoomApi/advanced_zoom_list_all_for_tutor', {
-			start_time,
-			end_time
+	const fetchData = async (fetch, {month}) => {
+		month_log.update(arr => [...arr, month])
+		const key = month + '-01'
+		let {data, success, debug} = await http.post(fetch,'/zoomApi/advanced_zoom_list_all_for_tutor', {
+			start_time: dayjs(key).startOf('month').format('YYYY-MM-DD HH:mm:ss'),
+			end_time: dayjs(key).endOf('month').format('YYYY-MM-DD HH:mm:ss'),
 		})
-		store.set(data)
+		if (!success) return {data, success, debug}
+		data = data.filter(d => !!d.start_date)
+		store.update(v => {
+			return [...v, ...data]
+		})
 		return {data, success, debug}
 	}
 	const setTimeZoom = (tz) => {
@@ -77,6 +82,7 @@ const create_store = () => {
 	return {
 		subscribe: _store.subscribe,
 		cacheFirst,
+		fetchData,
 		setTimeZoom
 	}
 }

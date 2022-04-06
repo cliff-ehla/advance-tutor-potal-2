@@ -10,7 +10,9 @@
 				redirect: '/logout'
 			}
 		}
-		const {data, success, debug} = await zoom_store.cacheFirst(fetch)
+		const {data, success, debug} = await zoom_store.cacheFirst(fetch, {
+			month: `${page.params.yyyy}-${page.params.mm}`
+		})
 		if (!success) return onFail(debug)
 		return true
 	}
